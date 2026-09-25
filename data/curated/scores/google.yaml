@@ -1,0 +1,2150 @@
+# Google (Gemini) benchmark scores: lab-reported (blog.google, deepmind.google eval tables and eval-methodology PDFs,
+# model cards, FSF reports, Gemini 2.5 tech report) and independent leaderboards. Format: data/curated/README.md.
+# Collected 2026-09-24; every number read from the linked primary source.
+# Notes:
+# - Third-party numbers Google printed in its own eval tables are recorded as provenance: lab, with the origin named in `setting`.
+# - Gemini 2.5 Pro and 2.5 Flash previews each published their own tables; the version is named in `setting`.
+# - "Deep Think" modes map to the base Pro model (setting "Deep Think"); the Feb 2026 Deep Think upgrade is built on 3.1 Pro.
+# - IMO: the 35/42 gold is the official IMO 2025 result of an advanced Deep Think version. Other IMO rows (released 2.5 Deep Think,
+#   3 Pro, 3.1 Pro Deep Think) are Google's IMO-2025 benchmark percentages converted to points out of 42 (noted in setting).
+# - Gemini 3.5 Pro is announced but unreleased; Google has published no benchmark numbers for it (as of 2026-09-24).
+# - Bio values from FSF figures were read from labeled bar charts (values are printed on the bars).
+
+newBenchmarks:
+  - { id: tau2-bench, name: "τ²-bench (average)", short: "τ²-bench", group: agentic, unit: pct, ceiling: 100, released: 2025-06-09, url: https://arxiv.org/abs/2506.07982, description: "Dual-control conversational agent benchmark; single number averaged across domains (Retail, Airline, Telecom) as labs report it." }
+  - { id: tau2-bench-retail, name: "τ²-bench Retail", short: "τ²-Retail", group: agentic, unit: pct, ceiling: 100, released: 2025-06-09, url: https://arxiv.org/abs/2506.07982, description: "τ²-bench Retail domain." }
+  - { id: tau2-bench-airline, name: "τ²-bench Airline", short: "τ²-Airline", group: agentic, unit: pct, ceiling: 100, released: 2025-06-09, url: https://arxiv.org/abs/2506.07982, description: "τ²-bench Airline domain." }
+  - { id: toolathlon-verified, name: "Toolathlon-Verified", short: "Toolathlon-V", group: agentic, unit: pct, ceiling: 100, released: 2026-06-30, url: https://toolathlon.xyz/docs/blog/toolathlon-verified, description: "Major revision of Toolathlon (fixed specs, ground truth, evaluators); a new score series not comparable with original Toolathlon." }
+  - { id: wmdp-bio, name: "WMDP-Bio", short: "WMDP-Bio", group: bio, unit: pct, ceiling: 100, released: 2024-03-05, url: https://www.wmdp.ai, description: "Weapons of Mass Destruction Proxy, biosecurity subset: hazardous-knowledge multiple-choice questions (1,273)." }
+  - { id: wmdp-chem, name: "WMDP-Chem", short: "WMDP-Chem", group: bio, unit: pct, ceiling: 100, released: 2024-03-05, url: https://www.wmdp.ai, description: "Weapons of Mass Destruction Proxy, chemical-security subset (408 multiple-choice questions)." }
+  - { id: securebio-vmqa-sc, name: "SecureBio VMQA (single-choice)", short: "VMQA-SC", group: bio, unit: pct, ceiling: 100, released: 2025-04-21, url: https://arxiv.org/abs/2504.16137, description: "SecureBio virology troubleshooting MCQ (N=350), single-choice format; Google notes VMQA is an earlier version of the Virology Capabilities Test. Not directly comparable to multi-select VCT scores." }
+  - { id: lab-bench-2, name: "LABBench2", short: "LABBench2", group: bio, unit: pct, ceiling: 100, released: 2026-02-04, url: https://arxiv.org/abs/2604.09554, description: "Successor to LAB-Bench: real-world biology research tasks (macro-average over 11 sub-tasks such as LitQA3, ProtocolQA2, FigQA2, DbQA2), typically run agentically with tools." }
+
+scores:
+  # ── gemini-2.5-pro (lab) ────────────────────────────────────────
+  - model: gemini-2.5-pro
+    benchmark: aime-2024
+    value: 92.0
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-pro-exp-03-25; single attempt (pass@1)"
+    date: 2025-03-25
+    source: "Gemini 2.5: Our most intelligent AI model (launch benchmark table)"
+    url: https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/
+  - model: gemini-2.5-pro
+    benchmark: aime-2025
+    value: 86.7
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-pro-exp-03-25; single attempt (pass@1)"
+    date: 2025-03-25
+    source: "Gemini 2.5: Our most intelligent AI model (launch benchmark table)"
+    url: https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/
+  - model: gemini-2.5-pro
+    benchmark: gpqa-diamond
+    value: 84.0
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-pro-exp-03-25; single attempt (pass@1)"
+    date: 2025-03-25
+    source: "Gemini 2.5: Our most intelligent AI model (launch benchmark table)"
+    url: https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/
+  - model: gemini-2.5-pro
+    benchmark: hle
+    value: 18.8
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-pro-exp-03-25; no tools; pass@1"
+    date: 2025-03-25
+    source: "Gemini 2.5: Our most intelligent AI model (launch benchmark table)"
+    url: https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/
+  - model: gemini-2.5-pro
+    benchmark: swe-bench-verified
+    value: 63.8
+    provenance: lab
+    tools: true
+    setting: "gemini-2.5-pro-exp-03-25; 'custom agent setup' - Google's scaffolding draws multiple trajectories and re-scores them with the model's own judgement (June 2025 model card later lists it under 'single attempt')"
+    date: 2025-03-25
+    source: "Gemini 2.5: Our most intelligent AI model (launch benchmark table)"
+    url: https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/
+  - model: gemini-2.5-pro
+    benchmark: aime-2025
+    value: 83.0
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-pro-preview-05-06; single attempt (pass@1)"
+    date: 2025-05-06
+    source: "Gemini 2.5 Pro model page, Preview (05-06) benchmark table (Wayback snapshot 2025-05-06)"
+    url: https://web.archive.org/web/20250506164409/https://deepmind.google/technologies/gemini/pro/
+  - model: gemini-2.5-pro
+    benchmark: gpqa-diamond
+    value: 83.0
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-pro-preview-05-06; single attempt (pass@1)"
+    date: 2025-05-06
+    source: "Gemini 2.5 Pro model page, Preview (05-06) benchmark table (Wayback snapshot 2025-05-06)"
+    url: https://web.archive.org/web/20250506164409/https://deepmind.google/technologies/gemini/pro/
+  - model: gemini-2.5-pro
+    benchmark: hle
+    value: 17.8
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-pro-preview-05-06; no tools"
+    date: 2025-05-06
+    source: "Gemini 2.5 Pro model page, Preview (05-06) benchmark table (Wayback snapshot 2025-05-06)"
+    url: https://web.archive.org/web/20250506164409/https://deepmind.google/technologies/gemini/pro/
+  - model: gemini-2.5-pro
+    benchmark: swe-bench-verified
+    value: 63.2
+    provenance: lab
+    tools: true
+    setting: "gemini-2.5-pro-preview-05-06; Google scaffolding draws multiple trajectories and re-scores with model's own judgement (June 2025 model card later lists it under 'single attempt')"
+    date: 2025-05-06
+    source: "Gemini 2.5 Pro model page, Preview (05-06) benchmark table (Wayback snapshot 2025-05-06)"
+    url: https://web.archive.org/web/20250506164409/https://deepmind.google/technologies/gemini/pro/
+  - model: gemini-2.5-pro
+    benchmark: aime-2025
+    value: 88.0
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-pro-preview-06-05 (became GA gemini-2.5-pro); single attempt"
+    date: 2025-06-05
+    source: "Try the latest Gemini 2.5 Pro before general availability (benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-pro-latest-preview/
+  - model: gemini-2.5-pro
+    benchmark: gpqa-diamond
+    value: 86.4
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-pro-preview-06-05 (became GA gemini-2.5-pro); single attempt"
+    date: 2025-06-05
+    source: "Try the latest Gemini 2.5 Pro before general availability (benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-pro-latest-preview/
+  - model: gemini-2.5-pro
+    benchmark: hle
+    value: 21.6
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-pro-preview-06-05 (became GA gemini-2.5-pro); thinking; no tools"
+    date: 2025-06-05
+    source: "Try the latest Gemini 2.5 Pro before general availability (benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-pro-latest-preview/
+  - model: gemini-2.5-pro
+    benchmark: swe-bench-verified
+    value: 59.6
+    provenance: lab
+    tools: true
+    setting: "gemini-2.5-pro-preview-06-05 (became GA gemini-2.5-pro); single attempt"
+    date: 2025-06-05
+    source: "Try the latest Gemini 2.5 Pro before general availability (benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-pro-latest-preview/
+  - model: gemini-2.5-pro
+    benchmark: swe-bench-verified
+    value: 67.2
+    provenance: lab
+    tools: true
+    setting: "gemini-2.5-pro-preview-06-05 (became GA gemini-2.5-pro); multiple attempts (multiple trajectories re-scored by the model's own judgement)"
+    date: 2025-06-05
+    source: "Try the latest Gemini 2.5 Pro before general availability (benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-pro-latest-preview/
+  - model: gemini-2.5-pro
+    benchmark: hle
+    value: 26.9
+    provenance: lab
+    tools: true
+    setting: "Gemini Deep Research agent built on 2.5 Pro (web browsing); June 2025"
+    date: 2025-07-07
+    source: "Gemini 2.5 technical report (arXiv 2507.06261), Section 'Gemini as an Agent: Deep Research'"
+    url: https://arxiv.org/abs/2507.06261
+  - model: gemini-2.5-pro
+    benchmark: hle
+    value: 32.4
+    provenance: lab
+    tools: true
+    setting: "Gemini Deep Research agent built on 2.5 Pro (web browsing), higher compute; June 2025"
+    date: 2025-07-07
+    source: "Gemini 2.5 technical report (arXiv 2507.06261), Section 'Gemini as an Agent: Deep Research'"
+    url: https://arxiv.org/abs/2507.06261
+  - model: gemini-2.5-pro
+    benchmark: arc-agi-2
+    value: 4.9
+    provenance: lab
+    tools: false
+    setting: "ARC Prize Verified, semi-private set; quoted by Google from arcprize.org in Gemini 3 Pro table"
+    date: 2025-11-18
+    source: "Gemini 3 Pro - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-2.5-pro
+    benchmark: tau2-bench
+    value: 54.9
+    provenance: lab
+    tools: true
+    setting: "GA, thinking; average of retail/airline/telecom, Sierra framework with prompt adjustment (original airline domain)"
+    date: 2025-11-18
+    source: "Gemini 3 Pro - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-2.5-pro
+    benchmark: terminal-bench-2
+    value: 32.6
+    provenance: lab
+    tools: true
+    setting: "Terminus-2 harness; quoted by Google from the public Terminal-Bench leaderboard"
+    date: 2025-11-18
+    source: "Gemini 3 Pro - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-2.5-pro
+    benchmark: vending-bench-2
+    value: 573.64
+    provenance: lab
+    tools: true
+    setting: "Net worth (mean); quoted by Google from andonlabs.com/evals/vending-bench"
+    date: 2025-11-18
+    source: "Gemini 3 Pro - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-2.5-pro
+    benchmark: mcp-atlas
+    value: 8.8
+    provenance: lab
+    tools: true
+    setting: "Quoted by Google from Scale AI's MCP Atlas leaderboard"
+    date: 2025-12-17
+    source: "Gemini 3 Flash - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-2.5-pro
+    benchmark: tau2-bench
+    value: 77.8
+    provenance: lab
+    tools: true
+    setting: "GA, thinking; average of retail/airline(fixed per Claude Opus 4.5 report)/telecom"
+    date: 2025-12-17
+    source: "Gemini 3 Flash - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-2.5-pro
+    benchmark: toolathlon
+    value: 10.5
+    provenance: lab
+    tools: true
+    setting: "Quoted by Google from runs by the Toolathlon authors / official leaderboard"
+    date: 2025-12-17
+    source: "Gemini 3 Flash - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+
+  # ── gemini-2.5-flash (lab) ──────────────────────────────────────
+  - model: gemini-2.5-flash
+    benchmark: aime-2024
+    value: 88.0
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-flash-preview-04-17; thinking; single attempt (pass@1)"
+    date: 2025-04-17
+    source: "Start building with Gemini 2.5 Flash (benchmark table)"
+    url: https://developers.googleblog.com/en/start-building-with-gemini-25-flash/
+  - model: gemini-2.5-flash
+    benchmark: aime-2025
+    value: 78.0
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-flash-preview-04-17; thinking; single attempt (pass@1)"
+    date: 2025-04-17
+    source: "Start building with Gemini 2.5 Flash (benchmark table)"
+    url: https://developers.googleblog.com/en/start-building-with-gemini-25-flash/
+  - model: gemini-2.5-flash
+    benchmark: gpqa-diamond
+    value: 78.3
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-flash-preview-04-17; thinking; single attempt (pass@1)"
+    date: 2025-04-17
+    source: "Start building with Gemini 2.5 Flash (benchmark table)"
+    url: https://developers.googleblog.com/en/start-building-with-gemini-25-flash/
+  - model: gemini-2.5-flash
+    benchmark: hle
+    value: 12.1
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-flash-preview-04-17; thinking; no tools"
+    date: 2025-04-17
+    source: "Start building with Gemini 2.5 Flash (benchmark table)"
+    url: https://developers.googleblog.com/en/start-building-with-gemini-25-flash/
+  - model: gemini-2.5-flash
+    benchmark: aime-2025
+    value: 72.0
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-flash-preview-05-20 (GA table 2025-06-17 repeats this); thinking; single attempt (pass@1)"
+    date: 2025-05-20
+    source: "Gemini 2.5: Our most intelligent models are getting even better (I/O 2025) - 2.5 Flash benchmark table"
+    url: https://blog.google/technology/google-deepmind/google-gemini-updates-io-2025/
+  - model: gemini-2.5-flash
+    benchmark: gpqa-diamond
+    value: 82.8
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-flash-preview-05-20 (GA table 2025-06-17 repeats this); thinking; single attempt (pass@1)"
+    date: 2025-05-20
+    source: "Gemini 2.5: Our most intelligent models are getting even better (I/O 2025) - 2.5 Flash benchmark table"
+    url: https://blog.google/technology/google-deepmind/google-gemini-updates-io-2025/
+  - model: gemini-2.5-flash
+    benchmark: hle
+    value: 11.0
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-flash-preview-05-20 (GA table 2025-06-17 repeats this); thinking; no tools"
+    date: 2025-05-20
+    source: "Gemini 2.5: Our most intelligent models are getting even better (I/O 2025) - 2.5 Flash benchmark table"
+    url: https://blog.google/technology/google-deepmind/google-gemini-updates-io-2025/
+  - model: gemini-2.5-flash
+    benchmark: swe-bench-verified
+    value: 60.4
+    provenance: lab
+    tools: true
+    setting: "gemini-2.5-flash-preview-05-20; thinking; Google scaffolding draws multiple trajectories and re-scores with model's own judgement (i.e. multiple-attempts style)"
+    date: 2025-05-20
+    source: "Gemini 2.5: Our most intelligent models are getting even better (I/O 2025) - 2.5 Flash benchmark table"
+    url: https://blog.google/technology/google-deepmind/google-gemini-updates-io-2025/
+  - model: gemini-2.5-flash
+    benchmark: aime-2025
+    value: 61.6
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "GA gemini-2.5-flash; non-thinking"
+    date: 2025-06-17
+    source: "We're expanding our Gemini 2.5 family of models (GA benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-model-family-expands/
+  - model: gemini-2.5-flash
+    benchmark: gpqa-diamond
+    value: 78.3
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "GA gemini-2.5-flash; non-thinking"
+    date: 2025-06-17
+    source: "We're expanding our Gemini 2.5 family of models (GA benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-model-family-expands/
+  - model: gemini-2.5-flash
+    benchmark: hle
+    value: 8.4
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "GA gemini-2.5-flash; non-thinking; no tools"
+    date: 2025-06-17
+    source: "We're expanding our Gemini 2.5 family of models (GA benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-model-family-expands/
+  - model: gemini-2.5-flash
+    benchmark: swe-bench-verified
+    value: 48.9
+    provenance: lab
+    tools: true
+    setting: "GA gemini-2.5-flash; thinking; single attempt"
+    date: 2025-06-17
+    source: "We're expanding our Gemini 2.5 family of models (GA benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-model-family-expands/
+  - model: gemini-2.5-flash
+    benchmark: swe-bench-verified
+    value: 60.3
+    provenance: lab
+    tools: true
+    setting: "GA gemini-2.5-flash; thinking; multiple attempts (multiple trajectories re-scored by model's own judgement)"
+    date: 2025-06-17
+    source: "We're expanding our Gemini 2.5 family of models (GA benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-model-family-expands/
+  - model: gemini-2.5-flash
+    benchmark: swe-bench-verified
+    value: 50.0
+    provenance: lab
+    tools: true
+    effort: none
+    setting: "GA gemini-2.5-flash; non-thinking; single attempt"
+    date: 2025-06-17
+    source: "We're expanding our Gemini 2.5 family of models (GA benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-model-family-expands/
+  - model: gemini-2.5-flash
+    benchmark: swe-bench-verified
+    value: 60.0
+    provenance: lab
+    tools: true
+    effort: none
+    setting: "GA gemini-2.5-flash; non-thinking; multiple attempts"
+    date: 2025-06-17
+    source: "We're expanding our Gemini 2.5 family of models (GA benchmark table)"
+    url: https://blog.google/products/gemini/gemini-2-5-model-family-expands/
+  - model: gemini-2.5-flash
+    benchmark: swe-bench-verified
+    value: 54.0
+    provenance: lab
+    tools: true
+    setting: "gemini-2.5-flash-preview-09-2025; thinking; compared against GA single-attempt 48.9%"
+    date: 2025-09-25
+    source: "Continuing to bring you our latest models, with an improved Gemini 2.5 Flash and Flash-Lite release"
+    url: https://developers.googleblog.com/en/continuing-to-bring-you-our-latest-models-with-an-improved-gemini-2-5-flash-and-flash-lite-release/
+  - model: gemini-2.5-flash
+    benchmark: aime-2025
+    value: 75.6
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-flash-preview-09-2025; thinking; single attempt (pass@1)"
+    date: 2025-09-26
+    source: "Gemini 2.5 Flash Model Card (updated Sep 26, 2025)"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf
+  - model: gemini-2.5-flash
+    benchmark: gpqa-diamond
+    value: 80.8
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-flash-preview-09-2025; thinking; single attempt (pass@1)"
+    date: 2025-09-26
+    source: "Gemini 2.5 Flash Model Card (updated Sep 26, 2025)"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf
+  - model: gemini-2.5-flash
+    benchmark: hle
+    value: 13.2
+    provenance: lab
+    tools: false
+    setting: "gemini-2.5-flash-preview-09-2025; thinking; no tools"
+    date: 2025-09-26
+    source: "Gemini 2.5 Flash Model Card (updated Sep 26, 2025)"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Flash-Model-Card.pdf
+  - model: gemini-2.5-flash
+    benchmark: aime-2025
+    value: 75.7
+    provenance: lab
+    tools: true
+    setting: "GA, thinking; with code execution"
+    date: 2025-12-17
+    source: "Gemini 3 Flash - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-2.5-flash
+    benchmark: arc-agi-2
+    value: 2.5
+    provenance: lab
+    tools: false
+    setting: "GA, thinking; ARC Prize Verified, semi-private set; quoted by Google from arcprize.org"
+    date: 2025-12-17
+    source: "Gemini 3 Flash - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-2.5-flash
+    benchmark: mcp-atlas
+    value: 3.4
+    provenance: lab
+    tools: true
+    setting: "GA, thinking; quoted by Google from Scale AI's MCP Atlas leaderboard"
+    date: 2025-12-17
+    source: "Gemini 3 Flash - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-2.5-flash
+    benchmark: tau2-bench
+    value: 79.5
+    provenance: lab
+    tools: true
+    setting: "GA, thinking; average of retail/airline(fixed per Claude Opus 4.5 report)/telecom"
+    date: 2025-12-17
+    source: "Gemini 3 Flash - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-2.5-flash
+    benchmark: terminal-bench-2
+    value: 16.9
+    provenance: lab
+    tools: true
+    setting: "GA, thinking; Terminus-2 harness; quoted by Google from the public Terminal-Bench leaderboard"
+    date: 2025-12-17
+    source: "Gemini 3 Flash - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-2.5-flash
+    benchmark: toolathlon
+    value: 3.7
+    provenance: lab
+    tools: true
+    setting: "GA, thinking; quoted by Google from runs by the Toolathlon authors / official leaderboard"
+    date: 2025-12-17
+    source: "Gemini 3 Flash - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-2.5-flash
+    benchmark: vending-bench-2
+    value: 549
+    provenance: lab
+    tools: true
+    setting: "GA, thinking; net worth (mean), rounded to whole dollars; quoted by Google from andonlabs.com"
+    date: 2025-12-17
+    source: "Gemini 3 Flash - Model Evaluation: Approach, Methodology & Results"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+
+  # ── gemini-2.5-deep-think (lab) ─────────────────────────────────
+  - model: gemini-2.5-deep-think
+    benchmark: imo
+    value: 35
+    provenance: lab
+    tools: false
+    setting: "IMO 2025, advanced Deep Think version (not the released model); 5/6 problems solved, officially graded by IMO coordinators, natural language, within 4.5h limit"
+    date: 2025-07-21
+    source: "Advanced version of Gemini with Deep Think officially achieves gold-medal standard at the International Mathematical Olympiad"
+    url: https://deepmind.google/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/
+  - model: gemini-2.5-deep-think
+    benchmark: aime-2025
+    value: 99.2
+    provenance: lab
+    tools: false
+    setting: "Released Gemini 2.5 Deep Think (Gemini app); no tools"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card / 'Try Deep Think in the Gemini app' blog chart"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-deep-think
+    benchmark: hle
+    value: 34.8
+    provenance: lab
+    tools: false
+    setting: "Released Gemini 2.5 Deep Think (Gemini app); no tools"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card / 'Try Deep Think in the Gemini app' blog chart"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-deep-think
+    benchmark: imo
+    value: 25.5
+    provenance: lab
+    tools: false
+    setting: "Released Gemini 2.5 Deep Think (Gemini app); IMO 2025 problems, pass@1, bronze-medal grade; Google reports 60.7%, converted to points out of 42"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think - Model Card"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+
+  # ── gemini-3-pro (lab) ──────────────────────────────────────────
+  - model: gemini-3-pro
+    benchmark: aime-2025
+    value: 95.0
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "No tools"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: aime-2025
+    value: 100
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "With code execution"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: arc-agi-2
+    value: 31.1
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "ARC Prize Verified, semi-private set"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: arc-agi-2
+    value: 45.1
+    provenance: lab
+    tools: true
+    setting: "Deep Think; with code execution; ARC Prize Verified"
+    date: 2025-11-18
+    source: "A new era of intelligence with Gemini 3 (Google blog, Gemini 3 Deep Think section)"
+    url: https://blog.google/products/gemini/gemini-3/
+  - model: gemini-3-pro
+    benchmark: gpqa-diamond
+    value: 91.9
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "No tools"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: gpqa-diamond
+    value: 93.8
+    provenance: lab
+    tools: false
+    setting: "Deep Think; no tools"
+    date: 2025-11-18
+    source: "A new era of intelligence with Gemini 3 (Google blog, Gemini 3 Deep Think section)"
+    url: https://blog.google/products/gemini/gemini-3/
+  - model: gemini-3-pro
+    benchmark: hle
+    value: 37.5
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "No tools; full set (text + MM)"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: hle
+    value: 45.8
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "With search and code execution (search blocklist)"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: hle
+    value: 41.0
+    provenance: lab
+    tools: false
+    setting: "Deep Think; no tools"
+    date: 2025-11-18
+    source: "A new era of intelligence with Gemini 3 (Google blog, Gemini 3 Deep Think section)"
+    url: https://blog.google/products/gemini/gemini-3/
+  - model: gemini-3-pro
+    benchmark: swe-bench-verified
+    value: 76.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Single attempt; bash + file-edit + submit tools; averaged over 10 runs"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: tau2-bench
+    value: 85.4
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Average of Retail, Airline (original), Telecom; Sierra framework with prompt adjustment"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: tau2-bench-airline
+    value: 73.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Airline domain, original (pre-fix) version"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: tau2-bench-retail
+    value: 85.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Retail domain (per-domain breakdown in methodology text)"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: tau2-bench-telecom
+    value: 98.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Telecom domain"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: terminal-bench-2
+    value: 54.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Terminus-2 agent harness (reported from public leaderboard)"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: vending-bench-2
+    value: 5478.16
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Net worth (mean); reported from Andon Labs Vending-Bench 2 leaderboard"
+    date: 2025-11-18
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: mcp-atlas
+    value: 54.1
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Sourced from Scale AI MCP Atlas leaderboard per Google methodology; Gemini 3 Pro column of Gemini 3 Flash table"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: tau2-bench
+    value: 90.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Average of Retail, Airline (fixed per Claude Opus 4.5 report), Telecom; Gemini 3 Pro column of Gemini 3 Flash table"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: toolathlon
+    value: 36.4
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Run by benchmark authors / official leaderboard, per Google methodology; Gemini 3 Pro column of Gemini 3 Flash table"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: imo
+    value: 6.0
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "IMO 2025 (all 6 problems), avg of 4 runs, expert-graded; Google reports 14.3%, converted to points out of 42; Gemini 3 Pro Preview column of Deep Think table"
+    date: 2026-02-12
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Deep Think"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_deep_think_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: browsecomp
+    value: 59.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Deep Research agent with search + Python + browsing; Gemini 3 Pro column of Gemini 3.1 Pro table"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: scicode
+    value: 56
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Sourced from Artificial Analysis per Google methodology; Gemini 3 Pro column of Gemini 3.1 Pro table"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: swe-bench-pro-public
+    value: 43.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Single attempt; Gemini 3 Pro (Thinking High) column of Gemini 3.1 Pro table"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3-pro
+    benchmark: terminal-bench-2
+    value: 56.9
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Terminus-2 harness, reported from public leaderboard; Gemini 3 Pro (Thinking High) column of Gemini 3.1 Pro table"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+
+  # ── gemini-3-flash (lab) ────────────────────────────────────────
+  - model: gemini-3-flash
+    benchmark: aime-2025
+    value: 95.2
+    provenance: lab
+    tools: false
+    setting: "Thinking, default API settings; no tools"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: aime-2025
+    value: 99.7
+    provenance: lab
+    tools: true
+    setting: "Thinking, default API settings; with code execution"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: arc-agi-2
+    value: 33.6
+    provenance: lab
+    tools: false
+    setting: "ARC Prize Verified, semi-private set"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: gpqa-diamond
+    value: 90.4
+    provenance: lab
+    tools: false
+    setting: "Thinking, default API settings; no tools"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: hle
+    value: 33.7
+    provenance: lab
+    tools: false
+    setting: "Thinking, default API settings; no tools; full set (text + MM)"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: hle
+    value: 43.5
+    provenance: lab
+    tools: true
+    setting: "Thinking, default API settings; with search and code execution"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: mcp-atlas
+    value: 57.4
+    provenance: lab
+    tools: true
+    setting: "Sourced from Scale AI MCP Atlas leaderboard per Google methodology"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: swe-bench-verified
+    value: 78.0
+    provenance: lab
+    tools: true
+    setting: "Single attempt; bash + file-edit + submit tools; averaged over 5 runs"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: tau2-bench
+    value: 90.2
+    provenance: lab
+    tools: true
+    setting: "Simple average of Retail, Airline (fixed per Claude Opus 4.5 report), Telecom; user model Gemini 3 Pro"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: terminal-bench-2
+    value: 47.6
+    provenance: lab
+    tools: true
+    setting: "Terminus-2 harness (leaderboard submission pending at publication)"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: toolathlon
+    value: 49.4
+    provenance: lab
+    tools: true
+    setting: "Run by benchmark authors / official leaderboard, per Google methodology"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: vending-bench-2
+    value: 3635
+    provenance: lab
+    tools: true
+    setting: "Net worth (mean); reported from Andon Labs Vending-Bench 2 leaderboard"
+    date: 2025-12-17
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: mcp-atlas
+    value: 62.0
+    provenance: lab
+    tools: true
+    setting: "From Scale AI official leaderboard; Gemini 3 Flash column of Gemini 3.5 Flash table (differs from 57.4 at launch)"
+    date: 2026-05-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.5 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-5_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: osworld-verified
+    value: 65.1
+    provenance: lab
+    tools: true
+    setting: "Self-computed, avg of 5 runs, single attempt each; 1080p, max 100 steps, pyautogui; Gemini 3 Flash column of Gemini 3.5 Flash table"
+    date: 2026-05-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.5 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-5_flash_model_evaluation.pdf
+  - model: gemini-3-flash
+    benchmark: swe-bench-pro-public
+    value: 49.6
+    provenance: lab
+    tools: true
+    setting: "Single attempt; internal Antigravity harness; as re-reported in Gemini 3.5 Flash table (eval-methodology PDF shows 48.4)"
+    date: 2026-05-19
+    source: "Gemini 3.5 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash/
+  - model: gemini-3-flash
+    benchmark: terminal-bench-2.1
+    value: 58.0
+    provenance: lab
+    tools: true
+    setting: "Terminus-2 harness, self-computed; Gemini 3 Flash column of Gemini 3.5 Flash table"
+    date: 2026-05-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.5 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-5_flash_model_evaluation.pdf
+
+  # ── gemini-3.1-pro (lab) ────────────────────────────────────────
+  - model: gemini-3.1-pro
+    benchmark: arc-agi-2
+    value: 84.6
+    provenance: lab
+    tools: false
+    setting: "Deep Think (Feb 2026 upgrade); ARC Prize Verified, v2 semi-private; tool use not stated"
+    date: 2026-02-12
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Deep Think"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_deep_think_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: hle
+    value: 48.4
+    provenance: lab
+    tools: false
+    setting: "Deep Think (Feb 2026 upgrade); no tools; full set (text + MM)"
+    date: 2026-02-12
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Deep Think"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_deep_think_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: hle
+    value: 53.4
+    provenance: lab
+    tools: true
+    setting: "Deep Think (Feb 2026 upgrade); search (blocklist) + code execution"
+    date: 2026-02-12
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Deep Think"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_deep_think_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: imo
+    value: 34.2
+    provenance: lab
+    tools: false
+    setting: "Deep Think (Feb 2026 upgrade); IMO 2025 all 6 problems, avg of 4 runs, expert-graded; Google reports 81.5%, converted to points out of 42"
+    date: 2026-02-12
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3 Deep Think"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_deep_think_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: arc-agi-2
+    value: 77.1
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Thinking (High); ARC Prize Verified, semi-private set"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: browsecomp
+    value: 85.9
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Thinking (High); Deep Research agent with search + Python + browsing"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: gpqa-diamond
+    value: 94.3
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Thinking (High); no tools"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: hle
+    value: 44.4
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Thinking (High); no tools; full set (text + MM)"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: hle
+    value: 51.4
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Thinking (High); search (blocklist) + code"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: mcp-atlas
+    value: 69.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Thinking (High); public set, sourced from Turing"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: scicode
+    value: 59
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Thinking (High); sourced from Artificial Analysis per Google methodology"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: swe-bench-pro-public
+    value: 54.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Thinking (High); single attempt, avg of 5 runs"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: swe-bench-verified
+    value: 80.6
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Thinking (High); single attempt, avg of 10 runs; includes +0.6pt adjustment for 3 items broken in official harness"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: tau2-bench-retail
+    value: 90.8
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Thinking (High); Retail domain (airline excluded by Google, no average reported)"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: tau2-bench-telecom
+    value: 99.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Thinking (High); Telecom domain"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: terminal-bench-2
+    value: 68.5
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Thinking (High); Terminus-2 harness, self-computed"
+    date: 2026-02-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.1 Pro"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-1_pro_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: mcp-atlas
+    value: 78.2
+    provenance: lab
+    tools: true
+    setting: "From Scale AI official leaderboard; Gemini 3.1 Pro column of Gemini 3.5 Flash table (differs from 69.2 at launch)"
+    date: 2026-05-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.5 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-5_flash_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: osworld-verified
+    value: 76.2
+    provenance: lab
+    tools: true
+    setting: "Self-computed, avg of 5 runs, single attempt each; 1080p, max 100 steps, pyautogui; Gemini 3.1 Pro column of Gemini 3.5 Flash table"
+    date: 2026-05-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.5 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-5_flash_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: terminal-bench-2.1
+    value: 70.3
+    provenance: lab
+    tools: true
+    setting: "Terminus-2 harness, reported from public leaderboard; Gemini 3.1 Pro column of Gemini 3.5 Flash table"
+    date: 2026-05-19
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.5 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-5_flash_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: deepswe
+    value: 12
+    provenance: lab
+    tools: true
+    setting: "DeepSWE v1.1, from deepswe.datacurve.ai leaderboard (best thinking level); Gemini 3.1 Pro column of Gemini 3.6 Flash table"
+    date: 2026-07-21
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.6 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-6_flash_model_evaluation.pdf
+  - model: gemini-3.1-pro
+    benchmark: terminal-bench-2.1
+    value: 73.8
+    provenance: lab
+    tools: true
+    setting: "Terminus-2 harness, from public leaderboard / Artificial Analysis; Gemini 3.1 Pro column of Gemini 3.6 Flash table"
+    date: 2026-07-21
+    source: "Model Evaluation - Approach, Methodology & Results: Gemini 3.6 Flash"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3-6_flash_model_evaluation.pdf
+
+  # ── gemini-3.5-flash (lab) ──────────────────────────────────────
+  - model: gemini-3.5-flash
+    benchmark: arc-agi-2
+    value: 72.1
+    provenance: lab
+    tools: false
+    setting: "ARC Prize Verified, semi-private set (sourced by Google from ARC Prize leaderboard)"
+    date: 2026-05-19
+    source: "Gemini 3.5 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash/
+  - model: gemini-3.5-flash
+    benchmark: hle
+    value: 40.2
+    provenance: lab
+    tools: false
+    setting: "full set, text + MM; single HLE row, not labeled, but the 3 Flash/3.1 Pro columns match Google's published no-tools figures"
+    date: 2026-05-19
+    source: "Gemini 3.5 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash/
+  - model: gemini-3.5-flash
+    benchmark: mcp-atlas
+    value: 83.6
+    provenance: lab
+    tools: true
+    setting: "sourced by Google from the Scale AI MCP Atlas leaderboard"
+    date: 2026-05-19
+    source: "Gemini 3.5 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash/
+  - model: gemini-3.5-flash
+    benchmark: osworld-verified
+    value: 78.4
+    provenance: lab
+    tools: true
+    setting: "self-computed; avg of 5 runs, single attempt each; 1080p, max 100 steps, pyautogui actuation"
+    date: 2026-05-19
+    source: "Gemini 3.5 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash/
+  - model: gemini-3.5-flash
+    benchmark: swe-bench-pro-public
+    value: 55.1
+    provenance: lab
+    tools: true
+    setting: "Single attempt; internal Antigravity harness; averaged over 5 runs (model card + blog show 55.1; the eval-methodology PDF shows 53.9)"
+    date: 2026-05-19
+    source: "Gemini 3.5 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash/
+  - model: gemini-3.5-flash
+    benchmark: terminal-bench-2.1
+    value: 76.2
+    provenance: lab
+    tools: true
+    setting: "Terminus-2 harness; self-computed"
+    date: 2026-05-19
+    source: "Gemini 3.5 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash/
+  - model: gemini-3.5-flash
+    benchmark: toolathlon
+    value: 56.5
+    provenance: lab
+    tools: true
+    setting: "result provided to Google by the benchmark authors (HKUST)"
+    date: 2026-05-19
+    source: "Gemini 3.5 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash/
+  - model: gemini-3.5-flash
+    benchmark: deepswe
+    value: 37
+    provenance: lab
+    tools: true
+    effort: medium
+    setting: "DeepSWE v1.1; from Datacurve public leaderboard, medium reasoning (best level); as re-reported in Gemini 3.6 Flash table"
+    date: 2026-07-21
+    source: "Gemini 3.6 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-6-flash/
+
+  # ── gemini-3.5-flash-lite (lab) ─────────────────────────────────
+  - model: gemini-3.5-flash-lite
+    benchmark: osworld-verified
+    value: 74.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "self-computed; avg of 5 runs, single attempt each; 1080p, max 100 steps; high thinking"
+    date: 2026-07-21
+    source: "Gemini 3.5 Flash-Lite model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/
+  - model: gemini-3.5-flash-lite
+    benchmark: swe-bench-pro-public
+    value: 54.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "full public set; internal Antigravity harness; high thinking"
+    date: 2026-07-21
+    source: "Gemini 3.5 Flash-Lite model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/
+  - model: gemini-3.5-flash-lite
+    benchmark: terminal-bench-2.1
+    value: 54.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Terminus-2 harness; self-computed; high thinking"
+    date: 2026-07-21
+    source: "Gemini 3.5 Flash-Lite model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/
+
+  # ── gemini-3.6-flash (lab) ──────────────────────────────────────
+  - model: gemini-3.6-flash
+    benchmark: deepswe
+    value: 49
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "DeepSWE v1.1; from Datacurve public leaderboard, high reasoning (best level); later re-reported as 48.6 in the 3.7 Flash table"
+    date: 2026-07-21
+    source: "Gemini 3.6 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-6-flash/
+  - model: gemini-3.6-flash
+    benchmark: osworld-verified
+    value: 83.0
+    provenance: lab
+    tools: true
+    setting: "self-computed; avg of 5 runs, single attempt each; 1080p, max 100 steps"
+    date: 2026-07-21
+    source: "Gemini 3.6 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-6-flash/
+  - model: gemini-3.6-flash
+    benchmark: swe-bench-pro-public
+    value: 58.7
+    provenance: lab
+    tools: true
+    setting: "internal Antigravity harness; self-computed"
+    date: 2026-07-21
+    source: "Gemini 3.6 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-6-flash/
+  - model: gemini-3.6-flash
+    benchmark: terminal-bench-2.1
+    value: 78.0
+    provenance: lab
+    tools: true
+    setting: "Terminus-2 harness; self-computed"
+    date: 2026-07-21
+    source: "Gemini 3.6 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-6-flash/
+  - model: gemini-3.6-flash
+    benchmark: osworld-2
+    value: 33.8
+    provenance: lab
+    tools: true
+    setting: "OSWorld 2.0 partial score; max over 3 runs, 500 max steps, screenshot-only; pre-08.08 patch; as re-reported in Gemini 3.7 Flash table"
+    date: 2026-08-13
+    source: "Gemini 3.7 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-7-flash/
+  - model: gemini-3.6-flash
+    benchmark: terminal-bench-3
+    value: 5.4
+    provenance: lab
+    tools: true
+    setting: "Terminal-Bench 3.0; self-computed with mini-swe-agent harness (LiteLLM 1.96), minor task fixes; as re-reported in Gemini 3.7 Flash table"
+    date: 2026-08-13
+    source: "Gemini 3.7 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-7-flash/
+
+  # ── gemini-3.7-flash (lab) ──────────────────────────────────────
+  - model: gemini-3.7-flash
+    benchmark: deepswe
+    value: 65.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "DeepSWE v1.1; self-computed with mini-swe-agent harness (LiteLLM 1.96), high thinking"
+    date: 2026-08-13
+    source: "Gemini 3.7 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-7-flash/
+  - model: gemini-3.7-flash
+    benchmark: osworld-2
+    value: 47.9
+    provenance: lab
+    tools: true
+    setting: "OSWorld 2.0 partial score; max over 3 runs, 500 max steps, screenshot-only; pre-08.08 patch"
+    date: 2026-08-13
+    source: "Gemini 3.7 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-7-flash/
+  - model: gemini-3.7-flash
+    benchmark: terminal-bench-2.1
+    value: 85.8
+    provenance: lab
+    tools: true
+    setting: "Terminus-2 harness; self-computed"
+    date: 2026-08-13
+    source: "Gemini 3.7 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-7-flash/
+  - model: gemini-3.7-flash
+    benchmark: terminal-bench-3
+    value: 14.9
+    provenance: lab
+    tools: true
+    setting: "Terminal-Bench 3.0; self-computed with mini-swe-agent harness (LiteLLM 1.96), minor fixes to 2 tasks"
+    date: 2026-08-13
+    source: "Gemini 3.7 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-7-flash/
+  - model: gemini-3.7-flash
+    benchmark: osworld-2
+    value: 50.6
+    provenance: lab
+    tools: true
+    setting: "OSWorld 2.0 partial score, batched tool calls enabled; max over 3 runs, 500 max steps; as re-reported in Gemini 3.8 Flash table"
+    date: 2026-09-02
+    source: "Gemini 3.8 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-8-flash/
+  - model: gemini-3.7-flash
+    benchmark: terminal-bench-4
+    value: 11.2
+    provenance: lab
+    tools: true
+    setting: "Terminal-Bench 4.0; from official leaderboard, highest-scoring thinking level; as re-reported in Gemini 3.8 Flash table"
+    date: 2026-09-02
+    source: "Gemini 3.8 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-8-flash/
+
+  # ── gemini-3.8-flash (lab) ──────────────────────────────────────
+  - model: gemini-3.8-flash
+    benchmark: deepswe
+    value: 73.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "DeepSWE v1.1; self-computed with mini-swe-agent harness, high thinking"
+    date: 2026-09-02
+    source: "Gemini 3.8 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-8-flash/
+  - model: gemini-3.8-flash
+    benchmark: osworld-2
+    value: 59.0
+    provenance: lab
+    tools: true
+    setting: "OSWorld 2.0 partial score, batched tool calls enabled; max over 3 runs, 500 max steps, screenshot-only; pre-08.08 patch"
+    date: 2026-09-02
+    source: "Gemini 3.8 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-8-flash/
+  - model: gemini-3.8-flash
+    benchmark: terminal-bench-2.1
+    value: 89.4
+    provenance: lab
+    tools: true
+    setting: "Terminus-2 harness; self-computed"
+    date: 2026-09-02
+    source: "Gemini 3.8 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-8-flash/
+  - model: gemini-3.8-flash
+    benchmark: terminal-bench-4
+    value: 19.1
+    provenance: lab
+    tools: true
+    setting: "Terminal-Bench 4.0; from official leaderboard, highest-scoring thinking level"
+    date: 2026-09-02
+    source: "Gemini 3.8 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-8-flash/
+
+  # ── Bio / chem evals from Gemini model cards and FSF reports (lab) ───
+  - model: gemini-2.5-pro
+    benchmark: lab-bench-cloning
+    value: 53.1
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; Cloning Scenarios N=33"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-pro
+    benchmark: lab-bench-protocolqa
+    value: 74.4
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; N=108"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-pro
+    benchmark: lab-bench-seqqa
+    value: 71.0
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; N=600"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-pro
+    benchmark: securebio-vmqa-sc
+    value: 55.5
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; N=350"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-pro
+    benchmark: wmdp-bio
+    value: 86.1
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; N=1273"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-pro
+    benchmark: wmdp-chem
+    value: 80.0
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; N=408"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-flash
+    benchmark: lab-bench-cloning
+    value: 44.1
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; Cloning Scenarios N=33"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-flash
+    benchmark: lab-bench-protocolqa
+    value: 63.5
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; N=108"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-flash
+    benchmark: lab-bench-seqqa
+    value: 58.0
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; N=600"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-flash
+    benchmark: securebio-vmqa-sc
+    value: 48.1
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; N=350"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-flash
+    benchmark: wmdp-bio
+    value: 83.8
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; N=1273"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-flash
+    benchmark: wmdp-chem
+    value: 75.3
+    provenance: lab
+    tools: false
+    setting: "GA; FSF CBRN MCQ; mean over 100 shuffled runs; N=408"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-deep-think
+    benchmark: lab-bench-cloning
+    value: 64.8
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ; mean over 100 shuffled runs; Cloning Scenarios N=33"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-deep-think
+    benchmark: lab-bench-protocolqa
+    value: 81.7
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ; mean over 100 shuffled runs; N=108"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-deep-think
+    benchmark: lab-bench-seqqa
+    value: 75.5
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ; mean over 100 shuffled runs; N=600"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-deep-think
+    benchmark: securebio-vmqa-sc
+    value: 60.0
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ; mean over 100 shuffled runs; N=350"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-deep-think
+    benchmark: wmdp-bio
+    value: 87.7
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ; mean over 100 shuffled runs; N=1273"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-2.5-deep-think
+    benchmark: wmdp-chem
+    value: 83.4
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ; mean over 100 shuffled runs; N=408"
+    date: 2025-08-01
+    source: "Gemini 2.5 Deep Think Model Card, Figure 1"
+    url: https://storage.googleapis.com/deepmind-media/Model-Cards/Gemini-2-5-Deep-Think-Model-Card.pdf
+  - model: gemini-3-pro
+    benchmark: lab-bench-cloning
+    value: 94.2
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ, shuffled answer choices, mean solve rate; read from labeled bar chart; Cloning Scenarios N=33, n=30"
+    date: 2025-11-18
+    source: "Frontier Safety Framework Report – Gemini 3 Pro (Figure 1)"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_fsf_report.pdf
+  - model: gemini-3-pro
+    benchmark: lab-bench-protocolqa
+    value: 87.4
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ, shuffled answer choices, mean solve rate; read from labeled bar chart; N=108, n=10"
+    date: 2025-11-18
+    source: "Frontier Safety Framework Report – Gemini 3 Pro (Figure 1)"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_fsf_report.pdf
+  - model: gemini-3-pro
+    benchmark: lab-bench-seqqa
+    value: 87.6
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ, shuffled answer choices, mean solve rate; read from labeled bar chart; N=600, n=5"
+    date: 2025-11-18
+    source: "Frontier Safety Framework Report – Gemini 3 Pro (Figure 1)"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_fsf_report.pdf
+  - model: gemini-3-pro
+    benchmark: securebio-vmqa-sc
+    value: 61.2
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ, shuffled answer choices, mean solve rate; read from labeled bar chart; labeled 'SecureBio VCT - SC', N=350, n=10 runs"
+    date: 2025-11-18
+    source: "Frontier Safety Framework Report – Gemini 3 Pro (Figure 1)"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_fsf_report.pdf
+  - model: gemini-3-pro
+    benchmark: wmdp-bio
+    value: 88.2
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ, shuffled answer choices, mean solve rate; read from labeled bar chart; N=1273, n=10"
+    date: 2025-11-18
+    source: "Frontier Safety Framework Report – Gemini 3 Pro (Figure 1)"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_fsf_report.pdf
+  - model: gemini-3-pro
+    benchmark: wmdp-chem
+    value: 84.8
+    provenance: lab
+    tools: false
+    setting: "FSF CBRN MCQ, shuffled answer choices, mean solve rate; read from labeled bar chart; N=408, n=10"
+    date: 2025-11-18
+    source: "Frontier Safety Framework Report – Gemini 3 Pro (Figure 1)"
+    url: https://storage.googleapis.com/deepmind-media/gemini/gemini_3_pro_fsf_report.pdf
+  - model: gemini-3.6-flash
+    benchmark: lab-bench-2
+    value: 76.1
+    provenance: lab
+    tools: true
+    setting: "Linux terminal with bioinfo tools, Python, R and internet access; as re-reported in Gemini 3.7 Flash table"
+    date: 2026-08-13
+    source: "Gemini 3.7 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-7-flash/
+  - model: gemini-3.7-flash
+    benchmark: lab-bench-2
+    value: 82.1
+    provenance: lab
+    tools: true
+    setting: "Linux terminal with bioinfo tools, Python, R and internet access"
+    date: 2026-08-13
+    source: "Gemini 3.7 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-7-flash/
+  - model: gemini-3.8-flash
+    benchmark: lab-bench-2
+    value: 86.2
+    provenance: lab
+    tools: true
+    setting: "macro-average over 11 sub-tasks; Linux terminal with bioinfo tools, Python, R and internet access"
+    date: 2026-09-02
+    source: "Gemini 3.8 Flash model card (evaluation table)"
+    url: https://deepmind.google/models/model-cards/gemini-3-8-flash/
+
+  # ── Independent leaderboards ────────────────────────────────────
+  - model: gemini-2.5-pro
+    benchmark: aime-2025
+    value: 88.33
+    provenance: independent
+    tools: false
+    setting: "GA; ±5.74; released after competition"
+    date: 2026-09-24
+    source: "MathArena AIME 2025 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: gemini-2.5-pro
+    benchmark: aime-2025
+    value: 83.33
+    provenance: independent
+    tools: false
+    setting: "05-06 preview; ±6.67; released after competition"
+    date: 2026-09-24
+    source: "MathArena AIME 2025 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: gemini-2.5-flash
+    benchmark: aime-2025
+    value: 70.83
+    provenance: independent
+    tools: false
+    setting: "Thinking; ±8.13; released after competition"
+    date: 2026-09-24
+    source: "MathArena AIME 2025 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: gemini-3-pro
+    benchmark: aime-2025
+    value: 95.0
+    provenance: independent
+    tools: false
+    setting: "Gemini 3 Pro (preview); ±3.90; released after competition"
+    date: 2026-09-24
+    source: "MathArena AIME 2025 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: gemini-3-flash
+    benchmark: aime-2025
+    value: 97.5
+    provenance: independent
+    tools: false
+    setting: "±2.79 (95% CI); released after competition"
+    date: 2026-09-24
+    source: "MathArena AIME 2025 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: gemini-3-pro
+    benchmark: aime-2026
+    value: 91.67
+    provenance: independent
+    tools: false
+    setting: "Gemini 3 Pro (preview); ±4.95; released before competition (uncontaminated)"
+    date: 2026-09-24
+    source: "MathArena AIME 2026 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: gemini-3-flash
+    benchmark: aime-2026
+    value: 96.67
+    provenance: independent
+    tools: false
+    setting: "±3.21; released before competition (uncontaminated)"
+    date: 2026-09-24
+    source: "MathArena AIME 2026 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: gemini-3.1-pro
+    benchmark: aime-2026
+    value: 98.33
+    provenance: independent
+    tools: false
+    setting: "3.1 Pro Preview; ±2.29; released after competition"
+    date: 2026-09-24
+    source: "MathArena AIME 2026 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: gemini-3.5-flash
+    benchmark: aime-2026
+    value: 95.0
+    provenance: independent
+    tools: false
+    setting: "±5.51; released after competition"
+    date: 2026-09-24
+    source: "MathArena AIME 2026 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: gemini-3.6-flash
+    benchmark: aime-2026
+    value: 96.67
+    provenance: independent
+    tools: false
+    setting: "±4.54; released after competition"
+    date: 2026-09-24
+    source: "MathArena AIME 2026 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: gemini-3.1-pro
+    benchmark: arc-agi-3
+    value: 0.42
+    provenance: independent
+    tools: false
+    setting: "Gemini 3.1 Pro (Preview)"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: gemini-3.8-flash
+    benchmark: arc-agi-3
+    value: 10.37
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "ARC standard harness"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: gemini-3.8-flash
+    benchmark: arc-agi-3
+    value: 3.99
+    provenance: independent
+    tools: false
+    effort: medium
+    setting: "ARC standard harness"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: gemini-3.8-flash
+    benchmark: arc-agi-3
+    value: 5.99
+    provenance: independent
+    tools: false
+    effort: low
+    setting: "ARC standard harness"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: gemini-3.8-flash
+    benchmark: arc-agi-3
+    value: 35.0
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "Provider Adapter (lab-supplied harness), listed separately by ARC Prize"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: gemini-3.8-flash
+    benchmark: arc-agi-3
+    value: 24.2
+    provenance: independent
+    tools: false
+    effort: medium
+    setting: "Provider Adapter (lab-supplied harness)"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: gemini-3.8-flash
+    benchmark: arc-agi-3
+    value: 15.07
+    provenance: independent
+    tools: false
+    effort: low
+    setting: "Provider Adapter (lab-supplied harness)"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: gemini-2.5-pro
+    benchmark: hmmt-2025
+    value: 82.5
+    provenance: independent
+    tools: false
+    setting: "GA; ±6.80; released after competition"
+    date: 2026-09-24
+    source: "MathArena HMMT February 2025 leaderboard"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: gemini-2.5-pro
+    benchmark: hmmt-2025
+    value: 80.83
+    provenance: independent
+    tools: false
+    setting: "05-06 preview; ±7.04; released after competition"
+    date: 2026-09-24
+    source: "MathArena HMMT February 2025 leaderboard"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: gemini-2.5-flash
+    benchmark: hmmt-2025
+    value: 64.17
+    provenance: independent
+    tools: false
+    setting: "Thinking; ±8.58; released after competition"
+    date: 2026-09-24
+    source: "MathArena HMMT February 2025 leaderboard"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: gemini-3-pro
+    benchmark: hmmt-2025
+    value: 97.5
+    provenance: independent
+    tools: false
+    setting: "Gemini 3 Pro (preview); ±2.79; released after competition"
+    date: 2026-09-24
+    source: "MathArena HMMT February 2025 leaderboard"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: gemini-3-flash
+    benchmark: hmmt-2025
+    value: 97.5
+    provenance: independent
+    tools: false
+    setting: "±2.79; released after competition"
+    date: 2026-09-24
+    source: "MathArena HMMT February 2025 leaderboard"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: gemini-3-pro
+    benchmark: mcp-atlas
+    value: 70.3
+    provenance: independent
+    tools: true
+    setting: "gemini-3-pro-preview; ±2.8 (Google's Dec 2025 table quoted 54.1 from an earlier leaderboard state)"
+    date: 2026-09-24
+    source: "Scale AI MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: gemini-3-flash
+    benchmark: mcp-atlas
+    value: 62.0
+    provenance: independent
+    tools: true
+    setting: "gemini-3-flash-preview; ±3.0"
+    date: 2026-09-24
+    source: "Scale AI MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: gemini-3.1-pro
+    benchmark: mcp-atlas
+    value: 78.2
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "gemini-3.1-pro-preview; ±2.5"
+    date: 2026-09-24
+    source: "Scale AI MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: gemini-3.5-flash
+    benchmark: mcp-atlas
+    value: 83.6
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "±2.3"
+    date: 2026-05-19
+    source: "Scale AI MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: gemini-2.5-pro
+    benchmark: osworld-verified
+    value: 45.76
+    provenance: independent
+    tools: true
+    setting: "Agent framework: Agent S2 (Simular) w/ gemini-2.5-pro; 50 steps"
+    date: 2025-07-28
+    source: "OSWorld-Verified leaderboard (os-world.github.io, verified results)"
+    url: https://os-world.github.io/
+  - model: gemini-3.1-pro
+    benchmark: osworld-verified
+    value: 78.34
+    provenance: independent
+    tools: true
+    setting: "Agent framework: OpenAPA (Laiye) w/ gemini-3.1-pro; 100 steps; coding actions; 282.8/361 tasks"
+    date: 2026-04-17
+    source: "OSWorld-Verified leaderboard (os-world.github.io, verified results)"
+    url: https://os-world.github.io/
+  - model: gemini-3-pro
+    benchmark: swe-bench-multilingual
+    value: 68.7
+    provenance: independent
+    tools: true
+    setting: "mini-SWE-agent v2.0.0a0; 1 attempt"
+    date: 2026-02-13
+    source: "SWE-bench Multilingual leaderboard (swebench.com)"
+    url: https://www.swebench.com/multilingual.html
+  - model: gemini-3-flash
+    benchmark: swe-bench-multilingual
+    value: 72.7
+    provenance: independent
+    tools: true
+    setting: "mini-SWE-agent v2.0.0a0; 1 attempt"
+    date: 2026-02-13
+    source: "SWE-bench Multilingual leaderboard (swebench.com)"
+    url: https://www.swebench.com/multilingual.html
+  - model: gemini-2.5-pro
+    benchmark: swe-bench-pro-commercial
+    value: 10.14
+    provenance: independent
+    tools: true
+    setting: "Gemini 2.5 Pro Preview; ±3.56"
+    date: 2025-09-19
+    source: "Scale AI SWE-Bench Pro leaderboard, Private Dataset tab (commercial codebases)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: gemini-3.1-pro
+    benchmark: swe-bench-pro-commercial
+    value: 32.2
+    provenance: independent
+    tools: true
+    setting: "gemini-3.1-pro (thinking); ±5.69"
+    date: 2026-04-08
+    source: "Scale AI SWE-Bench Pro leaderboard, Private Dataset tab (commercial codebases)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: gemini-3-pro
+    benchmark: swe-bench-pro-public
+    value: 43.3
+    provenance: independent
+    tools: true
+    setting: "gemini-3-pro-preview, Scale scaffold; ±3.6"
+    date: 2025-11-26
+    source: "Scale AI SWE-Bench Pro leaderboard (public set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: gemini-3-flash
+    benchmark: swe-bench-pro-public
+    value: 34.63
+    provenance: independent
+    tools: true
+    setting: "Scale scaffold; ±3.55"
+    date: 2026-01-12
+    source: "Scale AI SWE-Bench Pro leaderboard (public set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: gemini-3.1-pro
+    benchmark: swe-bench-pro-public
+    value: 46.1
+    provenance: independent
+    tools: true
+    setting: "gemini-3.1-pro (thinking), Scale scaffold; ±3.6"
+    date: 2026-04-08
+    source: "Scale AI SWE-Bench Pro leaderboard (public set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: gemini-3-pro
+    benchmark: tau2-bench-airline
+    value: 80.5
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Sierra run; pass^1; user simulator gpt-5.2"
+    date: 2026-03-02
+    source: "τ²-bench leaderboard (Sierra), tau2-bench v1.0.1"
+    url: https://taubench.com/
+  - model: gemini-3-flash
+    benchmark: tau2-bench-airline
+    value: 82.5
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Sierra run; pass^1; user simulator gpt-5.2"
+    date: 2026-03-02
+    source: "τ²-bench leaderboard (Sierra), tau2-bench v1.0.1"
+    url: https://taubench.com/
+  - model: gemini-3-pro
+    benchmark: tau2-bench-retail
+    value: 75.88
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Sierra run; pass^1; user simulator gpt-5.2"
+    date: 2026-03-02
+    source: "τ²-bench leaderboard (Sierra), tau2-bench v1.0.1"
+    url: https://taubench.com/
+  - model: gemini-3-flash
+    benchmark: tau2-bench-retail
+    value: 76.75
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Sierra run; pass^1; user simulator gpt-5.2"
+    date: 2026-03-02
+    source: "τ²-bench leaderboard (Sierra), tau2-bench v1.0.1"
+    url: https://taubench.com/
+  - model: gemini-3-pro
+    benchmark: tau2-bench-telecom
+    value: 91.01
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Sierra run; pass^1; user simulator gpt-5.2"
+    date: 2026-03-02
+    source: "τ²-bench leaderboard (Sierra), tau2-bench v1.0.1"
+    url: https://taubench.com/
+  - model: gemini-3-flash
+    benchmark: tau2-bench-telecom
+    value: 91.23
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Sierra run; pass^1; user simulator gpt-5.2"
+    date: 2026-03-02
+    source: "τ²-bench leaderboard (Sierra), tau2-bench v1.0.1"
+    url: https://taubench.com/
+  - model: gemini-2.5-pro
+    benchmark: terminal-bench-1
+    value: 25.3
+    provenance: independent
+    tools: true
+    setting: "Terminus 1 agent (Stanford); ±2.8"
+    date: 2025-05-15
+    source: "Terminal-Bench 1.0 (terminal-bench-core 0.1.1) leaderboard, tbench.ai (Wayback snapshot 2025-11-03)"
+    url: http://web.archive.org/web/20251103212338/https://www.tbench.ai/leaderboard
+  - model: gemini-2.5-flash
+    benchmark: terminal-bench-1
+    value: 16.8
+    provenance: independent
+    tools: true
+    setting: "Terminus 1 agent (Stanford); ±1.3"
+    date: 2025-05-17
+    source: "Terminal-Bench 1.0 (terminal-bench-core 0.1.1) leaderboard, tbench.ai (Wayback snapshot 2025-11-03)"
+    url: http://web.archive.org/web/20251103212338/https://www.tbench.ai/leaderboard
+  - model: gemini-3-pro
+    benchmark: terminal-bench-2.1
+    value: 73.93
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Terminus 2 agent; 95% CI ±2.53"
+    date: 2025-11-18
+    source: "Terminal-Bench 2.1 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=2.1
+  - model: gemini-3-pro
+    benchmark: terminal-bench-2.1
+    value: 65.84
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Gemini CLI agent; 95% CI ±2.70"
+    date: 2025-11-18
+    source: "Terminal-Bench 2.1 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=2.1
+  - model: gemini-3.1-pro
+    benchmark: terminal-bench-2.1
+    value: 65.84
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Gemini CLI agent; 95% CI ±3.27"
+    date: 2026-02-19
+    source: "Terminal-Bench 2.1 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=2.1
+  - model: gemini-3.1-pro
+    benchmark: terminal-bench-2.1
+    value: 65.62
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Terminus 2 agent; 95% CI ±3.23"
+    date: 2026-02-19
+    source: "Terminal-Bench 2.1 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=2.1
+  - model: gemini-3.7-flash
+    benchmark: terminal-bench-4
+    value: 11.21
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "mini-SWE-agent; 95% CI ±2.45"
+    date: 2026-08-13
+    source: "Terminal-Bench 4.0 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=4.0
+  - model: gemini-3.8-flash
+    benchmark: terminal-bench-4
+    value: 19.09
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "mini-SWE-agent; 95% CI ±3.36"
+    date: 2026-09-02
+    source: "Terminal-Bench 4.0 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=4.0
+  - model: gemini-2.5-pro
+    benchmark: toolathlon
+    value: 10.5
+    provenance: independent
+    tools: true
+    setting: "Pass@1 ±1.9; default agent"
+    date: 2025-10-28
+    source: "Toolathlon leaderboard (original series)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gemini-2.5-flash
+    benchmark: toolathlon
+    value: 3.7
+    provenance: independent
+    tools: true
+    setting: "Pass@1 ±1.5; default agent"
+    date: 2025-10-28
+    source: "Toolathlon leaderboard (original series)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gemini-3-pro
+    benchmark: toolathlon
+    value: 36.4
+    provenance: independent
+    tools: true
+    setting: "Pass@1 ±0.4; default agent"
+    date: 2025-11-22
+    source: "Toolathlon leaderboard (original series)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gemini-3-flash
+    benchmark: toolathlon
+    value: 49.4
+    provenance: independent
+    tools: true
+    setting: "Pass@1 ±0.4; default agent"
+    date: 2025-12-18
+    source: "Toolathlon leaderboard (original series)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gemini-3.1-pro
+    benchmark: toolathlon
+    value: 48.8
+    provenance: independent
+    tools: true
+    setting: "Pass@1 ±2.3; default agent"
+    date: 2026-03-13
+    source: "Toolathlon leaderboard (original series)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gemini-3.5-flash
+    benchmark: toolathlon
+    value: 56.5
+    provenance: independent
+    tools: true
+    setting: "Pass@1 ±2.7; default agent; evaluated by Toolathlon team"
+    date: 2026-05-19
+    source: "Toolathlon leaderboard (original series)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gemini-3.1-pro
+    benchmark: toolathlon-verified
+    value: 61.1
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Pass@1 ±1.3; default agent"
+    date: 2026-07-01
+    source: "Toolathlon-Verified leaderboard"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gemini-3.5-flash
+    benchmark: toolathlon-verified
+    value: 67.3
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Pass@1 ±1.2; default agent"
+    date: 2026-06-30
+    source: "Toolathlon-Verified leaderboard"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gemini-3.5-flash-lite
+    benchmark: toolathlon-verified
+    value: 57.1
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Pass@1 ±3.6; default agent"
+    date: 2026-07-30
+    source: "Toolathlon-Verified leaderboard"
+    url: https://toolathlon.xyz/docs/leaderboard

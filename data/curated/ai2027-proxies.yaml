@@ -1,0 +1,274 @@
+# Measurable proxies for "how far is reality behind (or ahead of) AI 2027?", as of 2026-09-24.
+#
+# Method: matched value. For each proxy, pick a value that reality has reached and find the date when
+# the scenario path reached the same value. Lag = realityDate - scenarioDate, in months.
+# Positive lag = reality is behind the scenario; negative lag = reality is ahead.
+# Where a proxy has not been reached, projectedDate is used instead of realityDate. For a not-yet proxy
+# with no defensible projection, projectedDate is null, and (today - scenarioDate) is only a lower bound.
+# This is the method the AI Futures Project uses in its own grading spreadsheets (linked in sources).
+# Values between the scenario's sidebar checkpoints are interpolated log-linearly, which reproduces
+# the authors' own interpolated dates.
+#
+# Format (one list item per proxy)
+#   id              kebab-case
+#   name            short label
+#   metric          camelCase metric name (matches claims[].metric in ai2027.yaml where possible)
+#   unit            optional unit label
+#   scenarioDate    when the AI 2027 path reaches scenarioValue
+#   scenarioRef     milestone id in ai2027.yaml
+#   scenarioValue   the matched value, in `unit`
+#   realityDate     when reality first reached it (null if not yet)
+#   realityValue    optional: the observed value
+#   realityRef      short description of the real-world observation
+#   status          reached | not-yet
+#   projectedDate   not-yet only: best evidence-based estimate, else null
+#   projectionNote  how the projection was made
+#   weight          1 normal, 0.5 if the proxy is fuzzy or the estimate is weak
+#   note            caveats
+#   sources         [url, ...]
+#
+# Computed lags (months, + = behind): compute-1e27 +9.1 · leading-lab-datacenter +0.3 · global-h100e -0.5 ·
+# coding-time-horizon -1.1 · ai-rd-uplift +11.1 · revenue -6.7 · valuation +4.0 · global-ai-datacenter-spending -12.0 ·
+# agent-1-mini -3.9 · china-centralization >= +1.8 (lower bound) · superhuman-coder +5.0 (projected) · public-salience +14.4
+# Median over all 12 (lower bound used for china): +1.1. Weight-weighted median: +0.3. Weighted mean: +2.0.
+# Median of the 7 weight-1 proxies: +0.3.
+# For comparison, the authors' Aug 2026 estimate of ~75% of AI 2027's pace implies ~4-5 months behind after 17.7 months.
+# The medians differ because revenue and spending run ahead while training compute and R&D uplift lag.
+
+- id: compute-1e27
+  name: First ~10^27 FLOP training run
+  metric: trainingFlop
+  unit: FLOP
+  scenarioDate: 2025-12-01
+  scenarioRef: agent-0
+  scenarioValue: 1.0e27
+  realityDate: 2026-09-03
+  realityValue: 1.0e27
+  realityRef: GPT-6 Astra (~1e27 FLOP, Epoch estimate, confidence Likely; trained on at least 100k GB200s at Abilene)
+  status: reached
+  projectedDate: null
+  projectionNote: null
+  weight: 1
+  note: "Scenario date is the Late 2025 section, where Agent-0 is OpenBrain's latest public model; the compute supplement has its run finishing in May 2025, which would make the lag ~16 months. Epoch's next-largest runs are Grok 4 (5e26) and GPT-4.5 (3.8e26). The AI Futures Project estimates Claude Mythos 5 (Jun 2026) at ~1.5e27 including RL (80% CI 1e27-3e27), but Epoch has no estimate for it; if it counts, the lag is ~6 months."
+  sources:
+    - https://epoch.ai/models/gpt-6-astra
+    - https://epoch.ai/data/ai-models
+    - https://ai-2027.com/research/compute-forecast
+    - https://docs.google.com/spreadsheets/d/1JfEJRIwGe7fSCIW14eC7q0sEhVWHEdetykVh9g9XnF8/edit?gid=1928509176
+
+- id: leading-lab-datacenter
+  name: Leading-lab datacenter capacity ~2 GW (the 10^28-capable build-out)
+  metric: datacenterCapacityGw
+  unit: GW
+  scenarioDate: 2025-12-22
+  scenarioRef: agent-0
+  scenarioValue: 1.9
+  realityDate: 2025-12-31
+  realityValue: 1.9
+  realityRef: "OpenAI CFO Sarah Friar: compute footprint grew 0.2 GW (2023) to 0.6 GW (2024) to ~1.9 GW by end of 2025"
+  status: reached
+  projectedDate: null
+  projectionNote: null
+  weight: 1
+  note: "Late 2025 says the new datacenters can train 10^28 FLOP; the scenario path has the leading company at ~2 GW by end-2025 and passes 1.9 GW around 2025-12-22 (authors' grading). It is ambiguous whether the 1.9 GW is IT load or total facility power."
+  sources:
+    - https://openai.com/index/a-business-that-scales-with-the-value-of-intelligence/
+    - https://docs.google.com/spreadsheets/d/1Ncol1SYIeLhGKdOUHKSYPxCTjkUwQVxkIbp393hveyA/edit?gid=145629229
+    - https://ai-2027.com
+
+- id: global-h100e
+  name: Global stock of AI compute (H100-equivalents)
+  metric: globalH100e
+  unit: H100e
+  scenarioDate: 2026-07-14
+  scenarioRef: china-wakes-up
+  scenarioValue: 2.756e7
+  realityDate: 2026-06-30
+  realityValue: 2.756e7
+  realityRef: "Epoch AI chip-sales data (generated 2026-08-27): ~27.6M cumulative H100e shipped by end of Q2 2026 (20.3M end-2025, 23.0M end-Q1 2026)"
+  status: reached
+  projectedDate: null
+  projectionNote: null
+  weight: 1
+  note: "Scenario path: 18M H100e end-2025 to 40M end-2026 (compute supplement table), log-interpolated. Epoch's Q2 2026 Google figure is flagged incomplete, so reality may be slightly further ahead. Epoch counts cumulative shipments with no retirements. The authors' Aug 2026 grade (older Epoch data, 24.5M at Q1) found reality ~1.7 months ahead."
+  sources:
+    - https://epoch.ai/data/ai-chip-sales
+    - https://ai-2027.com/research/compute-forecast
+    - https://docs.google.com/spreadsheets/d/1JfEJRIwGe7fSCIW14eC7q0sEhVWHEdetykVh9g9XnF8/edit?gid=1928509176
+
+- id: coding-time-horizon
+  name: METR 80% coding time horizon (AI 2027 timelines-model trajectory)
+  metric: metrTimeHorizon80
+  unit: minutes (METR TH1.0-equivalent)
+  scenarioDate: 2026-05-09
+  scenarioRef: coding-automation
+  scenarioValue: 279
+  realityDate: 2026-04-07
+  realityValue: 186
+  realityRef: "Claude Mythos Preview: 80% horizon ~186 min on METR Time Horizon 1.1 (x1.5 = 279 min TH1.0-equivalent); 50% horizon ~17h"
+  status: reached
+  projectedDate: null
+  projectionNote: null
+  weight: 1
+  note: "Authors' grading (Aug 2026): pace 1.05x against a central AI-2027-speed trajectory of their Apr 2025 timelines model. Against the erroneous graph published with AI 2027, reality is ~3.5 months behind. Mythos Preview has restricted access. METR has published no horizons for Claude Fable 5/5.1 or GPT-6 Astra, and measurements above ~16h are unreliable."
+  sources:
+    - https://metr.org/time-horizons/
+    - https://docs.google.com/spreadsheets/d/1JfEJRIwGe7fSCIW14eC7q0sEhVWHEdetykVh9g9XnF8/edit?gid=1928509176
+    - https://ai2027-tracker.com
+
+- id: ai-rd-uplift
+  name: AI software R&D progress multiplier (leading lab, internal) reaches 1.2x
+  metric: rdMultiplier
+  unit: x
+  scenarioDate: 2025-09-01
+  scenarioRef: coding-automation
+  scenarioValue: 1.2
+  realityDate: 2026-08-04
+  realityValue: 1.2
+  realityRef: "AI Futures Project estimate (Aug 2026): internal serial coding uplift ~1.7x, implying ~1.2x overall AI software R&D uplift (Daniel: 2x coding, ~1.26x overall)"
+  status: reached
+  projectedDate: null
+  projectionNote: null
+  weight: 1
+  note: "The headline scenario claim, 1.5x in early 2026 (sidebar 1.5 at 2026-04-30), has not been reached. The authors revised their Apr 2025 baseline uplift down, which makes this proxy look worse than the capability proxies. Lab self-reports are higher: Anthropic's internal poll gave ~4x self-reported output, and a METR survey found 1.4-2x perceived value."
+  sources:
+    - https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    - https://docs.google.com/spreadsheets/d/1JfEJRIwGe7fSCIW14eC7q0sEhVWHEdetykVh9g9XnF8/edit?gid=1928509176
+    - https://ai2027-tracker.com/predictions/rd-multiplier/
+
+- id: revenue
+  name: Leading AI company annualized revenue
+  metric: revenueAnnualized
+  unit: USD/yr
+  scenarioDate: 2027-02-19
+  scenarioRef: agent-2
+  scenarioValue: 6.5e10
+  realityDate: 2026-07-31
+  realityValue: 6.5e10
+  realityRef: "Anthropic told investors its run-rate reached $65B at the end of July 2026 (Bloomberg/CNBC/TechCrunch, 2026-08-17); $9B end-2025, $30B Apr, $47B May"
+  status: reached
+  projectedDate: null
+  projectionNote: null
+  weight: 1
+  note: "Scenario sidebar: OpenBrain $60.8B (2027-01-31) to $67.1B (2027-02-28), log-interpolated. The authors' own Aug 2026 grade used $47B (2026-05-15) against 2026-11 (~5.8 months ahead). Run-rate is last month x 12, so it is not recognized revenue."
+  sources:
+    - https://www.cnbc.com/2026/08/17/anthropic-says-annualized-revenue-climbed-to-65-billion-in-july.html
+    - https://www.bloomberg.com/news/articles/2026-08-17/anthropic-revenue-run-rate-surpasses-65-billion-ahead-of-ipo
+    - https://www.anthropic.com/news/series-h
+    - https://ai-2027.com
+
+- id: valuation
+  name: Leading AI company valuation
+  metric: valuation
+  unit: USD
+  scenarioDate: 2026-01-25
+  scenarioRef: coding-automation
+  scenarioValue: 9.65e11
+  realityDate: 2026-05-28
+  realityValue: 9.65e11
+  realityRef: Anthropic Series H at $965B post-money (2026-05-28); OpenAI $852B post-money (2026-03-31)
+  status: reached
+  projectedDate: null
+  projectionNote: null
+  weight: 1
+  note: "Scenario sidebar: $900B (2025-12-31) to $1.265T (2026-04-30), log-interpolated. The authors' own grade used OpenAI's $852B (~3.6 months behind). OpenAI is reportedly weighing a raise at $1.2T+ (Bloomberg, 2026-09-15), and Anthropic is preparing an IPO; neither had closed by 2026-09-24. The scenario's end-2026 value is $2.5T."
+  sources:
+    - https://www.anthropic.com/news/series-h
+    - https://www.cnbc.com/2026/03/31/openai-funding-round-ipo.html
+    - https://www.bloomberg.com/news/articles/2026-09-15/openai-weighing-funding-round-at-over-1-2-trillion-valuation
+    - https://ai-2027.com
+
+- id: global-ai-datacenter-spending
+  name: Global AI datacenter spending (annualized)
+  metric: globalAiDatacenterSpending
+  unit: USD/yr
+  scenarioDate: 2027-08-08
+  scenarioRef: geopolitics-of-superintelligence
+  scenarioValue: 8.5e11
+  realityDate: 2026-08-07
+  realityValue: 8.5e11
+  realityRef: "AI Futures Project bottom-up estimate: ~$850B/yr annualized as of 2026-08-07 (~$820B for full-year 2026; Big-5 guidance $775-800B, ~75% AI-specific, plus China, neoclouds, colos and sovereigns)"
+  status: reached
+  projectedDate: null
+  projectionNote: null
+  weight: 0.5
+  note: "Scenario sidebar: $400B (end-2025), $600B (end-2026), ~$880B (Sep 2027). The definitions do not match cleanly: the sidebar and the 2026 key-metrics box ($1T cost of ownership) measure different things. About 5-10% of the 2026 dollar growth is memory price inflation rather than added compute."
+  sources:
+    - https://docs.google.com/spreadsheets/d/1JfEJRIwGe7fSCIW14eC7q0sEhVWHEdetykVh9g9XnF8/edit?gid=1928509176
+    - https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+
+- id: agent-1-mini
+  name: Agent-1-mini-like release (early-2026-flagship capability at >=10x lower price)
+  metric: priceReduction
+  unit: x cheaper
+  scenarioDate: 2026-12-01
+  scenarioRef: agent-1-mini
+  scenarioValue: 10
+  realityDate: 2026-08-03
+  realityValue: 12.5
+  realityRef: "GPT-5.6 Luna after its 80% API price cut ($0.20/$1.20 per M tokens): Epoch ECI 156.3 vs GPT-5.4's 156.9 (Mar 2026, $2.50/$15), about 12.5x cheaper"
+  status: reached
+  projectedDate: null
+  projectionNote: null
+  weight: 0.5
+  note: "Operationalization is ours: Agent-1 is taken to be the early-2026 public flagship (GPT-5.4 level). The price-cut date is approximate (the tracker logged it on 2026-08-03). GPT-6 Luna (2026-09-22) is cheaper still at $0.10/$0.50. The scenario's downstream effects (mass adoption, +30% stocks) have not followed."
+  sources:
+    - https://ai2027-tracker.com/predictions/agent-mini-cost-reduction/
+    - https://ai2027-tracker.com/data/epoch-eci.csv
+    - https://benchlm.ai/openai/api-pricing
+    - https://venturebeat.com/technology/openai-releases-gpt-6-sol-and-luna-models-slashing-api-costs-50-or-more
+
+- id: china-centralization
+  name: China wakes up (CCP centralizes AI labs and compute)
+  metric: chinaCentralization
+  unit: event
+  scenarioDate: 2026-08-01
+  scenarioRef: china-wakes-up
+  scenarioValue: 1
+  realityDate: null
+  realityRef: "No consolidation observed. The 15th Five-Year Plan and the March 2026 government report prioritize AI Plus, but DeepSeek, Alibaba, ByteDance, Moonshot and Zhipu still compete independently."
+  status: not-yet
+  projectedDate: null
+  projectionNote: "No defensible basis for a date. The lag is at least 1.8 months (scenario date to 2026-09-24) and grows every month it does not happen."
+  weight: 0.5
+  note: "The authors (Aug 2026) grade this as the biggest miss of mid-2026. The same section's side claims hold: ~6-7 month US-China capability gap and ~12% compute share."
+  sources:
+    - https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    - https://ai2027-tracker.com/predictions/china-centralization/
+
+- id: superhuman-coder
+  name: Superhuman / Automated Coder
+  metric: capabilityMilestone
+  unit: event
+  scenarioDate: 2027-03-01
+  scenarioRef: superhuman-coder
+  scenarioValue: 1
+  realityDate: null
+  realityRef: Not reached; best METR 80% horizon ~3.1h (Claude Mythos Preview)
+  status: not-yet
+  projectedDate: 2027-08-01
+  projectionNote: "AI Futures Project pace method (Aug 2026): at 75% of AI 2027's speed, AC arrives at (2027-2025.25)/0.75+2025.25 = 2027.58, i.e. mid-2027. At 60% speed it arrives in early 2028. The authors' all-things-considered AC medians (Aug 2026) are Daniel Nov 2027, Brendan Jan 2029 and Eli Jan 2030 (see ai2027-updates.yaml)."
+  weight: 0.5
+  note: "This is a forecast, not an observation, so it is down-weighted. AI 2027's 'superhuman coder' is slightly stronger than the AI Futures Model's 'automated coder'."
+  sources:
+    - https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    - https://ai-2027.com/research/timelines-forecast
+
+- id: public-salience
+  name: Share of Americans naming AI the most important problem (Gallup)
+  metric: aiMostImportantProblem
+  unit: pct
+  scenarioDate: 2025-05-20
+  scenarioRef: government-oversight
+  scenarioValue: 0.625
+  realityDate: 2026-07-31
+  realityValue: 0.625
+  realityRef: "Gallup Most Important Problem, 4-month average to Jul 2026: ~0.625%, flat vs ~0.6% in Apr 2025"
+  status: reached
+  projectedDate: null
+  projectionNote: null
+  weight: 0.5
+  note: "Scenario sidebar path: 1% end-2025, ~1.7% Apr 2026, ~2.3% Aug 2026, 20% by Oct 2027. The authors call this their biggest predictive error but suspect the operationalization is poor, since AI salience feels much higher. Gallup reports '*' (<0.5%) for some months, which the authors treat as 0.5%."
+  sources:
+    - https://news.gallup.com/poll/1675/most-important-problem.aspx
+    - https://docs.google.com/spreadsheets/d/1JfEJRIwGe7fSCIW14eC7q0sEhVWHEdetykVh9g9XnF8/edit?gid=1928509176

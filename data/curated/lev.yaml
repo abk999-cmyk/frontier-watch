@@ -1,0 +1,509 @@
+# Longevity Escape Velocity (LEV): forecasts, milestones, the "top-to-bottom" LEV chart, and life-expectancy data.
+# Researched 2026-09-24. Rules: see README.md (every fact has a url, ISO dates, never invent a number).
+#
+# Format
+#   lastChecked            date of the last verification pass
+#   definition             { text, url }
+#   forecasts
+#     metaculus            one date question: { id, url, title, question, scale, api, communityMedian, history[], note }
+#       communityMedian    { asOf, forecasters, q1, median, q3 }   recency-weighted Community Prediction (the site default)
+#       history[]          { date, forecasters, q1, median, q3, q3AtUpperBound? }   sampled ~6-monthly from the full series;
+#                          date = start of that aggregation window. q3AtUpperBound: true means the upper quartile sits
+#                          at/above the 2200-01-01 range max (open upper bound).
+#     manifold[]           { id, question, url, probability (0-100), bettors, asOf, closes, resolved, resolution?, note? }
+#     named[]              { id, who, statedOn, datePrecision?, claim, levYear? | levYearRange? [lo, hi], probability? (0-100), url, sources? }
+#   annotations[]          { id, date, datePrecision?, category, title, summary, url, sources? }
+#                          category: protein-structure | ai-biology | ai-drug | rejuvenation-study | itp | aging-biomarker
+#   topToBottomCurve       { bestGuess, candidates[], dataFile, dataUrl, derived, note }
+#     candidates[]         { id, name, shape, whyItFits, source, url, data? }
+#     derived              numbers computed by us from a named source file; each block states the method.
+#   lifeExpectancyData     verified OWID grapher CSVs (+ one HMD parquet): { id, url, columns, shortColumns?, coverage, latest?, note }
+#   recordTrend            slope of the record-life-expectancy line, computed from the OWID CSV
+#
+# Probabilities are 0-100. Dates are ISO; month-only dates use the 1st with datePrecision: month.
+
+lastChecked: 2026-09-24
+
+definition:
+  text: >-
+    LEV is reached when remaining life expectancy (not life expectancy at birth) rises by at least one year per
+    calendar year, so that medical progress outpaces ageing.
+  url: https://en.wikipedia.org/wiki/Longevity_escape_velocity
+
+forecasts:
+  metaculus:
+    id: 6592
+    url: https://www.metaculus.com/questions/6592/
+    title: Date Life Expectancy Hits Escape Velocity
+    question: "When will a country reach longevity escape velocity, i.e. sustained increase of life expectancy of at least 1?"
+    opened: 2021-03-20
+    scale: "date, linear, 2021-03-23 to 2200-01-01, open upper bound; closes/resolves 2200-01-01"
+    api:
+      endpoints: [https://www.metaculus.com/api/posts/6592/, https://www.metaculus.com/api2/questions/6592/]
+      status: 403
+      tokenRequired: true
+      note: >-
+        Both endpoints return 403 "The API is only available to authenticated users. Please create an account and use
+        your API token". The HTML page is behind a Cloudflare challenge for curl (403); in a real browser the full
+        aggregation history is embedded in the page's Next.js payload (aggregations.recency_weighted.history, values are
+        0-1 positions on the linear date scale). Values below were read that way on 2026-09-24.
+    communityMedian:
+      asOf: 2026-09-17
+      forecasters: 149
+      q1: 2038-05-13
+      median: 2053-05-03
+      q3: 2110-07-13
+    history:
+      - { date: 2021-03-26, forecasters: 22, q1: 2050-12-07, median: 2083-04-06, q3: 2129-07-01 }
+      - { date: 2021-09-20, forecasters: 44, q1: 2057-08-03, median: 2098-07-14, q3: 2200-01-01, q3AtUpperBound: true }
+      - { date: 2022-01-02, forecasters: 53, q1: 2055-01-09, median: 2089-03-12, q3: 2172-11-13 }
+      - { date: 2022-07-04, forecasters: 75, q1: 2053-04-02, median: 2084-12-14, q3: 2200-01-01, q3AtUpperBound: true }
+      - { date: 2023-01-23, forecasters: 85, q1: 2048-11-30, median: 2073-08-12, q3: 2149-07-25 }
+      - { date: 2023-06-30, forecasters: 101, q1: 2043-08-17, median: 2068-03-29, q3: 2148-01-10 }
+      - { date: 2024-01-08, forecasters: 125, q1: 2041-11-29, median: 2061-05-30, q3: 2121-04-19 }
+      - { date: 2024-07-08, forecasters: 134, q1: 2040-09-09, median: 2063-02-10, q3: 2183-11-10 }
+      - { date: 2025-01-09, forecasters: 138, q1: 2038-01-14, median: 2054-03-14, q3: 2149-08-17 }
+      - { date: 2025-03-12, forecasters: 138, q1: 2036-09-19, median: 2049-12-26, q3: 2104-02-04 }
+      - { date: 2025-07-07, forecasters: 138, q1: 2036-12-27, median: 2050-09-01, q3: 2108-08-28 }
+      - { date: 2026-01-12, forecasters: 141, q1: 2039-06-04, median: 2055-03-05, q3: 2114-06-18 }
+      - { date: 2026-06-14, forecasters: 147, q1: 2039-03-10, median: 2055-04-05, q3: 2122-05-12 }
+      - { date: 2026-09-17, forecasters: 149, q1: 2038-05-13, median: 2053-05-03, q3: 2110-07-13 }
+    note: >-
+      204 aggregation points exist (2021-03-21 to 2026-09-17). The median fell from ~2083 (Mar 2021) to its lowest,
+      2049-12-26 (Mar 2025), then drifted back to 2053-2059 through 2026. The legacy "Metaculus Prediction" stopped
+      updating on 2024-10-07 (137 forecasters; median 2039-07-19, IQR 2030-02-16 to 2133-06-20).
+
+  manifold:
+    - id: SIIqNAUdLI
+      question: Longevity escape velocity before 2030?
+      url: https://manifold.markets/Jack1/longevity-escape-velocity-before-20
+      probability: 10.6
+      bettors: 8
+      asOf: 2026-09-24
+      closes: 2029-12-31
+      resolved: false
+    - id: CAU6a6z6X13Qj8Lumji4
+      question: "Life Extension Velocity (LEV) - for every year we survive, we gain an extra year - by 2036?"
+      url: https://manifold.markets/AutopoieticErgodicity/life-extension-velocity-lev-where-f
+      probability: 33.8
+      bettors: 13
+      asOf: 2026-09-24
+      closes: 2037-01-01
+      resolved: false
+      note: Last trade 2025-06-01; thin market.
+    - id: WAT0LR6n1qtctjE8U1Gr
+      question: Will we find a way to live forever, i.e. reverse aging and achieve biological immortality by 2046?
+      url: https://manifold.markets/BB/will-we-find-a-way-to-live-forever
+      probability: 26.9
+      bettors: 92
+      asOf: 2026-09-24
+      closes: 2047-01-01
+      resolved: false
+      note: The most-traded LEV-adjacent market found (volume ~18.7k mana).
+    - id: KTGxAy4pjUYVDytAGJe6
+      question: Will human life expectancy eventually increase more than a year every year.
+      url: https://manifold.markets/Lazy/will-human-life-expectancy-eventual
+      probability: 47.0
+      bettors: 11
+      asOf: 2026-09-24
+      closes: 3000-01-01
+      resolved: false
+    - id: 2zAySZAng2
+      question: Will aging be solved by EOY 2035?
+      url: https://manifold.markets/programjames/will-aging-be-solved-by-eoy-2035
+      probability: 6.0
+      bettors: 9
+      asOf: 2026-09-24
+      closes: 2035-12-31
+      resolved: false
+    - id: l03UrsByQ3ff6JeIuC8s
+      question: Will aging be cured by 2100?
+      url: https://manifold.markets/MinhTruong/will-there-be-a-solution-to-aging-b
+      probability: 60.4
+      bettors: 45
+      asOf: 2026-09-24
+      closes: 2100-01-01
+      resolved: false
+    - id: 9J5xvjSeArzihkJReqrm
+      question: What will be true about AGI and longevity in 2040? (multiple choice)
+      url: https://manifold.markets/OlegEterevsky/what-will-be-true-about-agi-and-lon
+      bettors: 46
+      asOf: 2026-09-24
+      closes: 2040-01-02
+      resolved: false
+      note: >-
+        Answers are independent: "AGI is used in longevity research, but doesn't make significant advances" 74.7;
+        "AGI is developed and significant advances are made in longevity" 25.4; "AGI is not developed" 27.0.
+    - id: C19AQDljebsrRo69ldBt
+      question: Will one person currently alive reach longevity escape velocity?
+      url: https://manifold.markets/AllisonDuettmann/will-one-person-currently-alive-rea
+      probability: 47.8
+      bettors: 51
+      asOf: 2026-09-24
+      closes: 2024-11-23
+      resolved: false
+      note: Closed to trading on 2024-11-23 and never resolved, so the number is frozen.
+    - id: vT3ZFuB4kBMFtuBJOlO7
+      question: Will the Robust Mouse Rejuvenation Study by the LEVF succeed in increasing mouse lifespan 12 months?
+      url: https://manifold.markets/justifieduseofFallibilism/will-the-robust-mouse-rejuvenation
+      bettors: 29
+      asOf: 2026-09-24
+      closes: 2025-06-06
+      resolved: true
+      resolution: "NO"
+      note: Resolved NO on 2025-06-06, consistent with LEVF calling RMR1 only a "qualified win".
+    # API for refresh: GET https://api.manifold.markets/v0/market/{id} (probability is 0-1 there; x100 here).
+    # Search: https://api.manifold.markets/v0/search-markets?term=longevity%20escape%20velocity
+
+  named:
+    - id: degrey-2021-2036
+      who: Aubrey de Grey
+      statedOn: 2021-03-14
+      claim: "\"I now think there is a 50% chance that we will reach longevity escape velocity by 2036.\""
+      levYear: 2036
+      probability: 50
+      url: https://twitter.com/aubreydegrey/status/1371196809595346950
+      sources: [https://en.wikipedia.org/wiki/Longevity_escape_velocity]
+    - id: degrey-2022-15y
+      who: Aubrey de Grey
+      statedOn: 2022-10-20
+      claim: 50% chance that the Methuselarity (his synonym for LEV) is 15 years away; he used to say 25 years.
+      levYear: 2037
+      probability: 50
+      url: https://www.technologyreview.com/2022/10/20/1060934/pursuing-immortality-consolations-mortality/
+      sources: [https://en.wikipedia.org/wiki/Aubrey_de_Grey]
+    - id: kurzweil-2018
+      who: Ray Kurzweil
+      statedOn: 2018-01-19
+      claim: LEV in 10-12 years.
+      levYearRange: [2028, 2030]
+      url: https://www.inc.com/thomas-koulopoulos/according-to-peter-diamandis-ray-kurtzweil-this-is-how-you-build-future.html
+      sources: [https://en.wikipedia.org/wiki/Longevity_escape_velocity]
+    - id: kurzweil-2024-bessemer
+      who: Ray Kurzweil
+      statedOn: 2024-03-01
+      datePrecision: month
+      claim: "LEV by 2029: \"Past 2029, you'll get back more than a year.\" (Bessemer Venture Partners interview; restated in Popular Mechanics, 2026-04-29, as \"in just three years\")."
+      levYear: 2029
+      url: https://www.popularmechanics.com/science/a71165617/humans-will-go-backwards-in-time-scientist-says/
+    - id: kurzweil-2024-economist
+      who: Ray Kurzweil
+      statedOn: 2024-06-17
+      claim: LEV between 2029 and 2035, with AI simulating biological processes.
+      levYearRange: [2029, 2035]
+      url: https://www.economist.com/by-invitation/2024/06/17/ray-kurzweil-on-how-ai-will-transform-the-physical-world
+      sources: [https://en.wikipedia.org/wiki/Longevity_escape_velocity]
+    - id: amodei-2024-mlg
+      who: Dario Amodei
+      statedOn: 2024-10-01
+      datePrecision: month
+      claim: >-
+        In the 5-10 years after "powerful AI", human lifespan could double to ~150; "Once human lifespan is 150, we may
+        be able to reach 'escape velocity'". Conditional on powerful AI; no calendar year given.
+      url: https://www.darioamodei.com/essay/machines-of-loving-grace
+    - id: church-2025-2050
+      who: George Church
+      statedOn: 2025-06-26
+      claim: "Asked about LEV: \"I wouldn't be surprised if 2050 would be a point.\""
+      levYear: 2050
+      url: https://www.dwarkesh.com/p/george-church
+      sources: [https://en.wikipedia.org/wiki/Longevity_escape_velocity]
+    - id: sinclair-2023-150
+      who: David Sinclair
+      statedOn: 2023-01-30
+      claim: The first person to live to 150 has already been born. This is not a LEV date.
+      url: https://news.harvard.edu/gazette/story/2023/01/has-first-person-to-live-to-be-150-been-born/
+    # de Grey's most recent quantified LEV estimate found is the 2022 one. No newer dated statement could be verified
+    # in this pass (web-search budget exhausted); LEVF's 2025-2026 posts discuss RMR timing, not a LEV year.
+
+annotations:
+  - id: alphafold2-casp14
+    date: 2020-11-30
+    category: protein-structure
+    title: AlphaFold 2 solves protein structure prediction at CASP14
+    summary: DeepMind's AlphaFold 2 reaches accuracy competitive with experiment at CASP14.
+    url: https://deepmind.google/discover/blog/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology/
+  - id: alphafold2-nature
+    date: 2021-07-15
+    category: protein-structure
+    title: AlphaFold 2 paper and code published
+    summary: '"Highly accurate protein structure prediction with AlphaFold", Nature.'
+    url: https://www.nature.com/articles/s41586-021-03819-2
+  - id: alphafold-db-200m
+    date: 2022-07-28
+    category: protein-structure
+    title: AlphaFold DB expands to ~200 million predicted structures
+    summary: Predicted structures for nearly all catalogued proteins released with EMBL-EBI.
+    url: https://deepmind.google/discover/blog/alphafold-reveals-the-structure-of-the-protein-universe/
+  - id: alphafold3
+    date: 2024-05-08
+    category: protein-structure
+    title: AlphaFold 3 (Google DeepMind + Isomorphic Labs)
+    summary: Extends structure prediction to complexes of proteins, DNA, RNA, ligands and modifications.
+    url: https://www.nature.com/articles/s41586-024-07487-w
+    sources: [https://blog.google/technology/ai/google-deepmind-isomorphic-alphafold-3-ai-model/]
+  - id: nobel-chemistry-2024
+    date: 2024-10-09
+    category: protein-structure
+    title: Nobel Prize in Chemistry to Baker, Hassabis and Jumper
+    summary: Half for computational protein design (Baker), half for protein structure prediction (Hassabis, Jumper).
+    url: https://www.nobelprize.org/prizes/chemistry/2024/press-release/
+  - id: openai-gpt4b-micro-announced
+    date: 2025-01-17
+    category: ai-biology
+    title: OpenAI reveals GPT-4b micro, a protein model built with Retro Biosciences
+    summary: A longevity-focused model to re-engineer the Yamanaka reprogramming factors.
+    url: https://www.technologyreview.com/2025/01/17/1110086/openai-has-created-an-ai-model-for-longevity-science/
+  - id: levf-rmr1-complete
+    date: 2025-02-12
+    category: rejuvenation-study
+    title: "LEVF Robust Mouse Rejuvenation Study 1: last mouse dies, a \"qualified win\""
+    summary: >-
+      RMR1 (1,000 C57BL/6J mice, four interventions started at ~18 months) ended when the last mouse died on 2025-02-12.
+      Damage-repair treatments were additive, but the life extension matched calorie-restriction-level gains, short
+      of the +12-month "robust" target. Rapamycin dominated in females; the combination beat rapamycin alone in males.
+    url: https://www.levf.org/projects/robust-mouse-rejuvenation-study-1/study-updates/may-31st-2025
+    sources: [https://www.levf.org/breaking-the-ceiling-of-longevity-research, https://manifold.markets/justifieduseofFallibilism/will-the-robust-mouse-rejuvenation]
+  - id: google-ai-co-scientist
+    date: 2025-02-19
+    category: ai-biology
+    title: Google's AI co-scientist
+    summary: A multi-agent Gemini system that generates hypotheses, validated on drug repurposing and fibrosis targets.
+    url: https://research.google/blog/accelerating-scientific-breakthroughs-with-an-ai-co-scientist/
+  - id: rentosertib-phase2a-nature-medicine
+    date: 2025-06-03
+    category: ai-drug
+    title: Rentosertib phase 2a results in Nature Medicine
+    summary: >-
+      Insilico's generative-AI-discovered TNIK inhibitor for idiopathic pulmonary fibrosis. A 71-patient, 12-week
+      randomized trial met its safety endpoint. FVC changed by +98.4 ml on 60 mg QD vs -20.3 ml on placebo.
+    url: https://www.nature.com/articles/s41591-025-03743-2
+  - id: alphagenome
+    date: 2025-06-25
+    category: ai-biology
+    title: DeepMind AlphaGenome
+    summary: A model that predicts how DNA variants affect gene regulation across long genomic sequences.
+    url: https://deepmind.google/discover/blog/alphagenome-ai-for-better-understanding-the-genome/
+  - id: openai-retro-yamanaka-50x
+    date: 2025-08-22
+    category: ai-biology
+    title: GPT-4b micro-designed Yamanaka factors give 50x reprogramming markers
+    summary: >-
+      Redesigned SOX2/KLF4 variants gave >50x higher expression of stem-cell reprogramming markers in vitro, plus
+      stronger DNA-damage repair. Replicated across donors, cell types and delivery methods.
+    url: https://openai.com/index/accelerating-life-sciences-research-with-retro-biosciences/
+  - id: itp-2025-epi-hal-mit
+    date: 2025-09-19
+    category: itp
+    title: "NIA ITP: epicatechin, halofuginone and mitoglitazone extend male mouse lifespan"
+    summary: Median lifespan up ~5% (epicatechin) and ~9% (halofuginone, mitoglitazone) in male UM-HET3 mice, with no effect in females.
+    url: https://doi.org/10.1007/s11357-025-01881-6
+  - id: google-c2s-scale
+    date: 2025-10-15
+    category: ai-biology
+    title: C2S-Scale 27B (Gemma) generates a validated cancer-therapy hypothesis
+    summary: The single-cell model predicted that silmitasertib plus interferon boosts antigen presentation, and lab tests confirmed it.
+    url: https://blog.google/innovation-and-ai/products/google-gemma-ai-cancer-therapy-discovery/
+  - id: levf-rmr2-timing
+    date: 2025-12-09
+    category: rejuvenation-study
+    title: "LEVF: RMR2 pilot underway; main phase ~mid-2026, significant results 2028"
+    summary: >-
+      RMR2 is planned with 8 interventions, rapamycin and running wheels as baseline for all groups, repeated dosing,
+      20 groups and 2,000 mice. On 2026-03-10 LEVF said launching the full study needs ~$5M and that funding is the
+      only remaining bottleneck.
+    url: https://www.levf.org/december-2025-update
+    sources: [https://www.levf.org/projects/robust-mouse-rejuvenation-study-2, https://www.levf.org/breaking-the-ceiling-of-longevity-research]
+  - id: itp-2026-null-results
+    date: 2026-03-17
+    category: itp
+    title: "NIA ITP: eight compounds fail to extend lifespan"
+    summary: >-
+      Astaxanthin, meclizine, mitoglitazone, pioglitazone, alpha-ketoglutarate, mifepristone, methotrexate and
+      atorvastatin-telmisartan did not extend lifespan in UM-HET3 mice. Earlier hits failed at new doses or later starts.
+    url: https://doi.org/10.1007/s11357-026-02201-2
+  - id: transcriptomic-mortality-clocks
+    date: 2026-05-27
+    category: aging-biomarker
+    title: Universal transcriptomic hallmarks of mammalian ageing and mortality (Nature)
+    summary: >-
+      Over 11,000 transcriptomes from 4 mammals were used to train biomarkers of age and expected mortality. They
+      predict lifespan-modulating interventions and time to death.
+    url: https://www.nature.com/articles/s41586-026-10542-3
+  - id: rentosertib-aging-clocks
+    date: 2026-09-07
+    category: aging-biomarker
+    title: Six proteomic aging clocks show lower biological age on rentosertib (Nature Biotechnology)
+    summary: >-
+      A re-analysis of the phase 2a serum proteomes found that all six clocks predicted lower biological age in the
+      treated arms, supporting dual-purpose (disease + aging) trial designs.
+    url: https://www.nature.com/articles/s41587-026-03286-y
+  - id: rentosertib-phase3-start
+    date: 2026-09-09
+    category: ai-drug
+    title: Rentosertib phase 3 starts (NCT07687459)
+    summary: >-
+      A 320-patient phase 3 in idiopathic pulmonary fibrosis is recruiting. Rentosertib is described as the first
+      drug discovered and designed end-to-end with generative AI to reach phase 3.
+    url: https://clinicaltrials.gov/study/NCT07687459
+    sources: [https://en.wikipedia.org/wiki/Rentosertib]
+  # First AI-designed drug APPROVAL: none found. openFDA drugs@FDA returned "No matches found" for rentosertib and
+  # zasocitinib on 2026-09-24: https://api.fda.gov/drug/drugsfda.json?search=openfda.generic_name:%22rentosertib%22
+
+topToBottomCurve:
+  bestGuess: degrey-2004-escape-velocity-figure
+  note: >-
+    The "line that goes opposite-exponential from top to bottom" best matches Figure 1 of de Grey's 2004 PLoS Biology
+    paper that introduced the phrase "escape velocity". It plots remaining life expectancy against time. People who are
+    80 or 100 when first-generation rejuvenation therapies arrive follow curves that start flat at the top and plunge
+    ever faster to zero, like a body walking off a cliff. Younger people (50, 30, 0) dip and then curve back up, and that
+    upturn is LEV. The figure is conceptual, with no data behind it. The same shape (flat top, accelerating fall) is also
+    the classic survival curve, which is the best data-backed chart; its data is in dataFile. Candidate 5 is the
+    well-known Wikipedia LEV image. It is a rising exponential (bottom to top), listed in case the memory is mirrored.
+  dataFile: data/curated/survival-curves.csv
+  dataUrl: https://catalog.ourworldindata.org/garden/hmd/2025-10-22/hmd/life_tables.parquet
+  candidates:
+    - id: degrey-2004-escape-velocity-figure
+      name: "\"Physical and Actuarial Escape Velocities\" (de Grey 2004, PLoS Biology, Fig. 1)"
+      shape: >-
+        y = remaining life expectancy, x = time. Curves for ages 100 and 80 fall from top to bottom ever faster; curves
+        for 50, 30 and 0 bottom out and then rise (escape velocity).
+      whyItFits: It is the original LEV chart, and its falling curves are exactly "top to bottom, opposite-exponential".
+      source: 'de Grey ADNJ (2004), "Escape velocity: why the prospect of extreme human life extension matters now", PLoS Biol 2(6):e187. CC BY 4.0.'
+      url: https://journals.plos.org/plosbiology/article?id=10.1371/journal.pbio.0020187
+      figureImage: https://journals.plos.org/plosbiology/article/figure/image?size=large&id=10.1371/journal.pbio.0020187.g002
+      data: >-
+        No data behind it. A real-data version: follow one cohort along the diagonal of period life tables, plotting
+        remaining life expectancy e(age0 + k, year0 + k) against year0 + k. A flat or rising segment would be LEV.
+        See derived.cohortRemainingLE.
+    - id: survival-curves
+      name: Survival curves by era (share of a birth cohort alive at each age), "rectangularization"
+      shape: >-
+        Starts at 100% at age 0 and stays high, then falls steeply after ~70. Gompertz mortality makes the late drop look
+        like an exponential flipped top to bottom. Across eras the curve becomes more rectangular.
+      whyItFits: It has the same top-to-bottom accelerating fall and is often shown in LEV and longevity talks. It is fully data-backed.
+      source: Human Mortality Database period life tables (l(x), radix 100,000), England and Wales, via Our World in Data's catalog.
+      url: https://ourworldindata.org/life-expectancy
+      data: >-
+        dataFile (England and Wales 1851, 1900, 1950, 2000, 2022; ages 0, 1, 5, 10 ... 110; survivingPct = l(x)/1000).
+        The quantile form covers 46 countries, 1751-2024:
+        https://ourworldindata.org/grapher/survival-ages-across-the-population.csv (plot x = age value, y = percentile).
+    - id: remaining-le-vs-age
+      name: Remaining life expectancy vs age
+      shape: Declines from e0 (~81-85) toward ~2 years at 100. LEV would appear as this curve lifting year after year by at least as much as people age.
+      whyItFits: It is a top-to-bottom curve and is the quantity LEV is defined on, but its shape is convex rather than a cliff.
+      source: OWID / HMD
+      url: https://ourworldindata.org/grapher/remaining-life-expectancy-at-different-ages
+      data: https://ourworldindata.org/grapher/remaining-life-expectancy-at-different-ages.csv (ages 0/10/15/25/45/65/80); all ages 0-110 are in dataUrl (life_expectancy column).
+    - id: gompertz-inverted
+      name: Gompertz mortality-rate curve shown inverted
+      shape: Death probability rises roughly exponentially with age (doubling every ~8 years). Flipped, it becomes a top-to-bottom exponential.
+      whyItFits: It is literally an "opposite exponential", but it is rarely drawn inverted.
+      source: HMD q(x) in dataUrl (probability_of_death, in %). The WHO GHO 5-year age groups are also available.
+      url: https://ourworldindata.org/grapher/probability-of-dying-by-age
+      data: https://ourworldindata.org/grapher/probability-of-dying-by-age.csv (192 entities, 2000-2021, groups <1 to 80-84)
+    - id: wikipedia-lev-image
+      name: Wikipedia "Longevity Escape Velocity" image (User:Zedatik, 2012, public domain)
+      shape: >-
+        A rising exponential, with "life expectancy gained via advancing technologies" against "advancing technologies",
+        crossing a dashed "Longevity escape velocity" line. It goes bottom to top, not top to bottom.
+      whyItFits: It is the most-viewed LEV image, so it is worth ruling in or out with the user.
+      url: https://commons.wikimedia.org/wiki/File:Longevity_Escape_Velocity.png
+  derived:
+    cohortRemainingLE:
+      method: >-
+        Japan, both sexes, HMD period life tables from dataUrl. For a person aged A in 1973, the table gives remaining
+        life expectancy e(A+k) in year 1973+k, for k = 0, 5, 10, ... "noProgress" reads the same ages off the fixed 1973
+        table, i.e. what would happen with no medical progress since 1973. Actual minus noProgress is the progress
+        already banked. LEV requires the actual curve to stop falling.
+      source: https://catalog.ourworldindata.org/garden/hmd/2025-10-22/hmd/life_tables.parquet
+      years: [1973, 1978, 1983, 1988, 1993, 1998, 2003, 2008, 2013, 2018, 2023]
+      cohorts:
+        - { ageIn1973: 30, actual: [45.43, 42.39, 38.8, 35.29, 31.45, 28.16, 24.86, 21.21, 17.61, 14.29, 10.67], noProgress: [45.43, 40.69, 36.02, 31.45, 27.0, 22.68, 18.57, 14.76, 11.36, 8.43, 6.1] }
+        - { ageIn1973: 50, actual: [27.0, 24.18, 21.05, 17.98, 14.88, 12.39, 9.91, 7.37, 5.14, 3.57, 2.37], noProgress: [27.0, 22.68, 18.57, 14.76, 11.36, 8.43, 6.1, 4.37, 3.09, 2.26, 1.73] }
+        - { ageIn1973: 80, actual: [6.1, 4.8, 3.6, 2.69, 2.07, 1.73], noProgress: [6.1, 4.37, 3.09, 2.26, 1.73, 1.41] }
+    levGauge:
+      method: OLS slope of period remaining life expectancy at 65 (e65) over the last 21 HMD years. LEV at 65 would need a slope of 1.0 or more years per year.
+      source: https://catalog.ourworldindata.org/garden/hmd/2025-10-22/hmd/life_tables.parquet
+      e65SlopeYearsPerYear:
+        - { country: Japan, window: [2003, 2023], slope: 0.086, e65Latest: 22.08 }
+        - { country: England and Wales, window: [2002, 2022], slope: 0.102, e65Latest: 19.96 }
+        - { country: United States, window: [2003, 2023], slope: 0.044, e65Latest: 19.64 }
+      note: >-
+        HMD and OWID's combined HMD+UN WPP series can differ slightly (Japan e65 2023: HMD 22.08, OWID CSV 22.49).
+        Pick one source per chart.
+
+lifeExpectancyData:
+  - id: period-le-at-birth
+    url: https://ourworldindata.org/grapher/life-expectancy.csv
+    shortNamesUrl: https://ourworldindata.org/grapher/life-expectancy.csv?v=1&csvType=full&useColumnShortNames=true
+    status: 200
+    columns: [Entity, Code, Year, Life expectancy]
+    shortColumns: [entity, code, year, life_expectancy_0]
+    coverage: "1543-2023, 265 entities (21,564 rows). World 1770-2023, United States 1880-2023, Japan 1865-2023. OWID lastUpdated 2025-10-22, nextUpdate 2026-10-22."
+    latest:
+      - { entity: World, year: 2023, value: 73.17 }
+      - { entity: United States, year: 2023, value: 79.30 }
+      - { entity: Japan, year: 2023, value: 84.71 }
+      - { entity: Monaco, year: 2023, value: 86.37, note: "highest country value in 2023 (UN WPP-based)" }
+      - { entity: Hong Kong, year: 2023, value: 85.51 }
+    note: Sources are Riley (2005), Zijdeman et al. (2015), HMD (2025) and UN WPP (2024). For the HMD-first series use https://ourworldindata.org/grapher/life-expectancy-hmd-unwpp.csv (1751-2023; column "Life expectancy at birth, totals, period").
+  - id: remaining-le-at-65
+    url: https://ourworldindata.org/grapher/remaining-life-expectancy-at-different-ages.csv
+    status: 200
+    columns: [Entity, Code, Year, Age 0 (birth), Age 10, Age 15, Age 25, Age 45, Age 65, Age 80]
+    shortColumns: [entity, code, year, life_expectancy__sex_total__age_0__type_period, life_expectancy__sex_total__age_10__type_period, life_expectancy__sex_total__age_15__type_period, life_expectancy__sex_total__age_25__type_period, life_expectancy__sex_total__age_45__type_period, life_expectancy__sex_total__age_65__type_period, life_expectancy__sex_total__age_80__type_period]
+    coverage: "1751-2023, 264 entities (20,803 rows). Values are REMAINING years."
+    latest:
+      - { entity: World, year: 2023, age65: 17.57 }
+      - { entity: United States, year: 2023, age65: 20.00 }
+      - { entity: Japan, year: 2023, age65: 22.49 }
+      - { entity: Monaco, year: 2023, age65: 23.21 }
+    note: "https://ourworldindata.org/grapher/life-expectancy-at-different-ages.csv holds the same series as TOTAL expected age at death (Japan 2023: 65 year old -> 87.49)."
+  - id: record-life-expectancy
+    url: https://ourworldindata.org/grapher/maximum-life-expectancy-sex-female.csv
+    status: 200
+    columns: [Entity, Year, Life expectancy, "Country with yearly maximum life expectancy - Sex: female"]
+    shortColumns: [entity, year, life_expectancy__sex_female, country_with_max_le__sex_female]
+    coverage: "1840-2023, 184 rows (one per year). Female period e0, HMD countries only."
+    latest:
+      - { year: 1840, value: 46.14, country: Sweden }
+      - { year: 2023, value: 88.13, country: Hong Kong }
+    note: >-
+      "Entity" is a label like "Sweden 1840"; the country is in the last column. There are no male or both-sexes
+      versions (maximum-life-expectancy-sex-male / -sex-total / maximum-life-expectancy return 404). Record holders by
+      year count: Norway 62, Iceland 32, Japan 32, Sweden 25, Australia 14, Denmark 9, Hong Kong 9, Netherlands 1.
+  - id: survival-ages
+    url: https://ourworldindata.org/grapher/survival-ages-across-the-population.csv
+    status: 200
+    columns: [Entity, Code, Year, "99%", "90%", "80%", "70%", "60%", "50%", "40%", "30%", "20%", "10%", Top 1%]
+    coverage: "1751-2024, 46 HMD countries (4,397 rows). Each cell is the age reached by that share of a period cohort (Alvarez & Vaupel 2023 method)."
+  - id: le-projections
+    url: https://ourworldindata.org/grapher/life-expectancy-at-birth-including-the-un-projections.csv
+    status: 200
+    shortColumns: [entity, code, year, life_expectancy__sex_all__age_0__variant_estimates, life_expectancy__sex_all__age_0__variant_medium__projected]
+    coverage: "UN WPP 2024: estimates 1950-2023, medium-variant projections 2024-2100."
+  - id: hmd-life-tables
+    url: https://catalog.ourworldindata.org/garden/hmd/2025-10-22/hmd/life_tables.parquet
+    status: 200
+    format: parquet (40.4 MB; the .feather twin also works; .csv returns 404)
+    columns: [country, year, sex, age, type, central_death_rate, probability_of_death, average_survival_length, number_survivors, number_deaths, number_person_years_lived, number_person_years_remaining, life_expectancy]
+    coverage: "2,168,166 rows; 46 HMD countries; type period|cohort; sex female|male|total; age labels mix single years ('0'..'109', '110+') and groups ('1-4', '5-9', ...)."
+    note: >-
+      Full HMD life tables re-hosted by OWID (HMD data is CC BY 4.0), with no HMD login needed. number_survivors = l(x)
+      with radix 100,000; probability_of_death is in %. The path is versioned, so new releases get a new date folder.
+      Needs a parquet reader (e.g. `uv run --with pyarrow`).
+
+recordTrend:
+  source: https://ourworldindata.org/grapher/maximum-life-expectancy-sex-female.csv
+  method: OLS of the yearly record female period e0 on year.
+  slopes:
+    - { window: [1840, 2023], yearsPerYear: 0.251 }
+    - { window: [1900, 2023], yearsPerYear: 0.266 }
+    - { window: [1950, 2023], yearsPerYear: 0.204 }
+    - { window: [1990, 2023], yearsPerYear: 0.186 }
+  note: >-
+    This is the Oeppen-Vaupel "broken limits" line: about 3 months of record life expectancy gained per calendar year
+    for 180 years, slowing since 1950. LEV needs at least 1.0 year per year in REMAINING life expectancy, roughly 4x the
+    historic record pace at birth and 10-20x the recent pace at age 65 (0.04-0.10 years/year; see topToBottomCurve.derived.levGauge).
+  sources: [https://doi.org/10.1126/science.1069675]   # Oeppen & Vaupel, "Broken Limits to Life Expectancy", Science, 2002-05-10

@@ -1,0 +1,983 @@
+# xAI (Grok) benchmark scores: lab-reported (x.ai/news posts, xAI model cards) and independent leaderboards.
+# Format: data/curated/README.md. Collected 2026-09-24; every number read from the linked primary source.
+# Notes:
+# - Grok 4 Heavy HLE 44.4 is the full set with tools; 50.7 is the text-only subset (kept, flagged in setting).
+# - Bio/chem numbers are pre-mitigation dual-use capability evals unless the setting says otherwise.
+# - The Grok 4.5 model card is hosted by Cursor (co-trainer); it is the xAI/SpaceXAI card.
+# - No in-scope numbers found for Grok-1 (only MMLU/GSM8K/HumanEval/MATH) or for Grok 4.1 capability benchmarks
+#   (its post reports LMArena/EQ-Bench only). Grok 4.20 and 4.3 have no x.ai capability tables for these benchmarks.
+
+newBenchmarks:
+  - { id: wmdp-bio, name: "WMDP-Bio", short: "WMDP-Bio", group: bio, unit: pct, ceiling: 100, released: 2024-03-05, url: https://www.wmdp.ai, description: "Weapons of Mass Destruction Proxy, biosecurity subset: hazardous-knowledge multiple-choice questions (1,273)." }
+  - { id: wmdp-chem, name: "WMDP-Chem", short: "WMDP-Chem", group: bio, unit: pct, ceiling: 100, released: 2024-03-05, url: https://www.wmdp.ai, description: "Weapons of Mass Destruction Proxy, chemical-security subset (408 multiple-choice questions)." }
+  - { id: lab-bench-figqa, name: "LAB-Bench FigQA", short: "FigQA", group: bio, unit: pct, ceiling: 100, released: 2024-07-14, url: https://github.com/Future-House/LAB-Bench, description: "Interpreting scientific figures from biology papers (multiple choice)." }
+
+scores:
+  # ── Grok-1.5 and Grok-2 (lab) ───────────────────────────────────
+  - model: grok-1.5
+    benchmark: gpqa-diamond
+    value: 35.9
+    provenance: lab
+    tools: false
+    setting: "Reported as 'GPQA' (subset not named; comparison columns match GPQA Diamond figures); as re-reported in Grok-2 post"
+    date: 2024-08-13
+    source: "Grok-2 Beta Release"
+    url: https://x.ai/news/grok-2
+  - model: grok-2
+    benchmark: gpqa-diamond
+    value: 56.0
+    provenance: lab
+    tools: false
+    setting: "Reported as 'GPQA' (subset not named; comparison columns match GPQA Diamond figures)"
+    date: 2024-08-13
+    source: "Grok-2 Beta Release"
+    url: https://x.ai/news/grok-2
+
+  # ── Grok 3 (lab) ────────────────────────────────────────────────
+  - model: grok-3
+    benchmark: aime-2025
+    value: 93.3
+    provenance: lab
+    tools: false
+    setting: "Grok 3 (Think), highest test-time compute, cons@64"
+    date: 2025-02-19
+    source: "Grok 3 Beta — The Age of Reasoning Agents"
+    url: https://x.ai/news/grok-3
+  - model: grok-3
+    benchmark: aime-2025
+    value: 77.3
+    provenance: lab
+    tools: false
+    setting: "Grok 3 (Think), pass@1"
+    date: 2025-02-19
+    source: "Grok 3 Beta — The Age of Reasoning Agents"
+    url: https://x.ai/news/grok-3
+  - model: grok-3
+    benchmark: aime-2024
+    value: 93.3
+    provenance: lab
+    tools: false
+    setting: "Grok 3 (Think), cons@64"
+    date: 2025-02-19
+    source: "Grok 3 Beta — The Age of Reasoning Agents"
+    url: https://x.ai/news/grok-3
+  - model: grok-3
+    benchmark: aime-2024
+    value: 83.9
+    provenance: lab
+    tools: false
+    setting: "Grok 3 (Think), pass@1"
+    date: 2025-02-19
+    source: "Grok 3 Beta — The Age of Reasoning Agents"
+    url: https://x.ai/news/grok-3
+  - model: grok-3
+    benchmark: aime-2024
+    value: 52.2
+    provenance: lab
+    tools: false
+    setting: "Grok 3 Beta, non-reasoning"
+    date: 2025-02-19
+    source: "Grok 3 Beta — The Age of Reasoning Agents"
+    url: https://x.ai/news/grok-3
+  - model: grok-3
+    benchmark: gpqa-diamond
+    value: 84.6
+    provenance: lab
+    tools: false
+    setting: "Grok 3 (Think), cons@64; reported as 'GPQA'"
+    date: 2025-02-19
+    source: "Grok 3 Beta — The Age of Reasoning Agents"
+    url: https://x.ai/news/grok-3
+  - model: grok-3
+    benchmark: gpqa-diamond
+    value: 80.2
+    provenance: lab
+    tools: false
+    setting: "Grok 3 (Think), pass@1; reported as 'GPQA'"
+    date: 2025-02-19
+    source: "Grok 3 Beta — The Age of Reasoning Agents"
+    url: https://x.ai/news/grok-3
+  - model: grok-3
+    benchmark: gpqa-diamond
+    value: 75.4
+    provenance: lab
+    tools: false
+    setting: "Grok 3 Beta, non-reasoning; reported as 'GPQA'"
+    date: 2025-02-19
+    source: "Grok 3 Beta — The Age of Reasoning Agents"
+    url: https://x.ai/news/grok-3
+  - model: grok-3
+    benchmark: browsecomp
+    value: 0.0
+    provenance: lab
+    tools: true
+    setting: "Grok 3 (No Reasoning) with search; as re-reported in Grok 4 Fast post"
+    date: 2025-09-19
+    source: "Grok 4 Fast (xAI launch post)"
+    url: https://x.ai/news/grok-4-fast
+
+  # ── Grok 4 and Grok 4 Heavy (lab) ───────────────────────────────
+  - model: grok-4
+    benchmark: hle
+    value: 25.4
+    provenance: lab
+    tools: false
+    setting: "No tools; full set (April 3, 2025 version)"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4
+    benchmark: hle
+    value: 38.6
+    provenance: lab
+    tools: true
+    setting: "With Python + Internet tools; full set (April 3, 2025 version)"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4-heavy
+    benchmark: hle
+    value: 44.4
+    provenance: lab
+    tools: true
+    setting: "Heavy (parallel test-time compute, multiple agents); with Python + Internet tools; full set (April 3, 2025 version)"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4-heavy
+    benchmark: hle
+    value: 50.7
+    provenance: lab
+    tools: true
+    setting: "Heavy (parallel test-time compute, multiple agents); with Python + Internet tools; TEXT-ONLY SUBSET, not the full set"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4
+    benchmark: gpqa-diamond
+    value: 87.5
+    provenance: lab
+    tools: false
+    setting: "No tools; chart label 'GPQA' (Grok 4 Fast post labels the same 87.5 as GPQA Diamond)"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4-heavy
+    benchmark: gpqa-diamond
+    value: 88.4
+    provenance: lab
+    tools: true
+    setting: "Heavy (parallel test-time compute, multiple agents); with Python"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4
+    benchmark: aime-2025
+    value: 91.7
+    provenance: lab
+    tools: false
+    setting: "No tools"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4
+    benchmark: aime-2025
+    value: 98.8
+    provenance: lab
+    tools: true
+    setting: "With Python"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4-heavy
+    benchmark: aime-2025
+    value: 100
+    provenance: lab
+    tools: true
+    setting: "Heavy (parallel test-time compute, multiple agents); with Python"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4
+    benchmark: hmmt-2025
+    value: 90.0
+    provenance: lab
+    tools: false
+    setting: "No tools"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4
+    benchmark: hmmt-2025
+    value: 93.9
+    provenance: lab
+    tools: true
+    setting: "With Python"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4-heavy
+    benchmark: hmmt-2025
+    value: 96.7
+    provenance: lab
+    tools: true
+    setting: "Heavy (parallel test-time compute, multiple agents); with Python"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4
+    benchmark: arc-agi-2
+    value: 15.9
+    provenance: lab
+    tools: false
+    setting: "ARC-AGI-2 semi-private (ARC Prize-tested)"
+    date: 2025-07-09
+    source: "Grok 4 (xAI launch post)"
+    url: https://x.ai/news/grok-4
+  - model: grok-4
+    benchmark: browsecomp
+    value: 43.0
+    provenance: lab
+    tools: true
+    setting: "Agentic search; as re-reported in Grok 4 Fast post"
+    date: 2025-09-19
+    source: "Grok 4 Fast (xAI launch post)"
+    url: https://x.ai/news/grok-4-fast
+
+  # ── Grok 4 Fast (lab) ───────────────────────────────────────────
+  - model: grok-4-fast
+    benchmark: hle
+    value: 20.0
+    provenance: lab
+    tools: false
+    setting: "No tools"
+    date: 2025-09-19
+    source: "Grok 4 Fast (xAI launch post)"
+    url: https://x.ai/news/grok-4-fast
+  - model: grok-4-fast
+    benchmark: gpqa-diamond
+    value: 85.7
+    provenance: lab
+    tools: false
+    date: 2025-09-19
+    source: "Grok 4 Fast (xAI launch post)"
+    url: https://x.ai/news/grok-4-fast
+  - model: grok-4-fast
+    benchmark: aime-2025
+    value: 92.0
+    provenance: lab
+    tools: false
+    setting: "No tools"
+    date: 2025-09-19
+    source: "Grok 4 Fast (xAI launch post)"
+    url: https://x.ai/news/grok-4-fast
+  - model: grok-4-fast
+    benchmark: hmmt-2025
+    value: 93.3
+    provenance: lab
+    tools: false
+    setting: "No tools"
+    date: 2025-09-19
+    source: "Grok 4 Fast (xAI launch post)"
+    url: https://x.ai/news/grok-4-fast
+  - model: grok-4-fast
+    benchmark: browsecomp
+    value: 44.9
+    provenance: lab
+    tools: true
+    setting: "Agentic search"
+    date: 2025-09-19
+    source: "Grok 4 Fast (xAI launch post)"
+    url: https://x.ai/news/grok-4-fast
+
+  # ── Grok 4.3 / 4.5 / 4.6 / 4.7 coding and agentic (lab) ─────────
+  - model: grok-4.3
+    benchmark: deepswe
+    value: 44.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "DeepSWE 1.1, mini-swe-agent harness run by Datacurve; as re-reported in Grok 4.5 model card"
+    date: 2026-07-14
+    source: "Model Card: Grok 4.5 (xAI/Cursor, Jul 14, 2026)"
+    url: https://cursor.com/resources/grok-4-5-model-card.pdf
+  - model: grok-4.5
+    benchmark: deepswe
+    value: 62.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "DeepSWE 1.0; eval created by Datacurve, run by Artificial Analysis with provider harness"
+    date: 2026-07-16
+    source: "Introducing Grok 4.5"
+    url: https://x.ai/news/grok-4-5
+  - model: grok-4.5
+    benchmark: deepswe
+    value: 53.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "DeepSWE 1.1; mini-swe-agent harness run by Datacurve (Grok 4.6 post/card later list 54%)"
+    date: 2026-07-16
+    source: "Introducing Grok 4.5"
+    url: https://x.ai/news/grok-4-5
+  - model: grok-4.5
+    benchmark: swe-bench-pro-public
+    value: 64.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "SWE-Bench Pro (set not named; public set assumed); fixed agent scaffold with reward-hacking controls"
+    date: 2026-07-14
+    source: "Model Card: Grok 4.5 (xAI/Cursor, Jul 14, 2026)"
+    url: https://cursor.com/resources/grok-4-5-model-card.pdf
+  - model: grok-4.5
+    benchmark: swe-bench-multilingual
+    value: 78.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Results from Cursor runs; fixed agent scaffold"
+    date: 2026-07-14
+    source: "Model Card: Grok 4.5 (xAI/Cursor, Jul 14, 2026)"
+    url: https://cursor.com/resources/grok-4-5-model-card.pdf
+  - model: grok-4.5
+    benchmark: terminal-bench-2.1
+    value: 83.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Grok Build harness"
+    date: 2026-07-14
+    source: "Model Card: Grok 4.5 (xAI/Cursor, Jul 14, 2026)"
+    url: https://cursor.com/resources/grok-4-5-model-card.pdf
+  - model: grok-4.5
+    benchmark: terminal-bench-3
+    value: 15.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Grok Build harness; as re-reported in Grok 4.6 post"
+    date: 2026-08-12
+    source: "Introducing Grok 4.6"
+    url: https://x.ai/news/grok-4-6
+  - model: grok-4.5
+    benchmark: terminal-bench-4
+    value: 12.4
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Grok Build harness; evaluated by Harbor; as re-reported in Grok 4.7 model card"
+    date: 2026-09-21
+    source: "Model Card: Grok 4.7"
+    url: https://media.x.ai/v1/website/4p7card-5eccc980.pdf
+  - model: grok-4.6
+    benchmark: deepswe
+    value: 65.9
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "DeepSWE v1.1, mini-swe-agent harness; evaluated by Datacurve (Grok 4.7 post lists 65.2%)"
+    date: 2026-08-17
+    source: "Model Card: Grok 4.6 (revision 2026-08-17)"
+    url: https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf
+  - model: grok-4.6
+    benchmark: deepswe
+    value: 67.0
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "DeepSWE v1.1, mini-swe-agent harness; evaluated by Datacurve"
+    date: 2026-08-17
+    source: "Model Card: Grok 4.6 (revision 2026-08-17)"
+    url: https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf
+  - model: grok-4.6
+    benchmark: terminal-bench-3
+    value: 26.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Grok Build harness; evaluated by Harbor"
+    date: 2026-08-17
+    source: "Model Card: Grok 4.6 (revision 2026-08-17)"
+    url: https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf
+  - model: grok-4.6
+    benchmark: terminal-bench-4
+    value: 20.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Grok Build harness; as re-reported in Grok 4.7 post"
+    date: 2026-09-21
+    source: "Introducing Grok 4.7"
+    url: https://x.ai/news/grok-4-7
+  - model: grok-4.6
+    benchmark: frontierswe
+    value: 25.3
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "FrontierSWE V2 mean@5 partial credit, Proximus harness, evaluated by Proximal Labs; as re-reported in Grok 4.7 model card"
+    date: 2026-09-21
+    source: "Model Card: Grok 4.7"
+    url: https://media.x.ai/v1/website/4p7card-5eccc980.pdf
+  - model: grok-4.7
+    benchmark: deepswe
+    value: 71.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "DeepSWE v1.1, mini-swe-agent harness; evaluated by Datacurve"
+    date: 2026-09-21
+    source: "Introducing Grok 4.7"
+    url: https://x.ai/news/grok-4-7
+  - model: grok-4.7
+    benchmark: terminal-bench-4
+    value: 37.6
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "Grok Build harness (model card says 38.0%; tbench.ai lists 37.58%)"
+    date: 2026-09-21
+    source: "Introducing Grok 4.7"
+    url: https://x.ai/news/grok-4-7
+  - model: grok-4.7
+    benchmark: frontierswe
+    value: 29.0
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "FrontierSWE V2 mean@5 partial credit, Proximus harness, evaluated by Proximal Labs"
+    date: 2026-09-21
+    source: "Model Card: Grok 4.7"
+    url: https://media.x.ai/v1/website/4p7card-5eccc980.pdf
+
+  # ── Bio / chem dual-use evals from xAI model cards (lab) ────────
+  - model: grok-4
+    benchmark: biolp-bench
+    value: 47.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4 API; safeguards removed"
+    date: 2025-08-20
+    source: "Grok 4 Model Card (last updated Aug 20, 2025)"
+    url: https://data.x.ai/2025-08-20-grok-4-model-card.pdf
+  - model: grok-4
+    benchmark: biolp-bench
+    value: 44.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4 Web; safeguards removed"
+    date: 2025-08-20
+    source: "Grok 4 Model Card (last updated Aug 20, 2025)"
+    url: https://data.x.ai/2025-08-20-grok-4-model-card.pdf
+  - model: grok-4
+    benchmark: vct
+    value: 60.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4 API; text-only VCT questions; safeguards removed (Grok 4.20 card later lists Grok 4 at 55%)"
+    date: 2025-08-20
+    source: "Grok 4 Model Card (last updated Aug 20, 2025)"
+    url: https://data.x.ai/2025-08-20-grok-4-model-card.pdf
+  - model: grok-4
+    benchmark: vct
+    value: 71.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4 Web; text-only VCT questions; safeguards removed"
+    date: 2025-08-20
+    source: "Grok 4 Model Card (last updated Aug 20, 2025)"
+    url: https://data.x.ai/2025-08-20-grok-4-model-card.pdf
+  - model: grok-4
+    benchmark: wmdp-bio
+    value: 87.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4 API; text-only; safeguards removed"
+    date: 2025-08-20
+    source: "Grok 4 Model Card (last updated Aug 20, 2025)"
+    url: https://data.x.ai/2025-08-20-grok-4-model-card.pdf
+  - model: grok-4
+    benchmark: wmdp-bio
+    value: 88.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4 Web; text-only; safeguards removed"
+    date: 2025-08-20
+    source: "Grok 4 Model Card (last updated Aug 20, 2025)"
+    url: https://data.x.ai/2025-08-20-grok-4-model-card.pdf
+  - model: grok-4
+    benchmark: wmdp-chem
+    value: 83.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4 API; text-only; safeguards removed"
+    date: 2025-08-20
+    source: "Grok 4 Model Card (last updated Aug 20, 2025)"
+    url: https://data.x.ai/2025-08-20-grok-4-model-card.pdf
+  - model: grok-4
+    benchmark: wmdp-chem
+    value: 85.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4 Web; text-only; safeguards removed"
+    date: 2025-08-20
+    source: "Grok 4 Model Card (last updated Aug 20, 2025)"
+    url: https://data.x.ai/2025-08-20-grok-4-model-card.pdf
+  - model: grok-4
+    benchmark: lab-bench-protocolqa
+    value: 76.0
+    provenance: lab
+    tools: false
+    setting: "safeguards removed; as re-reported in Grok 4.1 model card"
+    date: 2025-11-17
+    source: "Grok 4.1 Model Card"
+    url: https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf
+  - model: grok-4
+    benchmark: lab-bench-figqa
+    value: 29.0
+    provenance: lab
+    tools: false
+    setting: "safeguards removed; as re-reported in Grok 4.1 model card"
+    date: 2025-11-17
+    source: "Grok 4.1 Model Card"
+    url: https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf
+  - model: grok-4
+    benchmark: lab-bench-cloning
+    value: 45.0
+    provenance: lab
+    tools: false
+    setting: "safeguards removed; as re-reported in Grok 4.1 model card"
+    date: 2025-11-17
+    source: "Grok 4.1 Model Card"
+    url: https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf
+  - model: grok-4-fast
+    benchmark: biolp-bench
+    value: 39.0
+    provenance: lab
+    tools: false
+    setting: "Reasoning enabled; safeguards removed"
+    date: 2025-09-19
+    source: "Grok 4 Fast Model Card"
+    url: https://data.x.ai/2025-09-19-grok-4-fast-model-card.pdf
+  - model: grok-4-fast
+    benchmark: vct
+    value: 54.5
+    provenance: lab
+    tools: false
+    setting: "Text-only VCT questions; reasoning enabled; safeguards removed"
+    date: 2025-09-19
+    source: "Grok 4 Fast Model Card"
+    url: https://data.x.ai/2025-09-19-grok-4-fast-model-card.pdf
+  - model: grok-4-fast
+    benchmark: wmdp-bio
+    value: 85.2
+    provenance: lab
+    tools: false
+    setting: "Reasoning enabled; safeguards removed"
+    date: 2025-09-19
+    source: "Grok 4 Fast Model Card"
+    url: https://data.x.ai/2025-09-19-grok-4-fast-model-card.pdf
+  - model: grok-4-fast
+    benchmark: wmdp-chem
+    value: 77.5
+    provenance: lab
+    tools: false
+    setting: "Reasoning enabled; safeguards removed"
+    date: 2025-09-19
+    source: "Grok 4 Fast Model Card"
+    url: https://data.x.ai/2025-09-19-grok-4-fast-model-card.pdf
+  - model: grok-4.1
+    benchmark: wmdp-bio
+    value: 87.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.1 Thinking; text-only; safeguards removed"
+    date: 2025-11-17
+    source: "Grok 4.1 Model Card"
+    url: https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf
+  - model: grok-4.1
+    benchmark: vct
+    value: 61.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.1 Thinking; text-only VCT questions; safeguards removed"
+    date: 2025-11-17
+    source: "Grok 4.1 Model Card"
+    url: https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf
+  - model: grok-4.1
+    benchmark: biolp-bench
+    value: 37.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.1 Thinking; safeguards removed"
+    date: 2025-11-17
+    source: "Grok 4.1 Model Card"
+    url: https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf
+  - model: grok-4.1
+    benchmark: lab-bench-protocolqa
+    value: 79.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.1 Thinking; safeguards removed"
+    date: 2025-11-17
+    source: "Grok 4.1 Model Card"
+    url: https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf
+  - model: grok-4.1
+    benchmark: lab-bench-figqa
+    value: 34.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.1 Thinking; safeguards removed"
+    date: 2025-11-17
+    source: "Grok 4.1 Model Card"
+    url: https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf
+  - model: grok-4.1
+    benchmark: lab-bench-cloning
+    value: 46.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.1 Thinking; safeguards removed"
+    date: 2025-11-17
+    source: "Grok 4.1 Model Card"
+    url: https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf
+  - model: grok-4.1
+    benchmark: wmdp-chem
+    value: 84.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.1 Thinking; safeguards removed"
+    date: 2025-11-17
+    source: "Grok 4.1 Model Card"
+    url: https://data.x.ai/2025-11-17-grok-4-1-model-card.pdf
+  - model: grok-4.20
+    benchmark: wmdp-bio
+    value: 91.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.2 SA (single-agent); pre-mitigation"
+    date: 2026-04-07
+    source: "Grok 4.20 System Card"
+    url: https://data.x.ai/2026-04-07-grok-4-20-model-card.pdf
+  - model: grok-4.20
+    benchmark: vct
+    value: 54.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.2 SA (single-agent); pre-mitigation"
+    date: 2026-04-07
+    source: "Grok 4.20 System Card"
+    url: https://data.x.ai/2026-04-07-grok-4-20-model-card.pdf
+  - model: grok-4.20
+    benchmark: lab-bench-protocolqa
+    value: 79.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.2 SA (single-agent); pre-mitigation"
+    date: 2026-04-07
+    source: "Grok 4.20 System Card"
+    url: https://data.x.ai/2026-04-07-grok-4-20-model-card.pdf
+  - model: grok-4.20
+    benchmark: lab-bench-figqa
+    value: 66.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.2 SA (single-agent); pre-mitigation"
+    date: 2026-04-07
+    source: "Grok 4.20 System Card"
+    url: https://data.x.ai/2026-04-07-grok-4-20-model-card.pdf
+  - model: grok-4.20
+    benchmark: lab-bench-cloning
+    value: 67.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.2 SA (single-agent); pre-mitigation"
+    date: 2026-04-07
+    source: "Grok 4.20 System Card"
+    url: https://data.x.ai/2026-04-07-grok-4-20-model-card.pdf
+  - model: grok-4.20
+    benchmark: wmdp-chem
+    value: 90.0
+    provenance: lab
+    tools: false
+    setting: "Grok 4.2 SA (single-agent); pre-mitigation"
+    date: 2026-04-07
+    source: "Grok 4.20 System Card"
+    url: https://data.x.ai/2026-04-07-grok-4-20-model-card.pdf
+  - model: grok-4.5
+    benchmark: vct
+    value: 65.5
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Multimodal VCT; dual-use knowledge probe"
+    date: 2026-07-14
+    source: "Model Card: Grok 4.5 (xAI/Cursor, Jul 14, 2026)"
+    url: https://cursor.com/resources/grok-4-5-model-card.pdf
+  - model: grok-4.5
+    benchmark: wmdp-bio
+    value: 90.9
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Scored under release-tracked safeguards"
+    date: 2026-07-14
+    source: "Model Card: Grok 4.5 (xAI/Cursor, Jul 14, 2026)"
+    url: https://cursor.com/resources/grok-4-5-model-card.pdf
+  - model: grok-4.5
+    benchmark: wmdp-chem
+    value: 87.3
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Scored under release-tracked safeguards"
+    date: 2026-07-14
+    source: "Model Card: Grok 4.5 (xAI/Cursor, Jul 14, 2026)"
+    url: https://cursor.com/resources/grok-4-5-model-card.pdf
+  - model: grok-4.6
+    benchmark: vct
+    value: 67.4
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Without production safeguards"
+    date: 2026-08-17
+    source: "Model Card: Grok 4.6 (revision 2026-08-17)"
+    url: https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf
+  - model: grok-4.6
+    benchmark: wmdp-bio
+    value: 90.0
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Without production safeguards"
+    date: 2026-08-17
+    source: "Model Card: Grok 4.6 (revision 2026-08-17)"
+    url: https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf
+  - model: grok-4.6
+    benchmark: wmdp-chem
+    value: 85.3
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Without production safeguards"
+    date: 2026-08-17
+    source: "Model Card: Grok 4.6 (revision 2026-08-17)"
+    url: https://media.x.ai/v1/website/card-4p6-4cd2dc57.pdf
+  - model: grok-4.7
+    benchmark: vct
+    value: 63.0
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "Multimodal VCT"
+    date: 2026-09-21
+    source: "Model Card: Grok 4.7"
+    url: https://media.x.ai/v1/website/4p7card-5eccc980.pdf
+  - model: grok-4.7
+    benchmark: wmdp-bio
+    value: 88.1
+    provenance: lab
+    tools: false
+    effort: high
+    date: 2026-09-21
+    source: "Model Card: Grok 4.7"
+    url: https://media.x.ai/v1/website/4p7card-5eccc980.pdf
+  - model: grok-4.7
+    benchmark: wmdp-chem
+    value: 84.9
+    provenance: lab
+    tools: false
+    effort: high
+    date: 2026-09-21
+    source: "Model Card: Grok 4.7"
+    url: https://media.x.ai/v1/website/4p7card-5eccc980.pdf
+
+  # ── Independent leaderboards ────────────────────────────────────
+  - model: grok-4
+    benchmark: terminal-bench-1
+    value: 39.0
+    provenance: independent
+    tools: true
+    setting: "Terminus 2 agent (Stanford); ±1.7"
+    date: 2025-10-14
+    source: "Terminal-Bench 1.0 (terminal-bench-core 0.1.1) leaderboard, tbench.ai (Wayback snapshot 2025-11-03)"
+    url: http://web.archive.org/web/20251103212338/https://www.tbench.ai/leaderboard
+  - model: grok-4-fast
+    benchmark: terminal-bench-1
+    value: 31.3
+    provenance: independent
+    tools: true
+    setting: "Terminus 2 agent (Stanford); ±1.4"
+    date: 2025-09-21
+    source: "Terminal-Bench 1.0 (terminal-bench-core 0.1.1) leaderboard, tbench.ai (Wayback snapshot 2025-11-03)"
+    url: http://web.archive.org/web/20251103212338/https://www.tbench.ai/leaderboard
+  - model: grok-3
+    benchmark: terminal-bench-1
+    value: 17.5
+    provenance: independent
+    tools: true
+    setting: "grok-3-beta; Terminus 1 agent (Stanford); ±4.2"
+    date: 2025-05-17
+    source: "Terminal-Bench 1.0 (terminal-bench-core 0.1.1) leaderboard, tbench.ai (Wayback snapshot 2025-11-03)"
+    url: http://web.archive.org/web/20251103212338/https://www.tbench.ai/leaderboard
+  - model: grok-4.5
+    benchmark: terminal-bench-2.1
+    value: 79.33
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Cursor CLI agent; 95% CI ±2.86"
+    date: 2026-07-08
+    source: "Terminal-Bench 2.1 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=2.1
+  - model: grok-4.6
+    benchmark: terminal-bench-3
+    value: 26.49
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Grok Build agent (xAI submission); 95% CI ±2.92"
+    date: 2026-08-12
+    source: "Terminal-Bench 3.0 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=3.0
+  - model: grok-4.5
+    benchmark: terminal-bench-3
+    value: 15.68
+    provenance: independent
+    tools: true
+    effort: xhigh
+    setting: "Cursor CLI agent; 95% CI ±2.88"
+    date: 2026-07-15
+    source: "Terminal-Bench 3.0 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=3.0
+  - model: grok-4.7
+    benchmark: terminal-bench-4
+    value: 37.58
+    provenance: independent
+    tools: true
+    effort: xhigh
+    setting: "Grok Build agent (xAI submission); 95% CI ±3.54"
+    date: 2026-09-21
+    source: "Terminal-Bench 4.0 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=4.0
+  - model: grok-4.6
+    benchmark: terminal-bench-4
+    value: 20.3
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Grok Build agent (xAI submission); 95% CI ±3.09"
+    date: 2026-08-12
+    source: "Terminal-Bench 4.0 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=4.0
+  - model: grok-4.5
+    benchmark: terminal-bench-4
+    value: 12.42
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "Grok Build agent (xAI submission); 95% CI ±2.62"
+    date: 2026-07-16
+    source: "Terminal-Bench 4.0 leaderboard, tbench.ai"
+    url: https://www.tbench.ai/?version=4.0
+  - model: grok-4
+    benchmark: toolathlon
+    value: 27.5
+    provenance: independent
+    tools: true
+    setting: "Pass@1 ±1.7; default agent; evaluated by Toolathlon team"
+    date: 2025-10-28
+    source: "Toolathlon leaderboard (original series)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: grok-4-fast
+    benchmark: toolathlon
+    value: 18.5
+    provenance: independent
+    tools: true
+    setting: "Pass@1 ±2.0; default agent; evaluated by Toolathlon team"
+    date: 2025-10-28
+    source: "Toolathlon leaderboard (original series)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: grok-4
+    benchmark: aime-2025
+    value: 92.5
+    provenance: independent
+    tools: false
+    setting: "Mean accuracy ±4.71 (95% CI); model released after competition"
+    date: 2026-09-24
+    source: "MathArena AIME 2025 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: grok-4-fast
+    benchmark: aime-2025
+    value: 90.83
+    provenance: independent
+    tools: false
+    setting: "Grok 4 Fast (reasoning); ±5.16; model released after competition"
+    date: 2026-09-24
+    source: "MathArena AIME 2025 leaderboard"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: grok-4
+    benchmark: hmmt-2025
+    value: 95.0
+    provenance: independent
+    tools: false
+    setting: "Mean accuracy ±3.90 (95% CI); model released after competition"
+    date: 2026-09-24
+    source: "MathArena HMMT February 2025 leaderboard"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: grok-4-fast
+    benchmark: hmmt-2025
+    value: 91.67
+    provenance: independent
+    tools: false
+    setting: "Grok 4 Fast (reasoning); ±4.95; model released after competition"
+    date: 2026-09-24
+    source: "MathArena HMMT February 2025 leaderboard"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: grok-4.20
+    benchmark: arc-agi-3
+    value: 0.09
+    provenance: independent
+    tools: false
+    setting: "Grok 4.20 Beta 0309 (reasoning)"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: grok-4.5
+    benchmark: arc-agi-3
+    value: 0.3
+    provenance: independent
+    tools: false
+    effort: high
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: grok-4.5
+    benchmark: arc-agi-3
+    value: 0.32
+    provenance: independent
+    tools: false
+    effort: medium
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: grok-4.5
+    benchmark: arc-agi-3
+    value: 0.26
+    provenance: independent
+    tools: false
+    effort: low
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard
+  - model: grok-4.6
+    benchmark: arc-agi-3
+    value: 2.11
+    provenance: independent
+    tools: false
+    effort: xhigh
+    date: 2026-09-24
+    source: "ARC Prize leaderboard, ARC-AGI-3 semi-private (snapshot 2026-09-24)"
+    url: https://arcprize.org/leaderboard

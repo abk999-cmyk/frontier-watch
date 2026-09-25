@@ -1,0 +1,274 @@
+@import 'tailwindcss';
+
+@theme {
+  --font-sans: 'Geist Variable', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'Geist Mono Variable', ui-monospace, 'SF Mono', Menlo, monospace;
+  --color-bg: var(--bg);
+  --color-bg-2: var(--bg-2);
+  --color-surface: var(--surface);
+  --color-surface-2: var(--surface-2);
+  --color-surface-3: var(--surface-3);
+  --color-line: var(--line);
+  --color-line-2: var(--line-2);
+  --color-ink: var(--text);
+  --color-ink-2: var(--text-2);
+  --color-ink-3: var(--text-3);
+  --color-accent: var(--accent);
+  --color-accent-ink: var(--accent-ink);
+  --color-good: var(--good);
+  --color-warn: var(--warn);
+  --color-critical: var(--critical);
+}
+
+/* ── Tokens ────────────────────────────────────────────────────────────────
+   Lab colours are the dataviz reference palette's categorical slots, validated
+   (scripts/validate_palette.js) in both modes for adjacent CVD ΔE ≥ 8 and the
+   normal-vision floor. Scatter forms carry >3 series, so every lab also has a
+   marker shape (secondary encoding) — see src/lib/labs.ts. */
+:root,
+:root[data-theme='dark'] {
+  color-scheme: dark;
+  --bg: #05070b;
+  --bg-2: #080b11;
+  --surface: #0e1118;
+  --surface-2: #141822;
+  --surface-3: #1c2130;
+  --glass: rgba(14, 17, 24, 0.72);
+  --line: rgba(255, 255, 255, 0.07);
+  --line-2: rgba(255, 255, 255, 0.14);
+  --text: #eef2f8;
+  --text-2: #a9b1c1;
+  --text-3: #6f7789;
+  --accent: #c6f432;
+  --accent-ink: #0b0f02;
+  --accent-soft: rgba(198, 244, 50, 0.12);
+  --glow-a: #7c5cff;
+  --glow-b: #22c7f0;
+  --lab-openai: #199e70;
+  --lab-anthropic: #d95926;
+  --lab-google: #3987e5;
+  --lab-xai: #c98500;
+  --lab-china: #d55181;
+  --lab-other: #5d6475;
+  --good: #0ca30c;
+  --warn: #fab219;
+  --serious: #ec835a;
+  --critical: #d03b3b;
+  --grid: #1c212c;
+  --axis: #343a48;
+  --seq-lo: #184f95;
+  --seq-hi: #86b6ef;
+  --shadow: 0 1px 0 rgba(255, 255, 255, 0.04) inset, 0 20px 60px -30px rgba(0, 0, 0, 0.8);
+  --hero-shadow: 0 0 24px rgba(0, 0, 0, 0.65);
+}
+
+:root[data-theme='light'] {
+  color-scheme: light;
+  --bg: #f4f5f7;
+  --bg-2: #eceef2;
+  --surface: #ffffff;
+  --surface-2: #f6f7f9;
+  --surface-3: #eceef3;
+  --glass: rgba(255, 255, 255, 0.78);
+  --line: rgba(11, 15, 25, 0.08);
+  --line-2: rgba(11, 15, 25, 0.16);
+  --text: #0b0d12;
+  --text-2: #4a5160;
+  --text-3: #7c8394;
+  --accent: #4d7c0f;
+  --accent-ink: #ffffff;
+  --accent-soft: rgba(77, 124, 15, 0.1);
+  --glow-a: #7c5cff;
+  --glow-b: #0ea5c6;
+  --lab-openai: #1baf7a;
+  --lab-anthropic: #eb6834;
+  --lab-google: #2a78d6;
+  --lab-xai: #eda100;
+  --lab-china: #e87ba4;
+  --lab-other: #9aa0ab;
+  --grid: #e6e8ec;
+  --axis: #c3c7cf;
+  --seq-lo: #cde2fb;
+  --seq-hi: #184f95;
+  --shadow: 0 1px 2px rgba(11, 15, 25, 0.04), 0 12px 40px -24px rgba(11, 15, 25, 0.25);
+  --hero-shadow: 0 0 18px rgba(255, 255, 255, 0.9);
+}
+
+html,
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+html {
+  overflow-x: clip;
+}
+body {
+  min-height: 100vh;
+  overflow-x: clip;
+}
+
+::selection {
+  background: var(--accent);
+  color: var(--accent-ink);
+}
+
+/* Hairline scrollbars */
+* {
+  scrollbar-width: thin;
+  scrollbar-color: var(--line-2) transparent;
+}
+
+.tnum {
+  font-variant-numeric: tabular-nums;
+}
+
+.kicker {
+  font-family: var(--font-mono);
+  font-size: 10.5px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--text-3);
+}
+
+/* Glass panel with a pointer-following spotlight. --mx/--my set from JS. */
+.panel {
+  position: relative;
+  background: var(--glass);
+  border: 1px solid var(--line);
+  border-radius: 18px;
+  box-shadow: var(--shadow);
+  backdrop-filter: blur(14px) saturate(130%);
+  -webkit-backdrop-filter: blur(14px) saturate(130%);
+  isolation: isolate;
+}
+.panel::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: inherit;
+  pointer-events: none;
+  z-index: -1;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(520px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--glow-a) 12%, transparent), transparent 42%);
+}
+.panel::after {
+  content: '';
+  position: absolute;
+  inset: -1px;
+  border-radius: inherit;
+  pointer-events: none;
+  padding: 1px;
+  opacity: 0;
+  transition: opacity 0.35s ease;
+  background: radial-gradient(360px circle at var(--mx, 50%) var(--my, 50%), color-mix(in oklab, var(--glow-b) 55%, transparent), transparent 45%);
+  -webkit-mask: linear-gradient(#000 0 0) content-box, linear-gradient(#000 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.panel:hover::before,
+.panel:hover::after {
+  opacity: 1;
+}
+
+/* Animated gradient text for hero figures (decorative ink, not data colour). */
+.text-aurora {
+  background: linear-gradient(100deg, var(--text) 10%, color-mix(in oklab, var(--glow-b) 70%, var(--text)) 45%, var(--accent) 80%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.shimmer {
+  background: linear-gradient(90deg, var(--surface-2) 0%, var(--surface-3) 50%, var(--surface-2) 100%);
+  background-size: 200% 100%;
+  animation: shimmer 1.4s linear infinite;
+}
+@keyframes shimmer {
+  to {
+    background-position: -200% 0;
+  }
+}
+
+@keyframes marquee {
+  to {
+    transform: translateX(-50%);
+  }
+}
+.marquee {
+  animation: marquee 60s linear infinite;
+}
+.marquee:hover {
+  animation-play-state: paused;
+}
+
+@keyframes pulse-dot {
+  0%,
+  100% {
+    box-shadow: 0 0 0 0 color-mix(in oklab, var(--accent) 60%, transparent);
+  }
+  50% {
+    box-shadow: 0 0 0 6px transparent;
+  }
+}
+.live-dot {
+  animation: pulse-dot 2s ease-in-out infinite;
+}
+
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 2px;
+  border-radius: 6px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    transition-duration: 0.001ms !important;
+  }
+}
+
+/* Dual-thumb range: the tracks are drawn by the component; only the thumbs take pointer input. */
+.range-thumb::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  pointer-events: auto;
+  width: 16px;
+  height: 16px;
+  border-radius: 999px;
+  background: var(--accent);
+  border: 3px solid var(--surface-2);
+  box-shadow: 0 0 0 1px var(--line-2);
+  cursor: grab;
+}
+.range-thumb::-moz-range-thumb {
+  pointer-events: auto;
+  width: 12px;
+  height: 12px;
+  border-radius: 999px;
+  background: var(--accent);
+  border: 3px solid var(--surface-2);
+  cursor: grab;
+}
+.range-thumb::-webkit-slider-runnable-track {
+  background: transparent;
+}
+
+/* Full-bleed: break a block out of the centred max-width container to span the viewport. */
+.full-bleed {
+  width: 100vw;
+  margin-left: calc(50% - 50vw);
+}
+
+/* Scroll containers driven by a synced control (e.g. the benchmark table body). */
+.no-scrollbar {
+  scrollbar-width: none;
+}
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}

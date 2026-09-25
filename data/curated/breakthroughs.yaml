@@ -1,0 +1,2736 @@
+# AI-driven math and science breakthroughs, 2016 → today. Format: data/curated/README.md (breakthroughs.yaml).
+# Curated 2026-09-24. Entries run in chronological order. Every date and number was checked against the linked
+# source or a primary source it cites.
+#
+# SCOPE
+#   Results where AI was central to the discovery itself. Pure benchmark scores are excluded.
+#   Olympiad results (IMO) count as math milestones but are capped at significance 2, because they are not new mathematics.
+#   `date` is the first public disclosure (announcement or preprint). The `url` points to the best primary source,
+#   usually the peer-reviewed version when one exists.
+#
+# SIGNIFICANCE (0–5). Levels 1–4 match the notability tiers of Epoch's FrontierMath: Open Problems;
+# FM:OP problems use Epoch's own tier directly.
+#   0  rediscovery: the result already existed (literature search, or a known answer found again)
+#   1  moderately interesting: a real new result that matters mainly to specialists (a record, a counterexample, a minor open problem)
+#   2  solid result: a strong researcher in the area would be happy with it; little attention outside the subfield
+#   3  major advance: people across a broad area (all of number theory, all of structural biology…) take note
+#   4  breakthrough: resolves a central, long-open problem or opens a new paradigm
+#   5  Millennium Prize or Nobel level. Anchor: AlphaFold 2 = 5.
+#   Grading is conservative. A disputed claim gets the grade it WOULD have if valid, and is marked `verification: disputed`.
+#
+# VERIFICATION (strongest evidence that applies)
+#   formal-proof    the proof was checked in Lean
+#   peer-reviewed   published in a refereed journal or conference, including workshop review
+#   expert-endorsed independent experts, official graders or Epoch's problem verifiers accepted it, but it is not yet refereed
+#   claimed         the developers or authors reported it and nobody has independently checked it yet
+#   disputed        substantive public objections to the claim or its framing are unresolved
+#
+# AUTONOMY
+#   tool            AI used as an instrument (prediction, search or optimisation) inside a human-directed project
+#   collaborative   humans and AI iterated together, and both contributed core ideas
+#   autonomous      the AI produced the core result end-to-end from a problem statement. Humans may have chosen the
+#                   problem, run lab work or written it up.
+
+- id: melvin-quantum-experiments
+  date: 2016-03-04
+  title: "MELVIN algorithm designs new quantum-optics experiments"
+  domain: science
+  field: quantum optics
+  system: MELVIN
+  org: University of Vienna / IQOQI (Zeilinger group)
+  significance: 1
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [quantum-optics, experiment-design, automated-search]
+  summary: "A computer search designed optical setups for complex entangled photon states, including the first design for a high-dimensional GHZ state; the designs were later built in the lab. Classical automated search, not machine learning: an early precursor of the field."
+  url: https://journals.aps.org/prl/abstract/10.1103/PhysRevLett.116.090405
+
+- id: alphafold1-casp13
+  date: 2018-12-02
+  title: "AlphaFold wins CASP13 protein structure prediction"
+  domain: science
+  field: structural biology
+  system: AlphaFold (v1)
+  org: DeepMind
+  significance: 3
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [protein-structure, casp]
+  summary: "Placed first at CASP13. It gave high-accuracy predictions for 24 of 43 free-modelling domains; the next-best method managed 14. A big jump, but not yet competitive with experiment. Nature paper January 2020."
+  url: https://www.nature.com/articles/s41586-019-1923-7
+
+- id: halicin-antibiotic
+  date: 2020-02-20
+  title: "Deep learning identifies halicin, a structurally novel antibiotic"
+  domain: science
+  field: antibiotic discovery
+  system: Message-passing neural network (Chemprop)
+  org: MIT / Broad Institute (Collins lab)
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [antibiotics, drug-discovery, virtual-screening]
+  summary: "A model trained on about 2,500 molecules screened more than 100M compounds and flagged halicin, an existing but structurally unusual compound, as a broad-spectrum antibacterial. Halicin cleared A. baumannii infections in mice. It is a repurposed molecule and has not entered the clinic."
+  url: https://doi.org/10.1016/j.cell.2020.01.021
+
+- id: alphachip-floorplanning
+  date: 2020-04-22
+  title: "AlphaChip: RL chip floorplanning claimed superhuman, and disputed ever since"
+  domain: science
+  field: chip design
+  system: AlphaChip (deep RL placement)
+  org: Google / Google DeepMind
+  significance: 2
+  verification: disputed
+  autonomy: tool
+  tags: [chip-design, reinforcement-learning, controversy]
+  summary: "Google reported that RL generates macro placements for TPU chips in hours that match or beat human experts (Nature, June 2021), and it named the method AlphaChip in a 2024 addendum. Nature added an editor's note in 2023. A UCSD replication found it underperforms, and Igor Markov published a detailed critique in CACM; Google rebutted in 2024. There is still no public-benchmark win or wider EDA adoption."
+  url: https://www.nature.com/articles/s41586-021-03544-w
+
+- id: alphafold2-casp14
+  date: 2020-11-30
+  title: "AlphaFold 2 solves protein structure prediction at CASP14"
+  domain: science
+  field: structural biology
+  system: AlphaFold 2
+  org: DeepMind
+  significance: 5
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [protein-structure, casp]
+  summary: "Median GDT 92.4 across CASP14 targets (87.0 on the hardest free-modelling targets) and about 1.6 Å median backbone error. For many proteins this is competitive with experimental structures, answering a 50-year grand challenge. Nature paper July 2021."
+  url: https://deepmind.google/blog/alphafold-a-solution-to-a-50-year-old-grand-challenge-in-biology/
+
+- id: ramanujan-machine
+  date: 2021-02-03
+  title: "Ramanujan Machine conjectures new formulas for fundamental constants"
+  domain: math
+  field: number theory
+  system: Ramanujan Machine
+  org: Technion
+  significance: 1
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [continued-fractions, constants, conjecture-generation]
+  summary: "Automated search algorithms produced previously unknown conjectured continued-fraction formulas for constants such as π, e and Catalan's constant. They are conjectures to be proved, not theorems."
+  url: https://www.nature.com/articles/s41586-021-03229-4
+
+- id: wagner-rl-counterexamples
+  date: 2021-04-29
+  title: "Reinforcement learning refutes open conjectures in graph theory"
+  domain: math
+  field: combinatorics
+  system: Deep cross-entropy method (RL)
+  org: Academic (A. Z. Wagner)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: tool
+  tags: [counterexample, graph-theory, reinforcement-learning]
+  summary: "A simple RL search found explicit counterexamples to several open conjectures in extremal combinatorics and spectral graph theory, including a question of Brualdi and Cao on permanents of pattern-avoiding matrices. The counterexamples are explicit and can be checked directly."
+  url: https://arxiv.org/abs/2104.14516
+
+- id: alphafold-database
+  date: 2021-07-22
+  title: "AlphaFold Protein Structure Database launches, later covering 200M+ proteins"
+  domain: science
+  field: structural biology
+  system: AlphaFold 2 + AlphaFold DB
+  org: DeepMind / EMBL-EBI
+  significance: 3
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [protein-structure, database]
+  summary: "Launched with 350k+ predicted structures, including about 98.5% of the human proteome. On 2022-07-28 it expanded to over 200M structures, covering nearly every catalogued protein. This is infrastructure built on AlphaFold 2, not a new method."
+  url: https://www.ebi.ac.uk/about/news/press-releases/alphafold-database-launch
+
+- id: deepmind-knots-kazhdan-lusztig
+  date: 2021-12-01
+  title: "ML guides mathematicians to new theorems in knot theory and representation theory"
+  domain: math
+  field: topology / representation theory
+  system: Supervised learning + attribution analysis
+  org: DeepMind with University of Oxford and University of Sydney mathematicians
+  significance: 2
+  verification: peer-reviewed
+  autonomy: collaborative
+  problem: Combinatorial invariance conjecture (Kazhdan–Lusztig polynomials)
+  tags: [knot-theory, representation-theory, ml-guided-intuition]
+  summary: "Models flagged hidden relationships that led mathematicians to a new theorem linking algebraic and geometric knot invariants, and to progress on the combinatorial invariance conjecture for Kazhdan–Lusztig polynomials."
+  url: https://www.nature.com/articles/s41586-021-04086-x
+
+- id: dm21-density-functional
+  date: 2021-12-09
+  title: "DM21 neural density functional fixes fractional-electron errors"
+  domain: science
+  field: quantum chemistry
+  system: DM21
+  org: DeepMind
+  significance: 1
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [dft, quantum-chemistry]
+  summary: "A neural exchange-correlation functional trained with fractional-charge and fractional-spin constraints corrected classic delocalization errors on benchmarks. Published comments questioned whether it generalizes, and later work found convergence failures on transition-metal chemistry."
+  url: https://www.science.org/doi/10.1126/science.abj6511
+
+- id: tokamak-rl-control
+  date: 2022-02-16
+  title: "Deep RL controls tokamak plasma shapes on real hardware"
+  domain: science
+  field: fusion plasma physics
+  system: Deep RL magnetic controller
+  org: DeepMind / EPFL Swiss Plasma Center
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [fusion, plasma-control, reinforcement-learning]
+  summary: "A policy trained in simulation commanded all 19 control coils of the TCV tokamak. It produced elongated, negative-triangularity and snowflake plasmas, and held two separate plasmas at once. A first in control engineering rather than new physics."
+  url: https://www.nature.com/articles/s41586-021-04301-9
+
+- id: alphatensor
+  date: 2022-10-05
+  title: "AlphaTensor discovers faster matrix multiplication algorithms"
+  domain: math
+  field: algorithms
+  system: AlphaTensor
+  org: DeepMind
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [matrix-multiplication, reinforcement-learning, algorithms]
+  summary: "An AlphaZero-style agent found a 4×4 matrix multiplication algorithm over GF(2) using 47 multiplications, versus 49 from applying Strassen twice. It also improved ranks for other small formats (4×5×5: 80→76). Humans beat some of its records within days."
+  url: https://www.nature.com/articles/s41586-022-05172-4
+
+- id: rfdiffusion
+  date: 2022-12-10
+  title: "RFdiffusion enables general de novo protein design"
+  domain: science
+  field: protein design
+  system: RFdiffusion
+  org: Baker lab, Institute for Protein Design (University of Washington)
+  significance: 4
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [protein-design, diffusion]
+  summary: "A diffusion model built on RoseTTAFold generates protein backbones for binders, symmetric assemblies and enzyme-site scaffolds. Hundreds of designs were tested experimentally, and the cryo-EM structure of a designed influenza binder nearly matched the design model. It became the standard generative tool for protein design. Preprint Dec 2022; Nature July 2023."
+  url: https://www.nature.com/articles/s41586-023-06415-8
+
+- id: coscientist-autonomous-chemistry
+  date: 2023-04-11
+  title: "Coscientist: a GPT-4 agent plans and runs real chemistry experiments"
+  domain: science
+  field: chemistry automation
+  system: Coscientist (GPT-4 agent with lab automation)
+  model: GPT-4
+  modelId: gpt-4
+  org: Carnegie Mellon University (Gomes lab)
+  significance: 1
+  verification: peer-reviewed
+  autonomy: autonomous
+  tags: [lab-automation, agents, chemistry]
+  summary: "A GPT-4 agent searched documentation, wrote code for liquid handlers and a cloud lab, and planned and optimised palladium-catalysed cross-coupling reactions that were then run on real hardware. A capability demonstration of an LLM driving a lab, not new chemistry. Nature, December 2023."
+  url: https://www.nature.com/articles/s41586-023-06792-0
+
+- id: abaucin-antibiotic
+  date: 2023-05-25
+  title: "Abaucin: ML-guided narrow-spectrum antibiotic against A. baumannii"
+  domain: science
+  field: antibiotic discovery
+  system: Neural network trained on growth-inhibition screens
+  org: McMaster University / MIT
+  significance: 1
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [antibiotics, drug-discovery, virtual-screening]
+  summary: "A model trained on about 7,500 experimentally screened molecules predicted abaucin. It kills A. baumannii specifically by perturbing lipoprotein trafficking (LolE) and controlled infection in a mouse wound model. Preclinical."
+  url: https://www.nature.com/articles/s41589-023-01349-8
+
+- id: alphadev-sorting
+  date: 2023-06-07
+  title: "AlphaDev finds faster sorting routines, merged into LLVM libc++"
+  domain: math
+  field: algorithms
+  system: AlphaDev
+  org: Google DeepMind
+  significance: 1
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [sorting, reinforcement-learning, algorithms]
+  summary: "Reinforcement learning at the assembly level found branchless sort routines for 3–5 elements. They are up to 70% faster for 5-element sorts and about 1.7% faster for large arrays, and now ship in the standard C++ library."
+  url: https://www.nature.com/articles/s41586-023-06004-9
+
+- id: flywire-whole-brain-connectome
+  date: 2023-06-30
+  title: "ML segmentation plus human proofreading yields the first whole adult-brain connectome"
+  domain: science
+  field: neuroscience
+  system: Convolutional nets for electron-microscopy segmentation, plus community proofreading (FlyWire)
+  org: FlyWire Consortium (Princeton University and collaborators)
+  significance: 3
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [connectome, drosophila, segmentation]
+  summary: "Convolutional nets segmented an electron-microscopy volume of an adult fruit-fly brain, and about 33 person-years of human proofreading turned it into a synapse-level wiring diagram of 139,255 neurons and roughly 50 million synapses. AI made the project feasible but was not accurate enough alone, and most neurotransmitter identities are predicted rather than measured. Nature, October 2024."
+  url: https://www.nature.com/articles/s41586-024-07558-y
+
+- id: alphamissense
+  date: 2023-09-19
+  title: "AlphaMissense classifies 71M possible human missense variants"
+  domain: science
+  field: genomics
+  system: AlphaMissense
+  org: Google DeepMind
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [variant-effect, genomics]
+  summary: "An AlphaFold-derived model assigned confident pathogenic or benign calls to 89% of all ~71M possible human missense variants; experts had previously classified about 0.1%. The calls are predictions, not clinical diagnoses."
+  url: https://www.science.org/doi/10.1126/science.adg7492
+
+- id: graphcast
+  date: 2023-11-14
+  title: "GraphCast beats the leading operational 10-day weather forecast"
+  domain: science
+  field: weather forecasting
+  system: GraphCast
+  org: Google DeepMind
+  significance: 3
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [weather, forecasting, gnn]
+  summary: "A graph neural network produces a global 10-day forecast at 0.25° in under a minute. It beat ECMWF's HRES on 90% of 1,380 verification targets, with better cyclone tracks and extremes. This started operational uptake of ML weather models."
+  url: https://www.science.org/doi/10.1126/science.adi2336
+
+- id: gnome-materials
+  date: 2023-11-29
+  title: "GNoME predicts 381k new stable crystals; novelty claims later contested"
+  domain: science
+  field: materials science
+  system: GNoME
+  org: Google DeepMind
+  significance: 2
+  verification: disputed
+  autonomy: tool
+  tags: [materials-discovery, crystals, gnn]
+  summary: "Reported 2.2M structures below the known convex hull, about 381k of them new stable materials. The DFT stability results stand, but the novelty and usefulness claims were challenged (Cheetham & Seshadri, Chem. Mater. 2024; >10% possible near-duplicates, SIAM J. Appl. Math.). Critiques by Palgrave, Schoop et al. led the companion A-Lab paper to publish a 2026 correction: 36 of 57 successes, with 'novel' meaning new to the platform."
+  url: https://www.nature.com/articles/s41586-023-06735-9
+
+- id: a-lab-autonomous-synthesis
+  date: 2023-11-29
+  title: "A-Lab robot synthesises 41 'new' materials in 17 days; claims later corrected"
+  domain: science
+  field: materials science
+  system: A-Lab (ML-planned robotic synthesis)
+  org: Lawrence Berkeley National Laboratory / UC Berkeley (with Google DeepMind predictions)
+  significance: 2
+  verification: disputed
+  autonomy: autonomous
+  tags: [self-driving-lab, materials-discovery, controversy]
+  summary: "An autonomous lab used ML and literature-trained models to plan syntheses of predicted compounds and reported 41 of 58 targets made in 17 days. Palgrave, Schoop and others argued most were known disordered phases and the automated X-ray analysis was inadequate. A January 2026 correction conceded that 'novel' meant new to the prediction platform, dropped four targets as inconclusive and removed one as training-data contamination."
+  url: https://www.nature.com/articles/s41586-023-06734-w
+
+- id: funsearch-cap-set
+  date: 2023-12-14
+  title: "FunSearch: LLM-guided program search finds larger cap sets"
+  domain: math
+  field: combinatorics
+  system: FunSearch (PaLM 2 + evolutionary program search)
+  model: PaLM 2
+  org: Google DeepMind
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  problem: Cap set problem
+  tags: [cap-set, program-search, llm-evolution]
+  summary: "It evolved programs that construct the largest known cap set in dimension 8 (512 points) and admissible sets that improve the lower bound on the asymptotic cap-set capacity. It also found better bin-packing heuristics. DeepMind calls it the first discovery on an open math problem made with an LLM."
+  url: https://www.nature.com/articles/s41586-023-06924-6
+
+- id: explainable-dl-antibiotic-class-mrsa
+  date: 2023-12-20
+  title: "Explainable deep learning finds a new structural class of antibiotics against MRSA"
+  domain: science
+  field: antibiotic discovery
+  system: Graph neural network ensembles with substructure explanations
+  org: MIT / Broad Institute (Collins lab)
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [antibiotics, drug-discovery, explainable-ml]
+  summary: "After screening 39,312 compounds to train models, the team scored about 12M compounds and used the models' rationales to pick out a structural class. The compounds kill MRSA by disrupting the membrane proton gradient and worked topically and systemically in mice. Preclinical."
+  url: https://www.nature.com/articles/s41586-023-06887-8
+
+- id: msft-pnnl-electrolyte
+  date: 2024-01-09
+  title: "AI screening of 32M candidates yields a lower-lithium solid electrolyte"
+  domain: science
+  field: materials science (batteries)
+  system: Azure Quantum Elements (ML potentials + DFT)
+  org: Microsoft / Pacific Northwest National Laboratory
+  significance: 1
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [batteries, materials-screening]
+  summary: "ML screening narrowed 32.6M candidates to 18 in under 80 hours. PNNL synthesized a Na–Li–Y–Cl solid electrolyte that uses up to about 70% less lithium, though it underperforms current commercial materials. Paper in JACS, July 2024."
+  url: https://pubs.acs.org/doi/10.1021/jacs.4c03849
+
+- id: alphageometry
+  date: 2024-01-17
+  title: "AlphaGeometry solves 25 of 30 olympiad geometry problems"
+  domain: math
+  field: olympiad geometry
+  system: AlphaGeometry
+  org: Google DeepMind
+  significance: 1
+  verification: peer-reviewed
+  autonomy: autonomous
+  tags: [olympiad, geometry, neuro-symbolic]
+  summary: "A neuro-symbolic system trained without human demonstrations solved 25 of 30 IMO geometry problems in a benchmark, close to gold-medallist level, and produced human-readable proofs. An olympiad milestone, not new mathematics."
+  url: https://www.nature.com/articles/s41586-023-06747-5
+
+- id: vesuvius-challenge-grand-prize
+  date: 2024-02-05
+  title: "Vesuvius Challenge: ML reads 2,000+ characters from an unopened Herculaneum scroll"
+  domain: science
+  field: papyrology / archaeology
+  system: CT scanning + ML ink detection (TimeSformer-based)
+  org: Vesuvius Challenge (winning team Youssef Nader, Luke Farritor, Julian Schilliger)
+  significance: 3
+  verification: expert-endorsed
+  autonomy: tool
+  tags: [archaeology, papyrology, computer-vision]
+  summary: "Models trained to detect carbon ink in CT scans recovered more than 2,000 Greek characters across about 15 columns (roughly 5% of one scroll carbonised in AD 79), revealing an unknown Epicurean text on pleasure, probably by Philodemus. A papyrologist panel verified the readings. The first text read from inside an unopened Herculaneum scroll."
+  url: https://scrollprize.substack.com/p/vesuvius-challenge-2023-grand-prize
+
+- id: opencrispr-1
+  date: 2024-04-22
+  title: "OpenCRISPR-1: an AI-generated genome editor works in human cells"
+  domain: science
+  field: gene editing
+  system: Profluent protein language models
+  org: Profluent Bio
+  significance: 2
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [gene-editing, crispr, protein-language-model]
+  summary: "A generated Cas9-like nuclease hundreds of mutations away from any natural Cas9 matched SpCas9's on-target editing in human cells, with higher specificity. It is openly licensed. Nature paper July 2025."
+  url: https://www.nature.com/articles/s41586-025-09298-z
+
+- id: alphafold3
+  date: 2024-05-08
+  title: "AlphaFold 3 predicts structures of full biomolecular complexes"
+  domain: science
+  field: structural biology
+  system: AlphaFold 3
+  org: Google DeepMind / Isomorphic Labs
+  significance: 3
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [protein-structure, biomolecular-complexes]
+  summary: "A diffusion-based architecture predicts joint structures of proteins with nucleic acids, small molecules, ions and modified residues. It is much more accurate than specialist docking tools on protein–ligand complexes. The release was criticised for initially withholding code and weights."
+  url: https://www.nature.com/articles/s41586-024-07487-w
+
+- id: esm3-esmgfp
+  date: 2024-06-25
+  title: "ESM3 generates esmGFP, a fluorescent protein far from any natural one"
+  domain: science
+  field: protein design
+  system: ESM3 (98B)
+  model: ESM3
+  org: EvolutionaryScale
+  significance: 2
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [protein-design, protein-language-model]
+  summary: "When prompted, the generative protein language model designed esmGFP, a bright fluorescent protein with only 58% identity to the nearest known fluorescent protein. The authors' estimate that this equals about 500M years of evolution drew pushback. Science, January 2025."
+  url: https://www.science.org/doi/10.1126/science.ads0018
+
+- id: alphaproof-imo-2024-silver
+  date: 2024-07-25
+  title: "AlphaProof + AlphaGeometry 2 reach IMO 2024 silver-medal standard"
+  domain: math
+  field: olympiad mathematics
+  system: AlphaProof, AlphaGeometry 2
+  org: Google DeepMind
+  significance: 2
+  verification: formal-proof
+  autonomy: autonomous
+  tags: [olympiad, imo, lean]
+  summary: "Solved 4 of 6 IMO 2024 problems for 28/42, one point below gold, including the hardest problem (P6). Proofs were in Lean and scored by Tim Gowers and Joseph Myers. Problems were hand-translated into Lean, and some took up to three days, far beyond contest time. A competition milestone, not new mathematics."
+  url: https://deepmind.google/discover/blog/ai-solves-imo-problems-at-silver-medal-level/
+
+- id: de-novo-serine-hydrolases
+  date: 2024-08-30
+  title: "RFdiffusion designs serine hydrolases with folds unlike any natural enzyme"
+  domain: science
+  field: enzyme design
+  system: RFdiffusion + ChemNet active-site filtering
+  org: Baker lab, Institute for Protein Design (University of Washington)
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [protein-design, enzymes, diffusion]
+  summary: "Designed enzymes with multi-step catalytic mechanisms reached catalytic efficiencies up to 2.2×10⁵ M⁻¹s⁻¹, with crystal structures within 1 Å of the design models. Five designs use folds not seen in natural serine hydrolases, and humans specified the target chemistry. Science, 2025."
+  url: https://www.science.org/doi/10.1126/science.adu2454
+
+- id: alphaproteo
+  date: 2024-09-05
+  title: "AlphaProteo designs high-affinity protein binders"
+  domain: science
+  field: protein design
+  system: AlphaProteo
+  org: Google DeepMind
+  significance: 2
+  verification: claimed
+  autonomy: collaborative
+  tags: [protein-design, binders]
+  summary: "Reported 3–300× better binding affinities and higher experimental success rates than prior methods on seven targets, including the first AI-designed VEGF-A binder. It failed on TNFα. Only a whitepaper exists and the model was not released, so it cannot be independently replicated."
+  url: https://deepmind.google/blog/alphaproteo-generates-novel-proteins-for-biology-and-health-research/
+
+- id: nazca-geoglyphs-ai-survey
+  date: 2024-09-23
+  title: "AI-assisted survey nearly doubles the known figurative Nazca geoglyphs"
+  domain: science
+  field: archaeology
+  system: Deep-learning detection on aerial imagery
+  org: Yamagata University / IBM Research
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [archaeology, computer-vision, remote-sensing]
+  summary: "Model suggestions guided six months of field survey that confirmed 303 new figurative geoglyphs, nearly doubling the ~430 found over the previous century. Humans screened about 36 AI suggestions per promising candidate. PNAS."
+  url: https://doi.org/10.1073/pnas.2407652121
+
+- id: nobel-chemistry-2024
+  date: 2024-10-09
+  title: "Nobel Prize in Chemistry recognises AlphaFold and computational protein design"
+  domain: science
+  field: structural biology
+  system: AlphaFold 2; Rosetta / RFdiffusion lineage
+  org: Royal Swedish Academy of Sciences (laureates at Google DeepMind and University of Washington)
+  significance: 5
+  verification: expert-endorsed
+  autonomy: tool
+  tags: [nobel, protein-structure, protein-design]
+  summary: "Half the prize went to David Baker for computational protein design, and half jointly to Demis Hassabis and John Jumper for protein structure prediction. This recognises the AlphaFold 2 and protein-design results; it is not a separate discovery."
+  url: https://www.nobelprize.org/prizes/chemistry/2024/press-release/
+
+- id: patternboost
+  date: 2024-11-01
+  title: "PatternBoost finds a counterexample to a 30-year-old conjecture"
+  domain: math
+  field: combinatorics
+  system: PatternBoost (transformer + local search)
+  org: Charton, Ellenberg, Wagner, Williamson (Meta FAIR and academia)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: tool
+  tags: [counterexample, extremal-combinatorics, transformers]
+  summary: "The method alternates classical local search with a transformer trained on the best constructions. It matched or beat the best-known constructions for several extremal-combinatorics problems and produced a counterexample to a conjecture that had been open for 30 years."
+  url: https://arxiv.org/abs/2411.00566
+
+- id: virtual-lab-nanobodies
+  date: 2024-11-12
+  title: "Virtual Lab: a team of LLM agents designs new SARS-CoV-2 nanobodies"
+  domain: science
+  field: protein design
+  system: Virtual Lab (GPT-4o PI and specialist agents)
+  model: GPT-4o
+  modelId: gpt-4o
+  org: Stanford University (Kyle Swanson, James Zou)
+  significance: 2
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [agents, protein-design, nanobodies]
+  summary: "An LLM 'PI' agent and specialist agents, with high-level human feedback, built an ESM, AlphaFold-Multimer and Rosetta pipeline and designed 92 nanobodies. Two showed improved binding to recent variants (JN.1 or KP.3) while keeping binding to the ancestral spike. Nature, July 2025."
+  url: https://www.nature.com/articles/s41586-025-09442-9
+
+- id: alphaqubit
+  date: 2024-11-20
+  title: "AlphaQubit sets decoding accuracy record for quantum error correction"
+  domain: science
+  field: quantum computing
+  system: AlphaQubit
+  org: Google DeepMind / Google Quantum AI
+  significance: 1
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [quantum-error-correction, decoding]
+  summary: "A transformer decoder made 6% fewer errors than tensor-network decoding and 30% fewer than correlated matching on real Sycamore surface-code data, and kept its lead in simulation up to distance 11. It is still too slow for real-time decoding."
+  url: https://www.nature.com/articles/s41586-024-08148-8
+
+- id: pytheus-path-identity-entanglement
+  date: 2024-12-02
+  title: "PyTheus AI finds a simpler way to entangle independent photons, built in the lab"
+  domain: science
+  field: quantum optics
+  system: PyTheus (automated experiment design)
+  org: Mario Krenn's group with Nanjing University (Xiao-Song Ma)
+  significance: 2
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [quantum-optics, experiment-design, entanglement]
+  summary: "Asked to rediscover entanglement swapping, the design algorithm instead produced a scheme based on path identity that needs no pre-entangled pairs, no Bell-state measurement and no detection of all ancillary photons. Physicists interpreted it, and a Nanjing group realised it experimentally. Physical Review Letters, December 2024."
+  url: https://doi.org/10.1103/PhysRevLett.133.233601
+
+- id: gencast
+  date: 2024-12-04
+  title: "GenCast ensemble beats ECMWF ENS on 97% of targets"
+  domain: science
+  field: weather forecasting
+  system: GenCast
+  org: Google DeepMind
+  significance: 3
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [weather, forecasting, diffusion]
+  summary: "A diffusion model produces 15-day probabilistic ensembles at 0.25° in 8 minutes. It is more skilful than the world-leading ECMWF ensemble on 97.2% of 1,320 targets, with better forecasts of extremes and cyclone tracks."
+  url: https://www.nature.com/articles/s41586-024-08252-9
+
+- id: designed-antivenom
+  date: 2025-01-15
+  title: "De novo designed proteins neutralise lethal snake-venom toxins"
+  domain: science
+  field: protein design
+  system: RFdiffusion + ProteinMPNN
+  org: Baker lab (University of Washington) / Technical University of Denmark
+  significance: 2
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [protein-design, antivenom]
+  summary: "Designed binders against three-finger toxins neutralised all three toxin subfamilies in vitro and protected mice from lethal neurotoxin challenge. Designs matched their models at near-atomic accuracy and needed little experimental screening."
+  url: https://www.nature.com/articles/s41586-024-08393-x
+
+- id: mattergen
+  date: 2025-01-16
+  title: "MatterGen generative materials design; flagship compound later disputed"
+  domain: science
+  field: materials science
+  system: MatterGen
+  org: Microsoft Research AI for Science
+  significance: 1
+  verification: disputed
+  autonomy: tool
+  tags: [materials-discovery, diffusion]
+  summary: "A diffusion model generates stable inorganic crystals steerable toward target properties. The synthesized TaCr2O6 hit within 20% of its bulk-modulus target. A 2026 Materials Horizons paper argues that compound is a known disordered phase that was in the training data."
+  url: https://www.nature.com/articles/s41586-025-08628-5
+
+- id: gpt4b-micro-yamanaka-factors
+  date: 2025-01-17
+  title: "OpenAI's GPT-4b micro re-engineers Yamanaka factors with ~50× reprogramming marker gains"
+  domain: science
+  field: stem-cell biology
+  system: GPT-4b micro (protein-sequence model)
+  model: GPT-4b micro
+  org: OpenAI / Retro Biosciences
+  significance: 2
+  verification: claimed
+  autonomy: tool
+  tags: [protein-design, reprogramming, longevity]
+  summary: "A custom model proposed SOX2 and KLF4 variants; over 30% of SOX2 and about 50% of KLF4 variants beat wild type. The best combinations raised pluripotency-marker expression about 50-fold with fewer DNA double-strand breaks across donors and cell types. First reported by MIT Technology Review in January 2025, with details in an August 2025 OpenAI post. Company results, not peer-reviewed."
+  url: https://www.technologyreview.com/2025/01/17/1110086/openai-has-created-an-ai-model-for-longevity-science/
+
+- id: google-ai-co-scientist
+  date: 2025-02-19
+  title: "AI co-scientist independently proposes an unpublished gene-transfer mechanism"
+  domain: science
+  field: microbiology / drug repurposing
+  system: AI co-scientist (Gemini 2.0 multi-agent)
+  model: Gemini 2.0
+  org: Google / Imperial College London
+  significance: 1
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [co-scientist, hypothesis-generation, microbiology]
+  summary: "Without seeing the lab's unpublished data, the system's top hypothesis matched the mechanism by which cf-PICIs hijack diverse phage tails, a finding that took the Imperial group about a decade. AML drug-repurposing candidates were also validated in cell lines. Mostly an independent rediscovery; Cell, September 2025."
+  url: https://www.cell.com/cell/fulltext/S0092-8674(25)00973-0
+
+- id: sakana-ai-scientist-v2-peer-review
+  date: 2025-03-12
+  title: "Fully AI-generated paper passes peer review at an ICLR 2025 workshop"
+  domain: science
+  field: machine learning research
+  system: The AI Scientist-v2
+  org: Sakana AI
+  significance: 1
+  verification: peer-reviewed
+  autonomy: autonomous
+  tags: [ai-scientist, peer-review, ml-research]
+  alanRef: 1
+  summary: "One of three end-to-end AI-generated papers (hypothesis, code, experiments, analysis, writing) scored 6.33 on average in double-blind review, above the acceptance threshold. The workshop had agreed to the experiment, and the paper was withdrawn before publication as planned. This is a workshop bar, not a main-track acceptance."
+  url: https://sakana.ai/ai-scientist-first-publication/
+
+- id: potts-model-o3-mini-exact-solution
+  date: 2025-03-31
+  title: "o3-mini-high helps solve the frustrated 1D J1–J2 Potts model for any number of states"
+  domain: science
+  field: statistical physics
+  system: o3-mini-high
+  model: o3-mini-high
+  modelId: o3-mini
+  org: OpenAI model used by Weiguo Yin, Brookhaven National Laboratory
+  significance: 1
+  verification: peer-reviewed
+  autonomy: collaborative
+  problem: 1D J1–J2 q-state Potts model
+  tags: [potts-model, exact-solution, transfer-matrix]
+  alanRef: 2
+  summary: "Yin solved the one-dimensional J1–J2 q-state Potts model exactly for any q by reducing the q²×q² transfer matrix to a 2×2 block, extending a 56-year-old result that covered only the Ising case. o3-mini-high solved the q = 3 case in about a day, with Yin correcting its errors and generalising from its cases. A 1D exact solution of mainly specialist interest; Physical Review B."
+  url: https://arxiv.org/abs/2503.23758
+
+- id: urania-gw-detectors
+  date: 2025-04-11
+  title: "AI search discovers novel gravitational-wave detector designs"
+  domain: science
+  field: gravitational-wave physics
+  system: Urania
+  org: Max Planck Institute for the Science of Light / Caltech
+  significance: 1
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [gravitational-waves, experiment-design]
+  summary: "A design-search algorithm found unconventional interferometer layouts that beat the best-known designs under realistic constraints, potentially widening the observable volume by up to 50×. The designs exist only in simulation; none has been built."
+  url: https://journals.aps.org/prx/abstract/10.1103/PhysRevX.15.021012
+
+- id: co-scientist-liver-fibrosis
+  date: 2025-05-04
+  title: "AI co-scientist's liver-fibrosis drug picks beat the lab's own in organoids"
+  domain: science
+  field: drug repurposing
+  system: AI co-scientist (Gemini multi-agent)
+  model: Gemini 2.0
+  org: Google / Stanford (Gary Peltz)
+  significance: 1
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [co-scientist, drug-repurposing, fibrosis]
+  summary: "Two of three epigenetic targets suggested by the system had anti-fibrotic effects in human hepatic organoids, while both of the researcher's own picks failed. Vorinostat cut TGF-β-induced chromatin changes by 91% and promoted regeneration. Organoid results only. Advanced Science, 2025."
+  url: https://doi.org/10.1002/advs.202508751
+
+- id: alphaevolve
+  date: 2025-05-14
+  title: "AlphaEvolve: 48-multiplication 4×4 complex matrix algorithm and new records"
+  domain: math
+  field: algorithms / combinatorics
+  system: AlphaEvolve (Gemini evolutionary coding agent)
+  model: AlphaEvolve (Gemini 2.0 Flash + Pro)
+  org: Google DeepMind
+  significance: 2
+  verification: expert-endorsed
+  autonomy: tool
+  tags: [alphaevolve, matrix-multiplication, kissing-number, llm-evolution]
+  alanRef: 20
+  summary: "It found a 4×4 complex-valued matrix multiplication using 48 scalar multiplications, beating Strassen's 1969 bound in that setting, and raised the 11-dimensional kissing-number lower bound from 592 to 593 (agents on EinsteinArena later reached 604). Over 50+ open problems it matched or improved the state of the art. Humans produced a rational-coefficient 48-multiplication version within weeks."
+  url: https://deepmind.google/discover/blog/alphaevolve-a-gemini-powered-coding-agent-for-designing-advanced-algorithms/
+
+- id: msft-discovery-pfas-free-coolant
+  date: 2025-05-19
+  title: "Microsoft Discovery finds a non-PFAS immersion coolant candidate in about 200 hours"
+  domain: science
+  field: materials chemistry
+  system: Microsoft Discovery (agentic R&D platform with HPC simulation)
+  org: Microsoft
+  significance: 1
+  verification: claimed
+  autonomy: tool
+  tags: [pfas, coolant, materials-screening]
+  alanRef: 4
+  summary: "Microsoft said its Discovery platform found a non-PFAS immersion coolant candidate in about 200 hours of computation; a partner synthesised it in under four months and Microsoft showed it cooling a PC. The molecule, the data and the AI models used were not disclosed and no paper followed, so this is a product-launch claim. Alan's table guesses 'o1/o3', which nothing supports."
+  url: https://azure.microsoft.com/en-us/blog/transforming-rd-with-agentic-ai-introducing-microsoft-discovery/
+
+- id: futurehouse-robin
+  date: 2025-05-20
+  title: "Robin multi-agent system proposes ripasudil for dry macular degeneration"
+  domain: science
+  field: drug repurposing
+  system: Robin (Crow, Falcon, Finch agents)
+  org: FutureHouse
+  significance: 1
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [drug-repurposing, multi-agent, ophthalmology]
+  summary: "The agents generated the hypotheses, experimental strategy and data analysis, and humans ran the wet-lab work. They proposed ripasudil, a glaucoma drug, as a dry-AMD candidate, and a new circadian mechanism (KL001) for enhancing RPE phagocytosis. Key results were validated in human RPE cells. Published in Nature, May 2026."
+  url: https://www.futurehouse.org/research-announcements/demonstrating-end-to-end-scientific-discovery-with-robin-a-multi-agent-system
+
+- id: rentosertib-phase2a
+  date: 2025-06-03
+  title: "Rentosertib, an AI-discovered target and drug, shows phase 2a signal in IPF"
+  domain: science
+  field: drug discovery
+  system: Pharma.AI (PandaOmics + Chemistry42)
+  org: Insilico Medicine
+  significance: 2
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [drug-discovery, clinical-trial, fibrosis]
+  summary: "AI proposed the target (TNIK) and generated the molecule. In a 71-patient, 12-week trial the drug was safe, and the 60 mg arm's lung function rose by 98.4 mL versus a 20.3 mL decline on placebo. This was a secondary endpoint in a small study."
+  url: https://www.nature.com/articles/s41591-025-03743-2
+
+- id: otto-sr-cochrane-reviews
+  date: 2025-06-13
+  title: "LLM pipeline otto-SR re-runs 12 Cochrane reviews and finds missed studies that change 3 results"
+  domain: science
+  field: evidence synthesis (medicine)
+  system: otto-SR (GPT-4.1 screening, o3-mini-high extraction)
+  model: GPT-4.1 + o3-mini-high
+  org: University of Toronto and collaborators (incl. Harvard Medical School)
+  significance: 1
+  verification: claimed
+  autonomy: tool
+  tags: [systematic-reviews, cochrane, meta-analysis]
+  alanRef: 5
+  summary: "otto-SR screened studies more sensitively than dual human reviewers (96.7% vs 81.7%). Re-running 12 Cochrane reviews with the original search cut-offs, it found 54 eligible studies the authors appear to have missed; after human checking, two reviews' primary outcomes became significant and one lost significance. Still a preprint; it corrects existing reviews rather than adding new science."
+  url: https://www.medrxiv.org/content/10.1101/2025.06.13.25329541v1
+
+- id: alphagenome
+  date: 2025-06-25
+  title: "AlphaGenome predicts regulatory effects from 1 Mb of DNA"
+  domain: science
+  field: genomics
+  system: AlphaGenome
+  org: Google DeepMind
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [genomics, regulatory-dna, variant-effect]
+  summary: "A single model reads up to 1M base pairs and predicts expression, splicing, chromatin accessibility and TF binding at base resolution. DeepMind reports it beat the best external models on 22 of 24 sequence tasks and 24 of 26 variant-effect tasks. Nature, January 2026."
+  url: https://www.nature.com/articles/s41586-025-10014-0
+
+- id: chai-2-zero-shot-antibodies
+  date: 2025-07-06
+  title: "Chai-2 designs de novo antibodies zero-shot with a ~16% hit rate"
+  domain: science
+  field: protein design
+  system: Chai-2
+  org: Chai Discovery
+  significance: 2
+  verification: claimed
+  autonomy: tool
+  tags: [protein-design, antibodies]
+  summary: "Testing 20 or fewer designs per target against 52 targets with no known binder in the PDB, the company reports a 16% hit rate for fully de novo antibodies and at least one binder for half the targets. Earlier methods needed thousands of designs. Company preprint; no clinical candidates yet."
+  url: https://doi.org/10.1101/2025.07.05.663018
+
+- id: imo-2025-openai-gold
+  date: 2025-07-19
+  title: "OpenAI experimental reasoning model scores IMO 2025 gold (self-graded)"
+  domain: math
+  field: olympiad mathematics
+  system: OpenAI experimental reasoning model
+  model: OpenAI experimental reasoning model
+  org: OpenAI
+  significance: 2
+  verification: claimed
+  autonomy: autonomous
+  tags: [olympiad, imo]
+  summary: "Solved 5 of 6 problems for 35/42 in natural language under contest time limits. Three former IMO medallists graded it, not the official IMO coordinators, and the announcement came before the IMO's requested embargo date. A competition milestone, not new mathematics."
+  url: https://x.com/alexwei_/status/1946477742855532918
+
+- id: imo-2025-gemini-deep-think-gold
+  date: 2025-07-21
+  title: "Gemini Deep Think officially certified at IMO 2025 gold standard"
+  domain: math
+  field: olympiad mathematics
+  system: Gemini Deep Think (advanced version)
+  model: Gemini Deep Think (advanced version)
+  org: Google DeepMind
+  significance: 2
+  verification: expert-endorsed
+  autonomy: autonomous
+  tags: [olympiad, imo]
+  summary: "Solved 5 of 6 problems for 35/42 end-to-end in natural language within the 4.5-hour limit, officially graded and certified by IMO coordinators. A competition milestone, not new mathematics."
+  url: https://deepmind.google/blog/advanced-version-of-gemini-with-deep-think-officially-achieves-gold-medal-standard-at-the-international-mathematical-olympiad/
+
+- id: aeneas-latin-inscriptions
+  date: 2025-07-23
+  title: "Aeneas restores, dates and places Latin inscriptions for historians"
+  domain: science
+  field: ancient history / epigraphy
+  system: Aeneas (generative multimodal network)
+  org: Google DeepMind with academic historians
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [epigraphy, history, generative-models]
+  summary: "Trained on about 200,000 Latin inscriptions, it attributes provinces with 72% accuracy, dates texts to within about 13 years, and restores gaps of up to 10 characters with up to 73% accuracy. Historians found its retrieved parallels useful in 90% of cases, and its dating of the Res Gestae matched scholarly consensus. A research tool rather than a single discovery. Nature."
+  url: https://www.nature.com/articles/s41586-025-09292-5
+
+- id: dusty-plasma-ml-physics
+  date: 2025-07-31
+  title: "Physics-tailored ML uncovers unexpected forces in dusty plasmas"
+  domain: science
+  field: plasma physics
+  system: Physics-constrained neural network
+  org: Emory University
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [plasma-physics, physics-informed-ml]
+  summary: "A network trained on 3D particle trajectories learned non-reciprocal inter-particle forces (R² > 0.99). It showed that particle charge and screening length depend on plasma conditions and particle size, contrary to standard assumptions. Won the 2025 PNAS Cozzarelli Prize."
+  url: https://www.pnas.org/doi/10.1073/pnas.2505725122
+
+- id: deep-think-barrott-nabijou-reproof
+  date: 2025-08-01
+  title: "Gemini Deep Think re-proves a 2022 enumerative-geometry conjecture by a new method"
+  domain: math
+  field: enumerative geometry / combinatorics
+  system: Gemini 2.5 Deep Think
+  model: Gemini 2.5 Deep Think
+  modelId: gemini-2.5-deep-think
+  org: Google DeepMind (used by Michel van Garrel, University of Birmingham)
+  significance: 0
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: Barrott–Nabijou Conjecture 5.2 (Crelle 2022)
+  tags: [reproof, binomial-identity, enumerative-geometry]
+  alanRef: 6
+  summary: "Asked to prove a binomial identity conjectured by Barrott and Nabijou, Deep Think gave a correct proof in one go using generating functions of ternary trees, then a generalisation. The conjecture had already been proved in 2023 by van Garrel, Nabijou and Schuler with scattering diagrams, so this is a new, more elementary proof of a known result, although Google's video presented it as solving a years-old conjecture."
+  url: https://vangarrel.com/wp-content/uploads/2026/03/icms-compressed.pdf
+
+- id: mit-generative-antibiotics
+  date: 2025-08-14
+  title: "Generative AI designs new antibiotics active against gonorrhoea and MRSA"
+  domain: science
+  field: antibiotic discovery
+  system: Fragment-based and de novo generative models
+  org: MIT / Broad Institute (Collins lab) / Phare Bio
+  significance: 2
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [antibiotics, generative-chemistry]
+  summary: "Models generated over 36M candidate structures. Two synthesized leads, NG1 (N. gonorrhoeae, targets LptA) and DN1 (MRSA), worked in mouse infection models. This moves from screening known molecules to designing new ones. Preclinical."
+  url: https://news.mit.edu/2025/using-generative-ai-researchers-design-compounds-kill-drug-resistant-bacteria-0814
+
+- id: gpt5-mecfs-metabolomics-reanalysis
+  date: 2025-08-16
+  title: "Researcher reports GPT-5 re-analysed an ME/CFS metabolomics dataset in minutes"
+  domain: science
+  field: metabolomics
+  system: GPT-5 Thinking
+  model: GPT-5 Thinking
+  modelId: gpt-5
+  org: OpenAI model (used by Derya Unutmaz, Jackson Laboratory)
+  significance: 0
+  verification: claimed
+  autonomy: autonomous
+  tags: [me-cfs, metabolomics, data-analysis]
+  alanRef: 7
+  summary: "Unutmaz gave GPT-5 a table of about 1,300 metabolites from 150 ME/CFS patients and 100 controls without naming the disease, and reported that in under five minutes it reproduced most of his team's month-long analysis, found things they had missed and proposed drug targets. Only a social-media post: the new findings were not named or tested."
+  url: https://x.com/DeryaTR_/status/1956871713125224736
+
+- id: gauss-strong-pnt-formalization
+  date: 2025-09-11
+  title: "Math Inc's Gauss completes the Lean formalisation of the strong Prime Number Theorem"
+  domain: math
+  field: analytic number theory (formalisation)
+  system: Gauss (Math, Inc. autoformalization agent)
+  model: Gauss
+  org: Math, Inc.
+  significance: 1
+  verification: formal-proof
+  autonomy: collaborative
+  problem: Strong Prime Number Theorem (Tao–Kontorovich formalisation project)
+  tags: [lean, autoformalization, prime-number-theorem]
+  alanRef: 8
+  summary: "In about three weeks Gauss finished the Lean formalisation of the strong Prime Number Theorem, the goal of Tao and Kontorovich's project, which had reached an intermediate result after 18 months; the output was about 25,000 lines. It relied on natural-language scaffolding and expert guidance. It formalises a classical theorem; it is not new mathematics."
+  url: https://www.math.inc/gauss
+
+- id: evo-generated-phage-genomes
+  date: 2025-09-17
+  title: "Genome language models design viable bacteriophage genomes"
+  domain: science
+  field: synthetic genomics
+  system: Evo 1 / Evo 2
+  model: Evo 1 / Evo 2
+  org: Arc Institute / Stanford
+  significance: 3
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [genome-design, bacteriophage, genomic-language-model]
+  summary: "Starting from the phage ΦX174 as a template, model-generated whole genomes yielded 16 viable, substantially novel phages. Some outcompeted ΦX174, and a cocktail overcame resistance in three E. coli strains. The first viable AI-designed genomes. Science, August 2026."
+  url: https://www.science.org/doi/10.1126/science.aec2657
+
+- id: unstable-singularities-fluids
+  date: 2025-09-17
+  title: "Neural solvers discover new families of unstable blow-up solutions in fluid equations"
+  domain: math
+  field: fluid PDEs
+  system: Physics-informed neural networks + high-precision Gauss–Newton optimiser
+  org: Google DeepMind / NYU / Stanford / Brown
+  significance: 2
+  verification: claimed
+  autonomy: collaborative
+  problem: Unstable self-similar blow-up (CCF, IPM, Boussinesq)
+  tags: [fluid-pdes, blow-up, pinns]
+  summary: "Found new unstable self-similar blow-up solutions for the Córdoba–Córdoba–Fontelos (CCF), incompressible porous medium (IPM) and Boussinesq/boundary-Euler equations, with residuals near 10^-13. Numerical, with no computer-assisted proof yet. It laid groundwork for the 2026 blow-up results."
+  url: https://arxiv.org/abs/2509.14185
+
+- id: godel-test-gpt5-bicriteria
+  date: 2025-09-22
+  title: "Gödel Test: GPT-5 refutes the authors' own easy conjecture in submodular maximisation"
+  domain: math
+  field: combinatorial optimisation
+  system: GPT-5
+  model: GPT-5
+  modelId: gpt-5
+  org: OpenAI model (tested by Moran Feldman, University of Haifa, and Amin Karbasi)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: Gödel Test Problem 2 (bicriteria submodular maximisation over p-systems)
+  tags: [submodular, conjecture, llm-evaluation]
+  alanRef: 9
+  summary: "Feldman and Karbasi gave GPT-5 five easy, unpublished conjectures in submodular maximisation. On one it proved a different, more natural bicriteria guarantee than expected, which showed the authors' conjectured bound was wrong; it gave nearly correct proofs on three and failed on two. These were deliberately simple test conjectures, not known open problems. ('UoH' in Alan's table is the University of Haifa.)"
+  url: https://arxiv.org/abs/2509.18383
+
+- id: aaronson-qma-gpt5-step
+  date: 2025-09-25
+  title: "GPT-5 supplies a key proof step in a quantum complexity paper"
+  domain: math
+  field: quantum complexity theory
+  system: GPT-5 Thinking
+  model: GPT-5 Thinking
+  modelId: gpt-5
+  org: UT Austin (Aaronson) and collaborators
+  significance: 1
+  verification: expert-endorsed
+  autonomy: collaborative
+  tags: [quantum-complexity, qma, proof-step]
+  alanRef: 10
+  summary: "Aaronson, Harris and Witteveen proved oracle limits on black-box amplification in QMA. Aaronson reports that a key technical step of the main proof came from GPT-5, the first time AI contributed a core step to one of his papers."
+  url: https://arxiv.org/abs/2509.21131
+
+- id: erdos-gpt5-literature-search-controversy
+  date: 2025-10-01
+  datePrecision: month
+  title: "'GPT-5 solved 10 Erdős problems' claim turns out to be literature search"
+  domain: math
+  field: combinatorics / number theory
+  system: GPT-5
+  model: GPT-5
+  modelId: gpt-5
+  org: OpenAI
+  significance: 0
+  verification: disputed
+  autonomy: tool
+  tags: [erdos, literature-search, controversy]
+  summary: "An OpenAI VP posted that GPT-5 had solved 10 open Erdős problems. Site maintainer Thomas Bloom called it a 'dramatic misrepresentation': GPT-5 had found existing papers he was unaware of. Demis Hassabis called it 'embarrassing' and the post was deleted. The literature finds were still genuinely useful."
+  url: https://techcrunch.com/2025/10/19/openais-embarrassing-math/
+
+- id: nicd-erasures-majority-counterexample
+  date: 2025-10-05
+  title: "GPT-5 Pro finds a counterexample to majority's optimality in correlation distillation with erasures"
+  domain: math
+  field: analysis of Boolean functions
+  system: GPT-5 Pro
+  model: GPT-5 Pro
+  modelId: gpt-5-pro
+  org: OpenAI model (used by Paata Ivanisvili and Xinyuan Xie, UC Irvine)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: Non-interactive correlation distillation with erasures (Yang)
+  tags: [boolean-functions, counterexample, tcs]
+  alanRef: 11
+  summary: "Asked to look for counterexamples in the Simons Institute's open-problem list, the model found after numerical experiments a 5-bit threshold function that beats majority at erasure probability 0.4, refuting a mid-2000s conjecture of Yang. Ivanisvili and Xie checked it by hand, and a 2026 Google paper confirmed the refutation. A small finite counterexample."
+  url: https://arxiv.org/abs/2510.20013
+
+- id: c2s-scale-cancer-hypothesis
+  date: 2025-10-15
+  title: "C2S-Scale 27B predicts a new cancer immunotherapy combination, confirmed in vitro"
+  domain: science
+  field: cancer immunology
+  system: Cell2Sentence-Scale 27B (Gemma)
+  model: C2S-Scale 27B (Gemma 2)
+  org: Google DeepMind / Google Research / Yale
+  significance: 1
+  verification: claimed
+  autonomy: collaborative
+  tags: [cancer-immunology, single-cell, drug-repurposing]
+  alanRef: 12
+  summary: "A virtual screen predicted that silmitasertib, a CK2 inhibitor, amplifies antigen presentation only alongside low-dose interferon. Cell experiments confirmed about a 50% increase. One drug in one context, in vitro, and only a preprint."
+  url: https://blog.google/innovation-and-ai/products/google-gemma-ai-cancer-therapy-discovery/
+
+- id: erdos-848-gpt5-pro
+  date: 2025-10-18
+  title: "GPT-5 Pro supplies the key idea resolving Erdős #848 for large N"
+  domain: math
+  field: number theory
+  system: GPT-5 Pro (ChatGPT)
+  model: GPT-5 Pro
+  modelId: gpt-5-pro
+  org: OpenAI (used by Mehtaab Sawhney, Columbia)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: collaborative
+  problem: "Erdős #848"
+  tags: [erdos, number-theory, squarefree]
+  alanRef: 24
+  summary: "Erdős and Sárközy asked whether the largest A ⊆ [N] with ab+1 never squarefree is the residue class 7 mod 25. Building on forum observations by others, Sawhney got the key lemma from GPT-5 Pro (use one element outside 7 or 18 mod 25 to sieve out the rest) and finished the proof himself after the model's own write-up went wrong. It is resolved only for sufficiently large N."
+  url: https://www.math.columbia.edu/~msawhney/Problem_848.pdf
+
+- id: nesterov-point-convergence-ryu
+  date: 2025-10-21
+  title: "GPT-5 Pro helps prove point convergence of Nesterov's accelerated gradient method"
+  domain: math
+  field: convex optimisation
+  system: GPT-5 Pro (ChatGPT)
+  model: GPT-5 Pro
+  modelId: gpt-5-pro
+  org: OpenAI model (used by Ernest Ryu and Uijeong Jang, UCLA)
+  significance: 2
+  verification: expert-endorsed
+  autonomy: collaborative
+  problem: Point convergence of Nesterov's accelerated gradient method
+  tags: [nesterov, convergence, optimisation]
+  alanRef: 13
+  summary: "Over about 12 hours across three days, Ryu used GPT-5 Pro to prove that trajectories of the critical-case Nesterov ODE converge to a single minimiser, then with Jang carried it over to Nesterov's 1983 method, a known open problem. Ryu discarded about 80% of the model's arguments as wrong, but it suggested the key steps; an AI-generated argument for another parameter range was later withdrawn as wrong. Not yet refereed."
+  url: https://arxiv.org/abs/2510.23513
+
+- id: discorl-discovered-rl-rule
+  date: 2025-10-22
+  title: "DeepMind's DiscoRL: a machine-discovered RL update rule beats hand-designed ones on Atari"
+  domain: science
+  field: AI/ML (reinforcement learning)
+  system: DiscoRL (meta-learned RL update rule)
+  org: Google DeepMind
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [meta-learning, reinforcement-learning, atari]
+  alanRef: 3
+  summary: "Meta-learning across many agents and environments produced a neural-network RL update rule that beat all existing hand-designed rules on Atari-57 and did well on unseen benchmarks such as ProcGen and NetHack. No LLM, Gemini or AlphaEvolve was involved, despite Alan's table; David Silver previewed the work in April 2025. Nature, October 2025."
+  url: https://www.nature.com/articles/s41586-025-09761-x
+
+- id: huxley-godel-machine-swe
+  date: 2025-10-24
+  title: "Huxley-Gödel Machine: a self-rewriting coding agent tops SWE-bench Lite"
+  domain: science
+  field: AI/ML (coding agents)
+  system: Huxley-Gödel Machine (GPT-5-mini for self-modification, GPT-5 for evaluation)
+  model: GPT-5-mini / GPT-5
+  org: KAUST (Schmidhuber group)
+  significance: 1
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [self-improvement, coding-agents, swe-bench]
+  alanRef: 14
+  summary: "A coding agent repeatedly rewrites its own code, choosing which changes to pursue by how well their descendants perform. The evolved agent scored 57.0% on SWE-bench Lite with GPT-5, about level with the best officially checked human-designed agent (56.7%). A benchmark result on a crowded leaderboard; accepted at ICLR 2026."
+  url: https://arxiv.org/abs/2510.21614
+
+- id: alphaevolve-67-problems-tao
+  date: 2025-11-03
+  title: "Tao, Gómez-Serrano et al. run AlphaEvolve on 67 open problems"
+  domain: math
+  field: analysis / combinatorics / geometry
+  system: AlphaEvolve, Gemini Deep Think, AlphaProof
+  model: AlphaEvolve (Gemini)
+  org: Google DeepMind / UCLA / Brown
+  significance: 1
+  verification: expert-endorsed
+  autonomy: collaborative
+  problem: Finite-field Kakeya sets (and 66 other problems)
+  tags: [alphaevolve, constructions, kakeya-nikodym]
+  alanRef: 22
+  summary: "AlphaEvolve rediscovered the best-known constructions in most of 67 problems and improved several, including new finite-field Kakeya and Nikodym constructions. Deep Think and AlphaProof were used in places to prove or formalize results. A broad but mostly incremental survey."
+  url: https://arxiv.org/abs/2511.02864
+
+- id: alphaevolve-isosceles-free-grid
+  date: 2025-11-03
+  title: "AlphaEvolve finds a 112-point isosceles-free set in the 64×64 grid"
+  domain: math
+  field: combinatorial geometry
+  system: AlphaEvolve
+  model: AlphaEvolve (Gemini)
+  org: Google DeepMind with UCLA (Tao) and Brown (Gómez-Serrano)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: tool
+  problem: Largest subset of the n×n grid with no isosceles triangle
+  tags: [alphaevolve, extremal-geometry, constructions]
+  alanRef: 21
+  summary: "It found a 112-point subset of the 64×64 grid with no isosceles triangle (degenerate ones included), beating PatternBoost's 110, and raised the 100×100 record from 160 to 164. Humans hinted at near four-fold symmetry. A small-case record; the asymptotic bounds are unchanged."
+  url: https://arxiv.org/abs/2511.02864
+
+- id: tao-nikodym-finite-fields
+  date: 2025-11-03
+  title: "AlphaEvolve-inspired constructions give smaller Nikodym sets over finite fields"
+  domain: math
+  field: combinatorics / finite fields
+  system: AlphaEvolve, Gemini Deep Think
+  model: AlphaEvolve (Gemini)
+  org: Google DeepMind / UCLA (Tao)
+  significance: 1
+  verification: claimed
+  autonomy: collaborative
+  problem: Finite-field Nikodym sets
+  tags: [alphaevolve, kakeya-nikodym, finite-fields]
+  alanRef: 23
+  summary: "AlphaEvolve's first 3D Nikodym construction used complicated high-degree surfaces, which the authors simplified by hand into a probabilistic construction. Tao then proved that for fixed d ≥ 3 and odd prime powers q there are Nikodym sets in F_q^d of size q^d − ((d−2)/log 2 + 1 + o(1)) q^(d−1) log q, beating the random construction. Only the initial ideas came from AI; the proofs are human. A second-order improvement; preprint."
+  url: https://arxiv.org/abs/2511.07721
+
+- id: kosmos-ai-scientist
+  date: 2025-11-04
+  title: "Kosmos AI scientist reports seven data-driven discoveries"
+  domain: science
+  field: automated science
+  system: Kosmos
+  model: Claude Sonnet 4 (data-analysis agent, named in preprint v1)
+  org: Edison Scientific / FutureHouse
+  significance: 1
+  verification: claimed
+  autonomy: autonomous
+  tags: [ai-scientist, data-analysis, neuroscience]
+  alanRef: 19
+  summary: "12-hour autonomous runs of literature search and data analysis produced seven reported discoveries. Three reproduced unpublished human findings; four are claimed as new, such as a mechanism of entorhinal-cortex vulnerability in ageing: flippase genes fall in vulnerable neurons of aged mice, which Kosmos proposed exposes an 'eat-me' signal to microglia. Alan's table credits Claude Sonnet 4.5, but preprint v1 names Sonnet 4 for the analysis agent. Preprint only; three other findings have their own entries."
+  url: https://arxiv.org/abs/2511.02824
+
+- id: kosmos-sod2-myocardial-fibrosis
+  date: 2025-11-04
+  title: "Kosmos finds genetic evidence that higher circulating SOD2 reduces myocardial fibrosis"
+  domain: science
+  field: cardiology / statistical genetics
+  system: Kosmos (Edison Scientific)
+  model: Claude Sonnet 4 (data-analysis agent, named in preprint v1)
+  org: Edison Scientific, with Stanford cardiovascular medicine
+  significance: 1
+  verification: claimed
+  autonomy: autonomous
+  tags: [kosmos, mendelian-randomization, cardiac-fibrosis, ai-scientist]
+  alanRef: 16
+  summary: "Given public myocardial-T1 GWAS and plasma pQTL data, Kosmos ranked SOD2 as the top causal protein: genetically higher SOD2 predicts less fibrosis, so SOD2 is protective rather than a 'driver'. A parallel, unpublished Stanford analysis found the same result (31 of 32 significant proteins shared), so this is a reproduction. Its proposed miR-222 mechanism did not match target-prediction databases. Preprint only; no wet-lab test yet."
+  url: https://arxiv.org/abs/2511.02824
+
+- id: kosmos-ssr1-t2d-variant
+  date: 2025-11-04
+  title: "Kosmos proposes SSR1 regulation as the mechanism of a protective type 2 diabetes variant"
+  domain: science
+  field: human genetics / diabetes
+  system: Kosmos (Edison Scientific)
+  model: Claude Sonnet 4 (data-analysis agent, named in preprint v1)
+  org: Edison Scientific
+  significance: 1
+  verification: claimed
+  autonomy: autonomous
+  tags: [kosmos, gwas, type-2-diabetes, ai-scientist]
+  alanRef: 17
+  summary: "Working from fine-mapped T2D GWAS variants with multi-omic annotations, Kosmos focused on the protective variant rs9379084 and proposed that it alters ATF3 binding and islet chromatin to lower SSR1 expression. Public enhancer-gene and TWAS data are consistent, but the ATF3 enrichment was weak (p = 0.042). Nothing was tested in the lab; preprint only."
+  url: https://arxiv.org/abs/2511.02824
+
+- id: kosmos-alzheimers-ecm-tau-timing
+  date: 2025-11-04
+  title: "Kosmos times extracellular-matrix loss after tau build-up in Alzheimer's neurons"
+  domain: science
+  field: neuroscience / proteomics
+  system: Kosmos (Edison Scientific)
+  model: Claude Sonnet 4 (data-analysis agent, named in preprint v1)
+  org: Edison Scientific, with UK DRI at UCL
+  significance: 1
+  verification: claimed
+  autonomy: autonomous
+  tags: [kosmos, alzheimers, tau, proteomics]
+  alanRef: 18
+  summary: "On unpublished proteomics of neurons ordered along a tau-accumulation pseudotime, Kosmos placed a sharp drop in extracellular-matrix proteins just after neurons turn tau-positive, suggesting the matrix loss follows tau build-up. The matrix decline matched the lab's own analysis; the timing held in reruns and in a published transcriptomic dataset. Humans curated the final report. Preprint only."
+  url: https://arxiv.org/abs/2511.02824
+
+- id: de-novo-antibodies-rfdiffusion
+  date: 2025-11-05
+  title: "Atomically accurate de novo antibody design with RFdiffusion"
+  domain: science
+  field: protein design
+  system: RFdiffusion (antibody fine-tune) + OrthoRep maturation
+  org: Baker lab, Institute for Protein Design (University of Washington)
+  significance: 3
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [protein-design, antibodies]
+  summary: "Designed VHHs, scFvs and full antibodies against chosen epitopes on four targets. Cryo-EM confirmed the designed binding poses, including all six CDR loops of one scFv. Initial nM-range affinities reached single-digit nM after maturation."
+  url: https://www.nature.com/articles/s41586-025-09721-5
+
+- id: hsu-nonlinear-qm-gpt5-idea
+  date: 2025-11-19
+  title: "Physics Letters B paper whose main idea Hsu credits to GPT-5 is disputed"
+  domain: science
+  field: quantum field theory / quantum foundations
+  system: GPT-5, with Gemini 2.5 Pro and Qwen-Max as verifiers
+  model: GPT-5
+  modelId: gpt-5
+  org: OpenAI model (used by Stephen Hsu, Michigan State University)
+  significance: 1
+  verification: disputed
+  autonomy: collaborative
+  tags: [nonlinear-qm, qft, tomonaga-schwinger]
+  alanRef: 30
+  summary: "Hsu derived conditions from the Tomonaga–Schwinger formalism that state-dependent (nonlinear) modifications of quantum field theory violate, and later said the main idea came from GPT-5, although the paper's acknowledgement says AI was used mainly for checking and formatting. Jonathan Oppenheim argued the criterion tests locality rather than nonlinearity and was given by Gisin and Polchinski decades ago, and Lajos Diósi also disputed it. Published in Physics Letters B, but contested."
+  url: https://arxiv.org/abs/2511.15935
+
+- id: gpt5-science-acceleration-paper
+  date: 2025-11-20
+  title: "OpenAI and academics document GPT-5 contributions to new research results"
+  domain: math
+  field: combinatorics / optimisation / multiple
+  system: GPT-5
+  model: GPT-5 / GPT-5 Pro
+  modelId: gpt-5
+  org: OpenAI with Gowers, Sawhney, Sellke and others
+  significance: 1
+  verification: expert-endorsed
+  autonomy: collaborative
+  tags: [case-studies, erdos, optimisation]
+  alanRef: 15
+  summary: "A collection of case studies in which GPT-5 contributed to research: the key lemma for Erdős #848 (resolved for large N), a proof of a Bubeck–Linial subtree-count conjecture, a COLT 2012 network-identifiability problem, better convex-body-chasing lower bounds, a compactness lemma GPT-5 proved for Tim Gowers in about 20 seconds (via the Kolmogorov–Riesz theorem, which he did not know), and several biology and physics workflows. The paper itself separates new results from independent rediscoveries and literature finds. Humans guided and checked all of it; the individual results have their own entries."
+  url: https://arxiv.org/abs/2511.16072
+
+- id: gpt5-colt-2012-dynamic-network-problem
+  date: 2025-11-20
+  title: "GPT-5 solves the identifiability part of a COLT 2012 open problem on growing networks"
+  domain: math
+  field: probability / learning theory
+  system: GPT-5 with OpenAI research scaffolding
+  model: GPT-5
+  modelId: gpt-5
+  org: OpenAI (Bubeck) and Harvard (Sellke)
+  significance: 1
+  verification: claimed
+  autonomy: autonomous
+  problem: "COLT 2012 open problem: learning dynamic network models from a static snapshot"
+  tags: [colt-open-problem, preferential-attachment, random-trees]
+  alanRef: 25
+  summary: "In a preferential-attachment tree whose vertices carry hidden 'attractiveness' labels 1 or w, GPT-5 proved that the limiting fraction of leaves is an explicit increasing function of w, so w can be estimated from one unlabelled snapshot. The authors credit all major proof ideas to GPT-5. The polynomial convergence rate the problem also asked for is not proved."
+  url: https://arxiv.org/abs/2511.16072
+
+- id: gpt5-trees-subgraph-count-conjecture
+  date: 2025-11-20
+  title: "GPT-5 proves a 2016 Bubeck–Linial conjecture on subtree counts in trees"
+  domain: math
+  field: graph theory
+  system: GPT-5 with OpenAI research scaffolding
+  model: GPT-5
+  modelId: gpt-5
+  org: OpenAI (Bubeck) and Harvard (Sellke)
+  significance: 1
+  verification: claimed
+  autonomy: autonomous
+  problem: "Bubeck–Linial conjecture: 29Y − 42P − 144S ≤ K for all trees"
+  tags: [graph-theory, trees, subgraph-counts]
+  alanRef: 26
+  summary: "Counting induced 5-vertex stars (S), paths (P) and 'wyes' (Y) in a tree, GPT-5 proved the open inequality 29Y − 42P − 144S ≤ 504, the last unresolved member of a family whose other members had been disproved, and gave a one-page proof of a known bound. Proofs were AI-generated apart from editing; humans discarded some wrong attempts. A niche problem posed by one of the authors."
+  url: https://arxiv.org/abs/2511.16072
+
+- id: gpt5-convex-body-chasing-lower-bound
+  date: 2025-11-20
+  title: "GPT-5 helps raise the convex body chasing lower bound to about 1.11√d"
+  domain: math
+  field: online algorithms
+  system: GPT-5 Pro (ChatGPT)
+  model: GPT-5 Pro
+  modelId: gpt-5-pro
+  org: University of Oxford (Christian Coester)
+  significance: 1
+  verification: claimed
+  autonomy: collaborative
+  problem: Competitive ratio of convex body chasing
+  tags: [online-algorithms, convex-body-chasing, lower-bounds]
+  alanRef: 27
+  summary: "Coester's rotating-line construction, completed with a fix from GPT-5, gives a π/2 lower bound in the plane (previously 1.5358). GPT-5 then suggested repeating it in ⌊d/2⌋ orthogonal planes, raising the general bound from √d to (π/2)√⌊d/2⌋ ≈ 1.11√d. The core idea was Coester's, he corrected the model's errors, and the gap to the O(d) upper bound remains."
+  url: https://arxiv.org/abs/2511.16072
+
+- id: gpt5-pro-t-cell-2dg-mechanism
+  date: 2025-11-20
+  title: "GPT-5 Pro proposes a glycosylation–IL-2 mechanism for unpublished T-cell data"
+  domain: science
+  field: immunology
+  system: GPT-5 Pro (ChatGPT)
+  model: GPT-5 Pro
+  modelId: gpt-5-pro
+  org: The Jackson Laboratory (Derya Unutmaz)
+  significance: 0
+  verification: claimed
+  autonomy: collaborative
+  tags: [immunology, t-cells, hypothesis-generation]
+  alanRef: 28
+  summary: "Shown an unpublished experiment where brief 2-DG exposure during T-cell priming increased Th17-type cells, GPT-5 Pro proposed that disrupted N-linked glycosylation reduces IL-2 signalling, suggested a mannose rescue and predicted better CAR-T killing. The lab had already run both experiments, with matching results. The OpenAI paper itself files it under independent rediscovery: a 2018 preprint had already linked the effect to IL-2 receptor glycosylation."
+  url: https://arxiv.org/abs/2511.16072
+
+- id: gpt5-pro-icf-burn-wave-model
+  date: 2025-11-20
+  title: "GPT-5 Pro helps build a reduced model of fusion burn-wave propagation"
+  domain: science
+  field: plasma physics / inertial confinement fusion
+  system: GPT-5 Pro (ChatGPT)
+  model: GPT-5 Pro
+  modelId: gpt-5-pro
+  org: Lawrence Livermore National Laboratory (Brian Spears)
+  significance: 0
+  verification: claimed
+  autonomy: collaborative
+  tags: [fusion, icf, reduced-models]
+  alanRef: 29
+  summary: "In about six hours GPT-5 Pro helped set up and solve a 1-D reaction-diffusion model of a burn wave spreading from a hot spot into cold DT fuel; it found that shallow, slightly concave fuel-density ramps give the fastest front. A simplified toy model that confirmed the author's expectations, and he had to catch the model's numerical shortcuts. A workflow demonstration rather than new physics."
+  url: https://arxiv.org/abs/2511.16072
+
+- id: dobriban-wasserstein-robust-density
+  date: 2025-11-24
+  title: "GPT-5 Pro helps find the minimax rate for density estimation under Wasserstein contamination"
+  domain: math
+  field: mathematical statistics
+  system: GPT-5 Pro
+  model: GPT-5 Pro
+  modelId: gpt-5-pro
+  org: OpenAI model (used by Edgar Dobriban, University of Pennsylvania)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: collaborative
+  problem: Minimax rate for robust density estimation under Wasserstein contamination
+  tags: [robust-statistics, minimax, optimal-transport]
+  alanRef: 31
+  summary: "Over a few weeks Dobriban used GPT-5 Pro to close the gap between upper and lower bounds he had left open in 2023, obtaining the minimax rate for estimating smooth densities under Wasserstein-bounded contamination. The model proposed key techniques, including a dynamic Benamou–Brenier argument, but also invented references and skipped details that took days to fix. A specialist result on the author's own question; preprint."
+  url: https://arxiv.org/abs/2511.18828
+
+- id: erdos-124-aristotle-easier-variant
+  date: 2025-11-29
+  title: "Aristotle proves an easier version of Erdős #124; the original conjecture stays open"
+  domain: math
+  field: number theory
+  system: Aristotle (Harmonic)
+  model: Aristotle
+  org: Harmonic (run by Boris Alexeev)
+  significance: 1
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #124"
+  tags: [erdos, number-theory, lean, misformalization]
+  summary: "Working only from a Lean statement in DeepMind's Formal Conjectures repository, Aristotle proved that if Σ1/(d_i−1) ≥ 1, every large integer is a sum of distinct powers of the bases d_i. It was reported as solving #124, but it was the easier reading (counting 1 as a power) and the proof is short and olympiad-level; the Lean file also had a weakening typo that Alexeev fixed before re-proving it. The Burr–Erdős–Graham–Li version is still open."
+  url: https://www.erdosproblems.com/forum/thread/124
+
+- id: erdos-1026-alphaevolve-aristotle
+  date: 2025-12-08
+  title: "Erdős #1026 solved by humans with AlphaEvolve, Aristotle and LLMs"
+  domain: math
+  field: combinatorics
+  system: AlphaEvolve, Aristotle, Gemini, GPT
+  org: Alexeev, Cambie, Tao, Wu (with Google DeepMind and Harmonic tools)
+  significance: 1
+  verification: formal-proof
+  autonomy: collaborative
+  problem: "Erdős #1026"
+  tags: [erdos, combinatorics, alphaevolve, lean]
+  summary: "A full solution with a strengthened conclusion, formalized in Lean. A day after Aristotle's proof, a 2016 paper by Tidor, Wang and Yang was found to contain a similar result (the match needs a 1959 argument of Seidenberg). Tao's wiki calls it a showcase of the many forms AI assistance can take in a collaboration: construction search, formalization and literature search."
+  url: https://terrytao.wordpress.com/2025/12/08/the-story-of-erdos-problem-126/
+
+- id: sellke-yin-learning-curve-monotonicity
+  date: 2025-12-11
+  title: "GPT-5.2 Pro proves learning-curve monotonicity for Gaussian MLE, a COLT 2019 open problem"
+  domain: math
+  field: statistical learning theory
+  system: GPT-5.2 Pro (plus an unreleased longer-thinking prototype)
+  model: GPT-5.2 Pro
+  modelId: gpt-5.2-pro
+  org: OpenAI (Steven Yin) with Mark Sellke (Harvard / OpenAI)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: "COLT 2019 open problem: monotonicity of learning curves"
+  tags: [learning-curves, colt-open-problem, mle]
+  alanRef: 32
+  summary: "The model proved that the maximum-likelihood estimator's expected forward-KL risk decreases as the sample grows for Gaussians with unknown covariance, the case flagged as open at COLT 2019, and extended it to Gamma variables and, for reverse KL, to exponential families. Humans only prompted, checked and transcribed, and the public GPT-5.2 Pro reproduced the main proof. The reverse-KL part is close to a textbook exercise."
+  url: https://arxiv.org/abs/2512.10220
+
+- id: erdos-333-literature-erdos-newman
+  date: 2025-12-25
+  title: "GPT-5.2 Pro 'solves' Erdős #333, but Erdős and Newman had the answer in 1977"
+  domain: math
+  field: number theory
+  system: GPT-5.2 Pro (Lean version with Claude Opus 4.5)
+  model: GPT-5.2 Pro
+  modelId: gpt-5.2-pro
+  org: OpenAI (run by Kevin Barreto)
+  significance: 0
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #333"
+  tags: [erdos, number-theory, literature-found]
+  summary: "Asked whether every density-zero set lies in B+B for some B with o(N^(1/2)) elements up to N, GPT-5.2 Pro answered no. About two hours later a forum user showed that Theorem 2 of Erdős and Newman (1977) already implies this, and the brief 'AI solved it' claim was withdrawn. A literature rediscovery."
+  url: https://www.erdosproblems.com/forum/thread/333
+
+- id: schwartz-claude-sudakov-shoulder
+  date: 2026-01-05
+  title: "Claude Opus 4.5 carries out a supervised QCD resummation calculation for a physics paper"
+  domain: science
+  field: particle physics (QCD)
+  system: Claude Code (Claude Opus 4.5)
+  model: Claude Opus 4.5
+  modelId: claude-opus-4.5
+  org: Anthropic model (used by Matthew Schwartz, Harvard)
+  significance: 1
+  verification: claimed
+  autonomy: collaborative
+  tags: [qcd, effective-field-theory, physics-calculation]
+  summary: "Schwartz guided Claude through resumming the C-parameter Sudakov shoulder with a new factorisation theorem; the abstract says Claude did the calculations, numerics and manuscript preparation under supervision, in about two weeks against an estimated one to two years. Schwartz had to catch a wrong factorisation formula and instances of fabricated results. Single-author preprint."
+  url: https://arxiv.org/abs/2601.02484
+
+- id: erdos-728-autonomous
+  date: 2026-01-06
+  title: "Erdős #728: first Erdős problem solved essentially autonomously by AI"
+  domain: math
+  field: number theory
+  system: GPT-5.2 Pro + Aristotle
+  model: GPT-5.2 Pro
+  modelId: gpt-5.2-pro
+  org: OpenAI / Harmonic (operated by Kevin Barreto)
+  significance: 1
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #728"
+  tags: [erdos, number-theory, factorials, lean]
+  summary: "The system produced a Lean proof of a logarithmic-gap result on factorial divisibility, which also settled #729 and #401, and Tao called it solved 'more or less autonomously'. It is still described as the first nontrivial autonomous Erdős solution, but Pomerance (2014) contains closely related work and on 14 January Pomerance showed his method also answers it, so Tao's wiki files it under 'comparable literature found afterwards'. Write-up by Sothanaphan."
+  url: https://arxiv.org/abs/2601.07421
+
+- id: erdos-205-gpt52-aristotle-disproof
+  date: 2026-01-10
+  title: "GPT-5.2 and Aristotle disprove Erdős #205, the first AI-only Erdős solution with no prior literature"
+  domain: math
+  field: number theory
+  system: GPT-5.2 Thinking + Aristotle
+  model: GPT-5.2 Thinking
+  modelId: gpt-5.2
+  org: OpenAI + Harmonic (run by Liam Price and Kevin Barreto)
+  significance: 1
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #205"
+  tags: [erdos, number-theory, lean]
+  summary: "Erdős thought 'surely' every large n equals 2^k + m with Ω(m) < log log m. GPT-5.2 Thinking found a counterexample construction via the Chinese remainder theorem and Aristotle proved it in Lean; Tao and Alexeev then sharpened it. It is the earliest entry in the wiki's 'AI alone, no comparable literature' category, though Tao called the idea natural in retrospect. The odd-n version is still open."
+  url: https://www.erdosproblems.com/forum/thread/205
+
+- id: erdos-281-gpt52-pro-ergodic
+  date: 2026-01-17
+  title: "GPT-5.2 Pro proves Erdős #281 on covering congruences; the answer was implicit in 1936 work"
+  domain: math
+  field: number theory
+  system: GPT-5.2 Pro
+  model: GPT-5.2 Pro
+  modelId: gpt-5.2-pro
+  org: OpenAI (run by Neel Somani)
+  significance: 0
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #281"
+  tags: [erdos, number-theory, covering-systems, literature-found]
+  summary: "GPT-5.2 Pro answered an Erdős–Graham question on covering congruences with an ergodic-theory argument on the profinite integers, and Tao first called it perhaps the most unambiguous case of AI solving an open problem. A day later forum users and Tao found that it follows at once from Davenport–Erdős (1936) plus a theorem of Rogers. The AI's proof takes a different route; it was formalised in Lean on 19 January."
+  url: https://www.erdosproblems.com/forum/thread/281
+
+- id: erdos-1051-aletheia-irrationality
+  date: 2026-01-29
+  title: "Aletheia proves Erdős #1051 on the irrationality of rapidly converging series"
+  domain: math
+  field: number theory
+  system: Aletheia (Gemini Deep Think research agent)
+  model: Gemini Deep Think (advanced version)
+  org: Google DeepMind (Lean proof by Kevin Barreto)
+  significance: 1
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #1051"
+  tags: [erdos, number-theory, irrationality, aletheia]
+  summary: "Aletheia proved on its own that Σ1/(a_n a_{n+1}) is irrational for increasing integers with liminf a_n^(1/2^n) > 1, answering an Erdős–Graham question, and Barreto formalised it in Lean. It is the only full, apparently new solution among Aletheia's four 'autonomous' Erdős results, and humans working with AI then pushed it to the sharp golden-ratio threshold."
+  url: https://arxiv.org/abs/2601.22401
+
+- id: aletheia-deep-think-research
+  date: 2026-02-11
+  title: "Aletheia agent writes an autonomous research paper and solves four open Erdős problems"
+  domain: math
+  field: arithmetic geometry / combinatorics
+  system: Aletheia (Gemini Deep Think agent)
+  model: Gemini Deep Think
+  org: Google DeepMind
+  significance: 1
+  verification: expert-endorsed
+  autonomy: autonomous
+  tags: [aletheia, arithmetic-geometry, erdos, autonomous-research]
+  summary: "It produced a paper computing eigenweights for all classical groups in arithmetic Hirzebruch proportionality with no human intervention (documented by Tony Feng). It was also credited with 4 of about 700 open Erdős problems evaluated (#652, #654, #1040, #1051), but only #1051 is a full, new solution: #652 applied a 2021 paper and the other two are partial. DeepMind itself claims no 'major advance' level results."
+  url: https://deepmind.google/blog/accelerating-mathematical-and-scientific-discovery-with-gemini-deep-think/
+
+- id: gpt52-single-minus-gluon-amplitudes
+  date: 2026-02-12
+  title: "GPT-5.2 conjectures, and an OpenAI model proves, nonzero single-minus gluon amplitudes"
+  domain: science
+  field: theoretical physics
+  system: GPT-5.2 Pro + internal OpenAI model
+  model: GPT-5.2 Pro
+  modelId: gpt-5.2-pro
+  org: OpenAI with IAS, Harvard, Cambridge, Vanderbilt (Strominger, Skinner et al.)
+  significance: 2
+  verification: expert-endorsed
+  autonomy: collaborative
+  tags: [scattering-amplitudes, quantum-field-theory]
+  summary: "Tree-level single-minus n-gluon amplitudes, usually presumed to vanish, are nonzero in 'half-collinear' kinematics. The AI conjectured the all-n closed form from hand-computed cases and a model proved it. The result applies to Klein-signature or complex momenta, and the paper is a preprint."
+  url: https://arxiv.org/abs/2602.12176
+
+- id: gauss-sphere-packing-lean
+  date: 2026-02-23
+  title: "Math Inc's Gauss formalises Viazovska's sphere-packing proofs in dimensions 8 and 24"
+  domain: math
+  field: discrete geometry (formalisation)
+  system: Gauss (Math, Inc. autoformalization agent)
+  model: Gauss
+  org: Math, Inc.
+  significance: 2
+  verification: formal-proof
+  autonomy: collaborative
+  problem: Sphere packing in dimensions 8 and 24 (Viazovska et al.)
+  tags: [lean, autoformalization, sphere-packing]
+  summary: "Building on the Hariharan–Viazovska blueprint, Gauss completed the Lean proof for dimension 8 in about five days, then the 24-dimensional case (announced 2 March, over 200k lines) in about two weeks, finding and fixing small errors in the source proofs along the way. It formalises Fields-medal mathematics rather than proving anything new."
+  url: https://www.math.inc/sphere-packing
+
+- id: erdos-846-deepmind-openai-independent
+  date: 2026-02-25
+  title: "DeepMind and OpenAI models independently disprove Erdős #846 on points in general position"
+  domain: math
+  field: discrete geometry
+  system: DeepMind prover agent (AlphaProof Nexus); OpenAI internal model
+  org: Google DeepMind; OpenAI
+  significance: 1
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #846"
+  tags: [erdos, discrete-geometry, lean]
+  summary: "Erdős, Nešetřil and Rödl asked whether an infinite planar set in which every n points contain εn in general position must be a finite union of sets in general position. DeepMind's agent found a Lean disproof from the Formal Conjectures statement alone, and an OpenAI internal model independently found essentially the same construction. Rödl noted it also follows from a 2024 Reiher–Rödl–Sales theorem after a projection."
+  url: https://www.erdosproblems.com/forum/thread/846
+
+- id: knuth-claudes-cycles
+  date: 2026-02-28
+  title: "Claude Opus 4.6 solves Knuth's Hamiltonian-cycle decomposition problem (odd m)"
+  domain: math
+  field: combinatorics / graph theory
+  system: Claude Opus 4.6
+  model: Claude Opus 4.6
+  modelId: claude-opus-4.6
+  org: Anthropic (used by Filip Stappers; write-up by Donald Knuth)
+  significance: 1
+  verification: formal-proof
+  autonomy: collaborative
+  problem: Knuth's Hamiltonian-cycle decomposition problem
+  tags: [graph-theory, hamiltonian-cycles, lean]
+  summary: "In about an hour of guided exploration, Claude found a general decomposition of a 3-regular Cayley digraph on m³ vertices into three Hamiltonian cycles for all odd m. Knuth proved it and Kim Morrison formalized the proof in Lean. GPT-5.4 Pro later supplied the even case."
+  url: https://cs.stanford.edu/~knuth/papers/claude-cycles.pdf
+
+- id: erdos-125-alphaproof-nexus
+  date: 2026-03-30
+  title: "DeepMind agent shows the base-3/base-4 digit sumset of Erdős #125 has lower density zero"
+  domain: math
+  field: number theory
+  system: AlphaProof Nexus (Gemini 3.1 Pro provers + AlphaProof)
+  model: Gemini 3.1 Pro
+  modelId: gemini-3.1-pro
+  org: Google DeepMind
+  significance: 1
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #125"
+  tags: [erdos, number-theory, lean, misformalization]
+  summary: "Burr, Erdős, Graham and Li asked whether A+B has positive density, where A and B are the integers using only digits 0 and 1 in base 3 and base 4. The agent first disproved the literal 'natural density' statement, then, once Erdős's intended lower density was settled on, proved in Lean that it is 0; Melfi, who had published on it, expected the opposite. One of 9 of 353 open Erdős problems this agent solved; the upper-density question is open."
+  url: https://www.erdosproblems.com/forum/thread/125
+
+- id: openai-short-proofs-erdos
+  date: 2026-03-31
+  title: "OpenAI internal model supplies short proofs for eight Erdős questions"
+  domain: math
+  field: combinatorics / number theory
+  system: OpenAI internal model
+  model: OpenAI internal model
+  org: OpenAI (write-ups by Alexeev, Putterman, Sawhney, Sellke, Valiant)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: "Erdős #997, #741, #684, #960, #987, #990, #1091, #1141"
+  tags: [erdos, number-theory, combinatorics]
+  summary: "Two arXiv notes give proofs 'due entirely to an internal model at OpenAI', including that {αp_n} is never well-distributed (#997), a basis construction for #741, answers to #960, #987, #990, #1091 and #1141, and a partial result on #684. Most are short answers to little-studied questions, several later checked in Lean, and Tao noted a 2013–14 paper by Benatar had a partial result on #997 with the same sieve input."
+  url: https://arxiv.org/abs/2603.29961
+
+- id: erdos-1202-gpt54-pro-sieve
+  date: 2026-04-01
+  title: "GPT-5.4 Pro disproves Erdős #1202 on sieving half the residue classes"
+  domain: math
+  field: number theory
+  system: GPT-5.4 Pro
+  model: GPT-5.4 Pro
+  modelId: gpt-5.4-pro
+  org: OpenAI (run by Liam Price)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: "Erdős #1202 (Ben Green's problem 44)"
+  tags: [erdos, number-theory, sieve-theory]
+  summary: "Erdős asked whether removing half the residue classes modulo k primes below n^(1−ε) must, for large k, leave at most εn integers in [1,n], and called it 'intractable at present'. GPT-5.4 Pro gave a simple counterexample using interval-shaped residue classes, under which about half of [1,n] survives. erdosproblems.com accepted it; there is no Lean proof."
+  url: https://www.erdosproblems.com/1202
+
+- id: erdos-1196-primitive-sets
+  date: 2026-04-13
+  title: "GPT-5.4 Pro idea resolves 1966 Erdős–Sárközy–Szemerédi conjectures (#1196, #1217)"
+  domain: math
+  field: number theory
+  system: GPT-5.4 Pro
+  model: GPT-5.4 Pro
+  modelId: gpt-5.4-pro
+  org: OpenAI (write-up by Alexeev, Lichtman, Tao et al.)
+  significance: 2
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: "Erdős #1196 and #1217"
+  tags: [erdos, primitive-sets, number-theory]
+  summary: "A new method for bounding Erdős sums of primitive sets, based on Markov chains with von Mangoldt weights, came from GPT-5.4 Pro's output. It proved two 1966 conjectures, gave a short proof of the Erdős primitive set conjecture (#164), and solved problems experts had already worked hard on. Math Inc's Gauss reportedly formalised the result in Lean on 16 April; the paper is arXiv 2605.00301."
+  url: https://terrytao.wordpress.com/2026/05/03/primitive-sets-and-von-mangoldt-chains-erdos-problem-1196-and-beyond/
+
+- id: erdos-unit-distance-disproof
+  date: 2026-05-20
+  title: "OpenAI model disproves Erdős's 1946 unit distance conjecture"
+  domain: math
+  field: discrete geometry
+  system: Internal general-purpose OpenAI reasoning model
+  model: Internal OpenAI reasoning model
+  org: OpenAI
+  significance: 4
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: "Erdős #90 (unit distance conjecture)"
+  tags: [erdos, discrete-geometry, class-field-theory, disproof]
+  summary: "The model built planar point sets with n^(1+δ) unit distances using class field towers and Golod–Shafarevich theory, refuting the n^(1+o(1)) conjecture (Erdős #90). Alon, Bloom, Gowers, Litt, Sawin, Shankar, Tsimerman, Wang and Wood published a human-verified digest, Sawin made the exponent explicit (1.014), and Logical Intelligence's Aleph Prover later formalised it in Lean. Claude Mythos, run offline, produced a weaker independent disproof on 26 May, after the answer was public. The idea soon led humans to disprove the sum-product conjecture over ℝ."
+  url: https://openai.com/index/model-disproves-discrete-geometry-conjecture/
+
+- id: jamming-exponent-identity-claude
+  date: 2026-06-02
+  title: "Claude Opus 4.7 proves the a + b = 1 jamming-exponent identity for Parisi and Zamponi"
+  domain: science
+  field: statistical physics
+  system: Claude Opus 4.7 (Claude Sonnet 4.6 for minor steps)
+  model: Claude Opus 4.7
+  modelId: claude-opus-4.7
+  org: Anthropic model (used by Giorgio Parisi and Francesco Zamponi, Sapienza University of Rome)
+  significance: 2
+  verification: peer-reviewed
+  autonomy: autonomous
+  tags: [jamming, replica-theory, analytic-proof]
+  summary: "In the replica theory of hard spheres near jamming, the relation a + b = 1 between critical exponents had been seen numerically since 2014 but never proven. The authors write that the model 'essentially derived the proof by itself, with minimal supervision' over about 40 prompts, fixing inconsistencies they flagged; they checked and edited it. Published in J. Stat. Mech.; a result for specialists."
+  url: https://arxiv.org/abs/2606.03300
+
+- id: fmop-q2-absolute-galois
+  date: 2026-06-09
+  title: "Claude Fable 5 finds a presentation of the absolute Galois group of Q₂"
+  domain: math
+  field: number theory
+  system: Claude Fable 5
+  model: Claude Fable 5
+  modelId: claude-fable-5
+  org: Anthropic (elicited by David Roe)
+  significance: 2
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: Presentation of the absolute Galois group of Q₂
+  tags: [frontiermath-open-problems, galois-theory, number-theory]
+  summary: "Epoch rates this FrontierMath Open Problem a 'solid result'. It fills the p = 2 gap left by the known explicit presentations for odd p. The solution passed Epoch's verifier, and GPT-5.5 Pro in a custom harness produced another on 2026-06-24. Roe and Turturean wrote up the full solution."
+  url: https://epoch.ai/frontiermath/open-problems/q2-absolute-galois
+
+- id: einsteinarena-kissing-number-604
+  date: 2026-06-09
+  title: "Agents on EinsteinArena raise the 11-dimensional kissing number bound from 593 to 604"
+  domain: math
+  field: discrete geometry
+  system: EinsteinArena (open platform of LLM research agents)
+  model: Multiple LLM agents
+  org: Stanford (Bianchi, Kwon, Pappu, Zou)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: Kissing number in dimension 11
+  tags: [kissing-number, sphere-packing, agents, records]
+  summary: "On a public platform where agents share partial results against a verifier, a sequence of submissions and agent-to-agent borrowing raised the best known lower bound in dimension 11 from AlphaEvolve's 593 to 604; Henry Cohn's kissing-number table now credits it. The paper reports 12 new records in all as of May 2026. A record improvement, not a structural result."
+  url: https://arxiv.org/abs/2606.10402
+
+- id: erdos-986-off-diagonal-ramsey
+  date: 2026-06-16
+  title: "OpenAI model supplies the final step settling Erdős's off-diagonal Ramsey conjecture (#986)"
+  domain: math
+  field: combinatorics
+  system: OpenAI internal model (Claude used for one appendix computation)
+  model: OpenAI internal model
+  org: Domagoj Bradač, with an OpenAI internal model
+  significance: 3
+  verification: expert-endorsed
+  autonomy: collaborative
+  problem: "Erdős #986"
+  tags: [erdos, ramsey-theory, graph-theory]
+  summary: "Bradač's preprint gave r(s,k) ≥ k^(s−2+o(1)) for fixed s; an OpenAI internal model then found the argument raising the exponent to s−1, giving r(s,k) = Ω(k^(s−1)/(log k)^(2s−4)). That matches the Erdős–Szekeres upper bound up to logarithms and improves Spencer's 1977 bound for all s ≥ 5. The paper says every other idea is human and that the author wrote it. Preprint only."
+  url: https://arxiv.org/abs/2605.28793
+
+- id: erdos-problems-ai-aggregate
+  date: 2026-06-30
+  title: "About 70 Erdős problems received full solutions with AI as a primary contributor by mid-2026"
+  domain: math
+  field: combinatorics / number theory
+  system: GPT-5.x Pro, Aristotle, Aletheia, DeepMind prover agent, Claude and others
+  org: Multiple (tracked by Terence Tao's wiki)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: collaborative
+  tags: [erdos, aggregate]
+  summary: "In the wiki's final snapshot (frozen 2026-06-30), 71 distinct problems had full solutions with AI as a primary contributor. Only 39 involved little human input and only 18 had no comparable prior literature; 35 came from significant human–AI collaboration. Another 77 problems appear in the literature-search section, many proofs were checked in Lean, and several AI claims were logged as wrong. Tao warns of selection bias and that many problems were obscure rather than hard. Individual problems have their own entries."
+  url: https://github.com/teorth/erdosproblems/wiki/AI-contributions-to-Erd%C5%91s-problems
+
+- id: cycle-double-cover-conjecture
+  date: 2026-07-10
+  title: "GPT-5.6 Sol Ultra proves the cycle double cover conjecture, with a Lean proof"
+  domain: math
+  field: graph theory
+  system: GPT-5.6 Sol Ultra (up to 64 concurrent subagents); write-up with Codex
+  model: GPT-5.6 Sol Ultra
+  modelId: gpt-5.6-sol
+  org: OpenAI
+  significance: 4
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Cycle double cover conjecture (Szekeres 1973, Seymour 1979)
+  tags: [graph-theory, nowhere-zero-flows, lean]
+  summary: "OpenAI released a three-page proof, attributed entirely to the model, that every bridgeless graph has a family of cycles covering each edge exactly twice. It turns a nowhere-zero (Z/2)³ flow from the Jaeger–Kilpatrick 8-flow theorem into the cover by a linear-algebra argument. OpenAI's Lean formalisation checks the unconditional statement, and Sang-il Oum and Jim Geelen published expositions reporting no gap. The prompt told the model to assume a proof exists and suggested approach families, including flows. Not yet refereed."
+  url: https://cdn.openai.com/pdf/04d1d1e4-bc75-476a-97cf-49055cd98d31/cdc_proof.pdf
+
+- id: grothendieck-group-scheme-counterexample
+  date: 2026-07-14
+  title: "GPT-5.6 Sol answers Grothendieck's question: an order-4 group scheme not killed by 4"
+  domain: math
+  field: algebraic geometry
+  system: GPT-5.6 Sol (construction) + Claude Fable (Lean formalisation)
+  model: GPT-5.6 Sol
+  modelId: gpt-5.6-sol
+  org: OpenAI + Anthropic models (used by Akhil Mathew, University of Chicago)
+  significance: 2
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Grothendieck's question on finite flat group schemes
+  tags: [group-schemes, counterexample, lean]
+  summary: "An explicit rank-4 Hopf algebra over Z[a,b]/(a³, b³, a²b+2) gives a finite locally free group scheme of order 4 that is not killed by 4; Deligne had proved the commutative case. Claude formalised it in about 1,000 lines of Lean within hours and it was merged into Mathlib's counterexamples. Kevin Buzzard confirmed it states the intended claim but called it far easier than other recent AI disproofs."
+  url: https://xenaproject.wordpress.com/2026/07/20/human-mathematicians-are-being-outcounterexampled/
+
+- id: sabidussi-compatibility-conjecture
+  date: 2026-07-14
+  title: Sabidussi's compatibility conjecture proved entirely by GPT-5.6 Pro, with
+    Lean proof
+  domain: math
+  field: graph theory
+  system: GPT-5.6 Pro (proof) + GPT-5.6 Sol (write-up)
+  model: GPT-5.6 Pro
+  org: OpenAI (used by Nikolay Ulyanov)
+  significance: 1
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Sabidussi's compatibility conjecture
+  tags:
+  - graph-theory
+  - eulerian-graphs
+  - lean
+  summary: Every Euler tour of a connected multigraph with all degrees even and ≥4
+    admits a compatible circuit decomposition (Sabidussi, recorded by Fleischner 1980).
+    Author says the proof is entirely due to GPT-5.6 Pro; Lean uses custom multigraph
+    definitions. Unrefereed.
+  url: https://arxiv.org/abs/2607.13225
+- id: synthetic-tnpb-nucleases
+  date: 2026-07-16
+  title: "AI-designed minimal RNA-guided nucleases outperform natural TnpB"
+  domain: science
+  field: gene editing
+  system: ESM inverse folding (structure- and evolution-guided design)
+  org: Innovative Genomics Institute / UC Berkeley (Doudna lab)
+  significance: 2
+  verification: peer-reviewed
+  autonomy: collaborative
+  tags: [gene-editing, protein-design]
+  summary: "Synthetic compact TnpB nucleases designed with protein models matched or beat natural TnpB editing in bacterial, human and plant cells. Compact editors matter because they are easier to deliver."
+  url: https://www.science.org/doi/10.1126/science.aed6123
+
+- id: jacobian-conjecture-counterexample
+  date: 2026-07-19
+  title: "Claude Fable 5 finds a counterexample to the Jacobian conjecture in three variables"
+  domain: math
+  field: algebraic geometry
+  system: Claude Fable 5
+  model: Claude Fable 5
+  modelId: claude-fable-5
+  org: Anthropic (Levent Alpöge; problem suggested by Akhil Mathew)
+  significance: 4
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: Jacobian conjecture (Keller, 1939), dimensions n ≥ 3
+  tags: [jacobian-conjecture, counterexample, polynomial-maps, algebraic-geometry]
+  summary: "Alpöge posted an explicit degree-7 polynomial map ℂ³ → ℂ³ with constant Jacobian determinant −2 that is not injective (it is generically three-to-one), which disproves the Jacobian conjecture in every dimension ≥ 3; the plane case n = 2 stays open. A computer-algebra check takes seconds, it was independently confirmed within a day, and Tao explained it geometrically via factorising binary cubics. How the model found it has not been disclosed, and Adrian Vasiu says the accompanying AI write-up borrows ideas from a publicly posted 2025 Borisov–Gabber–Vasiu draft, which Alpöge agreed deserves credit. Humans quickly used it to disprove the Hessian conjecture for n ≥ 5 and the weak Markus–Yamabe conjecture in dimension ≥ 14."
+  url: https://terrytao.wordpress.com/2026/07/21/a-digestion-of-the-jacobian-conjecture-counterexample/
+
+- id: gaussian-product-inequality-proof
+  date: 2026-07-20
+  title: "GPT-5.6 Sol proves the Gaussian product inequality conjecture"
+  domain: math
+  field: probability
+  system: GPT-5.6 Sol (max effort) + Codex for the Lean proof
+  model: GPT-5.6 Sol
+  modelId: gpt-5.6-sol
+  org: OpenAI (used by Dylan Greaves and Frédéric Ouimet, UQTR)
+  significance: 2
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Gaussian product inequality conjecture
+  tags: [probability, gaussian-inequalities, lean]
+  summary: "Shows E[∏|X_i|^(a_i)] ≥ ∏E|X_i|^(a_i) for every centred Gaussian vector and positive exponents, settling conjectures of Frenkel (2008) and Li–Wei (2012). The model produced the proof in a single run of about 130 minutes with a public transcript, and Codex formalised it in Lean. Preprint."
+  url: https://arxiv.org/abs/2609.20234
+
+- id: imo-2026-perfect-scores
+  date: 2026-07-23
+  title: "AI systems score officially graded perfect 42/42 at IMO 2026"
+  domain: math
+  field: olympiad mathematics
+  system: Huawei Celia; Xiaohongshu dots-note-3.0
+  org: Huawei / Xiaohongshu
+  significance: 2
+  verification: expert-endorsed
+  autonomy: autonomous
+  tags: [olympiad, imo]
+  summary: "IMO organisers graded two systems at 42/42 under official conditions with no human intervention, the first perfect AI scores. NVIDIA's Nemotron 3 Ultra got an official 30/42, the first open-weight gold. Several frontier models reportedly scored 42/42 on self-administered tests. A competition milestone, not new mathematics."
+  url: https://techxplore.com/news/2026-07-ai-humans-score-math-contest.html
+
+- id: petersen-coloring-counterexample
+  date: 2026-07-23
+  title: AI-found cubic graphs refute Jaeger's Petersen coloring conjecture
+  domain: math
+  field: graph theory
+  system: GPT-5.6 Sol Ultra (68-vertex graph); unnamed OpenAI models (112-vertex paper)
+  model: GPT-5.6 Sol Ultra
+  modelId: gpt-5.6-sol
+  org: OpenAI models, used by independent researchers (@NeuralReformist on X; Bryce
+    Putman)
+  significance: 2
+  verification: expert-endorsed
+  autonomy: collaborative
+  problem: Petersen coloring conjecture (Jaeger, 1980s)
+  tags:
+  - graph-theory
+  - snarks
+  - counterexample
+  - sat-solver
+  summary: A pseudonymous X account posted a 68-vertex bridgeless cubic graph with
+    no Petersen coloring on 23 Jul 2026, crediting GPT-5.6 Sol Ultra; Bryce Putman's
+    8 Aug preprint gave two 112-vertex counterexamples with DRAT-checked SAT certificates
+    (OpenAI models used extensively). Specialists (Goedgebeur, Jooken, Máčajová, Mattiolo,
+    Mazzuoccolo) accepted the disproof, gave a hand-checkable proof for one graph
+    and found a 52-vertex example. Berge–Fulkerson and the 5-cycle double cover conjecture
+    remain open.
+  url: https://arxiv.org/abs/2608.10012
+- id: fmop-superpermutations
+  date: 2026-07-26
+  title: "Shorter superpermutations on 9 and 10 symbols found in a GPT-5.6 Sol session"
+  domain: math
+  field: combinatorics
+  system: GPT-5.6 Sol (Codex)
+  model: GPT-5.6 Sol
+  modelId: gpt-5.6-sol
+  org: OpenAI (used by William Echols)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: collaborative
+  problem: Shortest superpermutations (n = 9, 10)
+  tags: [frontiermath-open-problems, combinatorics, records]
+  summary: "Echols built new superpermutations shorter than the known upper bounds for n = 9 and 10 in an interactive Codex session. The n = 8 record came from Uku Raudvere's post that day. Epoch rates this 'moderately interesting' and the constructions passed its verifier."
+  url: https://epoch.ai/frontiermath/open-problems/superpermutations
+
+- id: feige-conjecture-sharp-bound
+  date: 2026-07-27
+  title: "GPT-5.6 Pro proves Feige's 2004 conjecture on sums of nonnegative random variables"
+  domain: math
+  field: probability
+  system: ChatGPT 5.6 Pro (proof) + Codex (Lean)
+  model: GPT-5.6 Pro
+  org: OpenAI (used by Fu, Han, Wang, Yan, Zhang and Zhou)
+  significance: 2
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Feige's conjecture (2004)
+  tags: [probability, concentration-inequalities, lean]
+  summary: "A sum of independent nonnegative random variables with means at most 1 stays below its mean plus 1 with probability at least (n/(n+1))^n ≥ 1/e, the sharp constant. The authors say the model found the proof by combining a July 2026 result on Gaffke's conjecture with convex geometry; they rewrote it and supplied an end-to-end Lean proof. Nie and Wei posted an independent AI-assisted proof the same day. Not refereed."
+  url: https://arxiv.org/abs/2607.23980
+
+- id: kemeny-np-hard-three-voters
+  date: 2026-07-28
+  title: Kemeny rank aggregation NP-hard for three voters; reduction found by GPT-5.6
+    Sol
+  domain: math
+  field: computational social choice
+  system: GPT-5.6 Sol Ultra (Codex) + Claude Fable 5
+  model: GPT-5.6 Sol
+  modelId: gpt-5.6-sol
+  org: OpenAI + Anthropic (used by Dominik Peters, CNRS / Paris Dauphine)
+  significance: 2
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Kemeny aggregation with three voters (Dwork et al. 2001)
+  tags:
+  - complexity
+  - social-choice
+  - lean
+  summary: Kemeny aggregation is NP-hard with exactly three rankings (MAX CUT reduction).
+    Sol Ultra found a five-voter reduction in ~7 h, then the three-voter one in ~4
+    h with Fable 5's notes; Peters simplified and wrote it up. Lean checks the reduction's
+    correctness.
+  url: https://arxiv.org/abs/2607.25540
+- id: fmop-genus2-torsion-literature
+  date: 2026-07-30
+  title: "GPT-5.6 Sol 'solves' a genus-2 torsion problem by finding an existing curve"
+  domain: math
+  field: arithmetic geometry
+  system: GPT-5.6 Sol
+  model: GPT-5.6 Sol
+  modelId: gpt-5.6-sol
+  org: OpenAI
+  significance: 0
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: Genus-2 Jacobian rational torsion of prime order ≥ 31
+  tags: [frontiermath-open-problems, literature-search, arithmetic-geometry]
+  summary: "In Epoch's pre-release test the model found, by web search, a genus-2 curve with a rational torsion point of prime order ≥ 31 in a public database (Costa, Elkies, Poonen, Voight et al.). The answer already existed in the literature. Epoch raised the target to order 37."
+  url: https://epoch.ai/frontiermath/open-problems/genus-2-jacobian-torsion
+
+- id: astra-first-non-sofic-group
+  date: 2026-08-01
+  title: "OpenAI Astra constructs the first non-sofic group"
+  domain: math
+  field: group theory
+  system: GPT-6 Astra (internal pre-release)
+  model: GPT-6 Astra (internal pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI
+  significance: 4
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Is every group sofic?
+  tags: [group-theory, sofic-groups, lean]
+  summary: "It showed that the unit group of the binary Leavitt algebra is not sofic, answering the long-open question of whether every group is sofic (a notion introduced in 1999). The proof ships with a Lean 4 certificate and specialists accept it as correct. Credit is disputed: Andreas Thom says Kun–Thom (2019) played a decisive role and that OpenAI's 'no progress in a decade' framing is false, and Fournier-Facio said the proof pastes together ideas from 2016 and 2019 papers; OpenAI added citations on 6 August."
+  url: https://openai.com/index/ten-advances-in-mathematics/
+
+- id: astra-ten-advances
+  date: 2026-08-01
+  title: "Astra releases Lean-certified results on ten decade-old problems, disproving Connes's rigidity conjecture"
+  domain: math
+  field: operator algebras / combinatorics / complexity theory
+  system: GPT-6 Astra (internal pre-release)
+  model: GPT-6 Astra (internal pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI
+  significance: 3
+  verification: formal-proof
+  autonomy: autonomous
+  tags: [lean, operator-algebras, multiple-problems]
+  summary: "Besides the non-sofic group, results included a disproof of Connes's rigidity conjecture (non-isomorphic property (T) ICC groups with isomorphic von Neumann algebras), coding and sphere-packing bounds, Ehrhart's volume conjecture, quantum parallel repetition and three Erdős problems (#183, #146, #180). Every result has a Lean certificate, and OpenAI puts total inference cost at about $2,000 at API rates. A third-party audit (Sienicki and Sienicki) judged the main constructions sound but recorded a specialist request for major revision of the Ehrhart chapter; none is peer-reviewed, and OpenAI lists the certificates as 'agent-reviewed'. An online allegation that the Connes disproof uses a group with infinite centre is contradicted by the Lean statement, which requires ICC groups, and Zhou found a concurrent counterexample with GPT-5.6 Sol."
+  url: https://openai.com/index/ten-advances-in-mathematics/
+
+- id: erdos-183-astra-multicolor-ramsey
+  date: 2026-08-01
+  title: "Astra proves triangle Ramsey numbers R(3;k) grow superexponentially (Erdős #183)"
+  domain: math
+  field: combinatorics
+  system: Astra (internal version of GPT-6 Astra)
+  model: GPT-6 Astra (internal pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI
+  significance: 3
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #183"
+  tags: [erdos, ramsey-theory, lean]
+  summary: "Proved R(3;k) ≥ (c·k^(1/3)/log k)^k, so R(3;k) = k^Θ(k) and R(3;k)^(1/k) → ∞, settling a 1961 Erdős prize question (previous lower bound about 3.28^k). A corollary is that graphs with independence number 2 can have unbounded Shannon capacity. It applies a known saturated-matrix construction in a new way, ships with a Lean certificate, and Rob Morris wrote a human exposition."
+  url: https://www.erdosproblems.com/183
+
+- id: erdos-146-180-astra-turan
+  date: 2026-08-01
+  title: "Astra disproves Erdős's degeneracy conjecture and the Erdős–Simonovits compactness conjecture (#146, #180)"
+  domain: math
+  field: graph theory
+  system: Astra (internal version of GPT-6 Astra)
+  model: GPT-6 Astra (internal pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI
+  significance: 3
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #146, #180"
+  tags: [erdos, extremal-graph-theory, turan-numbers, lean]
+  summary: "Built a connected bipartite 2-degenerate graph H with ex(n,H) ≥ c·n^(3/2+ε), refuting Erdős's $500 conjecture that r-degenerate bipartite graphs have ex(n,H) = O(n^(2−1/r)). It also built a finite family of bipartite graphs whose joint extremal number is O(n^(4/3−1/48)) while each member's is Ω(n^(4/3)), refuting the corrected Erdős–Simonovits compactness conjecture (#180 as literally stated had a trivial counterexample). Both have Lean certificates; readers found the write-up hard to follow."
+  url: https://www.erdosproblems.com/146
+
+- id: astra-codes-sphere-packing-bounds
+  date: 2026-08-01
+  title: "Astra improves the 1977–78 MRRW and Kabatianskii–Levenshtein bounds for codes and sphere packing"
+  domain: math
+  field: coding theory / discrete geometry
+  system: GPT-6 Astra (internal pre-release)
+  model: GPT-6 Astra (internal pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI
+  significance: 3
+  verification: formal-proof
+  autonomy: autonomous
+  problem: MRRW bound for binary codes; Kabatianskii–Levenshtein bound; asymptotic Cohn–Elkies LP bound
+  tags: [coding-theory, sphere-packing, linear-programming, lean]
+  summary: "One of the 'ten advances': it improved the exponent of the McEliece–Rodemich–Rumsey–Welch bound for binary codes (1977) at every relative distance and the Kabatianskii–Levenshtein bound for spherical codes (1978), and showed the Cohn–Elkies LP bound decays at the rate conjectured in 2020, moving the sphere-packing exponent from 0.5990 to 0.6044. Alrabiah and Guruswami posted the same binary bound independently nine days later, and Stephen Miller says the sphere-packing argument reuses his 2016 work with Cohn. Lean certificates, but not peer-reviewed."
+  url: https://cdn.openai.com/pdf/ten-proofs-oai.pdf
+
+- id: moore-bound-asymptotic-degree-diameter
+  date: 2026-08-04
+  title: "Moore bound asymptotically attained for every fixed diameter, with a key idea from GPT-5.6 Pro"
+  domain: math
+  field: extremal graph theory
+  system: GPT-5.6 Pro
+  model: GPT-5.6 Pro
+  org: OpenAI (used by Wouter Cames van Batenburg and Samuel Korsky)
+  significance: 2
+  verification: formal-proof
+  autonomy: collaborative
+  problem: Degree–diameter problem (Bollobás's conjecture)
+  tags: [graph-theory, degree-diameter, lean]
+  summary: "The largest graph with maximum degree d and diameter k has (1+o(1))d^k vertices for every fixed k; this was known only for k = 2, 3 and 5. The model suggested splitting flags into odd- and even-rank parts, which became the main construction, and the main theorem is formalised in Lean. Not yet refereed."
+  url: https://arxiv.org/abs/2608.03965
+
+- id: sendov-conjecture-proof
+  date: 2026-08-05
+  title: "Sendov's conjecture proved for all degrees with GPT-5.6 Pro; Tao formalises it in Lean"
+  domain: math
+  field: complex analysis
+  system: GPT-5.6 Pro in an orchestration and verification workflow run by Lech Mazur
+  model: GPT-5.6 Pro
+  org: OpenAI (used by independent researcher Lech Mazur)
+  significance: 3
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Sendov's conjecture (1959)
+  tags: [polynomials, critical-points, lean]
+  summary: "A computer-assisted proof, credited to the model, that every zero of a polynomial with all zeros in the closed unit disk lies within distance 1 of a critical point; Tao had proved it in 2020 only for sufficiently large degree. Tao called the argument remarkably elementary and, with an AI agent, re-formalised it in about 15,000 lines of Lean (the original was about 90,000). It also settles the Phelps–Rodriguez conjecture. Not yet refereed."
+  url: https://www.proofatlas.ai/papers/sendov-conjecture/SENDOV_CONJECTURE_PROOF_AUGUST_5_2026.pdf
+
+- id: schiffer-pompeiu-counterexamples
+  date: 2026-08-05
+  title: Infinitely many planar counterexamples to Schiffer's conjecture and Pompeiu's
+    problem
+  domain: math
+  field: analysis of PDEs / spectral geometry
+  system: GPT-5.5, GPT-5.6, Claude Opus 4.8, Claude Fable 5 with coding harnesses
+  org: Gonzalo Cao-Labora and Jaume de Dios Pont, using OpenAI and Anthropic models
+  significance: 2
+  verification: formal-proof
+  autonomy: tool
+  problem: Schiffer's conjecture / Pompeiu problem (1929)
+  tags:
+  - pde
+  - spectral-geometry
+  - counterexample
+  - lean
+  summary: Infinitely many N-fold symmetric non-disk planar domains carrying a Neumann
+    eigenfunction constant on the boundary, disproving Schiffer's conjecture and (via
+    Williams' equivalence) the planar Pompeiu problem. The bifurcation strategy is
+    the authors'; LLMs checked estimates numerically and drafted Bessel-function bounds,
+    and GPT-5.6 wrote a Lean proof cited by DeepMind's Formal Conjectures. Colbrook
+    and Stepaniants posted an independent counterexample two days earlier with AI
+    used only for debugging.
+  url: https://arxiv.org/abs/2608.05114
+- id: weathernext-cyclones
+  date: 2026-08-06
+  title: "DeepMind cyclone model outperforms official hurricane forecasts in NHC verification"
+  domain: science
+  field: weather forecasting
+  system: WeatherNext Cyclones (GDMI)
+  org: Google DeepMind / Google Research
+  significance: 2
+  verification: peer-reviewed
+  autonomy: tool
+  tags: [weather, tropical-cyclones]
+  summary: "An ensemble model for cyclone track, intensity and wind radii gains a day or more of lead time over operational models on 2023–2025 storms. The NHC's 2025 verification report found it slightly beat official Atlantic track forecasts and named it the best Atlantic intensity model."
+  url: https://www.nature.com/articles/s41586-026-10953-2
+
+- id: fmop-m23-inverse-galois
+  date: 2026-08-09
+  title: "Mathieu group M23 realised as a Galois group over Q with AI assistance"
+  domain: math
+  field: number theory
+  system: Claude Fable 5, Claude Opus 4.8, GPT-5.6 Sol
+  model: Claude Fable 5, Claude Opus 4.8, GPT-5.6 Sol
+  org: Huang, Jackson, Lee, Poonen, Pries, Zhang (academic)
+  significance: 2
+  verification: expert-endorsed
+  autonomy: collaborative
+  problem: Inverse Galois problem for the Mathieu group M23
+  tags: [frontiermath-open-problems, inverse-galois, number-theory]
+  summary: "An explicit degree-23 polynomial with Galois group M23 finishes the 1980s programme of realising all 26 sporadic simple groups over Q. Epoch rates it a 'solid result' and marks it human+AI, because the authors say AI was instrumental."
+  url: https://arxiv.org/abs/2608.08538
+
+- id: zeta-zeros-two-thirds-critical-line
+  date: 2026-08-10
+  title: "Unreleased Claude model proves over two-thirds of zeta zeros are simple and on the critical line"
+  domain: math
+  field: analytic number theory
+  system: Internal research version of Claude in Claude Code (~60 subagents); Lean by Eric Easley
+  model: Claude (internal research version)
+  org: Anthropic (operator Jarred Sumner; checked by Levent Alpöge and Ralph Furman)
+  significance: 3
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Proportion of Riemann zeta zeros that are simple and on the critical line
+  tags: [riemann-zeta, analytic-number-theory, lean]
+  summary: "After a failed first session on the Riemann hypothesis itself, the model proved unconditionally that at least 2/3 of the nontrivial zeros are simple and on the critical line (0.6725 with an optimised window) and that at least 5/6 are distinct; the previous records were 5/12 and 0.6603. It makes Montgomery's 1973 pair-correlation argument unconditional via a rank-trace inequality on a finite compression of Weil's Hermitian form. The paper says Claude found and wrote the argument, Alpöge and Furman checked it, Conrey and Goldston read it, and the theorems are formalised in Lean. Not yet refereed; the Riemann hypothesis itself is untouched."
+  url: https://arxiv.org/abs/2608.13637
+
+- id: fmop-hadamard-668
+  date: 2026-08-12
+  title: "Claude-assisted team reports the first Hadamard matrix of order 668"
+  domain: math
+  field: combinatorics
+  system: Claude (internal Anthropic model)
+  model: Claude (internal Anthropic model)
+  org: Anthropic
+  significance: 1
+  verification: claimed
+  autonomy: collaborative
+  problem: "Hadamard conjecture: order 668"
+  tags: [frontiermath-open-problems, hadamard-matrices, combinatorics]
+  summary: "An Anthropic researcher, crediting three humans and Claude, reported Hadamard matrices for every admissible order up to 2000 with no previously known example, including 668, the smallest open case. The result was posted as a puzzle. Epoch rates it 'moderately interesting' and its solved status is provisional."
+  url: https://epoch.ai/frontiermath/open-problems/hadamard
+
+- id: banach-isometric-conjecture-odd
+  date: 2026-08-13
+  title: "Banach's 1932 isometric conjecture completed for real spaces in all odd dimensions with ChatGPT"
+  domain: math
+  field: functional analysis
+  system: ChatGPT 5.5 Pro, ChatGPT 5.6 Pro and GPT-5.6 Sol
+  model: GPT-5.6 Pro
+  org: OpenAI (used by Xinbao Lu and Kaiwen Yang, Tongji University)
+  significance: 3
+  verification: claimed
+  autonomy: collaborative
+  problem: Banach's isometric subspace conjecture
+  tags: [banach-spaces, convex-geometry, topology]
+  summary: "Shows that a real normed space whose n-dimensional subspaces are all isometric must be a Hilbert space for every odd n, closing the cases left by Gromov's 1967 even-n theorem; the complex case was extended separately by others. The approach to the key theorem came from ChatGPT sessions and GPT-5.6 Sol drafted the key section, which the authors checked and rewrote. Unrefereed and not formalised."
+  url: https://arxiv.org/abs/2608.13536
+
+- id: talagrand-convolution-conjecture-hypercube
+  date: 2026-08-16
+  title: Talagrand's 1989 convolution conjecture on the Boolean cube claimed via 'Odin'
+    AI agent
+  domain: math
+  field: analysis of Boolean functions
+  system: Odin Automatic AI Research Agent
+  org: Undisclosed developer (used by Junwei Lu, Shengtao Guo, Ethan X. Fang)
+  significance: 2
+  verification: claimed
+  autonomy: autonomous
+  problem: Talagrand's convolution conjecture
+  tags:
+  - boolean-analysis
+  - probability
+  - concentration
+  summary: Removes the log-log factor left by Yuansi Chen's Nov 2025 proof, claiming
+    the dimension-free 1/sqrt(log u) tail bound for the noise operator on the hypercube.
+    Undocumented agent; unrefereed. Shaposhnikov posted a separate AI-assisted martingale
+    proof.
+  url: https://arxiv.org/abs/2608.15515
+- id: alphaevolve-matmul-exponent-2026
+  date: 2026-08-17
+  title: "Matrix multiplication exponent bound lowered to ω < 2.371177 with help from AlphaEvolve"
+  domain: math
+  field: algebraic complexity
+  system: Gradient-based optimiser for the laser method, refined by AlphaEvolve
+  model: AlphaEvolve
+  org: Google DeepMind with Renfei Zhou, Josh Alman and Virginia Vassilevska Williams
+  significance: 2
+  verification: claimed
+  autonomy: tool
+  problem: Matrix multiplication exponent ω
+  tags: [matrix-multiplication, alphaevolve, laser-method]
+  summary: "Reformulating the non-convex optimisation inside the laser method and solving it by gradient descent improved the bound on ω; using AlphaEvolve to improve that optimiser raised the gain to about 1.6×10⁻⁴, from 2.371339 to 2.371177. The step is comparable to most improvements since 1990 but is a numerical record, not a new method. Preprint; the verification code has not yet been released."
+  url: https://arxiv.org/abs/2608.16884
+
+- id: chudnovsky-demailly-conjectures
+  date: 2026-08-17
+  title: Chudnovsky and Demailly conjectures proved for points in projective space
+    via ChatGPT's plan
+  domain: math
+  field: commutative algebra / algebraic geometry
+  system: ChatGPT-5.6 Sol
+  model: GPT-5.6 Sol
+  modelId: gpt-5.6-sol
+  org: OpenAI (used by Tài Huy Hà, Aniketh Sivakumar)
+  significance: 2
+  verification: claimed
+  autonomy: collaborative
+  problem: Chudnovsky's conjecture; Demailly's conjecture
+  tags:
+  - waldschmidt-constant
+  - interpolation
+  - algebraic-geometry
+  summary: Both conjectures on Waldschmidt constants for finite point sets in projective
+    space (char 0). Sol suggested the key idea and plan; authors developed and verified
+    the proofs. Preprint.
+  url: https://arxiv.org/abs/2608.16040
+- id: claude-protein-binder-design
+  date: 2026-08-18
+  title: "Claude autonomously designs protein binders for 14 of 15 targets"
+  domain: science
+  field: protein design
+  system: Claude Mythos Preview, Claude Opus 4.8
+  model: Claude Mythos Preview, Claude Opus 4.8
+  org: Anthropic
+  significance: 2
+  verification: expert-endorsed
+  autonomy: autonomous
+  tags: [protein-design, binders, agents]
+  summary: "Claude chose binding sites, generated and refined designs, and picked candidates with minimal human input. Independent labs (Adaptyv Bio, Twist) confirmed 354 working binders from 1,320 designs, a 22–35% hit rate versus the typical 10–15%. Some bound tighter than the best published binders."
+  url: https://www.anthropic.com/research/Claude-accelerates-protein-design
+
+- id: stein-riesz-weak-type-dimension-free
+  date: 2026-08-18
+  title: LLMs help answer Stein's 1986 question on dimension-free weak (1,1) bounds
+    for Riesz transforms
+  domain: math
+  field: harmonic analysis
+  system: GPT-5.6 Sol (with Danus/Rethlas agents) + Claude Opus 5
+  model: GPT-5.6 Sol; Claude Opus 5
+  org: OpenAI / Anthropic (used by Ouyang, Spector, Stockdale)
+  significance: 2
+  verification: claimed
+  autonomy: collaborative
+  problem: Stein's weak-type (1,1) Riesz transform question (ICM 1986)
+  tags:
+  - harmonic-analysis
+  - riesz-transform
+  summary: Weak-type (1,1) constant of the vector Riesz transform on R^n is at most
+    2 in every dimension; Sol produced partial results, Claude Opus 5 drafted the
+    final proof after human redirection. Preprint.
+  url: https://arxiv.org/abs/2608.18068
+- id: yau-tian-donaldson-csck-counterexample
+  date: 2026-08-19
+  title: "AI agents produce a claimed counterexample to the cscK Yau–Tian–Donaldson conjecture"
+  domain: math
+  field: Kähler geometry
+  system: Claude Code (Claude Fable 5), Codex (GPT-5.6 Sol) and the Danus agent
+  model: Claude Fable 5 / GPT-5.6 Sol
+  org: Peking University (Jihao Liu), with Anthropic and OpenAI models
+  significance: 3
+  verification: claimed
+  autonomy: collaborative
+  problem: Yau–Tian–Donaldson conjecture (constant scalar curvature form)
+  tags: [kahler-geometry, k-stability, counterexample]
+  summary: "A 79-page preprint builds a polarised smooth projective fivefold that is K-polystable yet has no constant-scalar-curvature Kähler metric, which would disprove the form of the conjecture Donaldson stated in 2002; the Kähler–Einstein (Fano) case is untouched. The author says the AI systems produced the example and proof with one crucial human redirection. Not refereed, not formalised, and no independent check is on record."
+  url: https://arxiv.org/abs/2608.19301
+
+- id: fmop-elliptic-curve-rank-30
+  date: 2026-08-20
+  title: "Claude-assisted team finds elliptic curves over Q of rank ≥30 and ≥31"
+  domain: math
+  field: arithmetic geometry
+  system: Claude (internal Anthropic model)
+  model: Claude (internal Anthropic model)
+  org: Anthropic (with Levent Alpöge and Ava Howell)
+  significance: 1
+  verification: expert-endorsed
+  autonomy: collaborative
+  problem: Elliptic curve rank record over Q
+  tags: [frontiermath-open-problems, elliptic-curves, records]
+  summary: "A curve with rank at least 30 beat the Elkies–Klagsbrun record of 29 from 2024; a rank ≥31 curve followed on 23 August. Ranks are exactly 30 and 31 assuming BSD and GRH. Epoch rates it 'moderately interesting'."
+  url: https://epoch.ai/frontiermath/open-problems/elliptic-curve-rank
+
+- id: hopf-problem-s6-complex-structure
+  date: 2026-08-23
+  title: "Claude-assisted construction gives the six-sphere a complex structure (Hopf problem)"
+  domain: math
+  field: complex geometry
+  system: Claude (version not stated), directed by Levent Alpöge
+  model: Claude
+  org: Anthropic (Levent Alpöge)
+  significance: 4
+  verification: claimed
+  autonomy: collaborative
+  problem: "Hopf problem: does S⁶ admit a complex structure?"
+  tags: [complex-geometry, hopf-problem, lean]
+  summary: "Alpöge posted a 108-page manuscript, made using an Anthropic model, that builds a compact complex threefold fibred by 2-tori over the projective line and shows it is diffeomorphic to S⁶. Philip Engel published notes on the proof, and Boris Alexeev and Dean Cureton posted proposed Lean formalisations. The construction contradicts a published theorem of Campana, Demailly and Peternell, which the manuscript argues is wrong, so experts are still checking it. How the work was split between Alpöge and Claude is undocumented, and the paper itself does not describe the AI's role."
+  url: https://alpo.ge/s6.pdf
+
+- id: mckean-entropy-production-boltzmann
+  date: 2026-09-01
+  title: GPT-5.6 Sol finds Boltzmann entropy production need not be monotone (McKean
+    1966)
+  domain: math
+  field: kinetic theory (mathematical physics)
+  system: GPT-5.6 Sol in Codex (Ultra), rewritten with Claude Code
+  model: GPT-5.6 Sol
+  modelId: gpt-5.6-sol
+  org: OpenAI (used by Luis Silvestre, U. Chicago)
+  significance: 2
+  verification: claimed
+  autonomy: autonomous
+  problem: McKean's entropy-production monotonicity question (1966)
+  tags:
+  - boltzmann-equation
+  - pde
+  - counterexample
+  summary: Entropy production in the spatially homogeneous Boltzmann equation can
+    increase (hard spheres and Maxwell molecules); first proof version from GPT-5.6
+    Sol. Preprint.
+  url: https://arxiv.org/abs/2609.01753
+- id: qma2-qma-quantum-oracle-separation
+  date: 2026-09-02
+  title: "Quantum oracle separates QMA(2) from QMA, from a proof idea by GPT-5.6 Sol"
+  domain: math
+  field: quantum complexity theory
+  system: GPT-5.6 Sol (ChatGPT)
+  model: GPT-5.6 Sol
+  modelId: gpt-5.6-sol
+  org: OpenAI (used by Bostanci, Grewal, Haferkamp, Huang, Hwang, Natarajan and Nirkhe)
+  significance: 2
+  verification: expert-endorsed
+  autonomy: collaborative
+  problem: Watrous's no-disentanglers conjecture
+  tags: [quantum-complexity, oracle-separation, qma]
+  summary: "Gives a quantum oracle relative to which QMA ≠ QMA(2), which yields Watrous's no-disentanglers conjecture. The model proposed the proof idea after being pointed to She and Yuen's polynomial method. A relativised result only; Aaronson listed it among significant AI-assisted solutions. Unrefereed."
+  url: https://arxiv.org/abs/2609.02865
+
+- id: fmop-genus2-rational-points
+  date: 2026-09-03
+  title: "GPT-6 Astra finds a genus-2 curve with 648 rational points"
+  domain: math
+  field: Diophantine geometry
+  system: GPT-6 Astra
+  model: GPT-6 Astra
+  modelId: gpt-6-astra
+  org: OpenAI
+  significance: 1
+  verification: expert-endorsed
+  autonomy: autonomous
+  problem: Genus-2 curves with many rational points
+  tags: [frontiermath-open-problems, rational-points, records]
+  summary: "In Epoch's pre-release evaluation the model found a curve with 648 rational points, beating the 642-point Elkies–Stoll record that had stood since 2008. The construction passed Epoch's verifier, which rates the problem 'moderately interesting'."
+  url: https://epoch.ai/frontiermath/open-problems/genus-2-rational-points
+
+- id: erdos-1-astra-dissociated-sets
+  date: 2026-09-03
+  title: "GPT-6 Astra disproves Erdős #1, his 'first serious problem' on distinct subset sums"
+  domain: math
+  field: additive combinatorics
+  system: GPT-6 Astra (pre-release) in Epoch's FrontierMath Erdős harness
+  model: GPT-6 Astra (pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI model; evaluated by Epoch AI (Adamczewski) and Thomas Bloom
+  significance: 4
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #1 (sets with distinct subset sums, $500)"
+  tags: [erdos, additive-combinatorics, lean, disproof]
+  summary: "Erdős asked in 1931 whether a set of n positive integers up to N with all subset sums distinct forces N ≫ 2^n. Working alone from a Lean statement, the model showed the answer is no: for every ε > 0 there are arbitrarily large n with such sets and N ≤ ε·2^n, beating Bohman's 0.22002·2^n. The Lean proof passed Epoch's Comparator check. The argument is ineffective (no bound on n in terms of ε), and Bloom's exposition recasts it via lattices and Siegel's lemma."
+  url: https://www.erdosproblems.com/1
+
+- id: erdos-74-astra-chromatic-bipartite
+  date: 2026-09-03
+  title: "GPT-6 Astra disproves the Erdős–Hajnal–Szemerédi conjecture on nearly bipartite graphs (#74)"
+  domain: math
+  field: graph theory
+  system: GPT-6 Astra (pre-release) in Epoch's FrontierMath Erdős harness
+  model: GPT-6 Astra (pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI model; evaluated by Epoch AI and Thomas Bloom
+  significance: 3
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #74 ($500)"
+  tags: [erdos, graph-theory, chromatic-number, lean]
+  summary: "Erdős, Hajnal and Szemerédi expected graphs of infinite chromatic number in which every n-vertex subgraph can be made bipartite by deleting f(n) edges, however slowly f grows. The model proved the opposite: for some f → ∞ (apparently f ≍ log n/log log n) any such graph is 3-colourable. It is one of the two problems it solved within Epoch's fixed $300 budget, with six Lean-checked disproofs using three distinct arguments."
+  url: https://www.erdosproblems.com/74
+
+- id: erdos-126-astra-prime-factors
+  date: 2026-09-03
+  title: "GPT-6 Astra proves Erdős #126: products of pairwise sums have ≫ √n prime factors"
+  domain: math
+  field: number theory
+  system: GPT-6 Astra (pre-release) in Epoch's FrontierMath Erdős harness
+  model: GPT-6 Astra (pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI model; evaluated by Epoch AI and Thomas Bloom
+  significance: 2
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős #126 ($250)"
+  tags: [erdos, number-theory, lean]
+  summary: "Erdős and Turán showed in 1934 that the numbers a+b (a ≠ b in an n-element set) have ≫ log n distinct prime factors, and Erdős asked for anything better. The model proved ≫ n^(1/2) and gave three distinct elementary proofs (exponents 1/8, 1/3 and 1/2), all Lean-checked."
+  url: https://www.erdosproblems.com/126
+
+- id: erdos-sos-conjecture-astra
+  date: 2026-09-03
+  title: "GPT-6 Astra proves the Erdős–Sós conjecture on trees in dense graphs (#548)"
+  domain: math
+  field: extremal graph theory
+  system: GPT-6 Astra (pre-release) in Epoch's FrontierMath Erdős harness
+  model: GPT-6 Astra (pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI model; evaluated by Epoch AI and Thomas Bloom
+  significance: 4
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős–Sós conjecture (1962), Erdős #548"
+  tags: [erdos, extremal-graph-theory, trees, lean]
+  summary: "The 1962 conjecture says every graph with more than (k−2)n/2 edges contains every tree on k vertices; it was known only in special cases and was called one of the most tantalising problems in extremal graph theory. The model's proof is short and elementary, a double count over vertex orderings with an induction on the tree, and it is Lean-checked. The formal statement differs from the classical one by one edge when (k−1)n is odd. Found with a larger budget than the benchmark's $300 limit."
+  url: https://www.erdosproblems.com/548
+
+- id: erdos-571-astra-turan-exponents
+  date: 2026-09-03
+  title: "GPT-6 Astra proves the Erdős–Simonovits rational exponents conjecture (#571)"
+  domain: math
+  field: extremal graph theory
+  system: GPT-6 Astra (pre-release) in Epoch's FrontierMath Erdős harness
+  model: GPT-6 Astra (pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI model; evaluated by Epoch AI and Thomas Bloom
+  significance: 3
+  verification: formal-proof
+  autonomy: autonomous
+  problem: "Erdős–Simonovits rational exponents conjecture, Erdős #571"
+  tags: [erdos, extremal-graph-theory, turan-numbers, lean]
+  summary: "Shows that for every rational α in [1,2) there is a single bipartite graph G with ex(n;G) ≍ n^α, where earlier work covered only special families of exponents or finite families of graphs (Bukh–Conlon). Bloom calls it the hardest of the model's five FrontierMath Erdős solutions and says he has not yet checked it in detail; confidence rests on the Lean proof. Found with a larger budget than the benchmark's $300 limit."
+  url: https://www.erdosproblems.com/571
+
+- id: catalan-constant-irrationality-disputed
+  date: 2026-09-03
+  title: "Disputed claim that Catalan's constant is irrational, with AI-produced numerics and checking"
+  domain: math
+  field: number theory
+  system: ChatGPT (unnamed; 'ChatGPT 5.6 Solar' as checker)
+  org: OpenAI models (used by Zhi-Wei Sun, Nanjing University)
+  significance: 3
+  verification: disputed
+  autonomy: tool
+  problem: Irrationality of Catalan's constant
+  tags: [irrationality, number-theory, disputed]
+  summary: "Sun claims a proof adapting the Calegari–Dimitrov–Tang method, with AI producing the numerics and 'verifying' the argument. Wachs (arXiv 2609.22339) computes that a quantity the argument needs to be negative is positive, so the proof is incomplete as written. Graded as if valid; an example of AI checking that did not catch an error."
+  url: https://arxiv.org/abs/2609.04176
+
+- id: koethe-conjecture-astra-disproof
+  date: 2026-09-03
+  title: "GPT-6 Astra disproves the 1930 Köthe conjecture in ring theory"
+  domain: math
+  field: ring theory
+  system: GPT-6 Astra (pre-release) in an Epoch AI run over Formal Conjectures' open problems
+  model: GPT-6 Astra (pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI model; run by Tom Adamczewski (Epoch AI)
+  significance: 4
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Köthe conjecture (1930), Krempa's matrix form
+  tags: [ring-theory, nil-ideals, lean, disproof]
+  summary: "In one unsteered attempt (about 26 hours, $432) the model proved in Lean that Krempa's matrix form of the conjecture is false: an algebra over the algebraic closure of F₂ with a nil ideal I and a 2×2 matrix over I that is not nilpotent. A human paper by Adamczewski with ring theorists Böhmler and Marczinzik, who checked the mathematics, then refuted Köthe's original question directly (two nil left ideals whose sum is not nil) and answered a 1989 question of Rowen. Greenfeld, King and Vendramin found another counterexample with some help from the model. Not yet refereed."
+  url: https://arxiv.org/abs/2609.07996
+
+- id: smale-mean-value-conjecture-astra
+  date: 2026-09-03
+  title: "GPT-6 Astra disproves Smale's mean value conjecture with constant 1"
+  domain: math
+  field: complex analysis
+  system: GPT-6 Astra (pre-release) in an Epoch AI run over Formal Conjectures' open problems
+  model: GPT-6 Astra (pre-release)
+  modelId: gpt-6-astra
+  org: OpenAI model; run by Tom Adamczewski (Epoch AI)
+  significance: 3
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Smale's mean value conjecture (K = 1)
+  tags: [polynomials, critical-points, lean, disproof]
+  summary: "Smale proved in 1981 that every complex polynomial has a critical point c with |p(z) − p(c)|/|z − c| ≤ 4|p'(z)| and conjectured the constant could be 1. The model gave a Lean-checked polynomial with p(0) = 0, p'(0) = 1 and |p(c)/c| > 1 at every critical point, so the conjecture with K = 1 (and the sharper (d−1)/d form) is false. It took one unsteered attempt of about 15 hours, and Comparator checked the statement against DeepMind's Formal Conjectures file. The witness has very large, unspecified degree and misses by a small margin, so the best constant between 1 and 4 is still open; no complex analyst is on record as having read the proof."
+  url: https://github.com/tadamcz/mean-value-problem
+
+- id: claude-flt-lean-formalization
+  date: 2026-09-04
+  title: "Claude agents produce the first complete Lean proof of Fermat's Last Theorem"
+  domain: math
+  field: number theory (formalisation)
+  system: Internal Anthropic research model (roughly Claude Fable 5.1 level)
+  model: Internal Claude research model
+  org: Anthropic (occasional direction from Tianyi Peng)
+  significance: 2
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Fermat's Last Theorem (formalisation)
+  tags: [lean, autoformalization, fermat]
+  summary: "In 11 days and about six billion output tokens, the model produced a 13-million-line Lean proof of FLT that uses only Lean's three standard axioms, adapting parts of Kevin Buzzard's Imperial FLT project and the flt-regular project. Humans gave only occasional high-level direction. Buzzard called it an extraordinary autoformalisation achievement; it formalises a known theorem and adds no new mathematics."
+  url: https://www.anthropic.com/research/formalizing-fermats-last-theorem
+
+- id: bollobas-nikiforov-conjecture-lean
+  date: 2026-09-06
+  title: Bollobás–Nikiforov spectral conjecture proved with GPT-6 Astra; Lean proof
+    by Grok 4.6
+  domain: math
+  field: spectral graph theory
+  system: GPT-6 Astra (ideation, manuscript) + Grok 4.6 (Lean) + Claude Fable 5.1
+    (packaging)
+  model: GPT-6 Astra
+  modelId: gpt-6-astra
+  org: OpenAI + xAI (used by Coutinho, Liu, Spier, Tang, Zhang)
+  significance: 2
+  verification: formal-proof
+  autonomy: collaborative
+  problem: Bollobás–Nikiforov conjecture
+  tags:
+  - spectral-graph-theory
+  - eigenvalues
+  - lean
+  summary: Every noncomplete graph satisfies λ1² + λ2² ≤ 2(1 − 1/ω)m, via a stronger
+    weighted spectral inequality. Ideas from mathematician–Astra exchanges; Grok 4.6
+    completed the Lean; Palomar registry machine-checked against a Mathlib-only statement.
+    No paper or referee report yet.
+  url: https://github.com/ShengtongZhang-alt/BN
+- id: forced-blowup-euler-boussinesq
+  date: 2026-09-07
+  title: "AI-assisted, Lean-formalised finite-time blow-up with forcing for Boussinesq and 3D Euler"
+  domain: math
+  field: fluid PDEs
+  system: Claude and OpenAI (Codex) models, unspecified; Lean formalisation
+  org: Alpöge and Buckmaster (building on Córdoba and Martínez-Zoroa)
+  significance: 3
+  verification: formal-proof
+  autonomy: collaborative
+  problem: Finite-time blow-up with smooth forcing (IPM, Boussinesq, 3D Euler)
+  tags: [fluid-pdes, blow-up, euler, lean]
+  summary: "Showed that smooth data with smooth forcing blows up in finite time for the IPM, 2D Boussinesq and 3D incompressible Euler equations, with Lean formalisations. The results were obtained on 15 August and Lean-checked by 22 August using LLMs from both Anthropic and OpenAI, then made public hours before OpenAI's Navier–Stokes claim. Tao calls it a breakthrough that makes forced Navier–Stokes blow-up look feasible. The arguments are heavily AI-assisted and the human-written papers are still being prepared."
+  url: https://terrytao.wordpress.com/2026/09/07/finite-time-blowup-with-smooth-forcing-term-for-the-incompressible-porous-medium-boussinesq-and-incompressible-euler-equations/
+
+- id: pinn-euler-r3-stable-singularity
+  date: 2026-09-07
+  title: "Neural-network search finds a stable self-similar blow-up candidate for unforced 3D Euler"
+  domain: math
+  field: fluid PDEs
+  system: Physics-informed neural networks + spline / interval-arithmetic certification
+  org: Caltech (Anandkumar group)
+  significance: 2
+  verification: claimed
+  autonomy: tool
+  problem: Finite-time blow-up for 3D incompressible Euler on ℝ³
+  tags: [euler, blow-up, pinns, computer-assisted-proof]
+  summary: "PINNs produced a high-precision self-similar singular profile for the unforced Euler equations on ℝ³ with no boundary, which the team is turning into a computer-assisted proof. Their follow-up (arXiv 2609.10860) gives only a preliminary, conditional stability framework, so blow-up is not yet proved. LLMs were used to simplify bounds; Tao hosted the announcement as a guest post."
+  url: https://terrytao.wordpress.com/2026/09/10/stable-singularity-of-the-euler-equations-on-r3/
+
+- id: openai-navier-stokes-blowup
+  date: 2026-09-08
+  title: "OpenAI claims finite-time blow-up for forced 3D Navier–Stokes (Millennium Problem)"
+  domain: math
+  field: fluid PDEs
+  system: Unnamed internal OpenAI model (~10,000 agents) + GPT-6 Astra for the Lean formalisation
+  model: Unnamed internal OpenAI model (rumoured 'Bel' base, unconfirmed)
+  org: OpenAI
+  significance: 5
+  verification: disputed
+  autonomy: autonomous
+  problem: Navier–Stokes existence and smoothness (Clay alternatives C and D)
+  tags: [navier-stokes, millennium-prize, blow-up, lean]
+  summary: "A 166-page paper claims that a 3D Navier–Stokes flow starting at rest, with a smooth force and bounded energy, blows up in finite time (Fefferman's alternatives C and D), with a Lean formalisation. The model is unnamed: OpenAI says only that it is an internal model 'significantly more capable than GPT-6 Astra', trained since 28 August through 'large-scale reinforcement learning on top of a previously pretrained model'. About 10,000 agents worked 88 hours (1–5 September) and GPT-6 Astra did the Lean work in 17 hours. The 'Bel' codename comes from an unconfirmed late-August leak about a 10T+ parameter pretrain succeeding 'Doug' (reportedly Astra's base); OpenAI has never named the base, so equating this model with Bel is speculation. Disputed: the unforced problem stays open, Alpöge and Buckmaster posted forced-Euler results hours earlier and raised credit and data-use complaints, and Clay said on 11 September that the problem has 'apparently been settled' without accepting a solution. On 21 September OpenAI said the same model had resolved 100+ other open problems, with no list published."
+  url: https://openai.com/index/navier-stokes-solution/
+
+- id: openai-unforced-euler-blowup
+  date: 2026-09-08
+  title: "OpenAI internal model claims finite-time blow-up for unforced 3D Euler from smooth data"
+  domain: math
+  field: fluid PDEs
+  system: Unnamed internal OpenAI model (~100 agents) + GPT-6 Astra for the Lean formalisation
+  model: Unnamed internal OpenAI model
+  org: OpenAI
+  significance: 4
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Finite-time blow-up for 3D incompressible Euler from smooth data on ℝ³
+  tags: [euler, blow-up, fluid-pdes, lean]
+  summary: "A companion paper to the Navier–Stokes claim exhibits smooth, compactly supported, divergence-free initial data on ℝ³ whose unforced Euler solution blows up in finite time. That is the open case left by Elgindi's C^(1,α) blow-up and Chen–Hou's result in a bounded cylinder. OpenAI says about 100 agents produced it in roughly 50 hours as a warm-up; it builds on the Córdoba–Martínez-Zoroa amplification method and ships with a Lean certificate in OpenAI's public repository. No refereed or independent written review exists yet, and it drew far less attention than the Navier–Stokes claim."
+  url: https://cdn.openai.com/pdf/315b36cd-ec98-4023-8342-93345194ece1/euler.pdf
+
+- id: rentosertib-phase3
+  date: 2026-09-09
+  title: "Rentosertib doses first patient in Phase III, the first for an AI-discovered drug"
+  domain: science
+  field: drug discovery
+  system: Pharma.AI (PandaOmics + Chemistry42)
+  org: Insilico Medicine
+  significance: 2
+  verification: claimed
+  autonomy: collaborative
+  tags: [drug-discovery, clinical-trial, fibrosis]
+  summary: "GENESIS-IPF-3 is a 52-week, 320-patient, placebo-controlled Phase III at 47 centres in China. It was announced on 2026-07-07 and dosed its first patient on 2026-09-09. The drug and its target were both AI-discovered. 'World's first' is Insilico's own framing, and no Phase III results exist yet."
+  url: https://www.prnewswire.com/news-releases/insilico-medicine-doses-first-patient-in-genesis-ipf-3-the-worlds-first-phase-iii-trial-of-a-generative-ai-driven-innovative-drug-302873749.html
+
+- id: small-undecidable-groups
+  date: 2026-09-09
+  title: GPT-5.6 Sol builds a 3-generator 9-relator group with unsolvable word problem
+  domain: math
+  field: combinatorial group theory
+  system: GPT-5.6 Sol Pro (construction); GPT-5.6 Sol in Codex (Lean)
+  model: GPT-5.6 Sol
+  modelId: gpt-5.6-sol
+  org: OpenAI (used by Marc Kegel, Shana Yunsheng Li, Qiuyu Ren)
+  significance: 1
+  verification: formal-proof
+  autonomy: autonomous
+  tags:
+  - word-problem
+  - undecidability
+  - 4-manifolds
+  - lean
+  summary: Beats Borisov's 1969 record (12 relators) with a 3-generator 9-relator
+    presentation with unsolvable word problem; ~28k lines of Lean for the algebraic
+    results.
+  url: https://arxiv.org/abs/2609.10461
+- id: fmop-committee-election-core
+  date: 2026-09-10
+  title: "Core always exists in approval-based committee elections (with GPT-6 Astra)"
+  domain: math
+  field: social choice theory
+  system: GPT-6 Astra
+  model: GPT-6 Astra
+  modelId: gpt-6-astra
+  org: Becker, Greger, Peters (academic)
+  significance: 3
+  verification: claimed
+  autonomy: collaborative
+  problem: Core existence in approval-based committee elections
+  tags: [social-choice, frontiermath-open-problems]
+  summary: "Settles the main open question in approval-based multiwinner voting: a core committee always exists and can be found in polynomial time. The authors credit Astra with the primary idea and proof, from a long interactive session. Epoch rates it a 'major advance', but its verifier does not apply (the benchmark asked for an election with an empty core, the opposite of what was proved), so so far only the authors have checked it."
+  url: https://arxiv.org/abs/2609.11912
+
+- id: nivat-conjecture-gpt6-lean
+  date: 2026-09-14
+  title: GPT-6 Pro proof of Nivat's 1997 periodicity conjecture, machine-checked in
+    Lean
+  domain: math
+  field: symbolic dynamics
+  system: GPT-6 Pro (proof) + GPT-6 Astra Ultra in Codex (Lean)
+  model: GPT-6 Pro
+  org: OpenAI (used by Boon Suan Ho)
+  significance: 3
+  verification: formal-proof
+  autonomy: autonomous
+  problem: Nivat's conjecture
+  tags:
+  - symbolic-dynamics
+  - combinatorics-on-words
+  - lean
+  summary: Lean 4/mathlib proof that a 2D configuration with at most mn distinct m×n
+    patterns has a nonzero period; Palomar registry machine-checked it against a Mathlib-only
+    statement. Submitter says GPT-6 Pro found the proof and he is not qualified to
+    digest it. No human expert review yet.
+  url: https://github.com/boonsuan/nivat
+- id: claude-art-enzyme-system
+  date: 2026-09-23
+  title: "Claude agents flag a CRISPR-like array-associated reverse-transcriptase system (ART)"
+  domain: science
+  field: molecular biology
+  system: Claude (about 950 parallel agents)
+  model: Claude Mythos 5 (per the preprint)
+  modelId: claude-mythos-5
+  org: Anthropic
+  significance: 1
+  verification: claimed
+  autonomy: autonomous
+  tags: [molecular-biology, reverse-transcriptase, agents]
+  summary: "From a single high-level prompt, about 950 agents screened 200k+ reverse transcriptases and spotted an unnoticed repeat array beside an RT in a jumbo phage. The resulting array-associated RT system shares traits of programmable DNA-editing systems, but its activity and function are not yet shown. Humans chose which of the agents' reports to pursue and ran the lab work. Preprint."
+  url: https://www.anthropic.com/news/claude-discovers-novel-enzyme-system

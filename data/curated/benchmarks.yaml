@@ -1,0 +1,303 @@
+# Benchmark registry. The groups appear in Abhinav's order: hle → swe → agentic → science → math → bio → index.
+#
+# unit:       pct (0–100) | minutes | usd | points | index
+# ceiling:    upper bound for bounded benchmarks (100 for pct). null = unbounded (drives the projection model choice)
+# saturatedOn: date the benchmark effectively maxed out (frontier ≥ ~95% or at noise ceiling); null if not
+# epoch:      optional auto-fetch mapping from the Epoch benchmark zip
+#   file:  CSV name inside the zip
+#   score: score column
+#   scale: multiplier to reach `unit` (e.g. 100 for 0–1 fractions)
+#   where: optional {column: substring} row filter
+#   extra: optional columns carried through as metadata (tokens, cost, effort, harness…)
+
+# ── HLE ──────────────────────────────────────────────────
+- id: hle
+  name: Humanity's Last Exam
+  short: HLE
+  group: hle
+  unit: pct
+  ceiling: 100
+  released: 2025-01-23
+  url: https://lastexam.ai
+  description: 2,500 expert-written closed-ended questions across 100+ subjects. The table splits it into independent runs and lab-reported runs with and without tools.
+  epoch: { file: hle_external.csv, score: Accuracy, scale: 100, provenance: independent, tools: false }
+
+# ── SWE ──────────────────────────────────────────────────
+- { id: swe-bench-full, name: SWE-bench (full), short: SWE Full, group: swe, unit: pct, ceiling: 100, released: 2023-10-10, url: https://www.swebench.com, description: The original 2,294 GitHub issue-resolution tasks. }
+- { id: swe-bench-lite, name: SWE-bench Lite, short: SWE Lite, group: swe, unit: pct, ceiling: 100, released: 2024-03-19, url: https://www.swebench.com, description: 300-task subset of SWE-bench. }
+- id: swe-bench-verified
+  name: SWE-bench Verified
+  short: SWE Verified
+  group: swe
+  unit: pct
+  ceiling: 100
+  released: 2024-08-13
+  url: https://openai.com/index/introducing-swe-bench-verified/
+  description: 500 human-validated SWE-bench tasks. OpenAI and Anthropic stopped reporting it in 2026 because of contamination.
+  epoch: { file: swe_bench_verified.csv, score: "Best score (across scorers)", scale: 100, provenance: independent }
+- { id: swe-bench-multilingual, name: SWE-bench Multilingual, short: SWE Multi-ling, group: swe, unit: pct, ceiling: 100, released: 2025-04-01, url: https://www.swebench.com/multilingual.html, description: 300 tasks across 9 programming languages. }
+- { id: swe-bench-multimodal, name: SWE-bench Multimodal, short: SWE Multimodal, group: swe, unit: pct, ceiling: 100, released: 2024-10-04, url: https://www.swebench.com/multimodal.html, description: Visual JavaScript issue tasks. }
+- { id: swe-bench-pro-public, name: SWE-bench Pro (public), short: SWE Pro, group: swe, unit: pct, ceiling: 100, released: 2025-09-21, url: https://scale.com/leaderboard/swe_bench_pro_public, description: Scale AI's harder long-horizon enterprise-style tasks (public set). }
+- { id: swe-bench-pro-commercial, name: SWE-bench Pro (commercial), short: SWE Pro (comm.), group: swe, unit: pct, ceiling: 100, released: 2025-09-21, url: https://scale.com/leaderboard, description: Held-out commercial codebases subset. }
+- { id: swe-lancer, name: SWE-Lancer (IC SWE Diamond), short: SWE-Lancer, group: swe, unit: pct, ceiling: 100, released: 2025-02-18, url: https://openai.com/index/swe-lancer/, description: Real Upwork freelance software tasks; percent of tasks passed. }
+- id: deepswe
+  name: DeepSWE
+  short: DeepSWE
+  group: swe
+  unit: pct
+  ceiling: 100
+  released: 2026-05-26
+  url: https://deepswe.datacurve.ai/
+  description: Long-horizon software-engineering tasks (pass@1, mini-swe-agent harness).
+  epoch: { file: deepswe_external.csv, score: "Pass@1", scale: 100, provenance: independent, extra: { effort: "Reasoning effort", costUsd: "Mean cost (USD)", outputTokens: "Mean output tokens", harness: Harness } }
+- id: frontierswe
+  name: FrontierSWE
+  short: FrontierSWE
+  group: swe
+  unit: pct
+  ceiling: 100
+  released: 2026-09-02
+  url: https://www.frontierswe.com/
+  description: Research-grade SWE tasks (mean@5).
+  epoch: { file: frontierswe_external.csv, score: Score, scale: 100, provenance: independent, extra: { costUsd: "Average cost (USD)", harness: Harness } }
+
+# ── Agentic ──────────────────────────────────────────────
+- { id: terminal-bench-1, name: Terminal-Bench 1.0, short: TB 1.0, group: agentic, version: "1.0", unit: pct, ceiling: 100, released: 2025-05-19, url: https://www.tbench.ai, description: Agentic terminal tasks, v1. }
+- id: terminal-bench-2
+  name: Terminal-Bench 2.0
+  short: TB 2.0
+  group: agentic
+  version: "2.0"
+  unit: pct
+  ceiling: 100
+  released: 2025-11-07
+  url: https://www.tbench.ai/leaderboard/terminal-bench/2.0
+  description: Agentic terminal tasks, v2. Scores vary by agent harness; the table shows the best harness.
+  epoch: { file: terminalbench_external.csv, score: "Accuracy mean", scale: 100, provenance: independent, extra: { harness: Agent } }
+- { id: terminal-bench-2.1, name: Terminal-Bench 2.1, short: TB 2.1, group: agentic, version: "2.1", unit: pct, ceiling: 100, url: https://www.tbench.ai, description: Terminal-Bench 2.1 (breaking revision). }
+- { id: terminal-bench-3, name: Terminal-Bench 3.0, short: TB 3.0, group: agentic, version: "3.0", unit: pct, ceiling: 100, released: 2026-07-30, url: https://www.tbench.ai, description: Terminal-Bench 3.0 (breaking revision). }
+- { id: terminal-bench-4, name: Terminal-Bench 4.0, short: TB 4.0, group: agentic, version: "4.0", unit: pct, ceiling: 100, released: 2026-08-26, url: https://www.tbench.ai/news/terminal-bench-4-0, description: Terminal-Bench 4.0 (breaking revision). }
+- id: osworld
+  name: OSWorld
+  short: OSWorld
+  group: agentic
+  unit: pct
+  ceiling: 100
+  released: 2024-04-11
+  url: https://os-world.github.io/
+  description: Computer-use tasks in real desktop OSes (original).
+  epoch: { file: os_world_external.csv, score: Score, scale: 1, provenance: independent }
+- { id: osworld-verified, name: OSWorld-Verified, short: OSWorld-V, group: agentic, unit: pct, ceiling: 100, released: 2025-07-28, url: https://os-world.github.io/, description: Cleaned OSWorld task set. }
+- id: osworld-2
+  name: OSWorld 2.0
+  short: OSWorld 2
+  group: agentic
+  version: "2.0"
+  unit: pct
+  ceiling: 100
+  released: 2026-06-26
+  url: https://github.com/xlang-ai/OSWorld-V2
+  description: 108 long-horizon computer-use tasks.
+  epoch: { file: osworld_2_external.csv, score: "Binary accuracy", scale: 100, provenance: independent, extra: { effort: Reasoning, costUsd: "Estimated cost (USD)" } }
+- { id: tau-bench-retail, name: τ-bench Retail, short: τ Retail, group: agentic, unit: pct, ceiling: 100, released: 2024-06-17, url: https://github.com/sierra-research/tau-bench, description: Tool-agent-user interaction (retail). }
+- { id: tau-bench-airline, name: τ-bench Airline, short: τ Airline, group: agentic, unit: pct, ceiling: 100, released: 2024-06-17, url: https://github.com/sierra-research/tau-bench, description: Tool-agent-user interaction (airline). }
+- { id: tau2-bench-telecom, name: τ²-bench Telecom, short: τ² Telecom, group: agentic, unit: pct, ceiling: 100, released: 2025-06-10, url: https://github.com/sierra-research/tau2-bench, description: Dual-control telecom domain. }
+- { id: browsecomp, name: BrowseComp, short: BrowseComp, group: agentic, unit: pct, ceiling: 100, released: 2025-04-10, url: https://openai.com/index/browsecomp/, description: Hard-to-find web information retrieval. }
+- id: gdpval
+  name: GDPval (wins + ties vs experts)
+  short: GDPval
+  group: agentic
+  unit: pct
+  ceiling: 100
+  released: 2025-09-25
+  url: https://openai.com/index/gdpval/
+  description: Economically valuable tasks across 44 occupations, graded against industry experts.
+  epoch: { file: gdpval_external.csv, score: "Win + tie rate (%)", scale: 100, provenance: independent }
+- id: metr-50
+  name: METR time horizon (50%)
+  short: METR 50%
+  group: agentic
+  unit: minutes
+  ceiling: null
+  released: 2025-03-19
+  url: https://metr.org/time-horizons/
+  description: Length of human-expert software tasks the model completes with 50% reliability. METR calls values above ~16h unreliable.
+  epoch: { file: metr_time_horizons_external.csv, score: Time horizon, scale: 1, provenance: independent, extra: { ciLow: CI_low, ciHigh: CI_high, version: METR version } }
+- id: metr-80
+  name: METR time horizon (80%)
+  short: METR 80%
+  group: agentic
+  unit: minutes
+  ceiling: null
+  released: 2025-03-19
+  url: https://metr.org/time-horizons/
+  description: Task length completed with 80% reliability.
+  epoch: { file: metr_time_horizons_external.csv, score: "Time Horizon (80%)", scale: 1, provenance: independent }
+- id: vending-bench-2
+  name: Vending-Bench 2
+  short: Vending 2
+  group: agentic
+  unit: usd
+  ceiling: null
+  released: 2025-11-18
+  url: https://andonlabs.com/evals/vending-bench-2
+  description: Year-long simulated vending business; final balance in USD.
+  epoch: { file: vending_bench_2_external.csv, score: Score, scale: 1, provenance: independent }
+- { id: toolathlon, name: Toolathlon, short: Toolathlon, group: agentic, unit: pct, ceiling: 100, released: 2025-10-01, url: https://toolathlon.xyz, description: Long-horizon multi-app tool use. }
+- { id: mcp-atlas, name: MCP Atlas, short: MCP Atlas, group: agentic, unit: pct, ceiling: 100, url: https://scale.com/leaderboard/mcp_atlas, description: Scale AI MCP tool-use benchmark. }
+
+# ── Science ──────────────────────────────────────────────
+- id: gpqa-diamond
+  name: GPQA Diamond
+  short: GPQA-D
+  group: science
+  unit: pct
+  ceiling: 100
+  released: 2023-11-20
+  saturatedOn: 2026-02-01
+  url: https://arxiv.org/abs/2311.12022
+  description: 198 graduate-level "Google-proof" science questions. Frontier models are now around 96%, near the noise ceiling.
+  epoch: { file: gpqa_diamond.csv, score: "Best score (across scorers)", scale: 100, provenance: independent }
+- { id: frontierscience-olympiad, name: FrontierScience (Olympiad), short: FS Olympiad, group: science, unit: pct, ceiling: 100, released: 2026-01-29, url: https://arxiv.org/abs/2601.21165, description: OpenAI's olympiad-level science problems. }
+- { id: frontierscience-research, name: FrontierScience (Research), short: FS Research, group: science, unit: pct, ceiling: 100, released: 2026-01-29, url: https://arxiv.org/abs/2601.21165, description: OpenAI's research-level science problems. }
+- id: critpt
+  name: CritPt
+  short: CritPt
+  group: science
+  unit: pct
+  ceiling: 100
+  released: 2025-09-30
+  url: https://critpt.com
+  description: Research-level physics reasoning challenges.
+  epoch: { file: critpt_external.csv, score: Accuracy, scale: 100, provenance: independent, extra: { costUsd: Cost } }
+- id: scicode
+  name: SciCode
+  short: SciCode
+  group: science
+  unit: pct
+  ceiling: 100
+  released: 2024-07-18
+  url: https://scicode-bench.github.io
+  description: Scientific research coding subproblems.
+  epoch: { file: scicode_external.csv, score: Score, scale: 100, provenance: independent }
+
+# ── Math ─────────────────────────────────────────────────
+- { id: aime-2024, name: AIME 2024, short: AIME '24, group: math, unit: pct, ceiling: 100, released: 2024-02-01, saturatedOn: 2025-04-16, url: https://artofproblemsolving.com/wiki/index.php/2024_AIME_I, description: American Invitational Mathematics Examination 2024. }
+- { id: aime-2025, name: AIME 2025, short: AIME '25, group: math, unit: pct, ceiling: 100, released: 2025-02-06, saturatedOn: 2025-08-07, url: https://artofproblemsolving.com/wiki/index.php/2025_AIME_I, description: AIME 2025. }
+- { id: aime-2026, name: AIME 2026, short: AIME '26, group: math, unit: pct, ceiling: 100, released: 2026-02-05, url: https://artofproblemsolving.com/wiki/index.php/2026_AIME_I, description: AIME 2026. }
+- id: otis-mock-aime
+  name: OTIS Mock AIME 2024–25
+  short: Mock AIME
+  group: math
+  unit: pct
+  ceiling: 100
+  released: 2024-12-19
+  url: https://epoch.ai/benchmarks
+  description: Epoch-run AIME-style set (held-out).
+  epoch: { file: otis_mock_aime_2024_2025.csv, score: "Best score (across scorers)", scale: 100, provenance: independent }
+- { id: hmmt-2025, name: HMMT Feb 2025, short: HMMT '25, group: math, unit: pct, ceiling: 100, released: 2025-02-15, url: https://matharena.ai, description: Harvard-MIT Math Tournament. }
+- id: math-l5
+  name: MATH Level 5
+  short: MATH L5
+  group: math
+  unit: pct
+  ceiling: 100
+  released: 2021-03-05
+  url: https://epoch.ai/benchmarks
+  description: Hardest tier of the MATH dataset (Epoch-run).
+  epoch: { file: math_level_5.csv, score: "Best score (across scorers)", scale: 100, provenance: independent }
+- id: frontiermath-t13
+  name: FrontierMath T1–3 (v1)
+  short: FM 1–3
+  group: math
+  unit: pct
+  ceiling: 100
+  released: 2025-02-28
+  url: https://epoch.ai/frontiermath
+  description: Epoch's original research-level math problems, tiers 1–3. Superseded by v2 in Jun 2026.
+  epoch: { file: frontiermath.csv, score: "Best score (across scorers)", scale: 100, provenance: independent }
+- id: frontiermath-t13-v2
+  name: FrontierMath T1–3 (v2)
+  short: FM 1–3 v2
+  group: math
+  version: v2
+  unit: pct
+  ceiling: 100
+  released: 2026-06-12
+  url: https://epoch.ai/frontiermath
+  description: Revised FrontierMath tiers 1–3.
+  epoch: { file: frontiermath_tiers_1_3_v2.csv, score: "Best score (across scorers)", scale: 100, provenance: independent }
+- id: frontiermath-t4
+  name: FrontierMath Tier 4 (v1)
+  short: FM T4
+  group: math
+  unit: pct
+  ceiling: 100
+  released: 2025-07-11
+  url: https://epoch.ai/frontiermath
+  description: Epoch's hardest research-math tier (v1).
+  epoch: { file: frontiermath_tier_4.csv, score: "Best score (across scorers)", scale: 100, provenance: independent }
+- id: frontiermath-t4-v2
+  name: FrontierMath Tier 4 (v2)
+  short: FM T4 v2
+  group: math
+  version: v2
+  unit: pct
+  ceiling: 100
+  released: 2026-06-12
+  url: https://epoch.ai/benchmarks/frontiermath-tier-4-v2
+  description: Revised Tier 4. Not comparable with v1.
+  epoch: { file: frontiermath_tier_4_v2.csv, score: "Best score (across scorers)", scale: 100, provenance: independent }
+- id: frontiermath-erdos
+  name: FrontierMath Erdős
+  short: FM Erdős
+  group: math
+  unit: pct
+  ceiling: 100
+  released: 2026-09-03
+  url: https://epoch.ai/frontiermath
+  description: Open Erdős-problem-derived set.
+  epoch: { file: frontiermath_erdos.csv, score: "Best score (across scorers)", scale: 100, provenance: independent }
+- id: proofbench
+  name: ProofBench
+  short: ProofBench
+  group: math
+  unit: pct
+  ceiling: 100
+  released: 2026-01-30
+  url: https://www.vals.ai/benchmarks/proof_bench
+  description: Formal-ish proof writing graded by Vals.
+  epoch: { file: proofbench_external.csv, score: Accuracy, scale: 100, provenance: independent, extra: { effort: "Reasoning effort", costUsd: "Cost per test (USD)" } }
+- { id: imo, name: IMO (best result that year), short: IMO, group: math, unit: points, ceiling: 42, url: https://www.imo-official.org, description: International Mathematical Olympiad score out of 42 (gold ≈ 35). }
+
+# ── Bio ──────────────────────────────────────────────────
+- { id: vct, name: Virology Capabilities Test, short: VCT, group: bio, unit: pct, ceiling: 100, released: 2025-04-21, url: https://www.virologytest.ai, description: SecureBio's multimodal virology troubleshooting test (expert virologists average ~22%). }
+- { id: lab-bench-litqa2, name: LAB-Bench LitQA2, short: LitQA2, group: bio, unit: pct, ceiling: 100, released: 2024-07-14, url: https://github.com/Future-House/LAB-Bench, description: Literature QA for biology research. }
+- { id: lab-bench-protocolqa, name: LAB-Bench ProtocolQA, short: ProtocolQA, group: bio, unit: pct, ceiling: 100, released: 2024-07-14, url: https://github.com/Future-House/LAB-Bench, description: Lab protocol troubleshooting. }
+- { id: lab-bench-cloning, name: LAB-Bench CloningScenarios, short: Cloning, group: bio, unit: pct, ceiling: 100, released: 2024-07-14, url: https://github.com/Future-House/LAB-Bench, description: Molecular cloning workflow reasoning. }
+- { id: lab-bench-seqqa, name: LAB-Bench SeqQA, short: SeqQA, group: bio, unit: pct, ceiling: 100, released: 2024-07-14, url: https://github.com/Future-House/LAB-Bench, description: DNA/protein sequence manipulation. }
+- { id: biolp-bench, name: BioLP-bench, short: BioLP, group: bio, unit: pct, ceiling: 100, released: 2024-08-01, url: https://github.com/baceolus/BioLP-bench, description: Finding errors in biological lab protocols. }
+
+# ── Indices & reasoning ─────────────────────────────────
+- id: arc-agi-1
+  name: ARC-AGI-1
+  short: ARC 1
+  group: index
+  unit: pct
+  ceiling: 100
+  released: 2019-11-05
+  url: https://arcprize.org/leaderboard
+  description: Abstraction & reasoning grid puzzles (semi-private).
+  epoch: { file: arc_agi_external.csv, score: Score, scale: 100, provenance: independent, extra: { costPerTask: "Cost per task" } }
+- id: arc-agi-2
+  name: ARC-AGI-2
+  short: ARC 2
+  group: index
+  unit: pct
+  ceiling: 100
+  released: 2025-03-24
+  url: https://arcprize.org/leaderboard
+  description: Harder ARC successor.
+  epoch: { file: arc_agi_2_external.csv, score: Score, scale: 100, provenance: independent, extra: { costPerTask: "Cost per task" } }
+- { id: arc-agi-3, name: ARC-AGI-3, short: ARC 3, group: index, unit: pct, ceiling: 100, url: https://arcprize.org/arc-agi/3/, description: Interactive game-based ARC. }
+- { id: eci, name: Epoch Capabilities Index, short: ECI, group: index, unit: index, ceiling: null, url: https://epoch.ai/eci, description: "Composite capability scale stitched across many benchmarks (Claude 3.5 Sonnet ≈ 130, GPT-5 ≈ 150)." }

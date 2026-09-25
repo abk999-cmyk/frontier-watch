@@ -1,0 +1,183 @@
+# Hyperscaler capital expenditure by CALENDAR quarter, 2022-Q1 to the latest reported quarter.
+# Researched 2026-09-24. Values in billions of USD (three decimals = the filing's $ millions).
+#
+# Format
+#   quarters[]: { company, quarter, capex, financeLeases, headline?, period, note?, url, headlineUrl? }
+#     company   microsoft | google | amazon | meta | oracle   (google = Alphabet Inc., consolidated)
+#     quarter   calendar quarter, YYYY-Qn (see fiscalMapping)
+#     capex     cash capex, see `definition`
+#     financeLeases  see `financeLeasesBasis` (the meaning differs by company); null = not reported/derivable
+#     headline  the company's own headline "capex" figure where it differs from cash capex (Microsoft, Meta)
+#     period    exact fiscal period covered by the filing
+#     url       the SEC filing (10-Q/10-K index) or earnings release the capex value comes from
+#   guidance[]: latest forward capex guidance per company, { company, year, period, low, high, basis, stated, note, url }
+#
+# How the numbers were built: quarterly values were pulled from SEC EDGAR XBRL (companyconcept API) for
+# PaymentsToAcquirePropertyPlantAndEquipment (Microsoft, Alphabet, Meta, Oracle) and PaymentsToAcquireProductiveAssets
+# (Amazon's "Purchases of property and equipment"). Where a filing gives only year-to-date figures, the quarter is
+# YTD minus the prior YTD (Q4 = 10-K annual minus 9-month YTD). Values are as FIRST reported for that period, except
+# Meta 2022-2023, which use the net figures from Meta's earnings releases (see definition).
+# Cross-checks: every Microsoft quarter matches "cash paid for PP&E" in the CFO's earnings remarks; Alphabet 2025-Q3..2026-Q2,
+# Amazon 2026-Q2, Oracle FY26 Q1..FY27 Q1 and all Meta quarters match the companies' earnings releases; cash PP&E +
+# finance-lease ROU reproduces Epoch's "broad capex" exactly for Microsoft and Amazon for every quarter 2022-Q1..2025-Q4.
+
+definition: >-
+  capex = "Purchases of property and equipment" from the cash-flow statement (cash paid in the quarter; excludes
+  assets acquired under finance leases, operating leases, and PP&E received but not yet paid for).
+  Microsoft: "Additions to property and equipment" (cash). Alphabet: "Purchases of property and equipment".
+  Amazon: gross "Purchases of property and equipment"; Amazon's own "cash capex" quoted on calls is NET of
+  "Proceeds from property and equipment sales and incentives" (about $0.8-1.1B/quarter lower in the 2025-26 quarters
+  shown in the Q2 2026 release).
+  Meta: "Purchases of property and equipment, net" (net of proceeds relating to property and equipment, Meta's
+  presentation since 2024 and in every earnings-release FCF table; 2022-2023 10-Qs showed gross purchases,
+  $0.02-0.13B/quarter higher, recorded in each note). Oracle: "Capital expenditures" (cash); Oracle also reports a
+  lower non-GAAP "net cash outlay for capital expenditures" that subtracts vendor financing and customer prepayments.
+  headline: Microsoft = "capital expenditures including finance leases" from the CFO's remarks (cash PP&E + new
+  finance leases + change in PP&E accrued but not yet paid). Meta = "capital expenditures, including principal
+  payments on finance leases" from each earnings release (= capex + financeLeases here, to within rounding).
+  Alphabet's and Oracle's headline capex equals the cash figure, so no headline field.
+
+financeLeasesBasis:
+  microsoft: >-
+    New finance leases (ROU assets obtained in exchange for finance-lease liabilities, 10-Q/10-K) through 2025-Q1.
+    From 2025-Q2 (FY25 Q4), when Microsoft began stating the split, the CFO-stated "finance leases" figure is used; it
+    matched the filing figure in FY25 Q4 (6.5 vs 6.503) but ran higher afterwards (the filing figure is in each note).
+    From FY27 (Jul 2026) Microsoft extended datacenter useful lives from 15 to 25 years, which moves some future
+    datacenter leases from finance to operating leases and so out of its headline capex.
+  meta: >-
+    Principal payments on finance leases (financing cash flow). This is NOT the value of new finance leases, but it is
+    exactly what Meta adds to cash capex in its headline figure. Meta stopped tagging new finance-lease ROU assets after 2023.
+  amazon: >-
+    "Property and equipment acquired under finance leases, net of remeasurements and modifications" (supplemental
+    cash-flow disclosure). Amazon's principal repayments of finance leases were much larger in 2022 ($1.5-2.8B/quarter)
+    and are not included.
+  google: >-
+    ROU assets obtained in exchange for finance-lease liabilities; tagged from 2024 only (Alphabet described finance
+    leases as not material for 2022-2023), so earlier quarters are null.
+  oracle: >-
+    ROU assets obtained in exchange for finance-lease liabilities, only where a standalone quarter can be derived from
+    filings (2025-Q3, 2026-Q2, 2026-Q3); the other quarters are null.
+
+fiscalMapping: >-
+  Alphabet, Amazon and Meta use calendar fiscal years (quarter = calendar quarter). Microsoft's fiscal year ends
+  June 30, so FY Q1 = Jul-Sep = CY Q3 of the prior calendar year, FY Q2 = Oct-Dec = CY Q4, FY Q3 = Jan-Mar = CY Q1,
+  FY Q4 = Apr-Jun = CY Q2 (e.g. FY26 Q4 = 2026-Q2); these align exactly. Oracle's fiscal year ends May 31. Each
+  Oracle quarter is assigned to the calendar quarter that holds most of it (its midpoint), the same rule Epoch uses:
+  FY Q1 Jun-Aug -> CY Q3, FY Q2 Sep-Nov -> CY Q4, FY Q3 Dec-Feb -> CY Q1 (of the year the quarter ends), and
+  FY Q4 Mar-May -> CY Q2 (e.g. FY27 Q1, Jun-Aug 2026 = 2026-Q3). So Oracle quarters are offset by one month from true
+  calendar quarters.
+
+epochCsvUrl: https://epoch.ai/data/charts/hyperscaler-capex-trend/stacked_hyperscalers_trend.csv # tested 2026-09-24: HTTP 200
+epochNote: >-
+  Epoch AI, "Hyperscaler capex has quadrupled since GPT-4's release" (Isabel Juniewicz, 2026-02-26; CSV updated
+  2026-02-27; https://epoch.ai/data-insights/hyperscaler-capex-trend). Its CSV covers CY2022 Q1-CY2025 Q4 in $M and uses
+  "broad capex" = cash PP&E + new finance-lease ROU assets (for Meta it infers new leases from ROU balance changes, and
+  for Oracle it reconstructs them). That is a different definition from `capex` here, so Epoch's values were not
+  transcribed. They were used as a cross-check: cash capex + the filings' finance-lease ROU figure reproduces Epoch to
+  the $1M for every Microsoft and Amazon quarter 2022-Q1..2025-Q4. Alphabet matches except 2024-Q2..Q4 (off by -0.24 to
+  +0.15), and Meta and Oracle differ only by Epoch's inferred-lease component.
+
+quarters:
+  # --- microsoft ---
+  - { company: microsoft, quarter: 2022-Q1, capex: 5.34, financeLeases: 0.72, headline: 6.3, period: "2022-01-01..2022-03-31", note: "FY22 Q3", url: https://www.sec.gov/Archives/edgar/data/789019/000156459022015675/0001564590-22-015675-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q3 }
+  - { company: microsoft, quarter: 2022-Q2, capex: 6.871, financeLeases: 1.14, headline: 8.7, period: "2022-04-01..2022-06-30", note: "FY22 Q4", url: https://www.sec.gov/Archives/edgar/data/789019/000156459022026876/0001564590-22-026876-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2022/earnings-fy-2022-q4 }
+  - { company: microsoft, quarter: 2022-Q3, capex: 6.283, financeLeases: 0.611, headline: 6.6, period: "2022-07-01..2022-09-30", note: "FY23 Q1", url: https://www.sec.gov/Archives/edgar/data/789019/000156459022035087/0001564590-22-035087-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q1 }
+  - { company: microsoft, quarter: 2022-Q4, capex: 6.274, financeLeases: 0.598, headline: 6.8, period: "2022-10-01..2022-12-31", note: "FY23 Q2", url: https://www.sec.gov/Archives/edgar/data/789019/000156459023000733/0001564590-23-000733-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q2 }
+  - { company: microsoft, quarter: 2023-Q1, capex: 6.607, financeLeases: 1.044, headline: 7.8, period: "2023-01-01..2023-03-31", note: "FY23 Q3", url: https://www.sec.gov/Archives/edgar/data/789019/000095017023014423/0000950170-23-014423-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q3 }
+  - { company: microsoft, quarter: 2023-Q2, capex: 8.943, financeLeases: 0.875, headline: 10.7, period: "2023-04-01..2023-06-30", note: "FY23 Q4", url: https://www.sec.gov/Archives/edgar/data/789019/000095017023035122/0000950170-23-035122-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2023/earnings-fy-2023-q4 }
+  - { company: microsoft, quarter: 2023-Q3, capex: 9.917, financeLeases: 1.704, headline: 11.2, period: "2023-07-01..2023-09-30", note: "FY24 Q1", url: https://www.sec.gov/Archives/edgar/data/789019/000095017023054855/0000950170-23-054855-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q1 }
+  - { company: microsoft, quarter: 2023-Q4, capex: 9.735, financeLeases: 1.796, headline: 11.5, period: "2023-10-01..2023-12-31", note: "FY24 Q2", url: https://www.sec.gov/Archives/edgar/data/789019/000095017024008814/0000950170-24-008814-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q2 }
+  - { company: microsoft, quarter: 2024-Q1, capex: 10.952, financeLeases: 3.421, headline: 14, period: "2024-01-01..2024-03-31", note: "FY24 Q3", url: https://www.sec.gov/Archives/edgar/data/789019/000095017024048288/0000950170-24-048288-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q3 }
+  - { company: microsoft, quarter: 2024-Q2, capex: 13.873, financeLeases: 4.712, headline: 19, period: "2024-04-01..2024-06-30", note: "FY24 Q4", url: https://www.sec.gov/Archives/edgar/data/789019/000095017024087843/0000950170-24-087843-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2024/earnings-fy-2024-q4 }
+  - { company: microsoft, quarter: 2024-Q3, capex: 14.923, financeLeases: 4.332, headline: 20, period: "2024-07-01..2024-09-30", note: "FY25 Q1", url: https://www.sec.gov/Archives/edgar/data/789019/000095017024118967/0000950170-24-118967-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q1 }
+  - { company: microsoft, quarter: 2024-Q4, capex: 15.804, financeLeases: 6.435, headline: 22.6, period: "2024-10-01..2024-12-31", note: "FY25 Q2", url: https://www.sec.gov/Archives/edgar/data/789019/000095017025010491/0000950170-25-010491-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q2 }
+  - { company: microsoft, quarter: 2025-Q1, capex: 16.745, financeLeases: 3.241, headline: 21.4, period: "2025-01-01..2025-03-31", note: "FY25 Q3", url: https://www.sec.gov/Archives/edgar/data/789019/000095017025061046/0000950170-25-061046-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q3 }
+  - { company: microsoft, quarter: 2025-Q2, capex: 17.079, financeLeases: 6.5, headline: 24.2, period: "2025-04-01..2025-06-30", note: "FY25 Q4; financeLeases as stated by the CFO; 10-Q/10-K ROU-obtained figure is 6.503", url: https://www.sec.gov/Archives/edgar/data/789019/000095017025100235/0000950170-25-100235-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2025/earnings-fy-2025-q4 }
+  - { company: microsoft, quarter: 2025-Q3, capex: 19.394, financeLeases: 11.1, headline: 34.9, period: "2025-07-01..2025-09-30", note: "FY26 Q1; financeLeases as stated by the CFO; 10-Q/10-K ROU-obtained figure is 9.147", url: https://www.sec.gov/Archives/edgar/data/789019/000119312525256321/0001193125-25-256321-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q1 }
+  - { company: microsoft, quarter: 2025-Q4, capex: 29.876, financeLeases: 6.7, headline: 37.5, period: "2025-10-01..2025-12-31", note: "FY26 Q2; financeLeases as stated by the CFO; 10-Q/10-K ROU-obtained figure is 6.33", url: https://www.sec.gov/Archives/edgar/data/789019/000119312526027207/0001193125-26-027207-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q2 }
+  - { company: microsoft, quarter: 2026-Q1, capex: 30.876, financeLeases: 4.7, headline: 31.9, period: "2026-01-01..2026-03-31", note: "FY26 Q3; financeLeases as stated by the CFO; 10-Q/10-K ROU-obtained figure is 4.009", url: https://www.sec.gov/Archives/edgar/data/789019/000119312526191507/0001193125-26-191507-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q3 }
+  - { company: microsoft, quarter: 2026-Q2, capex: 35.802, financeLeases: 5.6, headline: 41, period: "2026-04-01..2026-06-30", note: "FY26 Q4; financeLeases as stated by the CFO; 10-Q/10-K ROU-obtained figure is 5.122", url: https://www.sec.gov/Archives/edgar/data/789019/000119312526323660/0001193125-26-323660-index.htm, headlineUrl: https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4 }
+  # --- google ---
+  - { company: google, quarter: 2022-Q1, capex: 9.786, financeLeases: null, period: "2022-01-01..2022-03-31", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204422000029/0001652044-22-000029-index.htm }
+  - { company: google, quarter: 2022-Q2, capex: 6.828, financeLeases: null, period: "2022-04-01..2022-06-30", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204422000071/0001652044-22-000071-index.htm }
+  - { company: google, quarter: 2022-Q3, capex: 7.276, financeLeases: null, period: "2022-07-01..2022-09-30", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204422000090/0001652044-22-000090-index.htm }
+  - { company: google, quarter: 2022-Q4, capex: 7.595, financeLeases: null, period: "2022-10-01..2022-12-31", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204423000016/0001652044-23-000016-index.htm }
+  - { company: google, quarter: 2023-Q1, capex: 6.289, financeLeases: null, period: "2023-01-01..2023-03-31", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204423000045/0001652044-23-000045-index.htm }
+  - { company: google, quarter: 2023-Q2, capex: 6.888, financeLeases: null, period: "2023-04-01..2023-06-30", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204423000070/0001652044-23-000070-index.htm }
+  - { company: google, quarter: 2023-Q3, capex: 8.055, financeLeases: null, period: "2023-07-01..2023-09-30", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204423000094/0001652044-23-000094-index.htm }
+  - { company: google, quarter: 2023-Q4, capex: 11.019, financeLeases: null, period: "2023-10-01..2023-12-31", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204424000022/0001652044-24-000022-index.htm }
+  - { company: google, quarter: 2024-Q1, capex: 12.012, financeLeases: 0.019, period: "2024-01-01..2024-03-31", note: "financeLeases tagged from 2024; earlier finance leases described as not material", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204424000053/0001652044-24-000053-index.htm }
+  - { company: google, quarter: 2024-Q2, capex: 13.186, financeLeases: 0.146, period: "2024-04-01..2024-06-30", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204424000079/0001652044-24-000079-index.htm }
+  - { company: google, quarter: 2024-Q3, capex: 13.061, financeLeases: 0.078, period: "2024-07-01..2024-09-30", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204424000118/0001652044-24-000118-index.htm }
+  - { company: google, quarter: 2024-Q4, capex: 14.276, financeLeases: 0.07, period: "2024-10-01..2024-12-31", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204425000014/0001652044-25-000014-index.htm }
+  - { company: google, quarter: 2025-Q1, capex: 17.197, financeLeases: 0.523, period: "2025-01-01..2025-03-31", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204425000043/0001652044-25-000043-index.htm }
+  - { company: google, quarter: 2025-Q2, capex: 22.446, financeLeases: 0.083, period: "2025-04-01..2025-06-30", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204425000062/0001652044-25-000062-index.htm }
+  - { company: google, quarter: 2025-Q3, capex: 23.953, financeLeases: 0.383, period: "2025-07-01..2025-09-30", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204425000091/0001652044-25-000091-index.htm }
+  - { company: google, quarter: 2025-Q4, capex: 27.851, financeLeases: 0.617, period: "2025-10-01..2025-12-31", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204426000018/0001652044-26-000018-index.htm }
+  - { company: google, quarter: 2026-Q1, capex: 35.674, financeLeases: 0.211, period: "2026-01-01..2026-03-31", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204426000048/0001652044-26-000048-index.htm }
+  - { company: google, quarter: 2026-Q2, capex: 44.924, financeLeases: 0.691, period: "2026-04-01..2026-06-30", url: https://www.sec.gov/Archives/edgar/data/1652044/000165204426000071/0001652044-26-000071-index.htm }
+  # --- amazon ---
+  - { company: amazon, quarter: 2022-Q1, capex: 14.951, financeLeases: 0.166, period: "2022-01-01..2022-03-31", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872422000013/0001018724-22-000013-index.htm }
+  - { company: amazon, quarter: 2022-Q2, capex: 15.724, financeLeases: 0.061, period: "2022-04-01..2022-06-30", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872422000019/0001018724-22-000019-index.htm }
+  - { company: amazon, quarter: 2022-Q3, capex: 16.378, financeLeases: 0.131, period: "2022-07-01..2022-09-30", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872422000023/0001018724-22-000023-index.htm }
+  - { company: amazon, quarter: 2022-Q4, capex: 16.592, financeLeases: 0.317, period: "2022-10-01..2022-12-31", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872423000004/0001018724-23-000004-index.htm }
+  - { company: amazon, quarter: 2023-Q1, capex: 14.207, financeLeases: 0.008, period: "2023-01-01..2023-03-31", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872423000008/0001018724-23-000008-index.htm }
+  - { company: amazon, quarter: 2023-Q2, capex: 11.455, financeLeases: 0.24, period: "2023-04-01..2023-06-30", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872423000012/0001018724-23-000012-index.htm }
+  - { company: amazon, quarter: 2023-Q3, capex: 12.479, financeLeases: 0.183, period: "2023-07-01..2023-09-30", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872423000018/0001018724-23-000018-index.htm }
+  - { company: amazon, quarter: 2023-Q4, capex: 14.588, financeLeases: 0.211, period: "2023-10-01..2023-12-31", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872424000008/0001018724-24-000008-index.htm }
+  - { company: amazon, quarter: 2024-Q1, capex: 14.925, financeLeases: 0.042, period: "2024-01-01..2024-03-31", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872424000083/0001018724-24-000083-index.htm }
+  - { company: amazon, quarter: 2024-Q2, capex: 17.62, financeLeases: 0.181, period: "2024-04-01..2024-06-30", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872424000130/0001018724-24-000130-index.htm }
+  - { company: amazon, quarter: 2024-Q3, capex: 22.62, financeLeases: 0.186, period: "2024-07-01..2024-09-30", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872424000161/0001018724-24-000161-index.htm }
+  - { company: amazon, quarter: 2024-Q4, capex: 27.834, financeLeases: 0.445, period: "2024-10-01..2024-12-31", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872425000004/0001018724-25-000004-index.htm }
+  - { company: amazon, quarter: 2025-Q1, capex: 25.019, financeLeases: 0.054, period: "2025-01-01..2025-03-31", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872425000036/0001018724-25-000036-index.htm }
+  - { company: amazon, quarter: 2025-Q2, capex: 32.183, financeLeases: 0.937, period: "2025-04-01..2025-06-30", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872425000086/0001018724-25-000086-index.htm }
+  - { company: amazon, quarter: 2025-Q3, capex: 35.095, financeLeases: 0.977, period: "2025-07-01..2025-09-30", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872425000123/0001018724-25-000123-index.htm }
+  - { company: amazon, quarter: 2025-Q4, capex: 39.522, financeLeases: 0.943, period: "2025-10-01..2025-12-31", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872426000004/0001018724-26-000004-index.htm }
+  - { company: amazon, quarter: 2026-Q1, capex: 44.203, financeLeases: 1.565, period: "2026-01-01..2026-03-31", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872426000014/0001018724-26-000014-index.htm }
+  - { company: amazon, quarter: 2026-Q2, capex: 54.208, financeLeases: 0.563, period: "2026-04-01..2026-06-30", url: https://www.sec.gov/Archives/edgar/data/1018724/000101872426000026/0001018724-26-000026-index.htm }
+  # --- meta ---
+  - { company: meta, quarter: 2022-Q1, capex: 5.315, financeLeases: 0.233, headline: 5.55, period: "2022-01-01..2022-03-31", note: "Meta's 'purchases of property and equipment, net' (net of proceeds) from the press-release FCF table; the 10-Q/10-K cash-flow line then showed gross purchases of 5.441", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680122000054/meta03312022-exhibit991.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680122000054/meta03312022-exhibit991.htm }
+  - { company: meta, quarter: 2022-Q2, capex: 7.528, financeLeases: 0.219, headline: 7.75, period: "2022-04-01..2022-06-30", note: "Meta's 'purchases of property and equipment, net' (net of proceeds) from the press-release FCF table; the 10-Q/10-K cash-flow line then showed gross purchases of 7.572", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680122000079/meta06302022-exhibit991.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680122000079/meta06302022-exhibit991.htm }
+  - { company: meta, quarter: 2022-Q3, capex: 9.355, financeLeases: 0.163, headline: 9.52, period: "2022-07-01..2022-09-30", note: "Meta's 'purchases of property and equipment, net' (net of proceeds) from the press-release FCF table; the 10-Q/10-K cash-flow line then showed gross purchases of 9.375", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680122000105/meta09302022-exhibit991.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680122000105/meta09302022-exhibit991.htm }
+  - { company: meta, quarter: 2022-Q4, capex: 8.988, financeLeases: 0.235, headline: 9.22, period: "2022-10-01..2022-12-31", note: "Meta's 'purchases of property and equipment, net' (net of proceeds) from the press-release FCF table; the 10-Q/10-K cash-flow line then showed gross purchases of 9.043", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680123000008/meta-12312022xexhibit991.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680123000008/meta-12312022xexhibit991.htm }
+  - { company: meta, quarter: 2023-Q1, capex: 6.823, financeLeases: 0.264, headline: 7.09, period: "2023-01-01..2023-03-31", note: "Meta's 'purchases of property and equipment, net' (net of proceeds) from the press-release FCF table; the 10-Q/10-K cash-flow line then showed gross purchases of 6.842", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680123000063/meta03312023-exhibit991.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680123000063/meta03312023-exhibit991.htm }
+  - { company: meta, quarter: 2023-Q2, capex: 6.134, financeLeases: 0.22, headline: 6.35, period: "2023-04-01..2023-06-30", note: "Meta's 'purchases of property and equipment, net' (net of proceeds) from the press-release FCF table; the 10-Q/10-K cash-flow line then showed gross purchases of 6.216", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680123000089/meta06302023-exhibit991.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680123000089/meta06302023-exhibit991.htm }
+  - { company: meta, quarter: 2023-Q3, capex: 6.496, financeLeases: 0.267, headline: 6.76, period: "2023-07-01..2023-09-30", note: "Meta's 'purchases of property and equipment, net' (net of proceeds) from the press-release FCF table; the 10-Q/10-K cash-flow line then showed gross purchases of 6.543", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680123000100/meta09302023-exhibit991.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680123000100/meta09302023-exhibit991.htm }
+  - { company: meta, quarter: 2023-Q4, capex: 7.592, financeLeases: 0.307, headline: 7.9, period: "2023-10-01..2023-12-31", note: "Meta's 'purchases of property and equipment, net' (net of proceeds) from the press-release FCF table; the 10-Q/10-K cash-flow line then showed gross purchases of 7.665", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680124000010/meta-12312023xexhibit991.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680124000010/meta-12312023xexhibit991.htm }
+  - { company: meta, quarter: 2024-Q1, capex: 6.4, financeLeases: 0.315, headline: 6.72, period: "2024-01-01..2024-03-31", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680124000049/0001326801-24-000049-index.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680124000044/meta-03312024xexhibit991.htm }
+  - { company: meta, quarter: 2024-Q2, capex: 8.173, financeLeases: 0.299, headline: 8.47, period: "2024-04-01..2024-06-30", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680124000069/0001326801-24-000069-index.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680124000065/meta-06302024xexhibit991.htm }
+  - { company: meta, quarter: 2024-Q3, capex: 8.258, financeLeases: 0.944, headline: 9.2, period: "2024-07-01..2024-09-30", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680124000081/0001326801-24-000081-index.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680124000077/meta-09302024xexhibit991.htm }
+  - { company: meta, quarter: 2024-Q4, capex: 14.425, financeLeases: 0.411, headline: 14.84, period: "2024-10-01..2024-12-31", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680125000017/0001326801-25-000017-index.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680125000014/meta-12312024xexhibit991.htm }
+  - { company: meta, quarter: 2025-Q1, capex: 12.941, financeLeases: 0.751, headline: 13.69, period: "2025-01-01..2025-03-31", url: https://www.sec.gov/Archives/edgar/data/1326801/000132680125000054/0001326801-25-000054-index.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000132680125000050/meta-03312025xexhibit991.htm }
+  - { company: meta, quarter: 2025-Q2, capex: 16.538, financeLeases: 0.474, headline: 17.01, period: "2025-04-01..2025-06-30", url: https://www.sec.gov/Archives/edgar/data/1326801/000162828025036791/0001628280-25-036791-index.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000162828025036719/meta-06302025xexhibit991.htm }
+  - { company: meta, quarter: 2025-Q3, capex: 18.829, financeLeases: 0.545, headline: 19.37, period: "2025-07-01..2025-09-30", url: https://www.sec.gov/Archives/edgar/data/1326801/000162828025047240/0001628280-25-047240-index.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000162828025047114/meta-09302025xexhibit991.htm }
+  - { company: meta, quarter: 2025-Q4, capex: 21.383, financeLeases: 0.754, headline: 22.14, period: "2025-10-01..2025-12-31", url: https://www.sec.gov/Archives/edgar/data/1326801/000162828026003942/0001628280-26-003942-index.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000162828026003832/meta-12312025xexhibit991.htm }
+  - { company: meta, quarter: 2026-Q1, capex: 18.997, financeLeases: 0.843, headline: 19.84, period: "2026-01-01..2026-03-31", url: https://www.sec.gov/Archives/edgar/data/1326801/000162828026028526/0001628280-26-028526-index.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000162828026028364/meta-03312026xexhibit991.htm }
+  - { company: meta, quarter: 2026-Q2, capex: 30.116, financeLeases: 0.962, headline: 31.08, period: "2026-04-01..2026-06-30", url: https://www.sec.gov/Archives/edgar/data/1326801/000162828026050705/0001628280-26-050705-index.htm, headlineUrl: https://www.sec.gov/Archives/edgar/data/1326801/000162828026050596/meta-06302026xexhibit991.htm }
+  # --- oracle ---
+  - { company: oracle, quarter: 2022-Q1, capex: 1.101, financeLeases: null, period: "2021-12-01..2022-02-28", note: "FY22 Q3, Dec 2021-Feb 2022", url: https://www.sec.gov/Archives/edgar/data/1341439/000156459022009859/0001564590-22-009859-index.htm }
+  - { company: oracle, quarter: 2022-Q2, capex: 1.423, financeLeases: null, period: "2022-03-01..2022-05-31", note: "FY22 Q4, Mar 2022-May 2022", url: https://www.sec.gov/Archives/edgar/data/1341439/000156459022023675/0001564590-22-023675-index.htm }
+  - { company: oracle, quarter: 2022-Q3, capex: 1.719, financeLeases: null, period: "2022-06-01..2022-08-31", note: "FY23 Q1, Jun 2022-Aug 2022", url: https://www.sec.gov/Archives/edgar/data/1341439/000156459022031545/0001564590-22-031545-index.htm }
+  - { company: oracle, quarter: 2022-Q4, capex: 2.435, financeLeases: null, period: "2022-09-01..2022-11-30", note: "FY23 Q2, Sep 2022-Nov 2022", url: https://www.sec.gov/Archives/edgar/data/1341439/000156459022039278/0001564590-22-039278-index.htm }
+  - { company: oracle, quarter: 2023-Q1, capex: 2.628, financeLeases: null, period: "2022-12-01..2023-02-28", note: "FY23 Q3, Dec 2022-Feb 2023", url: https://www.sec.gov/Archives/edgar/data/1341439/000156459023003413/0001564590-23-003413-index.htm }
+  - { company: oracle, quarter: 2023-Q2, capex: 1.913, financeLeases: null, period: "2023-03-01..2023-05-31", note: "FY23 Q4, Mar 2023-May 2023", url: https://www.sec.gov/Archives/edgar/data/1341439/000095017023028914/0000950170-23-028914-index.htm }
+  - { company: oracle, quarter: 2023-Q3, capex: 1.314, financeLeases: null, period: "2023-06-01..2023-08-31", note: "FY24 Q1, Jun 2023-Aug 2023", url: https://www.sec.gov/Archives/edgar/data/1341439/000095017023047713/0000950170-23-047713-index.htm }
+  - { company: oracle, quarter: 2023-Q4, capex: 1.08, financeLeases: null, period: "2023-09-01..2023-11-30", note: "FY24 Q2, Sep 2023-Nov 2023", url: https://www.sec.gov/Archives/edgar/data/1341439/000095017023069682/0000950170-23-069682-index.htm }
+  - { company: oracle, quarter: 2024-Q1, capex: 1.674, financeLeases: null, period: "2023-12-01..2024-02-29", note: "FY24 Q3, Dec 2023-Feb 2024", url: https://www.sec.gov/Archives/edgar/data/1341439/000095017024029904/0000950170-24-029904-index.htm }
+  - { company: oracle, quarter: 2024-Q2, capex: 2.798, financeLeases: null, period: "2024-03-01..2024-05-31", note: "FY24 Q4, Mar 2024-May 2024", url: https://www.sec.gov/Archives/edgar/data/1341439/000095017024075605/0000950170-24-075605-index.htm }
+  - { company: oracle, quarter: 2024-Q3, capex: 2.303, financeLeases: null, period: "2024-06-01..2024-08-31", note: "FY25 Q1, Jun 2024-Aug 2024", url: https://www.sec.gov/Archives/edgar/data/1341439/000095017024104905/0000950170-24-104905-index.htm }
+  - { company: oracle, quarter: 2024-Q4, capex: 3.97, financeLeases: null, period: "2024-09-01..2024-11-30", note: "FY25 Q2, Sep 2024-Nov 2024", url: https://www.sec.gov/Archives/edgar/data/1341439/000095017024134973/0000950170-24-134973-index.htm }
+  - { company: oracle, quarter: 2025-Q1, capex: 5.862, financeLeases: null, period: "2024-12-01..2025-02-28", note: "FY25 Q3, Dec 2024-Feb 2025", url: https://www.sec.gov/Archives/edgar/data/1341439/000095017025037143/0000950170-25-037143-index.htm }
+  - { company: oracle, quarter: 2025-Q2, capex: 9.08, financeLeases: null, period: "2025-03-01..2025-05-31", note: "FY25 Q4, Mar 2025-May 2025", url: https://www.sec.gov/Archives/edgar/data/1341439/000095017025087926/0000950170-25-087926-index.htm }
+  - { company: oracle, quarter: 2025-Q3, capex: 8.502, financeLeases: 1.122, period: "2025-06-01..2025-08-31", note: "FY26 Q1, Jun 2025-Aug 2025", url: https://www.sec.gov/Archives/edgar/data/1341439/000119312525200095/0001193125-25-200095-index.htm }
+  - { company: oracle, quarter: 2025-Q4, capex: 12.033, financeLeases: null, period: "2025-09-01..2025-11-30", note: "FY26 Q2, Sep 2025-Nov 2025", url: https://www.sec.gov/Archives/edgar/data/1341439/000119312525315925/0001193125-25-315925-index.htm }
+  - { company: oracle, quarter: 2026-Q1, capex: 18.635, financeLeases: null, period: "2025-12-01..2026-02-28", note: "FY26 Q3, Dec 2025-Feb 2026", url: https://www.sec.gov/Archives/edgar/data/1341439/000119312526101045/0001193125-26-101045-index.htm }
+  - { company: oracle, quarter: 2026-Q2, capex: 16.493, financeLeases: 1.527, period: "2026-03-01..2026-05-31", note: "FY26 Q4, Mar 2026-May 2026", url: https://www.sec.gov/Archives/edgar/data/1341439/000119312526277521/0001193125-26-277521-index.htm }
+  - { company: oracle, quarter: 2026-Q3, capex: 28.499, financeLeases: 1.539, period: "2026-06-01..2026-08-31", note: "FY27 Q1, Jun 2026-Aug 2026", url: https://www.sec.gov/Archives/edgar/data/1341439/000119312526389274/0001193125-26-389274-index.htm }
+
+guidance:        # latest forward capex guidance per company (earlier ranges in note)
+  - { company: amazon, year: 2026, period: "CY2026", low: 220, high: 220, basis: "cash capex, net of proceeds and incentives (approximate point estimate)", stated: 2026-07-30, note: "Jassy on the Q2 2026 call: about $220B in 2026, up from about $200B (given Feb 2026, held in Apr 2026); raised mainly on higher memory prices, and still not enough capacity for 2026 demand.", url: "https://fortune.com/2026/07/30/andy-jassy-amazon-capex-demand-aws-pga-tour/" }
+  - { company: google, year: 2026, period: "CY2026", low: 195, high: 205, basis: "purchases of property and equipment", stated: 2026-07-22, note: "Raised from $180-190B on the Q2 2026 call because capacity delivery sped up; about 60% servers, 40% data centers and networking. Alphabet expects capex to rise significantly again in 2027.", url: "https://finance.yahoo.com/markets/stocks/articles/googl-drops-nearly-5-hours-212540090.html" }
+  - { company: meta, year: 2026, period: "CY2026", low: 130, high: 145, basis: "capex including principal payments on finance leases (Meta headline)", stated: 2026-07-29, note: "Narrowed from $125-145B (Apr 2026), which was raised from $115-135B (Jan 2026) on higher component prices.", url: "https://www.sec.gov/Archives/edgar/data/1326801/000162828026050596/meta-06302026xexhibit991.htm" }
+  - { company: microsoft, year: 2026, period: "CY2026", low: 175, high: 175, basis: "capital expenditures including finance leases (Microsoft headline); approximate", stated: 2026-07-29, note: "About $175B for calendar 2026, down from about $190B (stated 2026-04-29, incl. about $25B from higher component prices) only because of an accounting change: from FY27, datacenter useful lives go from 15 to 25 years, moving some leases from finance to operating, which Microsoft's capex excludes. Q1 FY27 (Jul-Sep 2026) guided above $50B, and FY27 capex is to grow year on year.", url: "https://www.microsoft.com/en-us/investor/events/fy-2026/earnings-fy-2026-q4" }
+  - { company: oracle, year: 2027, period: "FY2027 (Jun 2026-May 2027)", low: 90, high: 95, basis: "gross capital expenditures", stated: 2026-06-10, note: "Given with FY26 Q4 results and kept on 2026-09-10 (FY27 Q1). Net cash capex, after customer prepayments and vendor financing, is expected to be no more than about $70B. FY26 actual was $55.7B.", url: "https://www.investing.com/news/company-news/oracle-q1-fy2027-slides-cloud-infrastructure-surges-121-guides-90b-93CH-4897025" }

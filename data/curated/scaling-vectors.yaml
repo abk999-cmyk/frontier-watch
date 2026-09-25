@@ -1,0 +1,106 @@
+# Scaling vectors: new axes along which labs scale capability. Each entry names the model that INTRODUCED it
+# (introducedBy must be an id in models.yaml, and that model carries `scalingVector: <id>`).
+# Researched 2026-09-24. Only well-supported entries are listed. Considered and left out:
+#   - GPT-6 Astra "recurrent depth / looped transformer": reported by The Information from a single anonymous
+#     source; OpenAI's launch post and system card never mention it.
+
+- id: test-time-reasoning
+  name: RL-trained test-time reasoning
+  introducedBy: o1-preview
+  date: 2024-09-12
+  summary: >-
+    OpenAI trained o1 with large-scale reinforcement learning to reason in a long private chain of thought, and showed
+    that performance keeps improving with both train-time RL compute and test-time thinking time. That opened a second
+    scaling axis beyond pretraining.
+  url: https://openai.com/index/learning-to-reason-with-llms/
+
+- id: open-rl-verifiable-rewards
+  name: Open recipe for RL on verifiable rewards
+  introducedBy: deepseek-r1
+  date: 2025-01-20
+  summary: >-
+    DeepSeek released R1's weights together with a full recipe: GRPO reinforcement learning with rule-based rewards on
+    the V3 base, where R1-Zero developed long reasoning from pure RL with no supervised warm-up. o1-style reasoning
+    became reproducible across the field.
+  url: https://arxiv.org/abs/2501.12948
+
+- id: hybrid-reasoning
+  name: Hybrid reasoning with a user-set thinking budget
+  introducedBy: claude-3.7-sonnet
+  date: 2025-02-24
+  summary: >-
+    Anthropic billed Claude 3.7 Sonnet as the first hybrid reasoning model: one model that either answers at once or
+    thinks at length. API users can cap its thinking at any token budget up to 128K, so test-time compute became a
+    dial the user controls.
+  url: https://www.anthropic.com/news/claude-3-7-sonnet
+
+- id: pretraining-limits
+  name: Limits of pure pretraining scale
+  introducedBy: gpt-4.5
+  date: 2025-02-27
+  summary: >-
+    GPT-4.5 was OpenAI's largest pretraining run (about 3.8e26 FLOP by Epoch's estimate), yet its gains were modest
+    for the cost. OpenAI called it its last non-chain-of-thought model and pulled it from the API in July 2025. GPT-5
+    then used less pretraining compute, which moved the frontier toward RL and inference-time scaling.
+  url: https://epoch.ai/gradient-updates/why-gpt5-used-less-training-compute-than-gpt45-but-gpt6-probably-wont
+
+- id: long-horizon-agentic-coding
+  name: Long-horizon agentic coding
+  introducedBy: claude-opus-4
+  date: 2025-05-22
+  summary: >-
+    Claude Opus 4 shipped alongside the general release of Claude Code. It could work continuously for several hours
+    across thousands of steps; Rakuten ran a 7-hour autonomous open-source refactor with it. The length of task a
+    model can finish became a scaling target.
+  url: https://www.anthropic.com/news/claude-4
+
+- id: rl-at-pretraining-scale
+  name: RL compute at pretraining scale
+  introducedBy: grok-4
+  date: 2025-07-09
+  summary: >-
+    xAI ran reinforcement learning "at pretraining scale" on its 200,000-GPU Colossus cluster, using over an order of
+    magnitude more RL compute than before on the Grok 3 base. Its launch chart showed RL compute roughly equal to
+    pretraining compute.
+  url: https://x.ai/news/grok-4
+
+- id: parallel-test-time-compute
+  name: Parallel test-time compute
+  introducedBy: grok-4-heavy
+  date: 2025-07-09
+  summary: >-
+    Grok 4 Heavy runs several agents in parallel that weigh multiple hypotheses before answering. It was the first
+    publicly available product officially described as using parallel test-time compute. Gemini 2.5 Deep Think
+    (previewed May 2025, released Aug 1) and GPT-5 Pro (Aug 7) followed. o1 pro mode (Dec 2024) was only reported
+    to use parallel sampling.
+  url: https://x.ai/news/grok-4
+
+- id: agent-swarm
+  name: Agent-swarm orchestration trained with RL
+  introducedBy: kimi-k2.5
+  date: 2026-01-27
+  summary: >-
+    Kimi K2.5 was trained with Parallel-Agent RL (PARL) to act as an orchestrator. It splits a task and directs a
+    swarm of up to 100 sub-agents across up to 1,500 coordinated steps, with staged rewards so that it does not fall
+    back to working alone. Moonshot reports up to 4.5x lower latency than a single agent.
+  url: https://www.kimi.com/blog/kimi-k2-5.html
+
+- id: self-improvement
+  name: A model that helped build itself
+  introducedBy: gpt-5.3-codex
+  date: 2026-02-05
+  summary: >-
+    OpenAI called GPT-5.3-Codex "our first model that was instrumental in creating itself". Early versions debugged
+    its own training, managed its deployment and diagnosed evaluation results, an early sign of recursive
+    self-improvement. GPT-5.6 Sol later ran the post-training of the smaller GPT-5.6 Luna.
+  url: https://openai.com/index/introducing-gpt-5-3-codex/
+
+- id: new-scale-tier
+  name: A frontier tier above Opus
+  introducedBy: claude-mythos-preview
+  date: 2026-04-07
+  summary: >-
+    Anthropic introduced a model tier "larger and more intelligent than our Opus models" (from a leaked draft that
+    Anthropic confirmed), with capabilities "substantially beyond" any model it had trained. Its internal capability
+    trend line bent upward. The model was released only to Project Glasswing partners.
+  url: https://www-cdn.anthropic.com/7624816413e9b4d2e3ba620c5a5e091b98b190a5/Claude%20Mythos%20Preview%20System%20Card.pdf

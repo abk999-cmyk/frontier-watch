@@ -1,0 +1,346 @@
+# How the AI 2027 authors' own forecasts moved, Apr 2025 to Sep 2026.
+#
+# Format (one list item per forecaster x publication x milestone)
+#   forecaster       person, or group for aggregates
+#   published        when the forecast was stated (ISO). For values recorded retroactively, this is the as-of
+#                    date given by the authors, and the note says where it was recorded.
+#   milestone        automated-coder | superhuman-ai-researcher | ted-ai | asi | agi
+#                      automated-coder         AC: an AI that can fully automate an AGI project's coding, i.e. the
+#                                              company would rather fire its engineers than stop using AI for coding.
+#                                              AI 2027's "superhuman coder" (SC) is mapped here and flagged in the note
+#                                              (the authors call SC similar to AC but somewhat stronger).
+#                      superhuman-ai-researcher SAR: fully automates AI R&D; research taste matches the top human researcher.
+#                      ted-ai                  Top-Expert-Dominating AI: at least as good as top human experts at virtually
+#                                              all cognitive tasks. This is the project's definition of AGI from Jan 2026.
+#                      asi                     at virtually all cognitive tasks, 2x as far above the best humans as the best
+#                                              humans are above the median professional.
+#                      agi                     informal "AGI" / "intelligence explosion" medians from before the TED-AI
+#                                              definition was settled (the authors later chart these as AGI).
+#   median           ISO date. Month-level values use the 1st of the month. Year-only values use YYYY-07-01
+#                    (mid-year, the authors' own convention) with medianPrecision: year.
+#   medianPrecision  month | year
+#   basis            all-things-considered (the forecaster's bottom line) | model (raw model output)
+#   note             optional
+#   url              source
+#
+# Milestone definitions: https://www.aifuturesmodel.com and https://blog.aifutures.org/p/ai-futures-model-dec-2025-update
+# From Aug 2026 the forecasts are explicitly conditional on progress going as fast as technically feasible
+# (no government slowdown).
+
+# ───────────── Daniel Kokotajlo ─────────────
+- forecaster: Daniel Kokotajlo
+  published: 2025-04-03
+  milestone: agi
+  median: 2028-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "At AI 2027's publication: 'Daniel's median for the intelligence explosion shifted from 2027 to 2028'. 2027 was his modal year."
+  url: https://www.astralcodexten.com/p/introducing-ai-2027
+
+- forecaster: Daniel Kokotajlo
+  published: 2025-04-03
+  milestone: automated-coder
+  median: 2028-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "Superhuman coder (SC). Recorded retroactively in Dec 2025: 'At the time of publishing, Daniel's all-things-considered median was 2028, and Eli's was 2030'."
+  url: https://www.lesswrong.com/posts/G7MmNkYADKkmCiumj/response-to-titotal-s-critique-of-our-ai-2027-timelines
+
+- forecaster: Daniel Kokotajlo
+  published: 2025-08-20
+  milestone: agi
+  median: 2029-12-31
+  medianPrecision: month
+  basis: all-things-considered
+  note: "Tweet: 'my bottom-line numbers are somewhat different (median ~EOY 2029)'. The Jan 2026 history post charts it as 2030.0."
+  url: https://x.com/DKokotajlo/status/1958229951536316528
+
+- forecaster: Daniel Kokotajlo
+  published: 2025-11-20
+  milestone: agi
+  median: 2030-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "'around 2030, lots of uncertainty though' is what I say these days."
+  url: https://x.com/dkokotajlo/status/1991564542103662729
+
+- forecaster: Daniel Kokotajlo
+  published: 2025-12-31
+  milestone: automated-coder
+  median: 2029-12-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "AI Futures Model launch. He kept his median the same as the model's output (Dec 2029). The model's raw output for Daniel: SAR Mar 2031, TED-AI Oct 2032, ASI Jul 2034."
+  url: https://blog.aifutures.org/p/ai-futures-model-dec-2025-update
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-01-27
+  milestone: ted-ai
+  median: 2030-12-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "Jan 2026: Dec 2030 (2030.95), from the forecast-history section."
+  url: https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-01-27
+  milestone: asi
+  median: 2031-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "The post's table gives 2031; the aifuturesmodel.com forecaster page shows May 2031."
+  url: https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-02-12
+  milestone: automated-coder
+  median: 2029-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "Grading post: 'Daniel's current median prediction for full coding automation (2029)', with a median takeoff to superintelligence of ~1 year."
+  url: https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-04-02
+  milestone: automated-coder
+  median: 2028-05-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "Q1 2026 update: 'shift Daniel's Automated Coder (AC) median from late 2029 to mid 2028' (chart p50: May 2028). Drivers: METR TH1.1, faster doubling time (4 months), and an AC horizon requirement lowered to 1 year after Opus 4.6."
+  url: https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-04-02
+  milestone: ted-ai
+  median: 2029-07-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "Chart p10 Apr 2027, p50 Jul 2029, p90 May 2040. Probability of AGI by end of 2027: 25%."
+  url: https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-04-02
+  milestone: asi
+  median: 2030-03-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "The summary table rounds this to 2030; Mar 2030 is from the forecaster page."
+  url: https://www.aifuturesmodel.com/forecast/daniel-04-02-26
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-04-02
+  milestone: superhuman-ai-researcher
+  median: 2029-03-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "From the aifuturesmodel.com forecaster page only; SAR is not stated in the post."
+  url: https://www.aifuturesmodel.com/forecast/daniel-04-02-26
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-08-16
+  milestone: automated-coder
+  median: 2027-11-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "Q2.5 update (uplift- and revenue-anchored model): p10 Jan 2027, p50 Nov 2027, p90 Apr 2030. One month sooner than the model's Dec 2027 to reflect the 75%-of-AI-2027-pace estimate. One comparison chart in the post labels it Dec 2027."
+  url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-08-16
+  milestone: ted-ai
+  median: 2028-11-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "p10 Jul 2027, p50 Nov 2028, p90 May 2034. AC to TED-AI takeoff median ~8.9 months. Probability of AGI by end of 2027: 23%."
+  url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-08-16
+  milestone: asi
+  median: 2029-03-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "p10 Sep 2027, p50 Mar 2029, p90 May 2040. AC to ASI median ~1 year."
+  url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+
+- forecaster: Daniel Kokotajlo
+  published: 2026-08-16
+  milestone: superhuman-ai-researcher
+  median: 2028-12-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "Forecaster page only; the site's per-milestone adjustments put it after his TED-AI date. Consistent with his Aug 2026 80,000 Hours remark that full automation of AI R&D happens by end of 2028 at the median."
+  url: https://www.aifuturesmodel.com/forecast/daniel-08-16-26
+
+# ───────────── Eli Lifland ─────────────
+- forecaster: Eli Lifland
+  published: 2025-04-03
+  milestone: automated-coder
+  median: 2030-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "Superhuman coder (SC), all-things-considered, 80% CI 2026 to >2050. His model outputs were 2027 (time-horizon) and 2028 (benchmarks-and-gaps)."
+  url: https://ai-2027.com/research/timelines-forecast
+
+- forecaster: Eli Lifland
+  published: 2025-04-03
+  milestone: agi
+  median: 2031-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "Recorded in the Jan 2026 history: 'Apr 2025: 2031', i.e. his SC median plus about a year."
+  url: https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts
+
+- forecaster: Eli Lifland
+  published: 2025-05-01
+  milestone: automated-coder
+  median: 2029-07-01
+  medianPrecision: year
+  basis: model
+  note: "Updated time-horizon model, May 2025 (SC, Eli's parameters); the updated benchmarks-and-gaps model gave 2030. A Jul 2025 note on ai-2027.com says the updates 'push the median back 1.5 years while maintaining SC in 2027 as a serious possibility'."
+  url: https://ai-2027.com/research/timelines-forecast
+
+- forecaster: Eli Lifland
+  published: 2025-07-01
+  milestone: agi
+  median: 2033-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "Recorded retroactively (Jan 2026): 'Jul 2025: 2033. Updated based on corrections to our timelines model and downlift.'"
+  url: https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts
+
+- forecaster: Eli Lifland
+  published: 2025-11-22
+  milestone: agi
+  median: 2035-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "'Nov 2025: 2035. Updated based on the AI Futures Model's intermediate results.' Also tweeted as 'Late 2025: 2035'."
+  url: https://x.com/eli_lifland/status/1992254167394755023
+
+- forecaster: Eli Lifland
+  published: 2025-12-31
+  milestone: automated-coder
+  median: 2032-07-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "'lengthened timelines (median from late 2030 to mid 2032)', i.e. 2032.5; the model's raw output with his parameters was Nov 2030. Raw model for Eli: SAR Nov 2032, TED-AI Jul 2036, ASI Mar 2041."
+  url: https://blog.aifutures.org/p/ai-futures-model-dec-2025-update
+
+- forecaster: Eli Lifland
+  published: 2026-01-27
+  milestone: automated-coder
+  median: 2032-03-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "The table says 2032; the forecaster page says he 'made his AC arrival median Mar 2032 instead of Jul 2032'."
+  url: https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts
+
+- forecaster: Eli Lifland
+  published: 2026-01-27
+  milestone: ted-ai
+  median: 2035-01-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "'Jan 2026: Jan 2035 (~2035.0)'. Takeoff adjusted faster than the model to account for hardware R&D and broad economic automation."
+  url: https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts
+
+- forecaster: Eli Lifland
+  published: 2026-01-27
+  milestone: asi
+  median: 2036-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "The table gives 2036; the forecaster page shows Oct 2036."
+  url: https://blog.aifutures.org/p/clarifying-how-our-ai-timelines-forecasts
+
+- forecaster: Eli Lifland
+  published: 2026-04-02
+  milestone: automated-coder
+  median: 2030-07-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "'shift Eli's from early 2032 to mid 2030' (chart p50: Jul 2030). His METR doubling-time median was revised to 4.5 months."
+  url: https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update
+
+- forecaster: Eli Lifland
+  published: 2026-04-02
+  milestone: ted-ai
+  median: 2033-07-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "Chart p50 Jul 2033; the table says 2033. Probability of AGI by end of 2027: 12%."
+  url: https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update
+
+- forecaster: Eli Lifland
+  published: 2026-04-02
+  milestone: asi
+  median: 2035-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "The summary table gives 2035."
+  url: https://www.lesswrong.com/posts/XLLjqMxETva3ABtsK/q1-2026-timelines-update
+
+- forecaster: Eli Lifland
+  published: 2026-08-16
+  milestone: automated-coder
+  median: 2030-01-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "p10 Jun 2027, p50 Jan 2030, p90 Oct 2070. Lengthened from the model's Mar 2029 for unknown model limitations and data bottlenecks."
+  url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+
+- forecaster: Eli Lifland
+  published: 2026-08-16
+  milestone: ted-ai
+  median: 2032-07-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "Chart p50 Jul 2032 (2032.47); the table says 2032. AC to TED-AI takeoff median ~1.1 years. Probability of AGI by end of 2027: 9%."
+  url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+
+- forecaster: Eli Lifland
+  published: 2026-08-16
+  milestone: asi
+  median: 2033-07-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "Chart p50 Jul 2033. AC to ASI median ~2 years."
+  url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+
+# ───────────── Other AI 2027 / AI Futures Project forecasters ─────────────
+- forecaster: Nikola Jurkovic
+  published: 2025-04-03
+  milestone: automated-coder
+  median: 2028-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "Co-author of the timelines supplement (then at METR). Superhuman coder, all-things-considered, 80% CI 2026-2040."
+  url: https://ai-2027.com/research/timelines-forecast
+
+- forecaster: FutureSearch (aggregate of 3 forecasters)
+  published: 2025-04-03
+  milestone: automated-coder
+  median: 2033-07-01
+  medianPrecision: year
+  basis: all-things-considered
+  note: "Superhuman coder, 80% CI 2027 to >2050. Professional forecasters commissioned for the timelines supplement."
+  url: https://ai-2027.com/research/timelines-forecast
+
+- forecaster: Brendan Halstead
+  published: 2026-08-16
+  milestone: automated-coder
+  median: 2029-01-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "His first published parameters and views; the chart shows p50 Jan 2029 (2028-12-22). The model's raw output with his parameters was Jul 2028."
+  url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+
+- forecaster: Brendan Halstead
+  published: 2026-08-16
+  milestone: ted-ai
+  median: 2031-04-01
+  medianPrecision: month
+  basis: all-things-considered
+  note: "Chart p50 Apr 2031. He caps takeoff length and floors very short takeoffs at 6 months with 25% probability."
+  url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift

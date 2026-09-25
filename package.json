@@ -1,0 +1,51 @@
+{
+  "name": "frontier-watch",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "tsc -b && vite build",
+    "preview": "vite preview",
+    "fetch": "tsx scripts/fetch-all.ts",
+    "build:data": "tsx scripts/build-data.ts",
+    "build:refs": "tsx scripts/build-references.ts",
+    "refresh": "npm run fetch && npm run build:data",
+    "test": "vitest run",
+    "typecheck": "tsc -b --noEmit",
+    "postbuild:data": "tsx scripts/build-references.ts"
+  },
+  "dependencies": {
+    "@fontsource-variable/geist": "^5.3.0",
+    "@fontsource-variable/geist-mono": "^5.3.0",
+    "@react-three/drei": "^10.7.8",
+    "@react-three/fiber": "^9.8.1",
+    "@react-three/postprocessing": "^3.1.2",
+    "echarts": "^6.1.0",
+    "motion": "^13.4.3",
+    "postprocessing": "^6.39.5",
+    "react": "^19.3.0",
+    "react-dom": "^19.3.0",
+    "three": "^0.186.1"
+  },
+  "devDependencies": {
+    "@tailwindcss/vite": "^4.3.3",
+    "@types/js-yaml": "^4.0.9",
+    "@types/node": "^26.6.2",
+    "@types/papaparse": "^5.5.2",
+    "@types/react": "^19.3.0",
+    "@types/react-dom": "^19.3.0",
+    "@types/three": "^0.186.0",
+    "@vitejs/plugin-react": "^6.1.1",
+    "cheerio": "^1.2.0",
+    "fflate": "^0.8.3",
+    "js-yaml": "^5.4.2",
+    "papaparse": "^5.7.0",
+    "tailwindcss": "^4.3.3",
+    "tsx": "^4.23.15",
+    "typescript": "^7.0.2",
+    "vite": "^8.3.1",
+    "vitest": "^5.0.1",
+    "zod": "^4.6.5"
+  }
+}

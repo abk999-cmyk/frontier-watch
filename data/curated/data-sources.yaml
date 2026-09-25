@@ -1,0 +1,293 @@
+# Machine-readable data sources for the fetch scripts, each tested with curl on 2026-09-24.
+#
+# Format (one list entry per URL)
+#   id        kebab-case, stable
+#   url       exact URL that was fetched (follow redirects: curl -L)
+#   status    final HTTP status seen on 2026-09-24
+#   format    zip | csv | yaml | json | html | parquet (content-type in notes where useful)
+#   columns   header row / top-level keys, verbatim
+#   notes     row counts, date coverage, caveats, how to derive things
+#   checked   date of the curl test
+# Entries with status 403/404 are recorded so nobody retries them.
+
+# ---------------------------------------------------------------- Epoch AI: benchmarks + ECI
+- id: epoch-benchmarks
+  url: https://epoch.ai/data/benchmark_data.zip
+  status: 200
+  format: zip/csv
+  columns: [README.md, benchmark_metadata.csv, model_metadata.csv, epoch_capabilities_index/eci_scores.csv, epoch_capabilities_index/edi_scores.csv, epoch_capabilities_index/processed_data_for_eci.csv, epoch_capabilities_index/eci_bootstraps.json, "<benchmark>.csv x 15 Epoch-run", "<benchmark>_external.csv x 66"]
+  notes: >-
+    application/zip, 2,317,359 bytes, 88 files (zip entries dated 2026-09-24). All 15 Epoch-run per-benchmark CSVs
+    (gpqa_diamond, math_level_5, swe_bench_verified, otis_mock_aime_2024_2025, frontiermath*, simpleqa_verified,
+    chess_puzzles, mystery_game_puzzles, ...) share the header [Model version, mean_score, Best score (across scorers),
+    Release date, Organization, Country, Training compute (FLOP), Training compute notes, stderr, Log viewer, Logs,
+    Started at, id]. Scores are 0-1. The "Model version" carries an effort suffix (e.g. qwen3.8-max-0902_xhigh).
+    *_external.csv files have benchmark-specific headers. benchmark_metadata.csv header: [benchmark, in_eci,
+    source_file, score_column, scale, random_baseline, score_ceiling, release_date, superseded_by].
+    CC BY 4.0, cite "Epoch AI, 'Capabilities & Benchmarking'".
+  checked: 2026-09-24
+
+- id: epoch-eci-scores
+  url: https://epoch.ai/data/benchmark_data.zip#epoch_capabilities_index/eci_scores.csv
+  status: 200
+  format: csv (inside zip)
+  columns: [Model, Display name, eci, eci_ci_low, eci_ci_high, date, Organization, Country (of organization), Model accessibility, Accessibility group, model_versions]
+  notes: >-
+    268 rows, one per model. date ranges 2023-02-24 to 2026-09-09. The first row is "GPT-6 Astra, 166.6
+    (163.0-172.03), 2026-09-03". The ECI scale is anchored at Claude 3.5 Sonnet = 130 and GPT-5 = 150.
+    model_versions is often blank.
+  checked: 2026-09-24
+
+- id: epoch-edi-scores
+  url: https://epoch.ai/data/edi_scores.csv
+  status: 200
+  format: csv
+  columns: [benchmark_name, is_anchor, benchmark_release_date, edi, estimated_slope_scaled]
+  notes: >-
+    Benchmark difficulty (edi, in ECI points) and 2PL discrimination (estimated_slope_scaled, logits per ECI point).
+    The same file is at epoch_capabilities_index/edi_scores.csv in the zip. The inference-cost repo uses it to map a
+    benchmark accuracy to ECI: C = logit(a)/slope + edi.
+  checked: 2026-09-24
+
+- id: epoch-metr-horizons-mirror
+  url: https://epoch.ai/data/benchmark_data.zip#metr_time_horizons_external.csv
+  status: 200
+  format: csv (inside zip)
+  columns: [Model version, Time horizon, average_score, Release date, Organization, Country, Training compute (FLOP), Training compute notes, CI_high, CI_low, Source, Source link, Notes, Time Horizon (80%), METR version, id]
+  notes: 50 rows (METR-Horizon-v1.0 and v1.1). The latest is claude-mythos-preview-early, 2026-04-07, 1044.78 min p50, the same as METR's YAML.
+  checked: 2026-09-24
+
+# ---------------------------------------------------------------- Epoch AI: models (training compute, dates)
+- id: epoch-all-ai-models
+  url: https://epoch.ai/data/all_ai_models.csv
+  status: 200
+  format: csv
+  columns: [Model, Domain, Task, Organization, Authors, Publication date, Reference, Link, Citations, Notability criteria, Notability criteria notes, Parameters, Parameters notes, Training compute (FLOP), Training compute notes, Training dataset size (total), Dataset size notes, Training time (hours), Training time notes, Training hardware, Approach, Confidence, Abstract, Epochs, WikiText and Penn Treebank data, Model accessibility, Country (of organization), Base model, Finetune compute (FLOP), Finetune compute notes, Hardware quantity, Hardware utilization (MFU), Last modified, Training cloud compute vendor, Training data center, Archived links, Batch size, Batch size notes, Organization categorization, Foundation model, Training compute lower bound, Training compute upper bound, Training chip-hours, Training code accessibility, Accessibility notes, Possibly over 1e23 FLOP, Training compute cost (2023 USD), Utilization notes, Numerical format, Frontier model, Training power draw (W), Training compute estimation method, Hugging Face developer id, Post-training compute (FLOP), Post-training compute notes, Hardware utilization (HFU), Open model weights?]
+  notes: >-
+    text/csv, 6.8 MB, 3,620 rows, 57 columns. Publication date runs 1950-07-02 to 2026-09-21.
+    Subsets at the same path: notable_ai_models.csv (1,072 rows, 47 cols), large_scale_ai_models.csv (532 rows, 34 cols,
+    2019-10-30 to 2026-09-09) and frontier_ai_models.csv (138 rows, 61 cols). All five are bundled in
+    https://epoch.ai/data/ai_models.zip (200, 3.3 MB).
+  checked: 2026-09-24
+
+# ---------------------------------------------------------------- Epoch AI: inference cost ("The plunging price of thought")
+- id: epoch-inference-cost-curves
+  url: https://raw.githubusercontent.com/droodman/inference-cost/main/data/cost_truncated_curves.csv
+  status: 200
+  format: csv
+  columns: [run_id, model, benchmark, effort, budget_axis, budget, acc, mean_tokens_used, mean_output_tokens, mean_input_tokens, mean_cached_input_tokens, mean_cache_write_tokens, cost_per_task_usd, full_run_acc, n_samples, price_date, price_source]
+  notes: >-
+    The core dataset behind "The plunging price of thought" (Epoch report, 2026-09-22,
+    https://epoch.ai/publications/the-plunging-price-of-thought; repo https://github.com/droodman/inference-cost,
+    public, default branch main, last push 2026-09-24T14:49Z). 15,959 rows, 1,298 runs, 225 models, 11 benchmarks:
+    gpqa, aime, chess, math_lvl5, fm_tiers1_3_v2, fm_2025_02_private, mystery_agent, swe_bench_verified, simpleqa,
+    fm_tier4_2025_07_private, fm_tier4_v2. Each run (model x benchmark x effort) is replayed at token caps
+    budget = 64, 128, ... 131072. budget_axis says whether output or total tokens are capped. acc is the accuracy
+    under that cap, and full_run_acc the uncapped accuracy (at the largest cap they agree for 1,232 of 1,298 runs).
+    cost_per_task_usd = mean tokens x the model's API price on price_date (price_source is mostly openrouter-wayback;
+    gpu-effective for open models without an API). The file has NO release date. Join model to
+    "Model versions-Grid view.csv" (below). The report page links /data/cost_truncated_curves.csv on epoch.ai, but
+    that URL returns 404 HTML, so use this raw GitHub URL.
+    HOW TO COMPUTE "cheapest cost per task to reach capability X over time" (the paper's Pareto cost frontier):
+    (1) Clean model names as prepare_data.R does: strip "-maas..." and a trailing "-YYYY-MM-DD..."; average duplicates
+    by (model, benchmark, effort, budget). (2) release_date = the earliest "Version release date" among registry ids
+    that start with the cleaned name (case-insensitive). (3) For one benchmark and threshold a,
+    C_t(a) = min{ cost_per_task_usd_i : acc_i >= a and release_date_i <= t }. Every (run, budget) row is a candidate
+    point, so a model can qualify cheaply with a small cap. Step t over dates to get a falling staircase. (4) Optionally
+    express a in ECI units with epoch-edi-scores: C = logit(a)/estimated_slope_scaled + edi. Headline results: -47% per
+    quarter (~13x/yr) since 2023, -66%/qtr (75x/yr) right after a level debuts as SOTA, and -32%/qtr two years later.
+  checked: 2026-09-24
+
+- id: epoch-inference-cost-model-registry
+  url: https://raw.githubusercontent.com/droodman/inference-cost/main/data/Model%20versions-Grid%20view.csv
+  status: 200
+  format: csv (UTF-8 with BOM; multi-line quoted cells)
+  columns: [id, Model, Version release date, Link, Notes, Hugging Face developer id, Display name, Knowledge cutoff date, Description, Official release, Unique display name, ML Models, ML Models 2, ML Models 3, Model publication date, API prices, API Prices (new), Model aggregation, Model aggregation date, ML Models copy, ML Models copy]
+  notes: 950 rows. Supplies the release dates for the cost curves (join on id prefix). The header repeats "ML Models copy".
+  checked: 2026-09-24
+
+- id: epoch-inference-cost-runs
+  url: https://raw.githubusercontent.com/droodman/inference-cost/main/data/benchmarks_runs-PUBLIC%20VIEW.csv
+  status: 200
+  format: csv (UTF-8 with BOM)
+  columns: [id, task, model, Best score (across scorers), Scores, log viewer, logs, job, started_at, Status, Manual evaluation, task version, billable_input_tokens, billable_output_tokens, cache_read_tokens, cache_write_tokens, comments]
+  notes: 1,383 raw eval runs with billable token counts. started_at uses the format "August 11, 2026 4:07pm".
+  checked: 2026-09-24
+
+- id: epoch-inference-cost-record-timelines
+  url: https://raw.githubusercontent.com/droodman/inference-cost/main/output/slides/Figure%202.csv
+  status: 200
+  format: csv
+  columns: [bench, benchmark, level, model_label, acc, date, cost, label_drawn, trace_label]
+  notes: >-
+    The report's Figure 2 data, already computed: the cost-record holders at 25% and 75% accuracy per benchmark
+    (level = 0.25 | 0.75, cost in USD per task, date = model release). This is the simplest ready-made
+    "cheapest cost to reach X" series. Companions: output/tables/staircase_check.csv [benchmark, decline_pct_qtr,
+    share_records_moved, n_nodes] gives the model-free decline rate per benchmark (e.g. GPQA Diamond 46.97%/qtr).
+    output/slides/Figure 1.csv compares cost declines across technologies (hand-made, non-UTF-8 dashes).
+  checked: 2026-09-24
+
+# ---------------------------------------------------------------- Epoch AI: LLM inference price trends (older, frozen)
+- id: epoch-llm-price-trends-lowest
+  url: https://epoch.ai/data/charts/llm-inference-price-trends/lowest_price_models_data.csv
+  status: 200
+  format: csv
+  columns: [Benchmark, Threshold model, Performance range, Model Name, Release Date, USD per 1M Tokens, Predicted log price, Benchmark score]
+  notes: >-
+    Yes, a CSV exists. It is the chart data from https://epoch.ai/data-insights/llm-inference-price-trends: 119 rows of
+    the cheapest model above a threshold set by a reference model (MMLU, GPQA Diamond, HumanEval, MATH-500, MATH 5,
+    LMSys Arena ELO). Frozen: the latest Release Date is 2025-02-05. Prices are per token, not per task. Prefer
+    epoch-inference-cost-curves for current data.
+  checked: 2026-09-24
+
+- id: epoch-llm-price-trends-other
+  url: https://epoch.ai/data/charts/llm-inference-price-trends/other_models_data.csv
+  status: 200
+  format: csv
+  columns: [Benchmark, Threshold model, Performance range, Model Name, Release Date, USD per 1M Tokens]
+  notes: 371 rows. These are the non-frontier models plotted beside the lowest-price series. Frozen, like the one above.
+  checked: 2026-09-24
+
+- id: epoch-cost-truncated-curves-epoch-host
+  url: https://epoch.ai/data/cost_truncated_curves.csv
+  status: 404
+  format: html
+  columns: []
+  notes: Linked relatively from the Plunging Price report, but it returns a 404 HTML page. Use epoch-inference-cost-curves.
+  checked: 2026-09-24
+
+# ---------------------------------------------------------------- METR time horizons
+- id: metr-time-horizons
+  url: https://metr.org/assets/benchmark_results_1_1.yaml
+  status: 200
+  format: yaml
+  columns: [benchmark_name, doubling_time_in_days, long_tasks_version, results, swaa_version]
+  notes: >-
+    application/x-yaml, 16,255 bytes. benchmark_name METR-Horizon-v1.1. results is keyed by model slug. Each entry has
+    {benchmark_name, metrics: {average_score.estimate, is_sota, p50_horizon_length {estimate, ci_low, ci_high},
+    p80_horizon_length {...}}, release_date, scaffolds}. Horizons are in minutes. 26 models, release_date 2019-02-14
+    (gpt2) to 2026-04-07 (claude_mythos_preview_early_inspect, p50 1044.78 min). doubling_time_in_days:
+    all_time_stitched 187.8, from_2023_on 128.7 (CI 104.4-158.0). Newest known file: the time-horizons page links
+    only 1_0 and 1_1. Also available: benchmark_results_1_0.yaml (200) and task_results_1_1.yaml (200, 686 KB,
+    per-task results). benchmark_results_1_2.yaml, benchmark_results_2_0.yaml and benchmark_results.yaml are 404.
+  checked: 2026-09-24
+
+# ---------------------------------------------------------------- Dr Alan D. Thompson (LifeArchitect.ai)
+- id: lifearchitect-asi-sheet
+  url: https://docs.google.com/spreadsheets/d/e/2PACX-1vRXekMEE3KEmD0ADHCGVBW1Ki0vFaectMyFgz0I1vu9qc1zfIjzLxih5xxeoKrSXCdq4chM-W-eTMDp/pub?output=csv
+  status: 200
+  format: csv
+  columns: ["#", Check, ASI milestone (2/50 achieved), Type, Last updated, Link 1, Link 2, Notes]
+  notes: >-
+    text/csv, 7,960 bytes, 55 data lines. 51 numbered milestones (# 0-50) plus section rows whose "#" cell is text
+    ("PHASE 1: EARLY ASI, DISCOVERY, AND SIMULATION", "PHASE 2: GOVERNANCE AND ECONOMIC TRANSFORMATION",
+    "PHASE 3: PHYSICAL WORLD INTEGRATION", "About this sheet"), which should be skipped. Check is an emoji status:
+    green circle = achieved (2), orange circle = partially achieved (32), white circle = not achieved (17). The CSV has
+    no legend; these meanings come from the same author's asi-animation.html legend ("Not achieved / Partially achieved /
+    Achieved"), and 2 greens matches the "2/50 achieved" header. The achieved count is
+    also embedded in the third header ("2/50 achieved"), so read columns by position. "Last updated" is free text
+    ("2025", "May/2026", "Dec/2025"). Example: 4,🟢,First major new mathematical proof,Logistics,May/2026,https://openai.com/index/model-disproves-discrete-geometry-conjecture/,...
+  checked: 2026-09-24
+
+- id: lifearchitect-agi-gauge
+  url: https://lifearchitect.ai/agi/
+  status: 200
+  format: html
+  columns: []
+  notes: >-
+    text/html, 303,249 bytes (send a browser User-Agent). Exactly one `gauge.set(` call, which holds the current AGI
+    countdown %. `gauge.setMinValue(0)` sits on a nearby line, so match the exact pattern. Snippet (line ~3091):
+      gauge.animationSpeed = 64; // set animation speed (32 is default value) 128 slow, 32 fast
+      gauge.set(99); // set actual value //Alan change this! adt
+    Regex: gauge\.set\(\s*([0-9.]+)\s*\)  -> "99" on 2026-09-24. This page has no EVENTS_RAW.
+  checked: 2026-09-24
+
+- id: lifearchitect-asi-animation
+  url: https://lifearchitect.ai/asi-animation.html
+  status: 200
+  format: html
+  columns: []
+  notes: >-
+    text/html, 30,411 bytes. `const EVENTS_RAW = [` at line ~324 is a JS array of 80 entries shaped
+    [monthStr "Mon/YYYY", order (int, same-month tiebreak; the page adds order x 2 days to the timestamp), [milestone ids],
+    isAchieved?]. The optional 4th element `true` marks ids reaching "achieved" (green). Ids in events without it show
+    as "partially achieved" (orange; legend: grey Not achieved / orange Partially achieved / green Achieved). Snippet:
+      const EVENTS_RAW = [
+        ["Jul/2022",0,[1]],
+        ["May/2026",5,[4,5],true],
+    It runs from Jul/2022 to Aug/2026, and only the May/2026 entry (ids 4, 5) carries true. Ids match the sheet's "#".
+    Extract the block with (?s)const EVENTS_RAW = \[(.*?)\n\]; and then parse each entry with
+    \[\s*"([A-Z][a-z]{2}/\d{4})"\s*,\s*(\d+)\s*,\s*\[([\d,\s]*)\]\s*(?:,\s*(true))?\s*\]
+    The page also defines `const PHASES` (line ~298). It has no gauge.set.
+  checked: 2026-09-24
+
+# ---------------------------------------------------------------- LEV / longevity (used by lev.yaml)
+- id: owid-life-expectancy
+  url: https://ourworldindata.org/grapher/life-expectancy.csv
+  status: 200
+  format: csv
+  columns: [Entity, Code, Year, Life expectancy]
+  notes: >-
+    Period life expectancy at birth, 1543-2023, 265 entities. Append ?v=1&csvType=full&useColumnShortNames=true for
+    stable names [entity, code, year, life_expectancy_0]. Metadata at the same path with .metadata.json
+    (lastUpdated 2025-10-22, nextUpdate 2026-10-22). Grapher CSVs work by swapping the page URL's ending for .csv.
+  checked: 2026-09-24
+
+- id: owid-remaining-life-expectancy
+  url: https://ourworldindata.org/grapher/remaining-life-expectancy-at-different-ages.csv
+  status: 200
+  format: csv
+  columns: [Entity, Code, Year, Age 0 (birth), Age 10, Age 15, Age 25, Age 45, Age 65, Age 80]
+  notes: Remaining years, 1751-2023, 264 entities. The short column for 65 is life_expectancy__sex_total__age_65__type_period.
+  checked: 2026-09-24
+
+- id: owid-record-life-expectancy
+  url: https://ourworldindata.org/grapher/maximum-life-expectancy-sex-female.csv
+  status: 200
+  format: csv
+  columns: [Entity, Year, Life expectancy, "Country with yearly maximum life expectancy - Sex: female"]
+  notes: >-
+    Record female period e0 per year, 1840-2023 (184 rows; HMD countries). The OLS slope is 0.251 years/year over
+    1840-2023. The male/total variants (-sex-male, -sex-total, maximum-life-expectancy) return 404.
+  checked: 2026-09-24
+
+- id: owid-survival-ages
+  url: https://ourworldindata.org/grapher/survival-ages-across-the-population.csv
+  status: 200
+  format: csv
+  columns: [Entity, Code, Year, "99%", "90%", "80%", "70%", "60%", "50%", "40%", "30%", "20%", "10%", Top 1%]
+  notes: The age reached by each share of a period cohort, i.e. a survival curve sampled at percentiles. 46 HMD countries, 1751-2024.
+  checked: 2026-09-24
+
+- id: owid-hmd-life-tables
+  url: https://catalog.ourworldindata.org/garden/hmd/2025-10-22/hmd/life_tables.parquet
+  status: 200
+  format: parquet
+  columns: [country, year, sex, age, type, central_death_rate, probability_of_death, average_survival_length, number_survivors, number_deaths, number_person_years_lived, number_person_years_remaining, life_expectancy]
+  notes: >-
+    40.4 MB, 2,168,166 rows: full Human Mortality Database period and cohort life tables (46 countries), with no HMD
+    login needed. number_survivors = l(x) with radix 100,000. The .feather twin is 200 and .csv is 404. The date folder
+    is versioned (2024-12-01 also exists). data/curated/survival-curves.csv was extracted from this file.
+  checked: 2026-09-24
+
+- id: metaculus-lev-6592
+  url: https://www.metaculus.com/api/posts/6592/
+  status: 403
+  format: json
+  columns: []
+  notes: >-
+    The API needs an account token ("The API is only available to authenticated users..."); /api2/questions/6592/ is the
+    same. The HTML page (https://www.metaculus.com/questions/6592/) is a Cloudflare challenge for curl (403) but renders
+    in a real browser, with aggregations.recency_weighted.history embedded. Values are 0-1 on a linear scale:
+    date = 2021-03-23 + x * (2200-01-01 - 2021-03-23), i.e. unix 1616457600 + x * 5641660800.
+  checked: 2026-09-24
+
+- id: manifold-market
+  url: https://api.manifold.markets/v0/market/SIIqNAUdLI
+  status: 200
+  format: json
+  columns: [id, question, url, outcomeType, probability, uniqueBettorCount, volume, createdTime, closeTime, isResolved, resolution, resolutionTime, lastBetTime, answers]
+  notes: >-
+    Public, no key needed. probability is 0-1 and times are epoch ms. MULTIPLE_CHOICE markets have answers[] with
+    text + probability. Search: https://api.manifold.markets/v0/search-markets?term=longevity%20escape%20velocity (200).
+  checked: 2026-09-24

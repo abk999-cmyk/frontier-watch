@@ -1,0 +1,830 @@
+# Major AI compute and infrastructure commitments, 2023 to today, as dated events.
+# Researched 2026-09-24. Every event's figures were checked against its `url` or one of its `sources`, unless the
+# note says otherwise. openai.com blocks automated fetches, so those posts were read through the Wayback Machine.
+# WSJ, Reuters and NYT links are paywalled; they are cited for attribution, and the numbers were confirmed in
+# another listed source unless the note says otherwise.
+#
+# Format (one list item per event):
+#   id            kebab-case, stable
+#   date          YYYY-MM-DD, the announcement or first-report date
+#   datePrecision optional; "month" when only the month is known (then date = the 1st)
+#   company       openai | anthropic | xai | google | microsoft | meta | amazon | oracle | other
+#                 (the party making the commitment or building; national programs = other; xai includes SpaceXAI)
+#   counterparties  list of other parties
+#   title         short title
+#   usdBillions   headline US$ value (null if none given, or if only a non-USD amount was given; see note)
+#   gigawatts     headline power capacity (null if none given)
+#   horizon       free text for the period covered, or null
+#   status        announced  = plan, pledge, letter of intent, term sheet, target, claim or press report
+#                 contracted = definitive agreement or signed order disclosed, a closed funding round, or capacity delivered
+#                 revised    = a later event (supersededBy) changed or replaced it
+#                 cancelled  = abandoned
+#   supersededBy  id of the later event that revises this one, or null
+#   note          caveats, what the numbers mean, later developments
+#   url           primary source where possible
+#   sources       optional extra urls
+#
+# Caveats: $ and GW figures are not additive. Many deals overlap (Stargate totals include the Oracle and CoreWeave
+# capacity; the $1.4T claim included the chip deals). usdBillions sometimes means spending, sometimes an
+# investment into the company, sometimes contract value. The note says which.
+
+# ---------------------------------------------------------------- OpenAI
+- id: stargate-launch
+  date: 2025-01-21
+  company: openai
+  counterparties: [SoftBank, Oracle, MGX]
+  title: Stargate joint venture announced
+  usdBillions: 500
+  gigawatts: 10
+  horizon: "4 years"
+  status: announced
+  supersededBy: null
+  note: >-
+    "The Stargate Project is a new company which intends to invest $500 billion over the next four years",
+    with $100B to be deployed immediately. Equity funders are SoftBank, OpenAI, Oracle and MGX. The launch post
+    gives no GW figure; OpenAI first tied "$500 billion into 10 gigawatts" in its 2025-07-22 post. Progress is in
+    stargate-five-new-sites.
+  url: https://openai.com/index/announcing-the-stargate-project/
+
+- id: openai-coreweave-11-9b
+  date: 2025-03-10
+  company: openai
+  counterparties: [CoreWeave]
+  title: CoreWeave–OpenAI commercial agreement
+  usdBillions: 11.9
+  gigawatts: null
+  horizon: "through Oct 2030"
+  status: contracted
+  supersededBy: null
+  note: >-
+    CoreWeave's 10-Q: OpenAI "committed to pay the Company up to $11.9 billion through October 2030", and in May 2025
+    a further "up to $4.0 billion through April 2029". A third order came in Sep 2025 (openai-coreweave-6-5b). The
+    date is Reuters' report of the March deal.
+  url: https://www.sec.gov/Archives/edgar/data/1769628/000176962825000014/crwv-20250331.htm
+  sources: [https://www.reuters.com/technology/artificial-intelligence/coreweave-strikes-12-billion-contract-with-openai-ahead-ipo-sources-say-2025-03-10/]
+
+- id: stargate-uae
+  date: 2025-05-22
+  company: openai
+  counterparties: [G42, Oracle, Nvidia, Cisco, SoftBank]
+  title: Stargate UAE, a 1 GW cluster in the 5 GW UAE–US AI campus
+  usdBillions: null
+  gigawatts: 1
+  horizon: "first 200 MW in 2026"
+  status: announced
+  supersededBy: null
+  note: >-
+    G42 builds a 1 GW cluster that OpenAI and Oracle will operate, inside the 10-square-mile, 5 GW UAE–US AI campus
+    in Abu Dhabi announced during Trump's Gulf trip the week before. The first 200 MW is due in 2026.
+  url: https://www.cnbc.com/2025/05/22/stargate-uae-openai-nvidia-oracle.html
+
+- id: openai-oracle-4-5gw
+  date: 2025-07-22
+  company: openai
+  counterparties: [Oracle]
+  title: Oracle agrees to develop 4.5 GW of additional Stargate capacity
+  usdBillions: null
+  gigawatts: 4.5
+  horizon: null
+  status: revised
+  supersededBy: openai-oracle-300b
+  note: >-
+    With Abilene this brought Stargate to over 5 GW under development (over 2 million chips). OpenAI said it now
+    expected to exceed its $500B, 10 GW commitment. The $300B contract value was reported in September.
+  url: https://openai.com/index/stargate-advances-with-partnership-with-oracle/
+
+- id: openai-oracle-300b
+  date: 2025-09-10
+  company: openai
+  counterparties: [Oracle]
+  title: Oracle–OpenAI $300B cloud contract
+  usdBillions: 300
+  gigawatts: 4.5
+  horizon: "5 years"
+  status: contracted
+  supersededBy: null
+  note: >-
+    First reported by the WSJ. OpenAI confirmed on 2025-09-23 that the 4.5 GW Oracle partnership "exceeds $300 billion
+    between the two companies over the next five years".
+  url: https://www.wsj.com/business/openai-oracle-sign-300-billion-computing-deal-among-biggest-in-history-ff27c8fe
+  sources: [https://openai.com/index/five-new-stargate-sites/]
+
+- id: openai-nvidia-10gw-loi
+  date: 2025-09-22
+  company: openai
+  counterparties: [Nvidia]
+  title: Nvidia–OpenAI letter of intent for 10 GW and up to $100B investment
+  usdBillions: 100
+  gigawatts: 10
+  horizon: "first GW in 2H 2026 (Vera Rubin)"
+  status: revised
+  supersededBy: openai-nvidia-ports-pike-8gw
+  note: >-
+    A letter of intent: Nvidia "intends to invest up to $100 billion in OpenAI progressively as each gigawatt is
+    deployed", so the $ is Nvidia's investment, not OpenAI's spending. By 2026-02-03 no contract had been signed
+    (CNBC; the WSJ had reported the deal "on ice" on 2026-01-30). Nvidia put $30B into OpenAI's Feb 2026 round
+    instead (openai-110b-funding-round), and in Aug 2026 the compute side was restructured as the 8 GW PORTS-Pike lease.
+  url: https://openai.com/index/openai-nvidia-systems-partnership/
+  sources: [https://www.cnbc.com/2026/02/03/nvidia-openai-stalled-on-their-mega-deal-ai-giants-need-each-other.html]
+
+- id: stargate-five-new-sites
+  date: 2025-09-23
+  company: openai
+  counterparties: [Oracle, SoftBank, Vantage]
+  title: Five new Stargate sites bring planned capacity to nearly 7 GW
+  usdBillions: 400
+  gigawatts: 7
+  horizon: "3 years"
+  status: announced
+  supersededBy: null
+  note: >-
+    Totals are cumulative for Stargate: "nearly 7 gigawatts of planned capacity and over $400 billion in investment
+    over the next three years", including Abilene and CoreWeave projects. Oracle sites (Shackelford County TX, Doña
+    Ana County NM, Wisconsin with Vantage) plus a 600 MW Abilene expansion reach over 5.5 GW. SoftBank sites
+    (Lordstown OH, Milam County TX) can reach 1.5 GW within 18 months. OpenAI called this "a clear path to securing
+    the full $500 billion, 10-gigawatt commitment ... by the end of 2025".
+  url: https://openai.com/index/five-new-stargate-sites/
+
+- id: openai-coreweave-6-5b
+  date: 2025-09-25
+  company: openai
+  counterparties: [CoreWeave]
+  title: New CoreWeave order form of up to $6.5B
+  usdBillions: 6.5
+  gigawatts: null
+  horizon: "through 2031-05-31"
+  status: contracted
+  supersededBy: null
+  note: >-
+    Signed 2025-09-23 and disclosed in a CoreWeave 8-K on 2025-09-25. It sits under the master services agreement of
+    2025-05-08. OpenAI's CoreWeave commitments
+    now total about $22.4B ($11.9B + $4.0B + $6.5B).
+  url: https://www.sec.gov/Archives/edgar/data/1769628/000119312525216497/d17274d8k.htm
+
+- id: openai-amd-6gw
+  date: 2025-10-06
+  company: openai
+  counterparties: [AMD]
+  title: AMD–OpenAI 6 GW Instinct GPU agreement
+  usdBillions: null
+  gigawatts: 6
+  horizon: "multi-year; first 1 GW (MI450) from 2H 2026"
+  status: contracted
+  supersededBy: null
+  note: >-
+    Described as a "definitive agreement". AMD gave OpenAI a warrant for up to 160M AMD shares (about 10%) that vests
+    with deployment milestones and AMD share-price targets. AMD expects "tens of billions of dollars in revenue".
+  url: https://openai.com/index/openai-amd-strategic-partnership/
+
+- id: openai-broadcom-10gw
+  date: 2025-10-13
+  company: openai
+  counterparties: [Broadcom]
+  title: Broadcom–OpenAI 10 GW of OpenAI-designed accelerators
+  usdBillions: null
+  gigawatts: 10
+  horizon: "2H 2026 to end of 2029"
+  status: announced
+  supersededBy: null
+  note: >-
+    The companies "have signed a term sheet" to deploy racks of the accelerators with Broadcom networking. No
+    dollar value was disclosed.
+  url: https://openai.com/index/openai-and-broadcom-announce-strategic-collaboration/
+
+- id: openai-microsoft-250b-azure
+  date: 2025-10-28
+  company: openai
+  counterparties: [Microsoft]
+  title: OpenAI contracts an incremental $250B of Azure in its recapitalization
+  usdBillions: 250
+  gigawatts: null
+  horizon: null
+  status: contracted
+  supersededBy: null
+  note: >-
+    "OpenAI has contracted to purchase an incremental $250B of Azure services", and Microsoft gave up its right of
+    first refusal as OpenAI's compute provider. Microsoft's stake in OpenAI Group PBC is about 27%, worth about $135B.
+  url: https://blogs.microsoft.com/blog/2025/10/28/the-next-chapter-of-the-microsoft-openai-partnership/
+
+- id: openai-aws-38b
+  date: 2025-11-03
+  company: openai
+  counterparties: [Amazon Web Services]
+  title: AWS–OpenAI $38B multi-year agreement
+  usdBillions: 38
+  gigawatts: null
+  horizon: "7 years"
+  status: revised
+  supersededBy: openai-amazon-100b-aws
+  note: >-
+    Starts immediately on hundreds of thousands of Nvidia GPUs, with growth over seven years. It was OpenAI's first
+    AWS contract, and was expanded in Feb 2026.
+  url: https://openai.com/index/aws-and-openai-partnership/
+  sources: [https://www.cnbc.com/2025/11/03/open-ai-amazon-aws-cloud-deal.html]
+
+- id: openai-1-4t-commitments
+  date: 2025-11-06
+  company: openai
+  counterparties: []
+  title: Altman cites about $1.4T of compute commitments over 8 years
+  usdBillions: 1400
+  gigawatts: null
+  horizon: "8 years"
+  status: revised
+  supersededBy: openai-compute-reset-600b
+  note: >-
+    Altman on X: "We are looking at commitments of about $1.4 trillion over the next 8 years". This is a total of
+    the deals above, not a new deal. The ~30 GW figure Altman gave in an Oct 2025 livestream was not confirmed in a
+    source fetched here, so gigawatts is null.
+  url: https://techcrunch.com/2025/11/06/sam-altman-says-openai-has-20b-arr-and-about-1-4-trillion-in-data-center-commitments/
+
+- id: openai-cerebras-750mw
+  date: 2026-01-14
+  company: openai
+  counterparties: [Cerebras]
+  title: Cerebras to deliver up to 750 MW to OpenAI
+  usdBillions: 10
+  gigawatts: 0.75
+  horizon: "through 2028"
+  status: contracted
+  supersededBy: null
+  note: >-
+    CNBC: the deal is worth "over $10 billion". Cerebras' S-1 lists OpenAI as a customer signed in 2026, holding
+    warrants for 33.4M shares that depend on its compute purchases.
+  url: https://www.cnbc.com/2026/01/14/cerebras-scores-openai-deal-worth-over-10-billion.html
+  sources: [https://www.sec.gov/Archives/edgar/data/2021728/000162828026033143/cerebras-sx1a2.htm]
+
+- id: openai-compute-reset-600b
+  date: 2026-02-20
+  company: openai
+  counterparties: []
+  title: OpenAI resets its target to about $600B of compute spend by 2030
+  usdBillions: 600
+  gigawatts: null
+  horizon: "through 2030"
+  status: announced
+  supersededBy: null
+  note: >-
+    CNBC, citing sources: OpenAI told investors it targets "roughly $600 billion in total compute spend by 2030", months
+    after Altman's $1.4T figure, alongside a revenue target of over $280B in 2030 (versus $13.1B in 2025).
+  url: https://www.cnbc.com/2026/02/20/openai-resets-spend-expectations-targets-around-600-billion-by-2030.html
+
+- id: openai-110b-funding-round
+  date: 2026-02-27
+  company: openai
+  counterparties: [Nvidia, SoftBank, Amazon]
+  title: OpenAI $110B funding round
+  usdBillions: 110
+  gigawatts: null
+  horizon: null
+  status: announced
+  supersededBy: null
+  note: >-
+    Includes $30B from Nvidia (against the "up to $100B" in the Sep 2025 letter of intent), $30B from SoftBank, and
+    Amazon's commitment of up to $50B. This is equity to fund compute, not a compute purchase.
+  url: https://www.cnbc.com/2026/02/27/amazon-open-ai-cloud-jassy-altman.html
+
+- id: openai-amazon-100b-aws
+  date: 2026-02-27
+  company: openai
+  counterparties: [Amazon Web Services]
+  title: OpenAI expands AWS to $100B over 8 years, including 2 GW of Trainium
+  usdBillions: 100
+  gigawatts: 2
+  horizon: "8 years"
+  status: announced
+  supersededBy: null
+  note: >-
+    "OpenAI will spend $100 billion on AWS over the next eight years, an expansion of its existing $38 billion
+    agreement", including a commitment to deploy 2 GW of Trainium for its Frontier platform. Amazon committed to
+    invest up to $50B in OpenAI.
+  url: https://www.cnbc.com/2026/02/27/amazon-open-ai-cloud-jassy-altman.html
+
+- id: openai-nvidia-ports-pike-8gw
+  date: 2026-08-17
+  company: openai
+  counterparties: [Nvidia, SB Energy, SoftBank]
+  title: OpenAI takes an 8 GW lease at SB Energy's PORTS-Pike campus in Ohio, backed by Nvidia
+  usdBillions: null
+  gigawatts: 8
+  horizon: "20-year lease; capacity from 2028"
+  status: contracted
+  supersededBy: null
+  note: >-
+    SB Energy builds and runs the campus and leases 8 IT-GW to OpenAI for 20 years: 4.25 GW firm plus an option on
+    3.75 GW. Nvidia is the exclusive compute supplier, invests $1.5B in SB Energy and provides credit support. The
+    Reuters headline says the guarantee is up to $105B; that article could not be fetched.
+  url: https://nvidianews.nvidia.com/news/nvidia-guarantees-sb-energy-s-ports-pike-technology-campus-in-ohio-to-exclusively-host-nvidia-ai-compute
+  sources: [https://www.reuters.com/business/media-telecom/nvidia-invest-15-billion-sb-energy-under-openai-data-center-deal-2026-08-17/]
+
+# ---------------------------------------------------------------- Anthropic
+- id: anthropic-amazon-4b
+  date: 2023-09-25
+  company: anthropic
+  counterparties: [Amazon]
+  title: Amazon to invest up to $4B in Anthropic
+  usdBillions: 4
+  gigawatts: null
+  horizon: null
+  status: contracted
+  supersededBy: null
+  note: >-
+    This made AWS Anthropic's main cloud provider. Amazon added $4B more in Nov 2024, for $8B before the 2026 deals
+    (see anthropic-amazon-5gw-100b). This is an investment into Anthropic, not a compute purchase.
+  url: https://www.anthropic.com/news/anthropic-amazon
+
+- id: anthropic-google-tpu-1gw
+  date: 2025-10-23
+  company: anthropic
+  counterparties: [Google]
+  title: Anthropic expands to up to 1M Google TPUs, well over 1 GW in 2026
+  usdBillions: null
+  gigawatts: 1
+  horizon: "online in 2026"
+  status: announced
+  supersededBy: null
+  note: >-
+    "Worth tens of billions of dollars", with "well over a gigawatt of capacity online in 2026" (gigawatts is a
+    lower bound). Expanded in Apr 2026 (anthropic-google-broadcom-3-5gw).
+  url: https://www.anthropic.com/news/expanding-our-use-of-google-cloud-tpus-and-services
+
+- id: amazon-project-rainier-live
+  date: 2025-10-29
+  company: amazon
+  counterparties: [Anthropic]
+  title: Project Rainier ($11B Indiana Trainium2 campus for Anthropic) goes live
+  usdBillions: 11
+  gigawatts: null
+  horizon: null
+  status: contracted
+  supersededBy: null
+  note: >-
+    An $11B campus in New Carlisle, Indiana, on 1,200 acres, dedicated to training and serving Anthropic's models
+    on Trainium2 without Nvidia. By Apr 2026 Anthropic said it used over one million Trainium2 chips.
+  url: https://www.cnbc.com/2025/10/29/amazon-opens-11-billion-ai-data-center-project-rainier-in-indiana.html
+
+- id: anthropic-fluidstack-50b
+  date: 2025-11-12
+  company: anthropic
+  counterparties: [Fluidstack]
+  title: Anthropic to invest $50B in US data centers with Fluidstack
+  usdBillions: 50
+  gigawatts: null
+  horizon: "sites coming online through 2026"
+  status: announced
+  supersededBy: null
+  note: >-
+    Data centers in Texas and New York built with Fluidstack. Anthropic later called the Apr 2026 Google/Broadcom
+    deal "a major expansion" of this $50B commitment.
+  url: https://www.anthropic.com/news/anthropic-invests-50-billion-in-american-ai-infrastructure
+
+- id: anthropic-microsoft-nvidia-30b
+  date: 2025-11-18
+  company: anthropic
+  counterparties: [Microsoft, Nvidia]
+  title: Anthropic commits $30B to Azure; Nvidia and Microsoft to invest up to $15B
+  usdBillions: 30
+  gigawatts: 1
+  horizon: null
+  status: contracted
+  supersededBy: null
+  note: >-
+    Anthropic "committed to purchase $30 billion of Azure compute capacity and to contract additional compute
+    capacity up to one gigawatt" on Grace Blackwell and Vera Rubin. Nvidia will invest up to $10B and Microsoft up
+    to $5B in Anthropic.
+  url: https://www.anthropic.com/news/microsoft-nvidia-anthropic-announce-strategic-partnerships
+
+- id: anthropic-google-broadcom-3-5gw
+  date: 2026-04-06
+  company: anthropic
+  counterparties: [Google, Broadcom]
+  title: Multi-gigawatt TPU agreement with Google and Broadcom (about 3.5 GW via Broadcom, from 2027)
+  usdBillions: null
+  gigawatts: 3.5
+  horizon: "from 2027"
+  status: contracted
+  supersededBy: null
+  note: >-
+    Anthropic's post: "signed a new agreement ... for multiple gigawatts of next-generation TPU capacity". Broadcom's
+    8-K: Anthropic "will access through Broadcom approximately 3.5 gigawatts as part of the multiple gigawatts",
+    depending on Anthropic's commercial success. On 2026-05-06 Anthropic called it "a 5 GW agreement with Google and
+    Broadcom".
+  url: https://www.anthropic.com/news/google-broadcom-partnership-compute
+  sources: [https://www.sec.gov/Archives/edgar/data/1730168/000119312526144028/d87999d8k.htm, https://www.anthropic.com/news/higher-limits-spacex]
+
+- id: anthropic-amazon-5gw-100b
+  date: 2026-04-20
+  company: anthropic
+  counterparties: [Amazon]
+  title: Anthropic commits over $100B over 10 years to AWS for up to 5 GW
+  usdBillions: 100
+  gigawatts: 5
+  horizon: "10 years; nearly 1 GW by end-2026"
+  status: contracted
+  supersededBy: null
+  note: >-
+    Covers Graviton and Trainium2 through Trainium4, with nearly 1 GW of Trainium2/3 by the end of 2026. Amazon
+    invests $5B now and up to $20B more, on top of its earlier $8B.
+  url: https://www.anthropic.com/news/anthropic-amazon-compute
+
+- id: anthropic-spacex-colossus-1
+  date: 2026-05-06
+  company: anthropic
+  counterparties: [SpaceX, SpaceXAI]
+  title: Anthropic rents all of SpaceX's Colossus 1 (over 300 MW)
+  usdBillions: null
+  gigawatts: 0.3
+  horizon: "through May 2029"
+  status: contracted
+  supersededBy: null
+  note: >-
+    All capacity at Colossus 1 in Memphis: "more than 300 megawatts ... (over 220,000 NVIDIA GPUs) within the
+    month". Per SpaceX's prospectus (reported by CNBC), Anthropic pays $1.25B a month through May 2029. The total was
+    not disclosed, so usdBillions is null. Anthropic also expressed interest in multi-GW orbital compute with SpaceX.
+  url: https://www.anthropic.com/news/higher-limits-spacex
+  sources: [https://www.cnbc.com/2026/07/22/amd-anthropic-ai-chip-investment.html]
+
+- id: anthropic-amd-2gw
+  date: 2026-07-22
+  company: anthropic
+  counterparties: [AMD]
+  title: AMD–Anthropic 2 GW of MI450 GPUs; AMD to invest up to $5B
+  usdBillions: null
+  gigawatts: 2
+  horizon: "first GW in 1H 2027"
+  status: announced
+  supersededBy: null
+  note: >-
+    Anthropic will deploy 2 GW of AMD Instinct MI450 in Helios racks. AMD will invest up to $5B in Anthropic "in the
+    future". No purchase value was disclosed.
+  url: https://www.cnbc.com/2026/07/22/amd-anthropic-ai-chip-investment.html
+  sources: [https://ir.amd.com/news-events/press-releases/detail/1292/amd-and-anthropic-announce-strategic-partnership-to-deploy-up-to-2-gigawatts-of-amd-instinct-mi450-series-gpus]
+
+- id: anthropic-nscale-45b
+  date: 2026-08-26
+  company: anthropic
+  counterparties: [Nscale]
+  title: Anthropic–Nscale cloud deal of about $45B (460 MW, West Virginia)
+  usdBillions: 45
+  gigawatts: 0.46
+  horizon: "operational from late 2027"
+  status: announced
+  supersededBy: null
+  note: >-
+    CNBC confirmed it through sources; neither company had announced it. Covers about 460 MW at an Nscale site in
+    West Virginia on Nvidia Vera Rubin.
+  url: https://www.cnbc.com/2026/08/26/anthropic-and-nscale-strike-45-billion-cloud-deal-sources-say.html
+
+# ---------------------------------------------------------------- xAI / SpaceXAI
+- id: xai-series-b
+  date: 2024-05-26
+  company: xai
+  counterparties: [Valor Equity Partners, Vy Capital, Andreessen Horowitz, Sequoia Capital, Fidelity, Kingdom Holding]
+  title: xAI raises $6B Series B
+  usdBillions: 6
+  gigawatts: null
+  horizon: null
+  status: contracted
+  supersededBy: null
+  note: This round funded the first Colossus build in Memphis.
+  url: https://x.ai/news/series-b
+
+- id: xai-colossus-1-online
+  date: 2024-09-02
+  company: xai
+  counterparties: [Nvidia]
+  title: Colossus 1 (100k H100) online in Memphis after 122 days
+  usdBillions: null
+  gigawatts: null
+  horizon: null
+  status: contracted
+  supersededBy: null
+  note: >-
+    Came online over the 2024 Labor Day weekend with 100,000 H100s, built in 122 days. xAI planned to double it to
+    200k Hopper GPUs. Epoch (Sep 2026) estimates 340 MW of IT power and $12.9B capital cost today. Leased in full to
+    Anthropic from May 2026.
+  url: https://fortune.com/2024/09/03/elon-musk-xai-nvidia-colossus/
+  sources: [https://x.ai/news/series-c, https://epoch.ai/data/ai-data-centers/directory/colossus-1]
+
+- id: xai-series-c
+  date: 2024-12-23
+  company: xai
+  counterparties: [Nvidia, AMD, BlackRock, Fidelity, Sequoia Capital, MGX, QIA, Kingdom Holding]
+  title: xAI raises $6B Series C
+  usdBillions: 6
+  gigawatts: null
+  horizon: null
+  status: contracted
+  supersededBy: null
+  note: Nvidia and AMD joined as strategic investors. The stated use was to scale Colossus.
+  url: https://x.ai/news/series-c
+
+- id: xai-series-e
+  date: 2026-01-06
+  company: xai
+  counterparties: [Nvidia, Cisco, Valor Equity Partners, StepStone, Fidelity, QIA, MGX, Baron Capital]
+  title: xAI raises $20B Series E
+  usdBillions: 20
+  gigawatts: null
+  horizon: null
+  status: contracted
+  supersededBy: null
+  note: >-
+    Upsized from a $15B target, with Nvidia and Cisco as strategic investors. xAI said Colossus I and II ended 2025
+    with "over one million H100 GPU equivalents".
+  url: https://x.ai/news/series-e
+
+- id: spacex-acquires-xai
+  date: 2026-02-02
+  company: xai
+  counterparties: [SpaceX]
+  title: SpaceX acquires xAI (renamed SpaceXAI in July 2026)
+  usdBillions: null
+  gigawatts: null
+  horizon: null
+  status: contracted
+  supersededBy: null
+  note: >-
+    An all-stock deal valuing xAI at $250B and SpaceX at $1T (Reuters). SpaceX then began renting Colossus capacity to
+    outside customers (Anthropic, Google). The SpaceXAI rename is per Wikipedia.
+  url: https://finance.yahoo.com/news/musks-spacex-merge-xai-combined-212210116.html
+  sources: [https://en.wikipedia.org/wiki/SpaceXAI]
+
+- id: google-spacex-compute
+  date: 2026-06-05
+  company: google
+  counterparties: [SpaceX, SpaceXAI]
+  title: Google rents xAI data-center capacity from SpaceX at $920M a month
+  usdBillions: 29.4
+  gigawatts: null
+  horizon: "32 months from Oct 2026"
+  status: contracted
+  supersededBy: null
+  note: >-
+    $920M a month for 32 months for capacity at xAI data centers. usdBillions is that product ($29.4B); the NYT
+    reported about $30B.
+  sources: [https://www.nytimes.com/2026/06/05/technology/spacex-google-deal.html]
+  url: https://www.cnbc.com/2026/06/05/google-to-pay-spacex-920-million-a-month-for-xai-compute-capacity.html
+
+- id: xai-colossus-2
+  date: 2026-09-24
+  company: xai
+  counterparties: [Nvidia]
+  title: Colossus 2 at about 0.95 GW of IT power (Epoch estimate)
+  usdBillions: 35.8
+  gigawatts: 0.946
+  horizon: "Epoch projects 1.53 GW and $58B by Q1 2027"
+  status: contracted
+  supersededBy: null
+  note: >-
+    These are Epoch AI estimates (capital cost, IT power), not company disclosures, dated to Epoch's update. Epoch
+    puts current compute at about 1.11M H100-equivalents on B200/B300 chips. Land clearing began Feb 2025, and power
+    comes from gas turbines across the Mississippi state line. Users are SpaceXAI, Anthropic and Cursor.
+  url: https://epoch.ai/data/ai-data-centers/directory/colossus-2
+
+# ---------------------------------------------------------------- Meta
+- id: meta-prometheus-hyperion
+  date: 2025-07-14
+  company: meta
+  counterparties: []
+  title: Zuckerberg announces Prometheus (1 GW, 2026) and Hyperion (up to 5 GW) superclusters
+  usdBillions: null
+  gigawatts: 6
+  horizon: "Prometheus 2026; Hyperion 2 GW by 2030, then 5 GW"
+  status: announced
+  supersededBy: null
+  note: >-
+    gigawatts = 1 GW Prometheus (New Albany, Ohio) + up to 5 GW Hyperion (Richland Parish, Louisiana). The plan was
+    posted on Threads. Later Hyperion financing and costs are in meta-blue-owl-hyperion-jv and meta-hyperion-5gw-50b.
+  url: https://techcrunch.com/2025/07/14/mark-zuckerberg-says-meta-is-building-a-5gw-ai-data-center/
+
+- id: meta-coreweave-14-2b
+  date: 2025-09-30
+  company: meta
+  counterparties: [CoreWeave]
+  title: Meta commits up to $14.2B to CoreWeave
+  usdBillions: 14.2
+  gigawatts: null
+  horizon: "through 2031-12-14 (option into 2032)"
+  status: contracted
+  supersededBy: null
+  note: >-
+    A new order form signed 2025-09-25 under the Dec 2023 master services agreement, disclosed in a CoreWeave 8-K
+    filed 2025-09-30. Meta has an
+    option to expand materially. Mar 2026 brought a further ~$21B (meta-coreweave-21b).
+  url: https://www.sec.gov/Archives/edgar/data/1769628/000176962825000050/crwv-20250925.htm
+
+- id: meta-blue-owl-hyperion-jv
+  date: 2025-10-21
+  company: meta
+  counterparties: [Blue Owl Capital]
+  title: Meta–Blue Owl joint venture to fund Hyperion (about $27B)
+  usdBillions: 27
+  gigawatts: null
+  horizon: null
+  status: contracted
+  supersededBy: null
+  note: >-
+    Blue Owl funds own 80% and Meta 20%. The partners fund their shares of about $27B in development costs for the
+    buildings and power, cooling and connectivity infrastructure, which keeps the project off Meta's balance sheet.
+    In Jul 2026 Meta raised Hyperion's planned investment above $50B (meta-hyperion-5gw-50b).
+  url: https://about.fb.com/news/2025/10/meta-blue-owl-capital-develop-hyperion-data-center/
+
+- id: meta-600b-us
+  date: 2025-11-07
+  company: meta
+  counterparties: []
+  title: Meta pledges over $600B in the US by 2028
+  usdBillions: 600
+  gigawatts: null
+  horizon: "through 2028"
+  status: announced
+  supersededBy: null
+  note: >-
+    "Committing over $600 billion in the US by 2028 to support AI technology, infrastructure, and workforce
+    expansion". This is a broad pledge covering all US spending, not just compute.
+  url: https://about.fb.com/news/2025/11/meta-data-centers-drive-economic-growth-across-us/
+
+- id: meta-coreweave-21b
+  date: 2026-04-09
+  company: meta
+  counterparties: [CoreWeave]
+  title: Meta commits about $21B more to CoreWeave
+  usdBillions: 21
+  gigawatts: null
+  horizon: "through 2032-12-20"
+  status: contracted
+  supersededBy: null
+  note: >-
+    Signed 2026-03-31 and disclosed in a CoreWeave 8-K on 2026-04-09. Covers new capacity under a new order form
+    through 2032-12-20, plus exercise of an existing option under an earlier order form through 2032-04-10.
+  url: https://www.sec.gov/Archives/edgar/data/1769628/000176962826000154/crwv-20260331.htm
+
+- id: meta-hyperion-5gw-50b
+  date: 2026-07-13
+  company: meta
+  counterparties: []
+  title: Hyperion confirmed at 5 GW and over $50B
+  usdBillions: 50
+  gigawatts: 5
+  horizon: "about 2 GW by 2030; full build-out around 2032"
+  status: announced
+  supersededBy: null
+  note: >-
+    Meta said the Richland Parish campus will be a 5 GW data center costing more than $50B, up from the ~$27B
+    development budget in the Blue Owl JV.
+  url: https://www.cnbc.com/2026/07/13/meta-louisiana-data-center-investment-reaches-50-billion-amid-ai-push.html
+
+# ---------------------------------------------------------------- Microsoft
+- id: microsoft-80b-fy25
+  date: 2025-01-03
+  company: microsoft
+  counterparties: []
+  title: Microsoft plans about $80B for AI data centers in FY2025
+  usdBillions: 80
+  gigawatts: null
+  horizon: "FY2025 (Jul 2024-Jun 2025)"
+  status: announced
+  supersededBy: null
+  note: >-
+    More than half was to be spent in the US. Actual FY25 capex was $88.2B including finance leases (sum of the
+    headline figures in capex.yaml), or $64.6B of cash PP&E.
+  url: https://blogs.microsoft.com/on-the-issues/2025/01/03/the-golden-opportunity-for-american-ai/
+
+- id: microsoft-nebius
+  date: 2025-09-08
+  company: microsoft
+  counterparties: [Nebius]
+  title: Microsoft–Nebius GPU capacity contract ($17.4B, up to $19.4B)
+  usdBillions: 17.4
+  gigawatts: null
+  horizon: "5 years, through 2031"
+  status: contracted
+  supersededBy: null
+  note: >-
+    Dedicated GPU capacity from Nebius's Vineland, New Jersey site, delivered in tranches through 2025-26. Rises to
+    about $19.4B if Microsoft buys additional capacity (Nebius 6-K).
+  url: https://www.sec.gov/Archives/edgar/data/1513845/000110465925088312/tm2525580d1_6k.htm
+  sources: [https://nebius.com/newsroom/nebius-announces-multi-billion-dollar-agreement-with-microsoft-for-ai-infrastructure]
+
+- id: microsoft-fairwater-wisconsin
+  date: 2025-09-18
+  company: microsoft
+  counterparties: []
+  title: Fairwater AI datacenter in Wisconsin, plus $4B for a second
+  usdBillions: 7.3
+  gigawatts: null
+  horizon: "online early 2026; second site within 3 years"
+  status: announced
+  supersededBy: null
+  note: >-
+    usdBillions = the initial $3.3B pledge plus $4B more for a second datacenter of similar size (Microsoft says "more
+    than $7 billion" in Wisconsin). Microsoft called it the world's most powerful AI datacenter, with hundreds of
+    thousands of Nvidia GPUs. A second Fairwater site in Atlanta, linked to it as an "AI superfactory", was announced
+    2025-11-12 with no figures
+    (https://blogs.microsoft.com/blog/2025/11/12/infinite-scale-the-architecture-behind-the-azure-ai-superfactory/).
+  url: https://blogs.microsoft.com/on-the-issues/2025/09/18/made-in-wisconsin-the-worlds-most-powerful-ai-datacenter/
+
+- id: microsoft-iren
+  date: 2025-11-03
+  company: microsoft
+  counterparties: [IREN]
+  title: Microsoft–IREN $9.7B GPU cloud contract
+  usdBillions: 9.7
+  gigawatts: null
+  horizon: "multi-year"
+  status: contracted
+  supersededBy: null
+  note: A multi-year agreement for GPU cloud capacity on Nvidia GB300s.
+  url: https://iren.com/resources/blog/iren-signs97-billion-agreement-with-microsoft-to-deploy-ai-cloud-infrastructure
+
+# ---------------------------------------------------------------- Google, Amazon
+- id: google-texas-40b
+  date: 2025-11-14
+  company: google
+  counterparties: []
+  title: Google commits $40B in Texas through 2027
+  usdBillions: 40
+  gigawatts: null
+  horizon: "through 2027"
+  status: announced
+  supersededBy: null
+  note: Covers cloud and AI infrastructure, including new data-center campuses in Armstrong and Haskell counties.
+  url: https://blog.google/company-news/inside-google/company-announcements/google-american-innovation-texas/
+
+- id: amazon-us-gov-50b
+  date: 2025-11-24
+  company: amazon
+  counterparties: [US government]
+  title: Amazon to invest up to $50B in AI and supercomputing for US government agencies
+  usdBillions: 50
+  gigawatts: 1.3
+  horizon: "breaking ground in 2026"
+  status: announced
+  supersededBy: null
+  note: Adds nearly 1.3 GW across the AWS Top Secret, Secret and GovCloud (US) regions.
+  url: https://www.aboutamazon.com/news/company-news/amazon-ai-investment-us-federal-agencies
+
+# ---------------------------------------------------------------- National and multilateral programs
+- id: france-109b-eur
+  date: 2025-02-09
+  company: other
+  counterparties: [France]
+  title: Macron announces EUR 109B of private AI investment in France
+  usdBillions: null
+  gigawatts: null
+  horizon: null
+  status: announced
+  supersededBy: null
+  note: >-
+    EUR 109B of private investment (no USD figure given, so usdBillions is null), announced on the eve of the Paris AI
+    Action Summit and billed as France's answer to Stargate.
+  url: https://www.cnbc.com/2025/02/10/frances-answer-to-stargate-macron-announces-ai-investment.html
+
+- id: eu-investai-gigafactories
+  date: 2025-02-11
+  company: other
+  counterparties: [European Commission]
+  title: EU InvestAI, EUR 200B including a EUR 20B fund for AI gigafactories
+  usdBillions: null
+  gigawatts: null
+  horizon: null
+  status: announced
+  supersededBy: null
+  note: >-
+    Launched by von der Leyen at the Paris AI Action Summit to "mobilise EUR 200 billion", including "a new European
+    fund of EUR 20 billion for AI gigafactories". This adds to the existing EUR 10B for AI Factories, which Euractiv
+    argued was largely existing money.
+  sources: [https://web.archive.org/web/20250307161653/https://www.euractiv.com/section/tech/news/debunked-commissions-e10-billion-for-public-ai-is-old-money-not-fully-public-and-not-for-ai/]
+  url: https://ec.europa.eu/commission/presscorner/detail/en/ip_25_467
+
+- id: saudi-humain-nvidia
+  date: 2025-05-13
+  company: other
+  counterparties: [Humain, Nvidia, Saudi Public Investment Fund]
+  title: Humain (Saudi PIF) and Nvidia plan up to 500 MW of AI factories
+  usdBillions: null
+  gigawatts: 0.5
+  horizon: "5 years"
+  status: announced
+  supersededBy: null
+  note: >-
+    Up to 500 MW "powered by several hundred thousand" Nvidia GPUs over five years, starting with an 18,000-GPU GB300
+    supercomputer. Humain launched in May 2025 during Trump's Gulf visit, and Reuters reported an AMD deal the same day.
+  url: https://nvidianews.nvidia.com/news/humain-and-nvidia-announce-strategic-partnership-to-build-ai-factories-of-the-future-in-saudi-arabia
+
+- id: korea-nvidia-260k-gpus
+  date: 2025-10-30
+  company: other
+  counterparties: [South Korea Ministry of Science and ICT, Nvidia, Samsung, SK Group, Hyundai, Naver]
+  title: South Korea government and industry to add over 260,000 Nvidia GPUs
+  usdBillions: null
+  gigawatts: null
+  horizon: null
+  status: announced
+  supersededBy: null
+  note: >-
+    Over 50,000 GPUs go to the government's sovereign AI infrastructure (National AI Computing Center, NHN Cloud,
+    Kakao, NAVER Cloud). Samsung and SK Group each build AI factories with over 50,000 GPUs, and Hyundai Motor Group
+    one with 50,000 Blackwell GPUs.
+  url: https://nvidianews.nvidia.com/news/south-korea-ai-infrastructure

@@ -1,0 +1,1951 @@
+# Lab-reported and independent-leaderboard scores for Chinese labs:
+# DeepSeek (V3, R1, V4 Pro), Alibaba Qwen (Qwen3-235B, Qwen3.5, Qwen3.8-Max),
+# Moonshot Kimi (K2, K2.5, K3) and Zhipu/Z.ai GLM (GLM-5, GLM-5.3).
+# Compiled 2026-09-24 from model cards, tech reports and official blogs.
+#
+# Conventions used in this file:
+# - `setting` starting with "checkpoint: <name>" marks a later same-name checkpoint
+#   (e.g. DeepSeek-R1-0528, Qwen3-235B-A22B-2507, Kimi-K2-Instruct-0905,
+#   DeepSeek-V4-Pro-0813 GA) filed under the parent model id. Filter on that prefix
+#   to keep only the originally released checkpoint.
+# - `setting` starting with "original ..." / "V4-Pro Preview, as reported in ..." marks a
+#   lab's own number for the original checkpoint that first appeared in a later card.
+# - `tools: true` = HLE with tools, or search-based browsing (BrowseComp). Agentic coding
+#   harnesses (bash/edit) count as the benchmark's native setup, so `tools: false`.
+# - `effort` omitted = the lab did not state one (model thinks by default);
+#   `none` = non-thinking / instruct mode.
+
+newBenchmarks:
+  - id: browsecomp-zh
+    name: BrowseComp-ZH
+    short: BrowseComp-ZH
+    group: agentic
+    unit: pct
+    ceiling: 100
+    released: 2025-04-27
+    url: https://arxiv.org/abs/2504.19314
+    description: Chinese-web counterpart of BrowseComp (289 multi-hop questions), widely reported by Chinese labs.
+  - id: toolathlon-verified
+    name: Toolathlon-Verified
+    short: Toolathlon-V
+    group: agentic
+    unit: pct
+    ceiling: 100
+    released: 2026-06-30
+    url: https://toolathlon.xyz
+    description: Final verified release of Toolathlon with revised tasks, ground truths and evaluators. Not comparable with the original Toolathlon.
+
+scores:
+  - model: deepseek-v3
+    benchmark: gpqa-diamond
+    value: 59.1
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "pass@1; 8K output limit"
+    date: 2024-12-26
+    source: "DeepSeek-V3 model card (chat model table)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V3
+  - model: deepseek-v3
+    benchmark: swe-bench-verified
+    value: 42.0
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "resolved; 8K output limit"
+    date: 2024-12-26
+    source: "DeepSeek-V3 model card (chat model table)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V3
+  - model: deepseek-v3
+    benchmark: aime-2024
+    value: 39.2
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "pass@1; 8K output limit"
+    date: 2024-12-26
+    source: "DeepSeek-V3 model card (chat model table)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V3
+  - model: deepseek-r1
+    benchmark: gpqa-diamond
+    value: 71.5
+    provenance: lab
+    tools: false
+    setting: "pass@1; thinking (always on)"
+    date: 2025-01-20
+    source: "DeepSeek-R1 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1
+  - model: deepseek-r1
+    benchmark: swe-bench-verified
+    value: 49.2
+    provenance: lab
+    tools: false
+    setting: "resolved; thinking (always on)"
+    date: 2025-01-20
+    source: "DeepSeek-R1 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1
+  - model: deepseek-r1
+    benchmark: aime-2024
+    value: 79.8
+    provenance: lab
+    tools: false
+    setting: "pass@1; thinking (always on)"
+    date: 2025-01-20
+    source: "DeepSeek-R1 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1
+  - model: deepseek-r1
+    benchmark: hle
+    value: 8.5
+    provenance: lab
+    tools: false
+    setting: "original DeepSeek-R1; text-only subset; pass@1"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card (original R1 baseline column)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-r1
+    benchmark: aime-2025
+    value: 70.0
+    provenance: lab
+    tools: false
+    setting: "original DeepSeek-R1; pass@1"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card (original R1 baseline column)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-r1
+    benchmark: hmmt-2025
+    value: 41.7
+    provenance: lab
+    tools: false
+    setting: "original DeepSeek-R1; HMMT Feb 2025; pass@1"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card (original R1 baseline column)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-r1
+    benchmark: hle
+    value: 17.7
+    provenance: lab
+    tools: false
+    setting: "checkpoint: DeepSeek-R1-0528; text-only subset; pass@1"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-r1
+    benchmark: gpqa-diamond
+    value: 81.0
+    provenance: lab
+    tools: false
+    setting: "checkpoint: DeepSeek-R1-0528; pass@1"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-r1
+    benchmark: swe-bench-verified
+    value: 57.6
+    provenance: lab
+    tools: false
+    setting: "checkpoint: DeepSeek-R1-0528; Agentless framework"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-r1
+    benchmark: aime-2024
+    value: 91.4
+    provenance: lab
+    tools: false
+    setting: "checkpoint: DeepSeek-R1-0528; pass@1"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-r1
+    benchmark: aime-2025
+    value: 87.5
+    provenance: lab
+    tools: false
+    setting: "checkpoint: DeepSeek-R1-0528; pass@1"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-r1
+    benchmark: hmmt-2025
+    value: 79.4
+    provenance: lab
+    tools: false
+    setting: "checkpoint: DeepSeek-R1-0528; HMMT Feb 2025; pass@1"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-r1
+    benchmark: tau-bench-airline
+    value: 53.5
+    provenance: lab
+    tools: false
+    setting: "checkpoint: DeepSeek-R1-0528; GPT-4.1 as user simulator"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-r1
+    benchmark: tau-bench-retail
+    value: 63.9
+    provenance: lab
+    tools: false
+    setting: "checkpoint: DeepSeek-R1-0528; GPT-4.1 as user simulator"
+    date: 2025-05-28
+    source: "DeepSeek-R1-0528 model card"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-R1-0528
+  - model: deepseek-v4-pro
+    benchmark: hle
+    value: 37.7
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, Think Max; pass@1"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: hle
+    value: 34.5
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "V4-Pro Preview, Think High; pass@1"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: hle
+    value: 7.7
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "V4-Pro Preview, Non-think; pass@1"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: hle
+    value: 48.2
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "V4-Pro Preview, Think Max; in-house harness with web search + Python, up to 500 steps, 512K context"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: hle
+    value: 44.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "V4-Pro Preview, Think High; in-house search + Python harness"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: gpqa-diamond
+    value: 90.1
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, Think Max; pass@1"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: gpqa-diamond
+    value: 89.1
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "V4-Pro Preview, Think High; pass@1"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: gpqa-diamond
+    value: 72.9
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "V4-Pro Preview, Non-think; pass@1"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: swe-bench-verified
+    value: 80.6
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, Think Max; internal eval framework"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: swe-bench-verified
+    value: 79.4
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "V4-Pro Preview, Think High; internal eval framework"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: swe-bench-verified
+    value: 73.6
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "V4-Pro Preview, Non-think; internal eval framework"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: swe-bench-pro-public
+    value: 55.4
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, Think Max; 'SWE Pro (Resolved)'; internal eval framework"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: swe-bench-pro-public
+    value: 54.4
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "V4-Pro Preview, Think High; internal eval framework"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: swe-bench-multilingual
+    value: 76.2
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, Think Max; internal eval framework"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: swe-bench-multilingual
+    value: 74.1
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "V4-Pro Preview, Think High; internal eval framework"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: terminal-bench-2
+    value: 67.9
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, Think Max; internal eval framework; original TB2.0 set (~72.0 on TB2.0 Verified subset)"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: terminal-bench-2
+    value: 63.3
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "V4-Pro Preview, Think High; internal eval framework"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: terminal-bench-2
+    value: 59.1
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "V4-Pro Preview, Non-think; internal eval framework"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: browsecomp
+    value: 83.4
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "V4-Pro Preview, Think Max; in-house search harness, discard-all context management"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: browsecomp
+    value: 80.4
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "V4-Pro Preview, Think High; in-house search harness"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: mcp-atlas
+    value: 73.6
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, Think Max; public set, pass@1"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: mcp-atlas
+    value: 74.2
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "V4-Pro Preview, Think High; public set, pass@1"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: toolathlon
+    value: 51.8
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, Think Max; pass@1 (original Toolathlon)"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: toolathlon
+    value: 49.0
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "V4-Pro Preview, Think High; pass@1 (original Toolathlon)"
+    date: 2026-04-24
+    source: "DeepSeek-V4-Pro model card / tech report (Preview)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+  - model: deepseek-v4-pro
+    benchmark: hle
+    value: 42.7
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "checkpoint: DeepSeek-V4-Pro-0813 (GA, supersedes Preview)"
+    date: 2026-08-13
+    source: "DeepSeek-V4-Pro-0813 model card (GA release)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813
+  - model: deepseek-v4-pro
+    benchmark: hle
+    value: 60.0
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "checkpoint: DeepSeek-V4-Pro-0813 (GA); with tools"
+    date: 2026-08-13
+    source: "DeepSeek-V4-Pro-0813 model card (GA release)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813
+  - model: deepseek-v4-pro
+    benchmark: terminal-bench-2.1
+    value: 87.9
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "checkpoint: DeepSeek-V4-Pro-0813 (GA); DeepSeek Harness (minimal mode)"
+    date: 2026-08-13
+    source: "DeepSeek-V4-Pro-0813 model card (GA release)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813
+  - model: deepseek-v4-pro
+    benchmark: terminal-bench-2.1
+    value: 72.1
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, as reported in the 0813 card; DeepSeek Harness"
+    date: 2026-08-13
+    source: "DeepSeek-V4-Pro-0813 model card (GA release)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813
+  - model: deepseek-v4-pro
+    benchmark: deepswe
+    value: 62.7
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "checkpoint: DeepSeek-V4-Pro-0813 (GA); DeepSeek Harness (minimal mode)"
+    date: 2026-08-13
+    source: "DeepSeek-V4-Pro-0813 model card (GA release)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813
+  - model: deepseek-v4-pro
+    benchmark: deepswe
+    value: 12.8
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, as reported in the 0813 card; DeepSeek Harness"
+    date: 2026-08-13
+    source: "DeepSeek-V4-Pro-0813 model card (GA release)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813
+  - model: deepseek-v4-pro
+    benchmark: toolathlon-verified
+    value: 74.1
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "checkpoint: DeepSeek-V4-Pro-0813 (GA)"
+    date: 2026-08-13
+    source: "DeepSeek-V4-Pro-0813 model card (GA release)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813
+  - model: deepseek-v4-pro
+    benchmark: toolathlon-verified
+    value: 55.9
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "V4-Pro Preview, as reported in the 0813 card"
+    date: 2026-08-13
+    source: "DeepSeek-V4-Pro-0813 model card (GA release)"
+    url: https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro-0813
+  - model: qwen3
+    benchmark: gpqa-diamond
+    value: 71.1
+    provenance: lab
+    tools: false
+    setting: "Qwen3-235B-A22B thinking mode"
+    date: 2025-05-14
+    source: "Qwen3 Technical Report (Tables 11-12)"
+    url: https://arxiv.org/abs/2505.09388
+  - model: qwen3
+    benchmark: gpqa-diamond
+    value: 62.9
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "Qwen3-235B-A22B non-thinking mode"
+    date: 2025-05-14
+    source: "Qwen3 Technical Report (Tables 11-12)"
+    url: https://arxiv.org/abs/2505.09388
+  - model: qwen3
+    benchmark: aime-2024
+    value: 85.7
+    provenance: lab
+    tools: false
+    setting: "Qwen3-235B-A22B thinking mode; 38,912-token output limit"
+    date: 2025-05-14
+    source: "Qwen3 Technical Report (Tables 11-12)"
+    url: https://arxiv.org/abs/2505.09388
+  - model: qwen3
+    benchmark: aime-2024
+    value: 40.1
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "Qwen3-235B-A22B non-thinking mode"
+    date: 2025-05-14
+    source: "Qwen3 Technical Report (Tables 11-12)"
+    url: https://arxiv.org/abs/2505.09388
+  - model: qwen3
+    benchmark: aime-2025
+    value: 81.5
+    provenance: lab
+    tools: false
+    setting: "Qwen3-235B-A22B thinking mode; 38,912-token output limit"
+    date: 2025-05-14
+    source: "Qwen3 Technical Report (Tables 11-12)"
+    url: https://arxiv.org/abs/2505.09388
+  - model: qwen3
+    benchmark: aime-2025
+    value: 24.7
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "Qwen3-235B-A22B non-thinking mode"
+    date: 2025-05-14
+    source: "Qwen3 Technical Report (Tables 11-12)"
+    url: https://arxiv.org/abs/2505.09388
+  - model: qwen3
+    benchmark: hle
+    value: 11.8
+    provenance: lab
+    tools: false
+    setting: "original Qwen3-235B-A22B (thinking) baseline column; text-only subset"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: hmmt-2025
+    value: 62.5
+    provenance: lab
+    tools: false
+    setting: "original Qwen3-235B-A22B (thinking) baseline column"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: tau-bench-retail
+    value: 54.8
+    provenance: lab
+    tools: false
+    setting: "original Qwen3-235B-A22B (thinking) baseline column; TAU1-Retail"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: tau-bench-airline
+    value: 26.0
+    provenance: lab
+    tools: false
+    setting: "original Qwen3-235B-A22B (thinking) baseline column; TAU1-Airline"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: tau2-bench-telecom
+    value: 21.9
+    provenance: lab
+    tools: false
+    setting: "original Qwen3-235B-A22B (thinking) baseline column"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: hle
+    value: 18.2
+    provenance: lab
+    tools: false
+    setting: "checkpoint: Qwen3-235B-A22B-Thinking-2507; text-only subset"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: gpqa-diamond
+    value: 81.1
+    provenance: lab
+    tools: false
+    setting: "checkpoint: Qwen3-235B-A22B-Thinking-2507"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: aime-2025
+    value: 92.3
+    provenance: lab
+    tools: false
+    setting: "checkpoint: Qwen3-235B-A22B-Thinking-2507"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: hmmt-2025
+    value: 83.9
+    provenance: lab
+    tools: false
+    setting: "checkpoint: Qwen3-235B-A22B-Thinking-2507"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: tau-bench-retail
+    value: 67.8
+    provenance: lab
+    tools: false
+    setting: "checkpoint: Qwen3-235B-A22B-Thinking-2507; TAU1-Retail"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: tau-bench-airline
+    value: 46.0
+    provenance: lab
+    tools: false
+    setting: "checkpoint: Qwen3-235B-A22B-Thinking-2507; TAU1-Airline"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: tau2-bench-telecom
+    value: 45.6
+    provenance: lab
+    tools: false
+    setting: "checkpoint: Qwen3-235B-A22B-Thinking-2507"
+    date: 2025-07-25
+    source: "Qwen3-235B-A22B-Thinking-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Thinking-2507
+  - model: qwen3
+    benchmark: hmmt-2025
+    value: 10.0
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "original Qwen3-235B-A22B (non-thinking) baseline column"
+    date: 2025-07-21
+    source: "Qwen3-235B-A22B-Instruct-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507
+  - model: qwen3
+    benchmark: tau-bench-retail
+    value: 65.2
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "original Qwen3-235B-A22B (non-thinking) baseline column; TAU1-Retail"
+    date: 2025-07-21
+    source: "Qwen3-235B-A22B-Instruct-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507
+  - model: qwen3
+    benchmark: tau-bench-airline
+    value: 32.0
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "original Qwen3-235B-A22B (non-thinking) baseline column; TAU1-Airline"
+    date: 2025-07-21
+    source: "Qwen3-235B-A22B-Instruct-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507
+  - model: qwen3
+    benchmark: tau2-bench-telecom
+    value: 24.6
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "original Qwen3-235B-A22B (non-thinking) baseline column"
+    date: 2025-07-21
+    source: "Qwen3-235B-A22B-Instruct-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507
+  - model: qwen3
+    benchmark: gpqa-diamond
+    value: 77.5
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "checkpoint: Qwen3-235B-A22B-Instruct-2507 (non-thinking)"
+    date: 2025-07-21
+    source: "Qwen3-235B-A22B-Instruct-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507
+  - model: qwen3
+    benchmark: aime-2025
+    value: 70.3
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "checkpoint: Qwen3-235B-A22B-Instruct-2507 (non-thinking)"
+    date: 2025-07-21
+    source: "Qwen3-235B-A22B-Instruct-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507
+  - model: qwen3
+    benchmark: hmmt-2025
+    value: 55.4
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "checkpoint: Qwen3-235B-A22B-Instruct-2507 (non-thinking)"
+    date: 2025-07-21
+    source: "Qwen3-235B-A22B-Instruct-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507
+  - model: qwen3
+    benchmark: tau-bench-retail
+    value: 71.3
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "checkpoint: Qwen3-235B-A22B-Instruct-2507; TAU1-Retail"
+    date: 2025-07-21
+    source: "Qwen3-235B-A22B-Instruct-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507
+  - model: qwen3
+    benchmark: tau-bench-airline
+    value: 44.0
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "checkpoint: Qwen3-235B-A22B-Instruct-2507; TAU1-Airline"
+    date: 2025-07-21
+    source: "Qwen3-235B-A22B-Instruct-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507
+  - model: qwen3
+    benchmark: tau2-bench-telecom
+    value: 32.5
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "checkpoint: Qwen3-235B-A22B-Instruct-2507"
+    date: 2025-07-21
+    source: "Qwen3-235B-A22B-Instruct-2507 model card"
+    url: https://huggingface.co/Qwen/Qwen3-235B-A22B-Instruct-2507
+  - model: qwen3.5
+    benchmark: hle
+    value: 28.7
+    provenance: lab
+    tools: false
+    setting: "Qwen3.5-397B-A17B, thinking; GPT-4o judge"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: hle
+    value: 48.3
+    provenance: lab
+    tools: true
+    setting: "Qwen3.5-397B-A17B; search agent with 256K context-folding"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: gpqa-diamond
+    value: 88.4
+    provenance: lab
+    tools: false
+    setting: "Qwen3.5-397B-A17B, thinking"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: hmmt-2025
+    value: 94.8
+    provenance: lab
+    tools: false
+    setting: "Qwen3.5-397B-A17B; HMMT Feb 2025"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: aime-2026
+    value: 91.3
+    provenance: lab
+    tools: false
+    setting: "Qwen3.5-397B-A17B"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: swe-bench-verified
+    value: 76.4
+    provenance: lab
+    tools: false
+    setting: "Qwen3.5-397B-A17B; internal scaffold (bash + file-edit tools)"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: swe-bench-multilingual
+    value: 69.3
+    provenance: lab
+    tools: false
+    setting: "Qwen3.5-397B-A17B; internal scaffold (bash + file-edit tools)"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: terminal-bench-2
+    value: 52.5
+    provenance: lab
+    tools: false
+    setting: "Qwen3.5-397B-A17B; Terminus-2 harness, 3h timeout, avg of 5 runs"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: browsecomp
+    value: 78.6
+    provenance: lab
+    tools: true
+    setting: "Qwen3.5-397B-A17B; discard-all context strategy (same as DeepSeek-V3.2 / Kimi K2.5)"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: browsecomp
+    value: 69.0
+    provenance: lab
+    tools: true
+    setting: "Qwen3.5-397B-A17B; simple context-folding (256K)"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: browsecomp-zh
+    value: 70.3
+    provenance: lab
+    tools: true
+    setting: "Qwen3.5-397B-A17B; search agent"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: toolathlon
+    value: 38.3
+    provenance: lab
+    tools: false
+    setting: "Qwen3.5-397B-A17B; reported as 'Tool Decathlon'"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.5
+    benchmark: osworld-verified
+    value: 62.2
+    provenance: lab
+    tools: false
+    setting: "Qwen3.5-397B-A17B; vision-language table"
+    date: 2026-02-16
+    source: "Qwen3.5-397B-A17B model card (Qwen3.5 launch)"
+    url: https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+  - model: qwen3.8-max
+    benchmark: hle
+    value: 43.6
+    provenance: lab
+    tools: false
+    effort: unknown
+    setting: "Qwen3.8-Max; API default reasoning_effort is xhigh"
+    date: 2026-08-02
+    source: "Qwen3.8-Max blog (full benchmark table; same table on HF Qwen3.8-2.4T-A95B card)"
+    url: https://qwen.ai/blog?id=qwen3.8
+  - model: qwen3.8-max
+    benchmark: hle
+    value: 56.2
+    provenance: lab
+    tools: true
+    effort: unknown
+    setting: "Qwen3.8-Max; HLE w/ tools"
+    date: 2026-08-02
+    source: "Qwen3.8-Max blog (full benchmark table; same table on HF Qwen3.8-2.4T-A95B card)"
+    url: https://qwen.ai/blog?id=qwen3.8
+  - model: qwen3.8-max
+    benchmark: gpqa-diamond
+    value: 92.6
+    provenance: lab
+    tools: false
+    effort: unknown
+    setting: "Qwen3.8-Max"
+    date: 2026-08-02
+    source: "Qwen3.8-Max blog (full benchmark table; same table on HF Qwen3.8-2.4T-A95B card)"
+    url: https://qwen.ai/blog?id=qwen3.8
+  - model: qwen3.8-max
+    benchmark: terminal-bench-2.1
+    value: 86.6
+    provenance: lab
+    tools: false
+    effort: unknown
+    setting: "Qwen3.8-Max; Claude Code harness, avg@10, 5h timeout"
+    date: 2026-08-02
+    source: "Qwen3.8-Max blog (full benchmark table; same table on HF Qwen3.8-2.4T-A95B card)"
+    url: https://qwen.ai/blog?id=qwen3.8
+  - model: qwen3.8-max
+    benchmark: swe-bench-pro-public
+    value: 67.7
+    provenance: lab
+    tools: false
+    effort: unknown
+    setting: "Qwen3.8-Max; Claude Code harness; problematic tasks corrected (refined set)"
+    date: 2026-08-02
+    source: "Qwen3.8-Max blog (full benchmark table; same table on HF Qwen3.8-2.4T-A95B card)"
+    url: https://qwen.ai/blog?id=qwen3.8
+  - model: qwen3.8-max
+    benchmark: deepswe
+    value: 56.6
+    provenance: lab
+    tools: false
+    effort: unknown
+    setting: "Qwen3.8-Max; DeepSWE 1.1; best of Claude Code / mini-SWE-agent harnesses"
+    date: 2026-08-02
+    source: "Qwen3.8-Max blog (full benchmark table; same table on HF Qwen3.8-2.4T-A95B card)"
+    url: https://qwen.ai/blog?id=qwen3.8
+  - model: qwen3.8-max
+    benchmark: frontierswe
+    value: 73.5
+    provenance: lab
+    tools: false
+    effort: unknown
+    setting: "Qwen3.8-Max; Claude Code harness; mean@5"
+    date: 2026-08-02
+    source: "Qwen3.8-Max blog (full benchmark table; same table on HF Qwen3.8-2.4T-A95B card)"
+    url: https://qwen.ai/blog?id=qwen3.8
+  - model: qwen3.8-max
+    benchmark: toolathlon-verified
+    value: 72.5
+    provenance: lab
+    tools: false
+    effort: unknown
+    setting: "Qwen3.8-Max; pass@1"
+    date: 2026-08-02
+    source: "Qwen3.8-Max blog (full benchmark table; same table on HF Qwen3.8-2.4T-A95B card)"
+    url: https://qwen.ai/blog?id=qwen3.8
+  - model: qwen3.8-max
+    benchmark: osworld-verified
+    value: 86.1
+    provenance: lab
+    tools: false
+    effort: unknown
+    setting: "Qwen3.8-Max; visual agent table"
+    date: 2026-08-02
+    source: "Qwen3.8-Max blog (full benchmark table; same table on HF Qwen3.8-2.4T-A95B card)"
+    url: https://qwen.ai/blog?id=qwen3.8
+  - model: kimi-k2
+    benchmark: hle
+    value: 4.7
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "Kimi K2 Instruct (non-thinking); text-only subset"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: swe-bench-verified
+    value: 65.8
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "agentic, single attempt, bash/editor tools"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: swe-bench-verified
+    value: 71.6
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "agentic, multiple attempts (parallel test-time compute, internal scorer picks best)"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: swe-bench-verified
+    value: 51.8
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "Agentless, single patch without tests"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: swe-bench-multilingual
+    value: 47.3
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "agentic, single attempt"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: terminal-bench-1
+    value: 30.0
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "in-house framework"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: terminal-bench-1
+    value: 25.0
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "Terminus harness"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: tau2-bench-telecom
+    value: 65.8
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "avg@4"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: aime-2024
+    value: 69.6
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "avg@64"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: aime-2025
+    value: 49.5
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "avg@64"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: hmmt-2025
+    value: 38.8
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "avg@32"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: gpqa-diamond
+    value: 75.1
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "avg@8"
+    date: 2025-07-11
+    source: "Kimi-K2-Instruct model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct
+  - model: kimi-k2
+    benchmark: terminal-bench-1
+    value: 37.5
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "original Kimi K2 Instruct baseline column; Terminus-2 harness"
+    date: 2025-09-05
+    source: "Kimi-K2-Instruct-0905 model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905
+  - model: kimi-k2
+    benchmark: swe-bench-verified
+    value: 69.2
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "checkpoint: Kimi-K2-Instruct-0905; in-house SWE-agent-derived harness; mean of 5 runs"
+    date: 2025-09-05
+    source: "Kimi-K2-Instruct-0905 model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905
+  - model: kimi-k2
+    benchmark: swe-bench-multilingual
+    value: 55.9
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "checkpoint: Kimi-K2-Instruct-0905; in-house harness; mean of 5 runs"
+    date: 2025-09-05
+    source: "Kimi-K2-Instruct-0905 model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905
+  - model: kimi-k2
+    benchmark: terminal-bench-1
+    value: 44.5
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "checkpoint: Kimi-K2-Instruct-0905; Terminus-2 harness; mean of 5 runs"
+    date: 2025-09-05
+    source: "Kimi-K2-Instruct-0905 model card"
+    url: https://huggingface.co/moonshotai/Kimi-K2-Instruct-0905
+  - model: kimi-k2.5
+    benchmark: hle
+    value: 30.1
+    provenance: lab
+    tools: false
+    setting: "thinking; HLE-Full (text+image); text-only subset 31.5; 96K completion budget"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: hle
+    value: 50.2
+    provenance: lab
+    tools: true
+    setting: "thinking; HLE-Full with search, code-interpreter and browsing tools; text-only subset 51.8"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: gpqa-diamond
+    value: 87.6
+    provenance: lab
+    tools: false
+    setting: "thinking; avg@8"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: aime-2025
+    value: 96.1
+    provenance: lab
+    tools: false
+    setting: "thinking; avg@32"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: hmmt-2025
+    value: 95.4
+    provenance: lab
+    tools: false
+    setting: "thinking; HMMT Feb 2025; avg@32"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: swe-bench-verified
+    value: 76.8
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "internal framework (bash/createfile/insert/view/strreplace/submit); best score in non-thinking mode; avg of 5 runs"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: swe-bench-pro-public
+    value: 50.7
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "internal framework; non-thinking mode; avg of 5 runs"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: swe-bench-multilingual
+    value: 73.0
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "internal framework; non-thinking mode; avg of 5 runs"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: terminal-bench-2
+    value: 50.8
+    provenance: lab
+    tools: false
+    effort: none
+    setting: "Terminus-2 harness; non-thinking mode; avg of 5 runs"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: browsecomp
+    value: 60.6
+    provenance: lab
+    tools: true
+    setting: "thinking; single agent, no context management"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: browsecomp
+    value: 74.9
+    provenance: lab
+    tools: true
+    setting: "thinking; single agent, discard-all context management"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: browsecomp
+    value: 78.4
+    provenance: lab
+    tools: true
+    setting: "Agent Swarm mode (main agent 15 steps, sub-agents 100 steps)"
+    date: 2026-01-27
+    source: "Kimi K2.5 model card / tech blog"
+    url: https://huggingface.co/moonshotai/Kimi-K2.5
+  - model: kimi-k2.5
+    benchmark: osworld-verified
+    value: 63.3
+    provenance: lab
+    tools: false
+    setting: "GUI actions only, no external tools; max 100 steps"
+    date: 2026-02-02
+    source: "Kimi K2.5: Visual Agentic Intelligence (tech report)"
+    url: https://arxiv.org/abs/2602.02276
+  - model: kimi-k3
+    benchmark: hle
+    value: 43.5
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "HLE-Full; top-p 0.95"
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: kimi-k3
+    benchmark: hle
+    value: 56.0
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "HLE-Full with general tools"
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: kimi-k3
+    benchmark: gpqa-diamond
+    value: 93.5
+    provenance: lab
+    tools: false
+    effort: max
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: kimi-k3
+    benchmark: terminal-bench-2.1
+    value: 88.3
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "Kimi Code harness"
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: kimi-k3
+    benchmark: deepswe
+    value: 67.5
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "DeepSWE v1.1; Kimi Code harness (67.3 with mini-SWE-agent on official leaderboard)"
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: kimi-k3
+    benchmark: frontierswe
+    value: 81.2
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "Kimi Code harness"
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: kimi-k3
+    benchmark: browsecomp
+    value: 91.2
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "context compaction triggered at 300K tokens"
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: kimi-k3
+    benchmark: browsecomp
+    value: 90.4
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "full 1M-token context, no context management"
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: kimi-k3
+    benchmark: toolathlon-verified
+    value: 76.5
+    provenance: lab
+    tools: false
+    effort: max
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: kimi-k3
+    benchmark: mcp-atlas
+    value: 84.2
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "500-task public subset, 100-turn limit, Gemini 3.1 Pro judge"
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: kimi-k3
+    benchmark: osworld-verified
+    value: 84.8
+    provenance: lab
+    tools: false
+    effort: max
+    date: 2026-07-27
+    source: "Kimi K3 model card (weights release; launch blog 2026-07-16)"
+    url: https://huggingface.co/moonshotai/Kimi-K3
+  - model: glm-5
+    benchmark: hle
+    value: 30.5
+    provenance: lab
+    tools: false
+    setting: "thinking; text-only subset; 131K max generation; GPT-5.2 (medium) judge"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: hle
+    value: 50.4
+    provenance: lab
+    tools: true
+    setting: "thinking; text-only subset; 202,752-token max context"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: gpqa-diamond
+    value: 86.0
+    provenance: lab
+    tools: false
+    setting: "thinking"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: aime-2026
+    value: 92.7
+    provenance: lab
+    tools: false
+    setting: "thinking; AIME 2026 I only"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: swe-bench-verified
+    value: 77.8
+    provenance: lab
+    tools: false
+    setting: "OpenHands, tailored prompt, 200K context"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: swe-bench-multilingual
+    value: 73.3
+    provenance: lab
+    tools: false
+    setting: "OpenHands, tailored prompt, 200K context"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: terminal-bench-2
+    value: 56.2
+    provenance: lab
+    tools: false
+    setting: "Terminus-2 harness, 2h timeout (60.7 on Z.ai's verified TB2.0 set)"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: terminal-bench-2
+    value: 56.2
+    provenance: lab
+    tools: false
+    setting: "Claude Code 2.1.14 harness, avg of 5 runs (61.1 on Z.ai's verified TB2.0 set)"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: browsecomp
+    value: 62.0
+    provenance: lab
+    tools: true
+    setting: "keeps last 5 turns, no context management"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: browsecomp
+    value: 75.9
+    provenance: lab
+    tools: true
+    setting: "discard-all context management"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: browsecomp-zh
+    value: 72.7
+    provenance: lab
+    tools: true
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: mcp-atlas
+    value: 67.8
+    provenance: lab
+    tools: false
+    setting: "500-task public subset, Gemini 3 Pro judge"
+    date: 2026-02-11
+    source: "GLM-5 model card"
+    url: https://huggingface.co/zai-org/GLM-5
+  - model: glm-5
+    benchmark: toolathlon
+    value: 39.2
+    provenance: lab
+    tools: false
+    setting: "reported as 'Tool-Decathlon'; blog + tech report say 39.2, HF model card says 38.0"
+    date: 2026-02-12
+    source: "GLM-5 blog and tech report (Table 7)"
+    url: https://z.ai/blog/glm-5
+  - model: glm-5
+    benchmark: hmmt-2025
+    value: 97.9
+    provenance: lab
+    tools: false
+    setting: "thinking; HMMT Feb 2025"
+    date: 2026-02-17
+    source: "GLM-5: from Vibe Coding to Agentic Engineering (tech report, Table 7)"
+    url: https://arxiv.org/abs/2602.15763
+  - model: glm-5.3
+    benchmark: hle
+    value: 62.5
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "HLE w/ tools; 300K context with context management; GPT-5.6-luna judge"
+    date: 2026-08-14
+    source: "GLM-5.3 blog / model card"
+    url: https://z.ai/blog/glm-5.3
+  - model: glm-5.3
+    benchmark: terminal-bench-2.1
+    value: 88.2
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "Claude Code 2.1.207 harness, 6h timeout"
+    date: 2026-08-14
+    source: "GLM-5.3 blog / model card"
+    url: https://z.ai/blog/glm-5.3
+  - model: glm-5.3
+    benchmark: terminal-bench-3
+    value: 28.3
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "Claude Code 2.1.207 harness, avg@3, 400K context, 10h timeout"
+    date: 2026-08-14
+    source: "GLM-5.3 blog / model card"
+    url: https://z.ai/blog/glm-5.3
+  - model: glm-5.3
+    benchmark: deepswe
+    value: 66.9
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "DeepSWE v1.1; mini-swe-agent harness, 6h timeout"
+    date: 2026-08-14
+    source: "GLM-5.3 blog / model card"
+    url: https://z.ai/blog/glm-5.3
+  - model: glm-5.3
+    benchmark: frontierswe
+    value: 78.1
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "evaluation run by Proximal; dominance score as of 2026-08-14"
+    date: 2026-08-14
+    source: "GLM-5.3 blog / model card"
+    url: https://z.ai/blog/glm-5.3
+  - model: glm-5.3
+    benchmark: toolathlon-verified
+    value: 73.0
+    provenance: lab
+    tools: false
+    effort: max
+    setting: "official evaluation service; pass@1 avg of 3 runs"
+    date: 2026-08-14
+    source: "GLM-5.3 blog / model card"
+    url: https://z.ai/blog/glm-5.3
+
+  # ── Independent leaderboards (benchmarks not fetched from Epoch) ──
+  - model: kimi-k2
+    benchmark: swe-bench-pro-public
+    value: 27.67
+    provenance: independent
+    tools: false
+    setting: "row 'kimi-k2-instruct' (checkpoint unspecified: 0711 or 0905); SWE-Agent scaffold; ±3.25"
+    date: 2025-09-19
+    source: "Scale SWE-Bench Pro leaderboard (public set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: qwen3
+    benchmark: swe-bench-pro-public
+    value: 21.41
+    provenance: independent
+    tools: false
+    setting: "row 'qwen3-235b-a22b' (checkpoint unspecified: original or 2507); SWE-Agent scaffold; ±2.25"
+    date: 2026-01-27
+    source: "Scale SWE-Bench Pro leaderboard (public set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: qwen3.8-max
+    benchmark: mcp-atlas
+    value: 84.5
+    provenance: independent
+    tools: false
+    effort: xhigh
+    setting: "row 'Qwen3.8-2.4T-A95B (xHigh)', the open-weights model behind Qwen3.8-Max; ±2.25"
+    date: 2026-09-17
+    source: "Scale MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: glm-5.3
+    benchmark: mcp-atlas
+    value: 84.2
+    provenance: independent
+    tools: false
+    setting: "row 'GLM 5.3'; ±2.15"
+    date: 2026-09-17
+    source: "Scale MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: kimi-k3
+    benchmark: mcp-atlas
+    value: 82.3
+    provenance: independent
+    tools: false
+    effort: max
+    setting: "row 'kimi-k3 (max)'; ±2.35"
+    date: 2026-07-20
+    source: "Scale MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: kimi-k2.5
+    benchmark: mcp-atlas
+    value: 64.4
+    provenance: independent
+    tools: false
+    setting: "row 'kimi-k2p5'; ±3.0; row timestamp predates the model, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "Scale MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: qwen3
+    benchmark: terminal-bench-1
+    value: 6.6
+    provenance: independent
+    tools: false
+    setting: "Terminus 1 agent (Stanford); original Qwen3-235B; ±2.8"
+    date: 2025-05-15
+    source: "tbench.ai Terminal-Bench 1.0 leaderboard (archived snapshot 2026-08-09)"
+    url: http://web.archive.org/web/20260809131412/https://www.tbench.ai/leaderboard/terminal-bench/1.0
+  - model: deepseek-r1
+    benchmark: terminal-bench-1
+    value: 5.7
+    provenance: independent
+    tools: false
+    setting: "Terminus 1 agent (Stanford); original R1; ±1.4"
+    date: 2025-05-15
+    source: "tbench.ai Terminal-Bench 1.0 leaderboard (archived snapshot 2026-08-09)"
+    url: http://web.archive.org/web/20260809131412/https://www.tbench.ai/leaderboard/terminal-bench/1.0
+  - model: glm-5.3
+    benchmark: terminal-bench-3
+    value: 32.43
+    provenance: independent
+    tools: false
+    effort: max
+    setting: "Claude Code agent; ±2.86; 370 trials; submitter not stated"
+    date: 2026-08-18
+    source: "tbench.ai Terminal-Bench 3.0 leaderboard"
+    url: https://www.tbench.ai/?version=3.0
+  - model: glm-5.3
+    benchmark: terminal-bench-4
+    value: 41.82
+    provenance: independent
+    tools: false
+    effort: max
+    setting: "Claude Code agent; ±3.23; 330 trials; submitter not stated; row dated before TB 4.0's public release"
+    date: 2026-08-14
+    source: "tbench.ai Terminal-Bench 4.0 leaderboard"
+    url: https://www.tbench.ai/
+  - model: deepseek-v4-pro
+    benchmark: toolathlon
+    value: 52.8
+    provenance: independent
+    tools: false
+    effort: max
+    setting: "DeepSeek-V4-Pro Max (Preview); ±1.9"
+    date: 2026-04-25
+    source: "Toolathlon leaderboard (legacy series, independently evaluated rows)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: glm-5
+    benchmark: toolathlon
+    value: 39.2
+    provenance: independent
+    tools: false
+    setting: "GLM-5; ±1.2"
+    date: 2026-02-13
+    source: "Toolathlon leaderboard (legacy series, independently evaluated rows)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: qwen3.5
+    benchmark: toolathlon
+    value: 37.7
+    provenance: independent
+    tools: false
+    setting: "Qwen3.5-Plus; ±1.2"
+    date: 2026-02-21
+    source: "Toolathlon leaderboard (legacy series, independently evaluated rows)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: kimi-k2.5
+    benchmark: toolathlon
+    value: 27.8
+    provenance: independent
+    tools: false
+    setting: "Kimi-K2.5; ±0.8"
+    date: 2026-02-04
+    source: "Toolathlon leaderboard (legacy series, independently evaluated rows)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: kimi-k2
+    benchmark: toolathlon
+    value: 13.0
+    provenance: independent
+    tools: false
+    setting: "checkpoint: Kimi-K2-0905; ±2.0"
+    date: 2025-10-28
+    source: "Toolathlon leaderboard (legacy series, independently evaluated rows)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: kimi-k3
+    benchmark: toolathlon-verified
+    value: 76.5
+    provenance: independent
+    tools: false
+    effort: max
+    setting: "Kimi K3 (max); ±1.9"
+    date: 2026-07-16
+    source: "Toolathlon-Verified leaderboard (independently evaluated rows)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: deepseek-v4-pro
+    benchmark: toolathlon-verified
+    value: 74.4
+    provenance: independent
+    tools: false
+    effort: max
+    setting: "checkpoint: DeepSeek V4 Pro 0813 (max); ±1.2"
+    date: 2026-08-13
+    source: "Toolathlon-Verified leaderboard (independently evaluated rows)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: deepseek-v4-pro
+    benchmark: toolathlon-verified
+    value: 55.9
+    provenance: independent
+    tools: false
+    effort: max
+    setting: "DeepSeek V4 Pro (max), Preview checkpoint; ±1.2"
+    date: 2026-06-30
+    source: "Toolathlon-Verified leaderboard (independently evaluated rows)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: qwen3.5
+    benchmark: toolathlon-verified
+    value: 40.7
+    provenance: independent
+    tools: false
+    setting: "Qwen3.5 397B-A17B; ±2.0"
+    date: 2026-07-30
+    source: "Toolathlon-Verified leaderboard (independently evaluated rows)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: kimi-k2.5
+    benchmark: toolathlon-verified
+    value: 33.0
+    provenance: independent
+    tools: false
+    setting: "Kimi K2.5; ±1.2"
+    date: 2026-07-15
+    source: "Toolathlon-Verified leaderboard (independently evaluated rows)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: glm-5
+    benchmark: swe-bench-multilingual
+    value: 69.7
+    provenance: independent
+    tools: false
+    setting: "mini-SWE-agent v2.0.0a0, 1 attempt; checked"
+    date: 2026-02-13
+    source: "SWE-bench Multilingual leaderboard"
+    url: https://www.swebench.com/multilingual.html
+  - model: kimi-k2.5
+    benchmark: swe-bench-multilingual
+    value: 67.3
+    provenance: independent
+    tools: false
+    setting: "mini-SWE-agent v2.0.0a0, 1 attempt; checked"
+    date: 2026-02-13
+    source: "SWE-bench Multilingual leaderboard"
+    url: https://www.swebench.com/multilingual.html
+  - model: kimi-k2.5
+    benchmark: osworld-verified
+    value: 63.3
+    provenance: independent
+    tools: false
+    setting: "screenshot only, max 100 steps, single rollout; row links Moonshot's tech report (same value as lab-reported)"
+    date: 2026-01-31
+    source: "OSWorld-Verified leaderboard"
+    url: https://os-world.github.io/
+  - model: deepseek-v3
+    benchmark: aime-2025
+    value: 25.0
+    provenance: independent
+    tools: false
+    effort: none
+    setting: "original DeepSeek-V3; ±7.75; no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: deepseek-v3
+    benchmark: aime-2025
+    value: 50.0
+    provenance: independent
+    tools: false
+    effort: none
+    setting: "checkpoint: DeepSeek-V3-0324; ±8.95; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: deepseek-r1
+    benchmark: aime-2025
+    value: 70.0
+    provenance: independent
+    tools: false
+    setting: "original DeepSeek-R1; ±8.20; no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: deepseek-r1
+    benchmark: aime-2025
+    value: 89.17
+    provenance: independent
+    tools: false
+    setting: "checkpoint: DeepSeek-R1-0528; ±5.56; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: qwen3
+    benchmark: aime-2025
+    value: 80.83
+    provenance: independent
+    tools: false
+    setting: "original Qwen3-235B-A22B; ±7.04; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: kimi-k2.5
+    benchmark: aime-2025
+    value: 95.83
+    provenance: independent
+    tools: false
+    setting: "Kimi K2.5 (Think); ±3.58; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: glm-5
+    benchmark: aime-2025
+    value: 96.67
+    provenance: independent
+    tools: false
+    setting: "GLM 5 via Z.ai API; ±3.21; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: glm-5
+    benchmark: aime-2026
+    value: 96.67
+    provenance: independent
+    tools: false
+    setting: "GLM 5; ±3.21; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2026)"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: deepseek-v4-pro
+    benchmark: aime-2026
+    value: 96.67
+    provenance: independent
+    tools: false
+    effort: max
+    setting: "DeepSeek-v4-Pro (Max) via DeepSeek API (Preview vs 0813 not stated); ±3.21; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2026)"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: kimi-k3
+    benchmark: aime-2026
+    value: 96.67
+    provenance: independent
+    setting: "Kimi K3 (Think); run via kimi CLI harness (tool use not confirmed); ±4.54; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2026)"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: kimi-k2.5
+    benchmark: aime-2026
+    value: 95.83
+    provenance: independent
+    tools: false
+    setting: "Kimi K2.5 (Think); ±3.58; no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2026)"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: qwen3.5
+    benchmark: aime-2026
+    value: 94.17
+    provenance: independent
+    tools: false
+    setting: "Qwen3.5-397B-A17B; ±4.19; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2026)"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: deepseek-v3
+    benchmark: hmmt-2025
+    value: 13.33
+    provenance: independent
+    tools: false
+    effort: none
+    setting: "original DeepSeek-V3; ±6.08; no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT Feb 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: deepseek-v3
+    benchmark: hmmt-2025
+    value: 29.17
+    provenance: independent
+    tools: false
+    effort: none
+    setting: "checkpoint: DeepSeek-V3-0324; ±8.13; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT Feb 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: deepseek-r1
+    benchmark: hmmt-2025
+    value: 41.67
+    provenance: independent
+    tools: false
+    setting: "original DeepSeek-R1; ±8.82; no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT Feb 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: deepseek-r1
+    benchmark: hmmt-2025
+    value: 76.67
+    provenance: independent
+    tools: false
+    setting: "checkpoint: DeepSeek-R1-0528; ±7.57; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT Feb 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: qwen3
+    benchmark: hmmt-2025
+    value: 62.5
+    provenance: independent
+    tools: false
+    setting: "original Qwen3-235B-A22B; ±8.66; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT Feb 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: kimi-k2.5
+    benchmark: hmmt-2025
+    value: 93.33
+    provenance: independent
+    tools: false
+    setting: "Kimi K2.5 (Think); ±4.46; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT Feb 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: glm-5
+    benchmark: hmmt-2025
+    value: 97.5
+    provenance: independent
+    tools: false
+    setting: "GLM 5; ±2.79; MathArena contamination flag (model released after the contest); no run date shown, date = retrieval 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT Feb 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025

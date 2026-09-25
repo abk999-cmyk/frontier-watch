@@ -1,0 +1,415 @@
+# AI 2040: Plan A (AI Futures Project), with present-day status of what each stage needs, as of 2026-09-24.
+#
+# Format
+#   source, pdf, blog, published, authors, framing
+#   plans:   the five branch options at "2029: Choose a Path": { id, name, subtitle, summary, url }
+#   stages:  year-by-year path of the Plan A branch
+#     year, title (as written on the site), url (section anchor), summary
+#     preconditions: policies or events the plan needs by that stage
+#       text      what is needed
+#       status    happened | partial | not-yet     (present-day, 2026-09-24)
+#       evidence  one-liner on reality
+#       url       source for the evidence
+#     branchPoints: optional off-ramps the scenario explores at that stage
+#   metrics: the scenario's per-year sidebar values (Plan A branch, as printed in the PDF sidebars; start of each year)
+#     { year, name, value, unit, note? }   Percentages are 0-100. Income is in 2025 USD.
+#
+# Plan A is a recommendation, not a forecast. The authors say the policy choices are recommendations
+# and the consequences they depict are predictions conditional on those choices.
+
+source: https://ai-2040.com
+pdf: https://ai-2040.com/AI-2040.pdf
+blog: https://blog.aifutures.org/p/ai-2040-plan-a
+summaryPage: https://ai-2040.com/summary
+published: 2026-07-09
+authors: [Thomas Larsen, Romeo Dean, Brendan Halstead, Eli Lifland, Ryan Greenblatt, Daniel Kokotajlo]
+statusAsOf: 2026-09-24
+framing: "A scenario-shaped policy recommendation, billed as 'the least bad plan we currently know of': in 2029 the US and China strike a verified deal that makes AI research transparent, spreads the frontier across many companies and countries, pauses at top-expert-level AI, and pushes superintelligence back from a default ~2030 to 2040."
+
+plans:
+  - id: A
+    name: The Deal
+    subtitle: Verified Slowdown
+    summary: "Offer China and other nations a deal to mutually verify and control AI development. This is the path the scenario follows."
+    url: https://ai-2040.com/?choices=plan-a-root
+  - id: B
+    name: Sabotage
+    subtitle: Fight China
+    summary: "Take aggressive action to slow China down, buying time to slow down for a few years rather than months."
+    url: https://ai-2040.com/?choices=plan-b-root
+  - id: C
+    name: Slowdown
+    subtitle: Burn the Lead
+    summary: "Slow down or pause for a few months during the intelligence explosion to make some progress on alignment. Corresponds to AI 2027's Slowdown ending."
+    url: https://ai-2040.com/?choices=plan-c-root
+  - id: D
+    name: Race
+    subtitle: Race to ASI
+    summary: "Race approximately as hard as possible to beat China and other companies to superintelligence. Corresponds to AI 2027's Race ending."
+    url: https://ai-2040.com/?choices=plan-d-root
+  - id: S
+    name: Shutdown
+    subtitle: Shut it all down
+    summary: "Offer China and others a deal to globally shut down AI development for the foreseeable future."
+    url: https://ai-2040.com/?choices=plan-s-root
+
+stages:
+  - year: 2027
+    title: "The Writing on the Wall"
+    url: https://ai-2040.com/#2027-the-writing-on-the-wall
+    summary: "America has two workforces: 165M people and millions of AI agents. AI companies race toward automated AI R&D but have not got there. Congress holds hearings and passes an omnibus 'AI Transparency Act of 2027' that does not fundamentally change the situation. The authors attach an 'Incremental AI Policy Wishlist'."
+    preconditions:
+      - text: "Frontier transparency law: small gap between internal and external deployment, public model specs, safety frameworks, incident reporting"
+        status: partial
+        evidence: "State level only. California SB 53 (signed 2025-09-25, in force 2026-01-01) requires published safety frameworks and 15-day incident reports; New York's RAISE Act, signed Dec 2025, takes effect 2027. No federal law."
+        url: https://en.wikipedia.org/wiki/Transparency_in_Frontier_Artificial_Intelligence_Act
+      - text: "Whistleblower protections for AI-lab employees"
+        status: partial
+        evidence: "SB 53 requires anonymous channels and anti-retaliation protections in California. The federal AI Whistleblower Protection Act (S.1792) has had no action since its introduction on 2025-05-15."
+        url: https://www.govtrack.us/congress/bills/119/s1792
+      - text: "Enforce chip export controls, including location verification to stop smuggling (Epoch estimates ~1/3 of Chinese compute is smuggled)"
+        status: not-yet
+        evidence: "Export controls exist, but the Chip Security Act (H.R.3447, location verification for export-controlled chips) was only ordered reported on 2026-03-26 and is not law."
+        url: https://www.govtrack.us/congress/bills/119/hr3447
+      - text: "Invest in verification R&D (e.g. inference-only verification that would allow a training pause)"
+        status: not-yet
+        evidence: "No government verification-R&D programme at the needed scale was identified. Work is limited to research proposals such as the FlexHEG and verification supplements."
+        url: https://ai-2040.com/supplements/verification-plan
+      - text: "Improve government AI capacity (evaluation and understanding of frontier AI)"
+        status: partial
+        evidence: "NIST's CAISI publishes evaluations, e.g. DeepSeek V4 Pro (2026-05-01), Kimi K3 cyber with UK AISI (2026-07-23) and GLM-5.3 (2026-09-17), focused on PRC models. It has no pre-deployment authority over US labs."
+        url: https://www.nist.gov/caisi
+      - text: "Limit the share of compute AI companies spend on AI R&D; track AI compute through the chip supply chain"
+        status: not-yet
+        evidence: "No such limits or compute registry exist; the plan notes big AI companies spend ~half their compute on R&D in 2026."
+        url: https://ai-2040.com/#2027-the-writing-on-the-wall
+
+  - year: 2028
+    title: "AI on the Ballot"
+    url: https://ai-2040.com/#2028-ai-on-the-ballot
+    summary: "AI is the top issue of the 2028 election. Datacenters under construction cost twice the US military budget, white-collar work is being disrupted, and experts warn the intelligence explosion is near. The candidates converge on rival plans for what to do."
+    preconditions:
+      - text: "Broad public and elite awareness that the default path reaches superhuman AI within the next presidential term"
+        status: not-yet
+        evidence: "Gallup's share of Americans naming AI the most important problem is ~0.6% (4-month average to Jul 2026), flat since 2025, although worry about AI and jobs is widespread."
+        url: https://news.gallup.com/poll/1675/most-important-problem.aspx
+      - text: "A US President willing to seek an international deal with China"
+        status: not-yet
+        evidence: "Current US federal policy prioritizes AI leadership and pre-empting state AI laws (EO 14365, Dec 2025) rather than a bilateral slowdown."
+        url: https://en.wikipedia.org/wiki/Regulation_of_artificial_intelligence_in_the_United_States
+    branchPoints:
+      - "China covertly stockpiles smuggled Nvidia servers ('Chip Diversion')"
+
+  - year: 2029
+    title: "Choose a Path"
+    url: https://ai-2040.com/?choices=plan-a-root#2029-choose-a-path
+    summary: "The new President announces the US will seek international cooperation and China is receptive. Step 1 Compute Declaration, Step 2 Pause Training, Step 3 Get Worldwide Buy-in. By year end most of the world has joined the 'Consortium'. The PDF also labels this 'Hurried Negotiation'."
+    preconditions:
+      - text: "US-China agreement with mutual verification (the Plan A deal)"
+        status: not-yet
+        evidence: "No bilateral AI agreement beyond the Nov 2024 Biden-Xi statement on keeping human control over nuclear-weapons decisions."
+        url: https://bidenwhitehouse.archives.gov/briefing-room/statements-releases/2024/11/16/readout-of-president-joe-bidens-meeting-with-president-xi-jinping-of-the-peoples-republic-of-china/
+      - text: "Declare all AI chips, datacenters and fabs, with reciprocal inspectors (target: under ~1% of compute hidden)"
+        status: not-yet
+        evidence: "No declaration or inspection regime exists; chip location verification is not even law domestically."
+        url: https://www.govtrack.us/congress/bills/119/hr3447
+      - text: "Temporary pause on all new frontier training runs"
+        status: not-yet
+        evidence: "No pause anywhere; the largest run on record, GPT-6 Astra (~1e27 FLOP), was released 2026-09-03."
+        url: https://epoch.ai/models/gpt-6-astra
+      - text: "Inference-only verification devices (network taps plus recomputation servers) retrofitted into major datacenters"
+        status: not-yet
+        evidence: "Exists only as a proposal in the plan's verification supplement."
+        url: https://ai-2040.com/supplements/verification-plan
+      - text: "Worldwide buy-in (a multilateral Consortium)"
+        status: not-yet
+        evidence: "The closest body is the non-binding UN Independent International Scientific Panel on AI (members appointed 2026-02-12, first meeting 2026-03-03)."
+        url: https://en.wikipedia.org/wiki/Independent_International_Scientific_Panel_on_AI
+    branchPoints:
+      - "Plan B (Sabotage), Plan C (Slowdown), Plan D (Race), Plan S (Shutdown)"
+      - "China attempts a covert AGI project (Medog-dam datacenter); analysts give it under 10% chance of reaching TED-AI undetected before 2043"
+
+  - year: 2030
+    title: "Plan A is Established"
+    url: https://ai-2040.com/?choices=plan-a-root#2030-plan-a-is-established
+    summary: "Training restarts under four principles: Buy Time, Total Research Transparency, Diffuse AI Broadly, and Reversibility (limit algorithmic progress; maintain mutually assured compute destruction). New datacenters go in the rival's most exposed neighbour: China's in Canada, America's in Mongolia."
+    preconditions:
+      - text: "Total Research Transparency: algorithms public and public access to the best weights"
+        status: not-yet
+        evidence: "Frontier labs keep algorithms secret, and the most capable models are access-restricted (Claude Mythos is limited to trusted programmes)."
+        url: https://ai2027-tracker.com/predictions/capability-secrecy/
+      - text: "Scale through compute rather than algorithmic progress; datacenters sited in third countries; compute destroyed if the deal collapses"
+        status: not-yet
+        evidence: "No such arrangement exists or is under negotiation."
+        url: https://ai-2040.com/?choices=plan-a-root#2030-plan-a-is-established
+
+  - year: 2031
+    title: "Safety Cases"
+    url: https://ai-2040.com/?choices=plan-a-root#2031-safety-cases
+    summary: "Consortium AIs could speed AI R&D ~10x if unrestricted. Transparency exposes misalignment incidents, the burden of proof flips, and governments require safety cases (alignment plus control). Public release now precedes internal R&D use, and a continual-learning paradigm is banned bilaterally."
+    preconditions:
+      - text: "Mandatory safety cases for large training runs, reviewed by the public, rivals and auditors"
+        status: partial
+        evidence: "The EU AI Act's systemic-risk GPAI duties (evaluations, adversarial testing, incident reporting) have applied since 2025-08-02, and SB 53 requires published frameworks. No approval regime anywhere."
+        url: https://artificialintelligenceact.eu/implementation-timeline/
+      - text: "Published model specs"
+        status: happened
+        evidence: "OpenAI publishes and updates its Model Spec; Anthropic publishes Claude's constitution."
+        url: https://model-spec.openai.com/
+      - text: "Independent third-party risk assessors trusted by both the US and China"
+        status: not-yet
+        evidence: "Government evaluators (US CAISI, UK AISI) test models, but no binational assessor regime exists."
+        url: https://www.nist.gov/caisi
+      - text: "Bilateral mechanism to ban unsafe training practices"
+        status: not-yet
+        evidence: "No US-China technical-safety agreement exists."
+        url: https://ai-2040.com/?choices=plan-a-root#2031-safety-cases
+    branchPoints:
+      - "A flawed safety case is approved"
+
+  - year: 2032
+    title: "Controlled Explosive Growth"
+    url: https://ai-2040.com/?choices=plan-a-root#2032-controlled-explosive-growth
+    summary: "60M AI agents run at 20x human speed, equivalent to ~3B human workers, and real GDP growth reaches ~50%. AI-driven industry is confined to monitored special economic zones, and robot and compute production is capped."
+    preconditions:
+      - text: "AI-enabled industry confined to monitored special economic zones"
+        status: not-yet
+        evidence: "No such zones exist."
+        url: https://ai-2040.com/?choices=plan-a-root#2032-controlled-explosive-growth
+      - text: "Robot and compute production capped at 4x per year via cap-and-trade permits (2032 cap: 80M robots, 5B H100e)"
+        status: not-yet
+        evidence: "No production caps exist. The global AI compute stock roughly tripled in 2025 (Epoch: ~6.7M H100e at end-2024, ~20.3M at end-2025)."
+        url: https://epoch.ai/data/ai-chip-sales
+      - text: "Tax reform for an economy where labour income erodes"
+        status: not-yet
+        evidence: "No AI-specific tax reform has been enacted."
+        url: https://ai-2040.com/?choices=plan-a-root#2032-controlled-explosive-growth
+
+  - year: 2033
+    title: "The Citizen's Dividend"
+    url: https://ai-2040.com/?choices=plan-a-root#2033-the-citizens-dividend
+    summary: "Permit fees fund a Citizen's Dividend: $45K per person in 2032, rising to ~$1M by 2035. Foreign aid reaches ~4B people, ~$1T a year goes to hardening against WMD threats, and 'truthseeking AIs' arrive."
+    preconditions:
+      - text: "Citizen's Dividend law distributing AI-permit revenue"
+        status: not-yet
+        evidence: "No AI dividend or UBI legislation has been enacted in the US."
+        url: https://ai-2040.com/?choices=plan-a-root#2033-the-citizens-dividend
+      - text: "Biodefense hardening: PPE, far-UVC, wastewater monitoring, bioshelters, fast vaccine pipelines"
+        status: partial
+        evidence: "Pieces exist, e.g. CDC's National Wastewater Surveillance System, but nothing near the ~$1T per year scale the plan describes."
+        url: https://www.cdc.gov/nwss/
+      - text: "Limits on AI persuasion capability plus a persuasion tax; AI-for-epistemics measures"
+        status: not-yet
+        evidence: "No such rules exist."
+        url: https://ai-2040.com/supplements/ai-for-epistemics
+
+  - year: 2034
+    title: "Mutually Assured Compute Destruction"
+    url: https://ai-2040.com/?choices=plan-a-root#2034-mutually-assured-compute-destruction
+    summary: "60B H100e of compute and 200M virtual workers at 50x speed. Datacenters and fabs sit in Canada and Mongolia under a mutual-destruction standoff, and chips need regular 'continue' messages to keep working."
+    preconditions:
+      - text: "Remote-disable chips that stop without periodic authorization, with an annexation fallback"
+        status: not-yet
+        evidence: "Hardware-enabled governance mechanisms remain research proposals; even location verification is not law."
+        url: https://www.govtrack.us/congress/bills/119/hr3447
+      - text: "Fixed cap on chip production under human oversight of manufacturing"
+        status: not-yet
+        evidence: "No caps exist."
+        url: https://ai-2040.com/?choices=plan-a-root#2034-mutually-assured-compute-destruction
+      - text: "Military AI R&D held back: dual-use transparency and no military use of AIs well above pre-deal capability"
+        status: not-yet
+        evidence: "Militaries are expanding frontier-AI contracting (e.g. 2025 DoD CDAO awards to OpenAI, Anthropic, Google and xAI)."
+        url: https://ai2027-tracker.com/predictions/dod-ai-contracting/
+    branchPoints:
+      - "Deal dissolution"
+
+  - year: 2035
+    title: "Pause at Top Expert AI"
+    url: https://ai-2040.com/?choices=plan-a-root#2035-pause-at-top-expert-ai
+    summary: "AIs match top human experts in every field. The Consortium pauses at the highest level it can still control, while alignment science (generalization, interpretability) advances."
+    preconditions:
+      - text: "Capabilities paused at the limit of what control-based safety cases can cover"
+        status: not-yet
+        evidence: "No capability-pause mechanism exists."
+        url: https://ai-2040.com/?choices=plan-a-root#2035-pause-at-top-expert-ai
+      - text: "Cross-lineage AI monitoring and red-teaming"
+        status: not-yet
+        evidence: "Labs monitor their own models; no cross-developer monitoring regime exists."
+        url: https://ai-2040.com/?choices=plan-a-root#2035-pause-at-top-expert-ai
+      - text: "Institutions for making deals with (possibly misaligned) AIs: welfare, pay, preservation"
+        status: partial
+        evidence: "Early voluntary steps only: Anthropic committed (2025-11-04) to preserve weights of released models and interview models before deprecation."
+        url: https://www.anthropic.com/research/deprecation-commitments
+
+  - year: 2036
+    title: "Life After Work"
+    url: https://ai-2040.com/?choices=plan-a-root#2036-life-after-work
+    summary: "200M AIs (≈100B human-equivalents) and 2B robots. The world divides into industrial zones, arcologies and preserves, and only 26% of Americans have jobs. GDP growth averages ~100% a year over 2032-2037 under the caps."
+    preconditions:
+      - text: "Production caps continue and the dividend expands"
+        status: not-yet
+        evidence: "Depends on the not-yet cap-and-trade and dividend regimes."
+        url: https://ai-2040.com/?choices=plan-a-root#2036-life-after-work
+      - text: "Honest AI forecasters trusted in political decision-making"
+        status: not-yet
+        evidence: "No institutional role for AI forecasters in government."
+        url: https://ai-2040.com/?choices=plan-a-root#2036-life-after-work
+
+  - year: 2037
+    title: "The Apocalyptic Arrival of Truth on Earth"
+    url: https://ai-2040.com/?choices=plan-a-root#2037-the-apocalyptic-arrival-of-truth-on-earth
+    summary: "100M top-expert AIs at 100x speed make science 10-1000x faster. Privacy-preserving auditing becomes standard and AI lie detectors arrive, making deals hard to cheat."
+    preconditions:
+      - text: "Privacy-preserving auditor agents and widely deployed AI lie detection, including for the powerful"
+        status: not-yet
+        evidence: "No reliable AI lie detection exists or is deployed."
+        url: https://ai-2040.com/?choices=plan-a-root#2037-the-apocalyptic-arrival-of-truth-on-earth
+      - text: "Frontier AI not concentrated in a few hands"
+        status: not-yet
+        evidence: "The frontier is concentrated in a few US labs (OpenAI, Anthropic, Google), with the best Chinese models roughly 6-7 months behind on Epoch's capability index."
+        url: https://ai2027-tracker.com/predictions/china-model-gap/
+
+  - year: 2038
+    title: "AI Alignment Is Now a Science"
+    url: https://ai-2040.com/?choices=plan-a-root#2038-ai-alignment-is-now-a-science
+    summary: "Alignment becomes a mature, textbook science with verified honesty. Debate moves on to alignment targets while the global pause at top-expert level continues."
+    preconditions:
+      - text: "Very large safety-research incentives ('tens of trillions of dollars by the mid-2030s' via philanthropy, ARPA-style programmes, prizes)"
+        status: not-yet
+        evidence: "The plan's own 2027 baseline is ~1.2K alignment researchers worldwide; funding is nowhere near this scale."
+        url: https://ai-2040.com/AI-2040.pdf
+      - text: "Interpretability tools that confirm alignment theory"
+        status: not-yet
+        evidence: "Interpretability cannot yet verify frontier-model goals."
+        url: https://ai-2040.com/supplements/alignment-roadmap
+
+  - year: 2039
+    title: "Beginning to Trust AIs"
+    url: https://ai-2040.com/?choices=plan-a-root#2039-beginning-to-trust-ais
+    summary: "The world negotiates handing authority to AIs, and safety cases shift from control to alignment. The dividend is $10M a year for Americans and ~$1M for the poorest non-Americans; growth is capped at ~100% a year."
+    preconditions:
+      - text: "Several independent lines of evidence that AIs are robustly aligned"
+        status: not-yet
+        evidence: "No such evidence exists for current systems."
+        url: https://ai-2040.com/?choices=plan-a-root#2039-beginning-to-trust-ais
+      - text: "Caps loosened (space first) while transparency and compute verification are kept after handoff"
+        status: not-yet
+        evidence: "Depends on regimes that do not exist yet."
+        url: https://ai-2040.com/?choices=plan-a-root#2039-beginning-to-trust-ais
+
+  - year: 2040
+    title: "Passing the Torch to AIs"
+    url: https://ai-2040.com/?choices=plan-a-root#2040-passing-the-torch-to-ais
+    summary: "Regulators loosen requirements and institutions and militaries are handed to AIs. Capabilities scale again (AIs at ~500x human speed) toward superintelligence."
+    preconditions:
+      - text: "Alignment-based safety cases with an inductive chain of trust across AI generations"
+        status: not-yet
+        evidence: "No alignment-based safety case has been accepted for any frontier system."
+        url: https://ai-2040.com/?choices=plan-a-root#2040-passing-the-torch-to-ais
+      - text: "Governance answers for space, digital-mind rights, manipulation and democracy"
+        status: not-yet
+        evidence: "Listed by the authors as open questions."
+        url: https://ai-2040.com/supplements/space-governance-plan
+
+metrics:
+  # Sidebar values from the PDF (start of each year, Plan A branch). They match the live site except
+  # "Total Slowdown", which the site has since revised (e.g. 2033: 2.2 on the site vs 2.5 years in the PDF).
+  # The site now labels "Alignment Researchers" as "Safety Researchers".
+  - { year: 2027, name: Employment rate, value: 62, unit: pct, note: "Share of Americans with jobs" }
+  - { year: 2028, name: Employment rate, value: 62, unit: pct }
+  - { year: 2029, name: Employment rate, value: 62, unit: pct }
+  - { year: 2030, name: Employment rate, value: 61, unit: pct }
+  - { year: 2031, name: Employment rate, value: 61, unit: pct }
+  - { year: 2032, name: Employment rate, value: 62, unit: pct }
+  - { year: 2033, name: Employment rate, value: 52, unit: pct }
+  - { year: 2034, name: Employment rate, value: 44, unit: pct }
+  - { year: 2035, name: Employment rate, value: 32, unit: pct }
+  - { year: 2036, name: Employment rate, value: 26, unit: pct }
+  - { year: 2037, name: Employment rate, value: 21, unit: pct }
+  - { year: 2038, name: Employment rate, value: 17, unit: pct }
+  - { year: 2039, name: Employment rate, value: 13, unit: pct }
+  - { year: 2040, name: Employment rate, value: 12, unit: pct }
+  - { year: 2027, name: Median income, value: 47400, unit: USD2025, note: "Median US working-age income" }
+  - { year: 2028, name: Median income, value: 48600, unit: USD2025 }
+  - { year: 2029, name: Median income, value: 50300, unit: USD2025 }
+  - { year: 2030, name: Median income, value: 51800, unit: USD2025 }
+  - { year: 2031, name: Median income, value: 52000, unit: USD2025 }
+  - { year: 2032, name: Median income, value: 104300, unit: USD2025 }
+  - { year: 2033, name: Median income, value: 193000, unit: USD2025 }
+  - { year: 2034, name: Median income, value: 429100, unit: USD2025 }
+  - { year: 2035, name: Median income, value: 1100000, unit: USD2025 }
+  - { year: 2036, name: Median income, value: 2100000, unit: USD2025 }
+  - { year: 2037, name: Median income, value: 3900000, unit: USD2025 }
+  - { year: 2038, name: Median income, value: 6800000, unit: USD2025 }
+  - { year: 2039, name: Median income, value: 10300000, unit: USD2025 }
+  - { year: 2040, name: Median income, value: 13000000, unit: USD2025 }
+  - { year: 2027, name: Alignment researchers, value: 1200, unit: people }
+  - { year: 2028, name: Alignment researchers, value: 1400, unit: people }
+  - { year: 2029, name: Alignment researchers, value: 1700, unit: people }
+  - { year: 2030, name: Alignment researchers, value: 3500, unit: people }
+  - { year: 2031, name: Alignment researchers, value: 10400, unit: people }
+  - { year: 2032, name: Alignment researchers, value: 20700, unit: people }
+  - { year: 2033, name: Alignment researchers, value: 31100, unit: people }
+  - { year: 2034, name: Alignment researchers, value: 46700, unit: people }
+  - { year: 2035, name: Alignment researchers, value: 60700, unit: people }
+  - { year: 2036, name: Alignment researchers, value: 78800, unit: people }
+  - { year: 2037, name: Alignment researchers, value: 102500, unit: people }
+  - { year: 2038, name: Alignment researchers, value: 133300, unit: people }
+  - { year: 2039, name: Alignment researchers, value: 173200, unit: people }
+  - { year: 2040, name: Alignment researchers, value: 225200, unit: people }
+  - { year: 2027, name: Total slowdown, value: 0, unit: years, note: "Delay in AI capability scaling vs the status quo, for safety reasons" }
+  - { year: 2028, name: Total slowdown, value: 0, unit: years }
+  - { year: 2029, name: Total slowdown, value: 0, unit: years }
+  - { year: 2030, name: Total slowdown, value: 1, unit: years }
+  - { year: 2031, name: Total slowdown, value: 1.5, unit: years }
+  - { year: 2032, name: Total slowdown, value: 2, unit: years }
+  - { year: 2033, name: Total slowdown, value: 2.5, unit: years }
+  - { year: 2034, name: Total slowdown, value: 3, unit: years }
+  - { year: 2035, name: Total slowdown, value: 4, unit: years }
+  - { year: 2036, name: Total slowdown, value: 5, unit: years }
+  - { year: 2037, name: Total slowdown, value: 6, unit: years }
+  - { year: 2038, name: Total slowdown, value: 7, unit: years }
+  - { year: 2039, name: Total slowdown, value: 8, unit: years }
+  - { year: 2040, name: Total slowdown, value: 9, unit: years }
+  - { year: 2027, name: Human labor, value: 3.5e9, unit: workers }
+  - { year: 2028, name: Human labor, value: 3.5e9, unit: workers }
+  - { year: 2029, name: Human labor, value: 3.4e9, unit: workers }
+  - { year: 2030, name: Human labor, value: 3.5e9, unit: workers }
+  - { year: 2031, name: Human labor, value: 3.4e9, unit: workers }
+  - { year: 2032, name: Human labor, value: 3.5e9, unit: workers }
+  - { year: 2033, name: Human labor, value: 3.7e9, unit: workers }
+  - { year: 2034, name: Human labor, value: 3.9e9, unit: workers }
+  - { year: 2035, name: Human labor, value: 3.8e9, unit: workers }
+  - { year: 2036, name: Human labor, value: 3.5e9, unit: workers }
+  - { year: 2037, name: Human labor, value: 3.0e9, unit: workers }
+  - { year: 2038, name: Human labor, value: 2.5e9, unit: workers }
+  - { year: 2039, name: Human labor, value: 2.2e9, unit: workers }
+  - { year: 2040, name: Human labor, value: 1.8e9, unit: workers }
+  - { year: 2027, name: Reliable AI agents, value: 2.8e7, unit: agents }
+  - { year: 2028, name: Reliable AI agents, value: 2.3e7, unit: agents }
+  - { year: 2029, name: Reliable AI agents, value: 2.9e7, unit: agents }
+  - { year: 2030, name: Reliable AI agents, value: 4.7e7, unit: agents }
+  - { year: 2031, name: Reliable AI agents, value: 4.6e7, unit: agents }
+  - { year: 2032, name: Reliable AI agents, value: 6.5e7, unit: agents }
+  - { year: 2033, name: Reliable AI agents, value: 1.2e8, unit: agents }
+  - { year: 2034, name: Reliable AI agents, value: 1.7e8, unit: agents }
+  - { year: 2035, name: Reliable AI agents, value: 1.8e8, unit: agents }
+  - { year: 2036, name: Reliable AI agents, value: 1.7e8, unit: agents }
+  - { year: 2037, name: Reliable AI agents, value: 1.7e8, unit: agents }
+  - { year: 2038, name: Reliable AI agents, value: 1.8e8, unit: agents }
+  - { year: 2039, name: Reliable AI agents, value: 1.8e8, unit: agents }
+  - { year: 2040, name: Reliable AI agents, value: 1.9e8, unit: agents }
+  - { year: 2027, name: AI agent speed, value: 114, unit: x human, note: "Top speed of AI agents relative to humans" }
+  - { year: 2028, name: AI agent speed, value: 131, unit: x human }
+  - { year: 2029, name: AI agent speed, value: 150, unit: x human }
+  - { year: 2030, name: AI agent speed, value: 189, unit: x human }
+  - { year: 2031, name: AI agent speed, value: 238, unit: x human }
+  - { year: 2032, name: AI agent speed, value: 300, unit: x human }
+  - { year: 2033, name: AI agent speed, value: 378, unit: x human }
+  - { year: 2034, name: AI agent speed, value: 476, unit: x human }
+  - { year: 2035, name: AI agent speed, value: 600, unit: x human }
+  - { year: 2036, name: AI agent speed, value: 814, unit: x human }
+  - { year: 2037, name: AI agent speed, value: 1105, unit: x human }
+  - { year: 2038, name: AI agent speed, value: 1500, unit: x human }
+  - { year: 2039, name: AI agent speed, value: 1937, unit: x human }
+  - { year: 2040, name: AI agent speed, value: 2500, unit: x human }

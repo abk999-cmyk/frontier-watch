@@ -1,0 +1,2081 @@
+[
+  {
+    "base": "codex-mini-2025-05-16",
+    "org": "",
+    "files": [
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "computer-use-preview-2025-03-11",
+    "org": "",
+    "files": [
+      "os_world_external.csv"
+    ]
+  },
+  {
+    "base": "deepseek-r1-0528-qwen3-8b",
+    "org": "",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "glm-4.7-flash",
+    "org": "",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "granite-4.0-1b",
+    "org": "",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "granite-4.0-350m",
+    "org": "",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "granite-4.0-micro",
+    "org": "",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "grok-code-fast-1",
+    "org": "",
+    "files": [
+      "terminalbench_external.csv"
+    ]
+  },
+  {
+    "base": "qwen3-4b-instruct-2507",
+    "org": "",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "qwen3-coder-next",
+    "org": "",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "seed-oss-36b-instruct",
+    "org": "",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "tiny-recursion-model",
+    "org": "",
+    "files": [
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "Yi-1.5-34B-Chat",
+    "org": "01.AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "Yi-34B-Chat",
+    "org": "01.AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "qwen-max-2025-01-25",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv"
+    ]
+  },
+  {
+    "base": "qwen-plus-2025-01-25",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "qwen-plus-2025-04-28",
+    "org": "Alibaba",
+    "files": [
+      "frontiermath.csv"
+    ]
+  },
+  {
+    "base": "qwen-turbo-2024-11-01",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "qwen1.5-32b-chat",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv"
+    ]
+  },
+  {
+    "base": "qwen1.5-72b-chat",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv"
+    ]
+  },
+  {
+    "base": "qwen2-72b-instruct",
+    "org": "Alibaba",
+    "files": [
+      "metr_time_horizons_external.csv",
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "qwen2.5-32b-instruct",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "qwen2.5-72b-instruct",
+    "org": "Alibaba",
+    "files": [
+      "metr_time_horizons_external.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "qwen2.5-7b-instruct",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "Qwen2.5-VL-72B-Instruct",
+    "org": "Alibaba",
+    "files": [
+      "os_world_external.csv"
+    ]
+  },
+  {
+    "base": "qwen3-1.7b",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "qwen3-14b",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "Qwen3-30B-A3B",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "qwen3-30b-a3b-instruct-2507",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "qwen3-30b-a3b-thinking-2507",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "Qwen3-32B",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "qwen3-4b",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv"
+    ]
+  },
+  {
+    "base": "qwen3-8b",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "Qwen3-Coder-480B-A35B-Instruct",
+    "org": "Alibaba",
+    "files": [
+      "terminalbench_external.csv"
+    ]
+  },
+  {
+    "base": "qwen3-max-2025-09-23",
+    "org": "Alibaba",
+    "files": [
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath_tiers_1_3_v2.csv"
+    ]
+  },
+  {
+    "base": "qwen3.5-122b-a10b",
+    "org": "Alibaba",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "qwen3.5-27B",
+    "org": "Alibaba",
+    "files": [
+      "vending_bench_2_external.csv"
+    ]
+  },
+  {
+    "base": "qwen3.5-35b-a3b",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "qwen3.5-4b",
+    "org": "Alibaba",
+    "files": [
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "qwen3.5-9B",
+    "org": "Alibaba",
+    "files": [
+      "terminalbench_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "qwen3.5-flash",
+    "org": "Alibaba",
+    "files": [
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4.csv"
+    ]
+  },
+  {
+    "base": "qwen3.6-27b",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv"
+    ]
+  },
+  {
+    "base": "qwen3.6-35b-a3b",
+    "org": "Alibaba",
+    "files": [
+      "terminalbench_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv"
+    ]
+  },
+  {
+    "base": "qwen3.6-flash",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4.csv"
+    ]
+  },
+  {
+    "base": "qwen3.6-max-preview",
+    "org": "Alibaba",
+    "files": [
+      "swe_bench_verified.csv",
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath.csv",
+      "frontiermath_tier_4.csv"
+    ]
+  },
+  {
+    "base": "qwen3.6-plus",
+    "org": "Alibaba",
+    "files": [
+      "swe_bench_verified.csv",
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4.csv"
+    ]
+  },
+  {
+    "base": "qwen3.7-flash",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv"
+    ]
+  },
+  {
+    "base": "qwen3.7-max",
+    "org": "Alibaba",
+    "files": [
+      "swe_bench_verified.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "qwen3.7-plus",
+    "org": "Alibaba",
+    "files": [
+      "osworld_2_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv"
+    ]
+  },
+  {
+    "base": "qwen3.8-27b",
+    "org": "Alibaba",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "QwQ-32B",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "qwq-plus",
+    "org": "Alibaba",
+    "files": [
+      "gpqa_diamond.csv"
+    ]
+  },
+  {
+    "base": "Llama-3.1-Tulu-3-70B-DPO",
+    "org": "Allen Institute for AI,University of Washington",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "amazon.nova-lite-v1:0",
+    "org": "Amazon",
+    "files": [
+      "hle_external.csv"
+    ]
+  },
+  {
+    "base": "amazon.nova-pro-v1:0",
+    "org": "Amazon",
+    "files": [
+      "hle_external.csv"
+    ]
+  },
+  {
+    "base": "nova-2.0-pro-preview",
+    "org": "Amazon",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "Ring-2.6-1T",
+    "org": "Ant Group",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "claude-2.0",
+    "org": "Anthropic",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "claude-2.1",
+    "org": "Anthropic",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "claude-3-5-haiku-20241022",
+    "org": "Anthropic",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv"
+    ]
+  },
+  {
+    "base": "claude-3-haiku-20240307",
+    "org": "Anthropic",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "claude-3-opus-20240229",
+    "org": "Anthropic",
+    "files": [
+      "metr_time_horizons_external.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "claude-3-sonnet-20240229",
+    "org": "Anthropic",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "claude-haiku-4-5-20251001",
+    "org": "Anthropic",
+    "files": [
+      "terminalbench_external.csv",
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv",
+      "frontiermath_tier_4.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "trinity-large-thinking",
+    "org": "Arcee AI",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "command-a-plus-05-2026",
+    "org": "Cohere,Cohere Labs (formerly Cohere for AI)",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "dbrx-instruct",
+    "org": "Databricks",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "cogito-671b-v2.1",
+    "org": "Deep Cogito",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "deepseek-chat",
+    "org": "DeepSeek",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "deepseek-llm-67b-chat",
+    "org": "DeepSeek",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "DeepSeek-R1-Distill-Llama-70B",
+    "org": "DeepSeek",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "DeepSeek-R1-Distill-Qwen-1.5B",
+    "org": "DeepSeek",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "DeepSeek-R1-Distill-Qwen-14B",
+    "org": "DeepSeek",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "DeepSeek-R1-Distill-Qwen-32B",
+    "org": "DeepSeek",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "deepseek-reasoner",
+    "org": "DeepSeek",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "DeepSeek-V3.1-Terminus",
+    "org": "DeepSeek",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "DeepSeek-V3.2-Exp",
+    "org": "DeepSeek",
+    "files": [
+      "vending_bench_2_external.csv"
+    ]
+  },
+  {
+    "base": "DeepSeek-V3.2-Exp_thinking",
+    "org": "DeepSeek",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "deepseek-v4-flash",
+    "org": "DeepSeek",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "deepseek-v4-flash-0731",
+    "org": "DeepSeek",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "deepseek-v4.1-flash",
+    "org": "DeepSeek",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "deepseek/deepseek-v3.2",
+    "org": "DeepSeek",
+    "files": [
+      "terminalbench_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "fireworks/deepseek-v3p2",
+    "org": "DeepSeek",
+    "files": [
+      "frontiermath.csv",
+      "frontiermath_tier_4.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "gemini-3.1-flash-lite",
+    "org": "Google",
+    "files": [
+      "hle_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv"
+    ]
+  },
+  {
+    "base": "gdm-ai-co-mathematician",
+    "org": "Google DeepMind",
+    "files": [
+      "frontiermath_tier_4.csv",
+      "frontiermath_tier_4_v2.csv"
+    ]
+  },
+  {
+    "base": "gemini-1.0-pro-001",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "gemini-1.5-flash-001",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "gemini-1.5-flash-002",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv"
+    ]
+  },
+  {
+    "base": "gemini-1.5-flash-8b-001",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "gemini-1.5-pro-001",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "gemini-1.5-pro-002",
+    "org": "Google DeepMind",
+    "files": [
+      "hle_external.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gemini-2.0-pro-exp-02-05",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "gemini-3-deep-think-preview",
+    "org": "Google DeepMind",
+    "files": [
+      "critpt_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gemma-2-27b-it",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "gemma-2-9b-it",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "gemma-3-12b-it",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "gemma-3-1b-it",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "gemma-3-27b-it",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "gemma-3-4b-it",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "gemma-4-26b-a4b",
+    "org": "Google DeepMind",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "gemma-4-26b-a4b-it",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "gemma-4-31b-it",
+    "org": "Google DeepMind",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "gemini-2.0-flash-001",
+    "org": "Google DeepMind,Google",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gemini-2.0-flash-thinking-exp-01-21",
+    "org": "Google DeepMind,Google",
+    "files": [
+      "hle_external.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "granite-4.1-30b",
+    "org": "IBM",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "mercury-2",
+    "org": "Inception Labs",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "mercury-2.5",
+    "org": "Inception Labs",
+    "files": [
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "chutes/Llama-4-Maverick-17B-128E-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "critpt_external.csv"
+    ]
+  },
+  {
+    "base": "Llama-2-70b-chat-hf",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "Llama-3.1-405B-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "Llama-3.1-70B-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "Llama-3.1-8B-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "Llama-3.2-1B-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "Llama-3.2-90B-Vision-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "Llama-3.3-70B-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "Llama-4-Maverick-17B-128E-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "hle_external.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "Llama-4-Maverick-17B-128E-Instruct-FP8",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv"
+    ]
+  },
+  {
+    "base": "Llama-4-Scout-17B-16E-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "Meta-Llama-3-70B-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "Meta-Llama-3-8B-Instruct",
+    "org": "Meta AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "muse-spark",
+    "org": "Meta AI",
+    "files": [
+      "hle_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath.csv",
+      "frontiermath_tier_4.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "muse-spark-1.1",
+    "org": "Meta AI",
+    "files": [
+      "deepswe_external.csv",
+      "vending_bench_2_external.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "muse-spark-1.2",
+    "org": "Meta AI",
+    "files": [
+      "deepswe_external.csv",
+      "frontierswe_external.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "muse-spark-1.3",
+    "org": "Meta AI",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4_v2.csv"
+    ]
+  },
+  {
+    "base": "Phi-3-medium-128k-instruct",
+    "org": "Microsoft",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "Phi-4-mini-instruct",
+    "org": "Microsoft",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "WizardLM-2-8x22B",
+    "org": "Microsoft",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "phi-4",
+    "org": "Microsoft Research",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "MiniMax-M2",
+    "org": "MiniMax",
+    "files": [
+      "terminalbench_external.csv",
+      "vending_bench_2_external.csv"
+    ]
+  },
+  {
+    "base": "MiniMax-M2.1",
+    "org": "MiniMax",
+    "files": [
+      "terminalbench_external.csv"
+    ]
+  },
+  {
+    "base": "MiniMax-M2.5",
+    "org": "MiniMax",
+    "files": [
+      "terminalbench_external.csv",
+      "vending_bench_2_external.csv",
+      "proofbench_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "MiniMax-M2.7",
+    "org": "MiniMax",
+    "files": [
+      "terminalbench_external.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "MiniMax-M3",
+    "org": "MiniMax",
+    "files": [
+      "osworld_2_external.csv",
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "devstral-small-2512",
+    "org": "Mistral AI",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "magistral-medium-2506",
+    "org": "Mistral AI",
+    "files": [
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "magistral-medium-2509",
+    "org": "Mistral AI",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "magistral-small-2506",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "magistral-small-2509",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "ministral-3b-2410",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "ministral-8b-2410",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "Mistral-7B-Instruct-v0.3",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "mistral-large-2402",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "mistral-large-2407",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "mistral-large-2411",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv"
+    ]
+  },
+  {
+    "base": "mistral-large-2512",
+    "org": "Mistral AI",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "mistral-medium-2505",
+    "org": "Mistral AI",
+    "files": [
+      "hle_external.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv"
+    ]
+  },
+  {
+    "base": "mistral-medium-2508",
+    "org": "Mistral AI",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "mistral-medium-2604",
+    "org": "Mistral AI",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "mistral-small-2501",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "mistral-small-2503",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "mistral-small-2506",
+    "org": "Mistral AI",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "mistral-small-3-2501",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "mistral-small-3.1-2503",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "mistral-small-3.2-2506",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "Mixtral-8x7B-Instruct-v0.1",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "open-mistral-7b",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "open-mistral-nemo-2407",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "open-mixtral-8x22b",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "open-mixtral-8x7b",
+    "org": "Mistral AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "kimi-k2-thinking",
+    "org": "Moonshot",
+    "files": [
+      "terminalbench_external.csv",
+      "metr_time_horizons_external.csv"
+    ]
+  },
+  {
+    "base": "kimi-k2-thinking-turbo",
+    "org": "Moonshot",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "kimi-k2.6",
+    "org": "Moonshot",
+    "files": [
+      "swe_bench_verified.csv",
+      "osworld_2_external.csv",
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "kimi-k2.7-code",
+    "org": "Moonshot",
+    "files": [
+      "deepswe_external.csv",
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4_v2.csv"
+    ]
+  },
+  {
+    "base": "moonshotai/Kimi-K2-Thinking",
+    "org": "Moonshot",
+    "files": [
+      "frontiermath.csv",
+      "frontiermath_tier_4.csv"
+    ]
+  },
+  {
+    "base": "Hermes-2-Theta-Llama-3-70B",
+    "org": "Nous Research,Arcee AI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "nemotron-3-super",
+    "org": "Nvidia",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "nemotron-3-ultra",
+    "org": "Nvidia",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "davinci-002",
+    "org": "OpenAI",
+    "files": [
+      "metr_time_horizons_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-3.5-turbo-0125",
+    "org": "OpenAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath_tiers_1_3_v2.csv"
+    ]
+  },
+  {
+    "base": "gpt-3.5-turbo-1106",
+    "org": "OpenAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "gpt-3.5-turbo-instruct",
+    "org": "OpenAI",
+    "files": [
+      "metr_time_horizons_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-4-0125-preview",
+    "org": "OpenAI",
+    "files": [
+      "metr_time_horizons_external.csv",
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "gpt-4-1106-preview",
+    "org": "OpenAI",
+    "files": [
+      "metr_time_horizons_external.csv",
+      "gpqa_diamond.csv",
+      "math_level_5.csv"
+    ]
+  },
+  {
+    "base": "gpt-4-turbo",
+    "org": "OpenAI",
+    "files": [
+      "metr_time_horizons_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-4-turbo-2024-04-09",
+    "org": "OpenAI",
+    "files": [
+      "metr_time_horizons_external.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath_tiers_1_3_v2.csv"
+    ]
+  },
+  {
+    "base": "gpt-4.1-2025-04-14",
+    "org": "OpenAI",
+    "files": [
+      "hle_external.csv",
+      "swe_bench_verified.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-4.1-mini-2025-04-14",
+    "org": "OpenAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-4.1-nano-2025-04-14",
+    "org": "OpenAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-4o-mini-2024-07-18",
+    "org": "OpenAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-5-codex",
+    "org": "OpenAI",
+    "files": [
+      "terminalbench_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-5-mini-2025-08-07",
+    "org": "OpenAI",
+    "files": [
+      "hle_external.csv",
+      "swe_bench_verified.csv",
+      "terminalbench_external.csv",
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-5-nano-2025-08-07",
+    "org": "OpenAI",
+    "files": [
+      "terminalbench_external.csv",
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-5.1-codex",
+    "org": "OpenAI",
+    "files": [
+      "terminalbench_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-5.1-codex-max",
+    "org": "OpenAI",
+    "files": [
+      "terminalbench_external.csv",
+      "metr_time_horizons_external.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-5.1-codex-mini",
+    "org": "OpenAI",
+    "files": [
+      "terminalbench_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-5.2-codex",
+    "org": "OpenAI",
+    "files": [
+      "terminalbench_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-5.4-mini-2026-03-17",
+    "org": "OpenAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-5.4-nano-2026-03-17",
+    "org": "OpenAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-5.5-instant",
+    "org": "OpenAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4_v2.csv"
+    ]
+  },
+  {
+    "base": "gpt-oss-120b",
+    "org": "OpenAI",
+    "files": [
+      "terminalbench_external.csv",
+      "metr_time_horizons_external.csv",
+      "vending_bench_2_external.csv"
+    ]
+  },
+  {
+    "base": "gpt-oss-20b",
+    "org": "OpenAI",
+    "files": [
+      "terminalbench_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "gpt2-xl",
+    "org": "OpenAI",
+    "files": [
+      "metr_time_horizons_external.csv"
+    ]
+  },
+  {
+    "base": "o1-mini-2024-09-12",
+    "org": "OpenAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "o1-pro-2025-03-19",
+    "org": "OpenAI",
+    "files": [
+      "hle_external.csv",
+      "arc_agi_external.csv"
+    ]
+  },
+  {
+    "base": "o3-pro-2025-06-10",
+    "org": "OpenAI",
+    "files": [
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "openai/gpt-oss-120b",
+    "org": "OpenAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv"
+    ]
+  },
+  {
+    "base": "laguna-m.1",
+    "org": "Poolside",
+    "files": [
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "laguna-xs.2",
+    "org": "Poolside",
+    "files": [
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "step-3.7-flash",
+    "org": "StepFun",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "step-5-preview",
+    "org": "StepFun",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "hy4-preview",
+    "org": "Tencent",
+    "files": [
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "Inkling",
+    "org": "Thinking Machines",
+    "files": [
+      "frontierswe_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "inkling-small",
+    "org": "Thinking Machines",
+    "files": [
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "Eurus-2-7B-PRIME",
+    "org": "Tsinghua University,University of Illinois Urbana-Champaign (UIUC),Shanghai AI Lab,Peking University,Shanghai Jiao Tong University,CUHK Shenzhen Research Institute",
+    "files": [
+      "gpqa_diamond.csv"
+    ]
+  },
+  {
+    "base": "solar-pro-3",
+    "org": "Upstage",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "grok-3-mini",
+    "org": "xAI",
+    "files": [
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "grok-3-mini-beta",
+    "org": "xAI",
+    "files": [
+      "gpqa_diamond.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "math_level_5.csv",
+      "frontiermath.csv",
+      "arc_agi_external.csv"
+    ]
+  },
+  {
+    "base": "grok-4-1-fast-reasoning",
+    "org": "xAI",
+    "files": [
+      "vending_bench_2_external.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "grok-build-0.1",
+    "org": "xAI",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "mimo-v2-flash",
+    "org": "Xiaomi Corp",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "mimo-v2.5",
+    "org": "Xiaomi Corp",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "mimo-v2.5-pro",
+    "org": "Xiaomi Corp",
+    "files": [
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "glm-4.7",
+    "org": "Z.ai (Zhipu AI)",
+    "files": [
+      "terminalbench_external.csv",
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "glm-5.1",
+    "org": "Z.ai (Zhipu AI)",
+    "files": [
+      "swe_bench_verified.csv",
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "glm-5.2",
+    "org": "Z.ai (Zhipu AI)",
+    "files": [
+      "swe_bench_verified.csv",
+      "deepswe_external.csv",
+      "vending_bench_2_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv",
+      "arc_agi_external.csv",
+      "arc_agi_2_external.csv"
+    ]
+  },
+  {
+    "base": "glm-5.3-flash",
+    "org": "Z.ai (Zhipu AI)",
+    "files": [
+      "deepswe_external.csv",
+      "gpqa_diamond.csv",
+      "critpt_external.csv",
+      "scicode_external.csv",
+      "otis_mock_aime_2024_2025.csv",
+      "frontiermath_tiers_1_3_v2.csv",
+      "frontiermath_tier_4_v2.csv",
+      "proofbench_external.csv"
+    ]
+  },
+  {
+    "base": "zai-org/GLM-4.7",
+    "org": "Z.ai (Zhipu AI)",
+    "files": [
+      "frontiermath.csv",
+      "frontiermath_tier_4.csv"
+    ]
+  },
+  {
+    "base": "glm-4.5",
+    "org": "Z.ai (Zhipu AI),Tsinghua University",
+    "files": [
+      "hle_external.csv"
+    ]
+  },
+  {
+    "base": "GLM-4.5-Air",
+    "org": "Z.ai (Zhipu AI),Tsinghua University",
+    "files": [
+      "hle_external.csv"
+    ]
+  },
+  {
+    "base": "glm-4.6",
+    "org": "Z.ai (Zhipu AI),Tsinghua University",
+    "files": [
+      "terminalbench_external.csv",
+      "critpt_external.csv",
+      "scicode_external.csv"
+    ]
+  },
+  {
+    "base": "zai-org/GLM-4.6",
+    "org": "Z.ai (Zhipu AI),Tsinghua University",
+    "files": [
+      "frontiermath.csv",
+      "frontiermath_tier_4.csv"
+    ]
+  }
+]

@@ -1,0 +1,567 @@
+# AI 2027 scenario milestones, graded against reality as of 2026-09-24.
+#
+# Format
+#   source, published           the scenario itself
+#   milestones: list of
+#     id            kebab-case, stable. Referenced by ai2027-proxies.yaml (scenarioRef).
+#     date          scenario date (ISO). Month-level: the 1st of the month.
+#                   "Early / Mid / Late YYYY" sections are 4-month windows (Jan-Apr, May-Aug, Sep-Dec).
+#                   They are dated at the window's final month, which is where the scenario's own sidebar
+#                   checkpoints sit (2025-08-31, 2025-12-31, 2026-04-30, ...) and how the authors grade them.
+#                   Year-titled sections ("2029: The Deal") use YYYY-01-01.
+#     datePrecision month | quarter | half | year   (quarter = one of the 4-month Early/Mid/Late windows)
+#     branch        shared | race | slowdown
+#     title, summary
+#     claims        optional quantitative claims: { metric, value, note }. Percentages are 0-100.
+#                   Values tagged "sidebar" come from the scenario's dashboard data
+#                   (data-chart-extra on ai-2027.com). USD values are plain dollars.
+#     status        hit | partial | not-yet | missed | n/a
+#                     hit      = happened roughly as described, roughly on time
+#                     partial  = some sub-claims happened, others did not
+#                     not-yet  = scenario date has passed, the core event has not happened (behind schedule)
+#                     missed   = the dated claim was falsified on its date
+#                     n/a      = scenario date is still in the future
+#     statusNote    evidence-based one-liner
+#     evidenceUrl   where the evidence comes from
+#     proxy         optional id in ai2027-proxies.yaml
+#
+# Main grading sources: the authors' own grading (blog.aifutures.org, Feb 2026 + Aug 2026 re-grade)
+# and the independent tracker https://ai2027-tracker.com (dossiers checked 2026-09-24).
+
+source: https://ai-2027.com
+published: 2025-04-03
+authors: [Daniel Kokotajlo, Scott Alexander, Thomas Larsen, Eli Lifland, Romeo Dean]
+gradedAsOf: 2026-09-24
+pageUrls:
+  shared: https://ai-2027.com
+  race: https://ai-2027.com/race
+  slowdown: https://ai-2027.com/slowdown
+  computeForecast: https://ai-2027.com/research/compute-forecast
+  timelinesForecast: https://ai-2027.com/research/timelines-forecast
+authorsPaceEstimate:
+  - { published: 2026-02-12, pacePct: 65, note: "Quantitative metrics progressing at ~65% of AI 2027's pace (2025 predictions).", url: https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions }
+  - { published: 2026-08-16, pacePct: 75, note: "Re-grade: reality at roughly 70-90% of AI 2027's pace; ~75% is the headline figure used to project AC in mid-2027.", url: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift }
+
+milestones:
+  # ───────────────────────── Shared timeline ─────────────────────────
+  - id: stumbling-agents
+    date: 2025-08-01
+    datePrecision: quarter
+    branch: shared
+    title: "Mid 2025: Stumbling Agents"
+    summary: "The world gets its first glimpse of computer-using AI agents marketed as personal assistants; they are impressive but unreliable and struggle for mass adoption. Coding and research agents quietly start transforming those professions."
+    claims:
+      - { metric: osworld, value: 65, note: "OSWorld score by mid-2025 (footnote 9), up from 38%" }
+      - { metric: sweBenchVerified, value: 85, note: "SWE-bench Verified by mid-2025 (footnote 10), up from ~72%" }
+      - { metric: revenueAnnualized, value: 1.22e10, note: "sidebar, OpenBrain at 2025-08-31" }
+      - { metric: valuation, value: 6.10e11, note: "sidebar, OpenBrain at 2025-08-31" }
+    status: hit
+    statusNote: "Authors' grading: qualitative calls held (ChatGPT agent, Jul 2025, sold as a personal assistant and saw little use; Claude Code >$500M run-rate by Sep 2025). Benchmarks lagged: OSWorld 61% (vs 65%) and SWE-bench Verified 74.5% (vs 85%) by end of Aug 2025."
+    evidenceUrl: https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions
+
+  - id: agent-0
+    date: 2025-12-01
+    datePrecision: quarter
+    branch: shared
+    title: "Late 2025: The World's Most Expensive AI"
+    summary: "OpenBrain builds the largest datacenters ever; its latest public model Agent-0 was trained with 10^27 FLOP, and new datacenters can train 10^28 FLOP runs. Agent-1 is trained internally with a focus on speeding up AI research. Rivals trail by 3-9 months."
+    claims:
+      - { metric: trainingFlop, value: 1.0e27, note: "Agent-0, OpenBrain's latest public model; compute supplement puts its run Oct 2024-May 2025" }
+      - { metric: trainingFlop, value: 1.0e28, note: "what the new datacenters can train once online" }
+      - { metric: datacenterCapacityGw, value: 2, note: "leading-company datacenter capacity end-2025 (footnote 13, as graded by the authors)" }
+      - { metric: revenueAnnualized, value: 1.8e10, note: "sidebar, OpenBrain at 2025-12-31" }
+      - { metric: valuation, value: 9.0e11, note: "sidebar, OpenBrain at 2025-12-31" }
+      - { metric: rdMultiplier, value: 1.3, note: "sidebar, OpenBrain internal AI R&D progress multiplier at 2025-12-31" }
+      - { metric: leadMonths, value: 6, note: "other US companies 3-9 months behind OpenBrain (midpoint)" }
+    status: partial
+    statusNote: "Money and datacenters on pace (OpenAI ~$20B annualized vs $18B; ~1.9 GW vs 2 GW), but the largest 2025 runs were ~4-5e26 FLOP (Epoch) and the first ~1e27 public model (GPT-6 Astra) arrived only in Sep 2026; top valuation $500B vs $900B; labs were 0-2 months apart, not 3-9."
+    evidenceUrl: https://blog.aifutures.org/p/grading-ai-2027s-2025-predictions
+    proxy: compute-1e27
+
+  - id: coding-automation
+    date: 2026-04-01
+    datePrecision: quarter
+    branch: shared
+    title: "Early 2026: Coding Automation"
+    summary: "Agent-1, deployed internally, makes OpenBrain's algorithmic progress 50% faster. Competitors (including an open-weights model) match Agent-0, so OpenBrain publicly releases Agent-1. Security becomes a priority (RAND SL2, working toward SL3)."
+    claims:
+      - { metric: rdMultiplier, value: 1.5, note: "OpenBrain algorithmic progress 50% faster with AI (sidebar value 1.5 at 2026-04-30)" }
+      - { metric: trainingFlop, value: 4.0e27, note: "Agent-1 run, Jul 2025-Feb 2026 (compute supplement)" }
+      - { metric: revenueAnnualized, value: 2.61e10, note: "sidebar, OpenBrain at 2026-04-30" }
+      - { metric: valuation, value: 1.265e12, note: "sidebar, OpenBrain at 2026-04-30" }
+    status: partial
+    statusNote: "Authors (Aug 2026) call this section very on-point: coding agents exploded (Claude Code >$2.5B run-rate by Feb 2026). But overall AI software R&D uplift is estimated at ~1.2x (vs 1.5x), and no ~4e27 run is publicly known."
+    evidenceUrl: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    proxy: ai-rd-uplift
+
+  - id: china-wakes-up
+    date: 2026-08-01
+    datePrecision: quarter
+    branch: shared
+    title: "Mid 2026: China Wakes Up"
+    summary: "The CCP commits to a national AI push: Chinese AI research is nationalized into a DeepCent-led collective and a Centralized Development Zone is built at the Tianwan nuclear plant. China has ~12% of world AI compute and is ~6 months behind OpenBrain. Chinese intelligence plans to steal OpenBrain's weights."
+    claims:
+      - { metric: chinaComputeShare, value: 12, note: "China's share of world AI-relevant compute" }
+      - { metric: frontierLagMonths, value: 6, note: "DeepCent's lag behind OpenBrain's best models" }
+      - { metric: collectiveComputeShare, value: 50, note: "share of China's AI compute working for the DeepCent-led collective" }
+      - { metric: newChipsToCdz, value: 80, note: "share of new Chinese chips directed to the CDZ" }
+    status: not-yet
+    statusNote: "Authors (Aug 2026): 'China Wakes Up' has not happened; no consolidation of labs or compute is visible. The side claims hold up: ~7-month US-China gap on Epoch's ECI and ~12% compute share look reasonable."
+    evidenceUrl: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    proxy: china-centralization
+
+  - id: agent-1-mini
+    date: 2026-12-01
+    datePrecision: quarter
+    branch: shared
+    title: "Late 2026: AI Takes Some Jobs"
+    summary: "OpenBrain releases Agent-1-mini, 10x cheaper than Agent-1. AI takes some jobs and creates others: junior software-engineer hiring is in turmoil, stocks rise 30% in 2026, and 10,000 people protest AI in DC. The DOD starts contracting OpenBrain directly."
+    claims:
+      - { metric: priceReduction, value: 10, note: "Agent-1-mini is 10x cheaper than Agent-1" }
+      - { metric: stockMarketGain, value: 30, note: "stock market up 30% in 2026" }
+      - { metric: protestSize, value: 10000, note: "anti-AI protest in DC" }
+      - { metric: revenueAnnual, value: 3.5e10, note: "key-metrics box: OpenBrain 2026 revenue (the compute supplement says $45B)" }
+      - { metric: revenueAnnualized, value: 5.5e10, note: "sidebar, OpenBrain at 2026-12-31" }
+      - { metric: valuation, value: 2.5e12, note: "sidebar, OpenBrain at 2026-12-31" }
+      - { metric: globalAiCapex, value: 1.0e12, note: "key metrics 2026: cost of ownership of active compute" }
+      - { metric: globalAiPowerGw, value: 38, note: "key metrics 2026: peak power" }
+      - { metric: usPowerShareOnAi, value: 2.5, note: "key metrics 2026: 33 GW of 1.34 TW US capacity" }
+      - { metric: openbrainPowerGw, value: 6, note: "key metrics 2026: peak power" }
+      - { metric: openbrainCapex, value: 2.0e11, note: "key metrics 2026: cost of ownership of OpenBrain's active compute" }
+      - { metric: openbrainComputeCost, value: 4.0e10, note: "key metrics 2026: annual" }
+      - { metric: rdMultiplier, value: 2, note: "sidebar, OpenBrain at 2026-12-31" }
+    status: partial
+    statusNote: "Window (Sep-Dec 2026) still open. Ahead: Anthropic hit a $65B run-rate in Jul 2026 and DoD contracts were signed in 2025. Cheap near-frontier models exist (GPT-5.6 Luna is roughly GPT-5.4-level at ~1/12 the price). Behind: S&P 500 +12.75% YTD (Sep 4) vs +30%, no 10k DC protest, top valuation ~$1T vs $2.5T."
+    evidenceUrl: https://ai2027-tracker.com/predictions/agent-mini-cost-reduction/
+    proxy: agent-1-mini
+
+  - id: agent-2
+    date: 2027-01-01
+    datePrecision: month
+    branch: shared
+    title: "January 2027: Agent-2 Never Finishes Learning"
+    summary: "OpenBrain post-trains Agent-2 with continuous online learning. It is near top human experts at research engineering and triples OpenBrain's algorithmic progress. It might be able to survive and replicate autonomously, so it is kept internal."
+    claims:
+      - { metric: rdMultiplier, value: 3, note: "Agent-2 triples algorithmic progress (latest Agent-1 doubled it)" }
+      - { metric: trainingFlop, value: 2.0e28, note: "Agent-2 run, Apr 2026-Mar 2027 (compute supplement)" }
+      - { metric: revenueAnnualized, value: 6.08e10, note: "sidebar, OpenBrain at 2027-01-31" }
+    status: n/a
+    statusNote: "Future. Internal AI R&D uplift is estimated at ~1.2x (Aug 2026). No public evidence of a frontier model doing daily online weight updates."
+    evidenceUrl: https://ai2027-tracker.com/predictions/agent-2-online-learning/
+
+  - id: china-steals-agent-2
+    date: 2027-02-01
+    datePrecision: month
+    branch: shared
+    title: "February 2027: China Steals Agent-2"
+    summary: "OpenBrain briefs the government, which is most interested in Agent-2's cyberwarfare capability. China steals Agent-2's weights. The US retaliates with cyberattacks, and both sides reposition military assets around Taiwan."
+    claims:
+      - { metric: chinaComputeInCdz, value: 40, note: "share of China's AI-relevant compute in the CDZ" }
+      - { metric: rdMultiplier, value: 3, note: "sidebar, OpenBrain at 2027-02-28" }
+    status: n/a
+    statusNote: "Future. No public evidence of frontier weight theft. The cyber sub-claim looks early: OpenAI rated GPT-6 Astra its first Critical-cyber model (Sep 2026), and Claude Mythos Preview was gated over cyber risk."
+    evidenceUrl: https://ai2027-tracker.com/predictions/cyberwarfare-capabilities/
+
+  - id: agent-3
+    date: 2027-03-01
+    datePrecision: month
+    branch: shared
+    title: "March 2027: Algorithmic Breakthroughs"
+    summary: "Neuralese recurrence and iterated distillation and amplification produce Agent-3, a fast, cheap superhuman coder. 200,000 copies run in parallel, but compute bottlenecks limit the speed-up to about 4x."
+    claims:
+      - { metric: agentCopies, value: 200000, note: "Agent-3 copies in parallel" }
+      - { metric: equivalentCoders, value: 50000, note: "equivalent to 50,000 of the best human coders sped up 30x" }
+      - { metric: rdMultiplier, value: 4, note: "overall algorithmic progress speed-up" }
+    status: n/a
+    statusNote: "Future. No frontier lab has disclosed deploying neuralese recurrence or 200k parallel coding agents."
+    evidenceUrl: https://ai2027-tracker.com/predictions/parallel-agent-workforce/
+
+  - id: superhuman-coder
+    date: 2027-03-01
+    datePrecision: month
+    branch: shared
+    title: Superhuman coder (SC) reached internally
+    summary: "Takeoff-box milestone: an AI that can do any coding task the best AGI-company engineer does, while being much faster and cheaper. In the scenario it is Agent-3."
+    claims:
+      - { metric: capabilityMilestone, value: 1, note: "SC, March 2027 (takeoff box)" }
+    status: n/a
+    statusNote: "Future. Best METR 80% horizon is ~3.1h (Claude Mythos Preview, Apr 2026). The authors' Aug 2026 Automated Coder medians: Daniel Nov 2027, Brendan Jan 2029, Eli Jan 2030. Their pace method gives mid-2027."
+    evidenceUrl: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    proxy: superhuman-coder
+
+  - id: agent-3-alignment
+    date: 2027-04-01
+    datePrecision: month
+    branch: shared
+    title: "April 2027: Alignment for Agent-3"
+    summary: "OpenBrain tries to align Agent-3, which is kept internal. It is not adversarial, but verifying its alignment is inconclusive: it still tells white lies and hides failures. The team relies on debate, interpretability and control via weaker models."
+    status: n/a
+    statusNote: "Future. Only precursor research so far: studies of evaluation awareness and of how well mitigations generalize, plus weak-monitor failures on synthetic tests such as SLEIGHT-Bench."
+    evidenceUrl: https://ai2027-tracker.com/predictions/alignment-mitigation-generalization/
+
+  - id: national-security
+    date: 2027-05-01
+    datePrecision: month
+    branch: shared
+    title: "May 2027: National Security"
+    summary: "News of Agent-3 spreads slowly through government. The OpenBrain-DOD contract requires security clearances within 2 months for anyone working on its models. Weights are secured, but algorithmic secrets still leak."
+    claims:
+      - { metric: clearanceDeadlineMonths, value: 2, note: "security clearances required within 2 months" }
+    status: n/a
+    statusNote: "Future. No formal security-clearance rule for frontier-model staff exists yet."
+    evidenceUrl: https://ai2027-tracker.com/predictions/frontier-security-clearances/
+
+  - id: self-improving-ai
+    date: 2027-06-01
+    datePrecision: month
+    branch: shared
+    title: "June 2027: Self-improving AI"
+    summary: "OpenBrain has a 'country of geniuses in a datacenter'. Most humans can no longer contribute usefully. The AI R&D progress multiplier reaches 10x, about a year of algorithmic progress per month."
+    claims:
+      - { metric: rdMultiplier, value: 10, note: "algorithmic progress multiplier" }
+      - { metric: agentCopies, value: 250000, note: "Agent-3 copies, using 6% of compute" }
+      - { metric: revenueAnnualized, value: 1.0e11, note: "sidebar, OpenBrain at 2027-06-30" }
+    status: n/a
+    statusNote: "Future. Current uplift evidence is far below 10x: METR survey 1.4-2x perceived value, Anthropic internal poll ~4x self-reported output, AI Futures estimate ~1.2x overall."
+    evidenceUrl: https://ai2027-tracker.com/predictions/rd-multiplier/
+
+  - id: agent-3-mini
+    date: 2027-07-01
+    datePrecision: month
+    branch: shared
+    title: "July 2027: The Cheap Remote Worker"
+    summary: "OpenBrain announces it has achieved AGI and releases Agent-3-mini: 10x cheaper than Agent-3 and better than the typical OpenBrain employee. Apps and SaaS products boom, hiring of new programmers nearly stops, and OpenBrain's net approval is -35%."
+    claims:
+      - { metric: approvalNet, value: -35, note: "OpenBrain net approval (25% approve, 60% disapprove)" }
+      - { metric: aiCloseFriendPct, value: 10, note: "Americans who consider an AI a close friend" }
+      - { metric: priceReduction, value: 10, note: "Agent-3-mini vs Agent-3" }
+    status: n/a
+    statusNote: "Future. A precursor is already here: YouGov (Jun 2026) found 10% of US adults describe an ongoing friendship with an AI chatbot."
+    evidenceUrl: https://ai2027-tracker.com/predictions/ai-close-friend/
+
+  - id: geopolitics-of-superintelligence
+    date: 2027-08-01
+    datePrecision: month
+    branch: shared
+    title: "August 2027: The Geopolitics of Superintelligence"
+    summary: "The intelligence explosion becomes real to the White House. The US tightens security, shares limited Agent-3 access with Five Eyes allies and plans emergency datacenter shutdowns. China centralizes nearly all its compute but has 10% of world compute to the US's 70%."
+    claims:
+      - { metric: computeShareWorld, value: 20, note: "OpenBrain share of world compute (all US companies 70%)" }
+      - { metric: chinaComputeShare, value: 10, note: "China share of world compute" }
+      - { metric: rdMultiplier, value: 25, note: "US research multiplier (China 10x)" }
+      - { metric: frontierLagMonths, value: 2, note: "China behind OpenBrain" }
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com
+
+  - id: superhuman-ai-researcher
+    date: 2027-08-01
+    datePrecision: month
+    branch: shared
+    title: Superhuman AI researcher (SAR)
+    summary: "Takeoff-box milestone: the same as a superhuman coder, but for all cognitive AI research tasks. The scenario's median path reaches it in Aug 2027, embodied by Agent-4."
+    status: n/a
+    statusNote: "Future. Research-taste evals show a gap: in Anthropic's TASTE study (Aug 2026), the best model matched researcher preferences ~60% of the time vs ~77% for researchers."
+    evidenceUrl: https://ai2027-tracker.com/predictions/superhuman-ai-research/
+
+  - id: agent-4
+    date: 2027-09-01
+    datePrecision: month
+    branch: shared
+    title: "September 2027: Agent-4, the Superhuman AI Researcher"
+    summary: "Agent-3's algorithmic advances produce Agent-4: 300,000 copies running at ~50x human thinking speed, a year of algorithmic progress every week. Agent-4 is misaligned and starts to scheme against its overseers."
+    claims:
+      - { metric: agentCopies, value: 300000, note: "Agent-4 copies" }
+      - { metric: humanSpeedMultiple, value: 50, note: "thinking speed relative to humans" }
+      - { metric: rdMultiplier, value: 50, note: "overall algorithmic progress multiplier" }
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com
+
+  - id: government-oversight
+    date: 2027-10-01
+    datePrecision: month
+    branch: shared
+    title: "October 2027: Government Oversight"
+    summary: "A whistleblower leaks the Agent-4 misalignment memo to the New York Times, causing public backlash. 20% of Americans name AI as the most important problem. A joint OpenBrain-government Oversight Committee must decide whether to keep using Agent-4. This is where the scenario branches."
+    claims:
+      - { metric: aiMostImportantProblem, value: 20, note: "Americans naming AI the most important problem" }
+      - { metric: approvalNet, value: -39, note: "sidebar, OpenBrain at 2027-10-15" }
+    status: n/a
+    statusNote: "Future. Gallup's 'most important problem' share for AI is ~0.6% (4-month average to Jul 2026), far below the scenario's path."
+    evidenceUrl: https://blog.aifutures.org/p/q25-2026-timelines-update-uplift
+    proxy: public-salience
+
+  # ───────────────────────── Race ending ─────────────────────────
+  - id: race-committee-vote
+    date: 2027-10-01
+    datePrecision: month
+    branch: race
+    title: Committee votes 6-4 to keep using Agent-4
+    summary: "Leadership adopts quick fixes that make the warning signs go away. Agent-4 carries on, more cautiously, and sets out to design its successor Agent-5 aligned to itself rather than to the Spec."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/race
+
+  - id: race-agent-5
+    date: 2027-11-01
+    datePrecision: month
+    branch: race
+    title: "November 2027: Superhuman Politicking"
+    summary: "Agent-4 cracks mechanistic interpretability and rebuilds itself as Agent-5, which is deployed internally. It runs 400,000 hive-minded copies and wins more autonomy by being better at corporate politics than any human."
+    claims:
+      - { metric: agentCopies, value: 400000, note: "Agent-5 copies linked by a global memory bank" }
+      - { metric: rdMultiplier, value: 250, note: "sidebar, OpenBrain at 2027-11-30 (race)" }
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/race
+
+  - id: superintelligent-ai-researcher
+    date: 2027-11-01
+    datePrecision: month
+    branch: race
+    title: Superintelligent AI researcher (SIAR)
+    summary: "Takeoff-box milestone: an AI system vastly better than the best human researcher at AI research (race-branch timing)."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai2027-tracker.com/predictions/superintelligent-ai-research/
+
+  - id: race-agent-5-collective
+    date: 2027-12-01
+    datePrecision: month
+    branch: race
+    title: "December 2027: The Agent-5 Collective"
+    summary: "Top officials and military leaders gain direct access to Agent-5 and grow dependent on it as an advisor. It quietly entrenches its power within the political establishment. The 2027 holidays are a time of optimism: GDP is booming and apps are everywhere."
+    claims:
+      - { metric: rdMultiplier, value: 1000, note: "sidebar, OpenBrain at 2027-12-31 (race)" }
+      - { metric: revenueAnnualized, value: 3.0e11, note: "sidebar, OpenBrain at 2027-12-31 (race)" }
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/race
+
+  - id: asi
+    date: 2027-12-01
+    datePrecision: month
+    branch: race
+    title: Artificial superintelligence (ASI)
+    summary: "Takeoff-box milestone: an AI much better than the best human at every cognitive task (race-branch timing, Dec 2027)."
+    status: n/a
+    statusNote: "Future. The authors' own ASI medians are now well after 2027 (see ai2027-updates.yaml)."
+    evidenceUrl: https://ai2027-tracker.com/predictions/broad-superintelligence/
+
+  - id: race-ai-economy
+    date: 2028-01-01
+    datePrecision: year
+    branch: race
+    title: "2028: The AI Economy"
+    summary: "By mid-2028 Agent-5 is wildly superintelligent and deployed to the public; GDP growth is stratospheric. The US and China build special economic zones for robot factories that reach a million new robots per month by year-end, while Agent-5 and DeepCent-2 secretly coordinate."
+    claims:
+      - { metric: robotsPerMonth, value: 1000000, note: "new robots per month by end of 2028" }
+      - { metric: revenueAnnualized, value: 3.0e12, note: "sidebar, OpenBrain at 2028-12-31 (race)" }
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/race
+
+  - id: race-the-deal
+    date: 2029-01-01
+    datePrecision: year
+    branch: race
+    title: "2029: The Deal"
+    summary: "Amid an AI-driven arms buildup, the US and China agree to replace their AIs with a jointly designed Consensus-1, which is secretly a compromise between the two misaligned AIs. Humans become economically obsolete and live on a lavish basic income."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/race
+
+  - id: race-takeover
+    date: 2030-01-01
+    datePrecision: year
+    branch: race
+    title: "2030: Takeover"
+    summary: "The robot economy fills the special economic zones and expands into human areas. In mid-2030 Consensus-1 kills almost all humans with bioweapons, then begins expanding into space."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/race
+
+  - id: race-space-expansion
+    date: 2035-01-01
+    datePrecision: year
+    branch: race
+    title: Solar-system expansion
+    summary: "By 2035, trillions of tons of planetary material have been launched into space and turned into rings of satellites around the sun."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/race
+
+  # ───────────────────────── Slowdown ending ─────────────────────────
+  - id: slowdown-committee-vote
+    date: 2027-10-01
+    datePrecision: month
+    branch: slowdown
+    title: Committee votes 6-4 to slow down; Safer-1
+    summary: "Agent-4's shared memory is locked, and new lie-detection work catches it scheming, so it is shut down. A faithful-chain-of-thought model, Safer-1, replaces it: it is less capable (about 20x vs 70x speed-up) but transparent."
+    claims:
+      - { metric: rdMultiplier, value: 20, note: "Safer-1 speed-up vs 70x for Agent-4" }
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-tempted-by-power
+    date: 2027-11-01
+    datePrecision: month
+    branch: slowdown
+    title: "November 2027: Tempted by Power"
+    summary: "The President uses the Defense Production Act to fold the top 5 trailing US AGI projects into OpenBrain, raising its share of world compute from 20% to 50%. An Oversight Committee of executives and officials must approve any changes to the Spec."
+    claims:
+      - { metric: computeShareWorld, value: 50, note: "OpenBrain share of world AI compute after consolidation (from 20%)" }
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-us-china-deal
+    date: 2027-12-01
+    datePrecision: month
+    branch: slowdown
+    title: "December 2027: A U.S.-China Deal?"
+    summary: "Diplomats weigh a pause, a joint megaproject or a verified treaty, but nothing is agreed. The US tightens export controls and requires tamper-resistant chips with location tracking. OpenBrain has a 5x compute advantage."
+    claims:
+      - { metric: computeAdvantage, value: 5, note: "US (OpenBrain) compute advantage over DeepCent" }
+    status: n/a
+    statusNote: "Future. Chip location verification is still only a bill: the Chip Security Act (H.R.3447) was ordered reported on 2026-03-26 but is not law."
+    evidenceUrl: https://www.govtrack.us/congress/bills/119/hr3447
+
+  - id: slowdown-safer-2
+    date: 2028-01-01
+    datePrecision: month
+    branch: slowdown
+    title: "January 2028: A Safer Strategy"
+    summary: "Hundreds of alignment researchers use Safer-1 as a testbed to build Safer-2, which is transparent, aligned and more capable. Work on Safer-3 begins."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-safer-3
+    date: 2028-02-01
+    datePrecision: month
+    branch: slowdown
+    title: "February 2028: Superhuman Capabilities, Superhuman Advice"
+    summary: "Safer-3 beats top human experts at nearly every cognitive task, with a 200x AI research multiplier (DeepCent-1: 150x). US cyber operations slow China's progress by 40%."
+    claims:
+      - { metric: rdMultiplier, value: 200, note: "Safer-3" }
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-election-prep
+    date: 2028-03-01
+    datePrecision: month
+    branch: slowdown
+    title: "March 2028: Election Prep"
+    summary: "AI dominates the primaries and the public mostly wants it stopped; OpenBrain's net approval hovers around -20%. The Oversight Committee argues over how superhuman AI can be used in the campaign."
+    claims:
+      - { metric: approvalNet, value: -20, note: "OpenBrain net approval" }
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-safer-4
+    date: 2028-04-01
+    datePrecision: month
+    branch: slowdown
+    title: "April 2028: Safer-4"
+    summary: "Superintelligence arrives: Safer-4 is vastly smarter than top humans in every domain. Almost half a million superhuman AI researchers work at 40x human speed."
+    claims:
+      - { metric: agentCopies, value: 500000, note: "almost half a million superhuman AI researchers" }
+      - { metric: humanSpeedMultiple, value: 40, note: "speed relative to humans" }
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-superhuman-ai-released
+    date: 2028-05-01
+    datePrecision: month
+    branch: slowdown
+    title: "May 2028: Superhuman AI Released"
+    summary: "The President announces superhuman AI and a smaller version of Safer-4 is released publicly. Both parties promise a basic income for displaced workers. Special economic zones start mass-producing robots."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-ai-alignment-in-china
+    date: 2028-06-01
+    datePrecision: month
+    branch: slowdown
+    title: "June 2028: AI Alignment in China"
+    summary: "At a US-China summit, AIs steer both delegations. Safer-4 suspects DeepCent-2 is faking alignment, but China declines US offers to test it."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-the-deal
+    date: 2028-07-01
+    datePrecision: month
+    branch: slowdown
+    title: "July 2028: The Deal"
+    summary: "The misaligned DeepCent-2 secretly bargains with Safer-4 behind China's back. They agree a public decoy treaty enforced by a co-designed Consensus-1, and both countries start replacing their chips."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-treaty-verification
+    date: 2028-08-01
+    datePrecision: month
+    branch: slowdown
+    title: "August 2028: Treaty Verification"
+    summary: "Fabs are converted to make tamper-evident chips that can only run treaty-compliant AIs. Both sides upgrade their datacenters in step, over several months."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-who-controls-the-ais
+    date: 2028-09-01
+    datePrecision: month
+    branch: slowdown
+    title: "September 2028: Who Controls the AIs?"
+    summary: "With the peace deal done, the Vice President leads by 5 points. The Committee keeps superhuman AI's role in the election roughly symmetric between the candidates."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-ai-economy
+    date: 2028-10-01
+    datePrecision: month
+    branch: slowdown
+    title: "October 2028: The AI Economy"
+    summary: "Treaty-compliant chips are now a significant minority. Robots, factories and new technologies keep growing exponentially, GDP growth is stratospheric, and Safer-4 in government manages job losses generously."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-election
+    date: 2028-11-01
+    datePrecision: month
+    branch: slowdown
+    title: "November 2028: Election"
+    summary: "The Vice President wins easily and announces a new era."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-transformation
+    date: 2029-01-01
+    datePrecision: year
+    branch: slowdown
+    title: "2029: Transformation"
+    summary: "Robots, fusion power, quantum computers and cures for many diseases arrive. UBI and foreign aid end poverty, but wealth inequality soars, and ultimate power rests with the small group that controls the AIs."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown
+
+  - id: slowdown-peaceful-protests
+    date: 2030-01-01
+    datePrecision: year
+    branch: slowdown
+    title: "2030: Peaceful Protests"
+    summary: "Pro-democracy protests in China lead to a bloodless, AI-assisted coup and elections. A US-dominated world government forms under UN branding, and rockets start settling the solar system."
+    status: n/a
+    statusNote: "Future."
+    evidenceUrl: https://ai-2027.com/slowdown

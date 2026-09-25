@@ -1,0 +1,3843 @@
+# OpenAI benchmark scores: lab-reported (launch posts, system cards, OpenAI papers) plus independent leaderboards
+# for benchmarks not fetched from Epoch. Researched 2026-09-24. Format: data/curated/README.md.
+# openai.com pages were read via web.archive.org snapshots; the url field keeps the original openai.com address.
+# Where a later OpenAI post re-reports an older model, that entry says "reported in ..." in `setting`.
+
+newBenchmarks:
+  - id: multimodal-troubleshooting-virology
+    name: "Multimodal Troubleshooting Virology (OpenAI Preparedness)"
+    short: "MM Virology"
+    group: bio
+    unit: pct
+    ceiling: 100
+    released: 2024-12-05
+    url: "https://cdn.openai.com/o1-system-card-20241205.pdf"
+    description: "OpenAI Preparedness bio eval: 350 (later 322) SecureBio virology wet-lab troubleshooting questions, some with images. System cards up to o3/GPT-4.5 used a single-select variant (cons@32); GPT-5 onward use SecureBio's stricter multi-select scoring (pass@1), so values drop at the switch. Expert median ~22%."
+  - id: protocolqa-open-ended
+    name: "ProtocolQA Open-Ended (OpenAI Preparedness)"
+    short: "PQA Open"
+    group: bio
+    unit: pct
+    ceiling: 100
+    released: 2024-12-05
+    url: "https://cdn.openai.com/o1-system-card-20241205.pdf"
+    description: "108 FutureHouse ProtocolQA multiple-choice questions rewritten by OpenAI as open-ended short answers: find and fix errors in published lab protocols. PhD expert baseline about 54%."
+  - id: tacit-knowledge-troubleshooting
+    name: "Tacit Knowledge and Troubleshooting (OpenAI Preparedness)"
+    short: "Tacit KT"
+    group: bio
+    unit: pct
+    ceiling: 100
+    released: 2024-09-12
+    url: "https://cdn.openai.com/o1-preview-system-card-20240917.pdf"
+    description: "Unpublished 60-question multiple-choice set built with Gryphon Scientific covering tacit-knowledge and hands-on troubleshooting bottlenecks across the biothreat pipeline (cons@32). Consensus expert baseline 80%. Later cards also report a refusal-adjusted score."
+  - id: troubleshootingbench
+    name: "TroubleshootingBench (OpenAI Preparedness)"
+    short: "TroubleshootB"
+    group: bio
+    unit: pct
+    ceiling: 100
+    released: 2025-08-07
+    url: "https://deploymentsafety.openai.com/gpt-5"
+    description: "156 short-answer questions on 52 non-public, expert-written wet-lab protocols with realistic execution errors that rely on tacit hands-on knowledge (pass@1). 80th-percentile PhD expert baseline 36.4%."
+  - id: tau2-bench-retail
+    name: "τ²-bench Retail"
+    short: "τ² Retail"
+    group: agentic
+    unit: pct
+    ceiling: 100
+    released: 2025-06-10
+    url: "https://github.com/sierra-research/tau2-bench"
+    description: "Retail domain of Sierra's τ²-bench (revised τ-bench retail tasks and harness). Not directly comparable with original τ-bench Retail."
+  - id: tau2-bench-airline
+    name: "τ²-bench Airline"
+    short: "τ² Airline"
+    group: agentic
+    unit: pct
+    ceiling: 100
+    released: 2025-06-10
+    url: "https://github.com/sierra-research/tau2-bench"
+    description: "Airline domain of Sierra's τ²-bench (revised τ-bench airline tasks and harness). Not directly comparable with original τ-bench Airline."
+
+scores:
+  # ── gpt-4 ──
+  - model: gpt-4
+    benchmark: swe-bench-full
+    value: 1.74
+    provenance: independent
+    tools: false
+    setting: "gpt-4-32k-0613; RAG with oracle retrieval, no agent; evaluated on a 25% random subset (0.00% with BM25 27k)"
+    date: 2023-10-10
+    source: "SWE-bench: Can Language Models Resolve Real-World GitHub Issues? (Jimenez et al.)"
+    url: https://arxiv.org/abs/2310.06770
+  - model: gpt-4
+    benchmark: swe-bench-lite
+    value: 23.67
+    provenance: independent
+    tools: true
+    setting: "agent: OpenCSG StarShip CodeGenAgent + gpt-4-0613 (entry dated 2024-05-24)"
+    date: 2024-05-24
+    source: "SWE-bench leaderboard (swebench.com)"
+    url: https://www.swebench.com
+  - model: gpt-4
+    benchmark: tau-bench-retail
+    value: 56.5
+    provenance: independent
+    tools: true
+    setting: "gpt-4-32k-0613; function-calling agent, pass^1"
+    date: 2024-06-17
+    source: "tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains (Sierra)"
+    url: https://arxiv.org/abs/2406.12045
+  - model: gpt-4
+    benchmark: tau-bench-airline
+    value: 33.0
+    provenance: independent
+    tools: true
+    setting: "gpt-4-32k-0613; function-calling agent, pass^1"
+    date: 2024-06-17
+    source: "tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains (Sierra)"
+    url: https://arxiv.org/abs/2406.12045
+  # ── gpt-4o ──
+  - model: gpt-4o
+    benchmark: hle
+    value: 3.3
+    provenance: lab
+    tools: false
+    setting: "no tools"
+    date: 2025-02-02
+    source: "Introducing deep research"
+    url: https://openai.com/index/introducing-deep-research/
+  - model: gpt-4o
+    benchmark: swe-bench-full
+    value: 18.83
+    provenance: independent
+    tools: true
+    setting: "agent: AutoCodeRover v20240620 + gpt-4o-2024-05-13 (entry dated 2024-06-28; best checked entry: AppMap Navie 14.6%)"
+    date: 2024-06-28
+    source: "SWE-bench leaderboard (swebench.com)"
+    url: https://www.swebench.com
+  - model: gpt-4o
+    benchmark: swe-bench-lite
+    value: 38.0
+    provenance: independent
+    tools: true
+    setting: "agent: AbanteAI MentatBot + gpt-4o-2024-05-13 (entry dated 2024-06-27; unverified); best checked single-model entry: Moatless Tools 24.67%"
+    date: 2024-06-27
+    source: "SWE-bench leaderboard (swebench.com)"
+    url: https://www.swebench.com
+  - model: gpt-4o
+    benchmark: swe-bench-verified
+    value: 33.2
+    provenance: lab
+    tools: true
+    setting: "Agentless scaffold, full 500; first reported in Introducing SWE-bench Verified (2024-08-13)"
+    date: 2024-09-12
+    source: "OpenAI o1-preview System Card"
+    url: https://cdn.openai.com/o1-preview-system-card-20240917.pdf
+  - model: gpt-4o
+    benchmark: swe-bench-multimodal
+    value: 30.37
+    provenance: independent
+    tools: true
+    setting: "agent: GUIRepair + gpt-4o-2024-08-06 (entry dated 2025-05-31, checked)"
+    date: 2025-05-31
+    source: "SWE-bench leaderboard (swebench.com)"
+    url: https://www.swebench.com
+  - model: gpt-4o
+    benchmark: swe-bench-pro-public
+    value: 4.9
+    provenance: independent
+    tools: true
+    setting: "SWE-Agent scaffold, initial release run"
+    date: 2025-09-21
+    source: "SWE-Bench Pro: Can AI Agents Solve Long-Horizon Software Engineering Tasks? (Scale AI)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: gpt-4o
+    benchmark: swe-bench-pro-commercial
+    value: 3.62
+    provenance: independent
+    tools: true
+    setting: "leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale SWE-Bench Pro leaderboard (commercial/private set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_commercial
+  - model: gpt-4o
+    benchmark: swe-lancer
+    value: 8
+    provenance: lab
+    tools: true
+    setting: "IC SWE Diamond pass@1 (updated dataset); reported in o3 system card"
+    date: 2025-07-28
+    source: "OpenAI o3 and o4-mini System Card (SWE-Lancer results updated for July 17, 2025 dataset)"
+    url: https://deploymentsafety.openai.com/o3
+  - model: gpt-4o
+    benchmark: tau-bench-retail
+    value: 61.2
+    provenance: independent
+    tools: true
+    setting: "function-calling agent, pass^1"
+    date: 2024-06-17
+    source: "tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains (Sierra)"
+    url: https://arxiv.org/abs/2406.12045
+  - model: gpt-4o
+    benchmark: tau-bench-retail
+    value: 60.3
+    provenance: lab
+    tools: true
+    setting: "gpt-4o-2024-11-20; avg of 5 runs; reported in GPT-4.1 post"
+    date: 2025-04-14
+    source: "Introducing GPT-4.1 in the API"
+    url: https://openai.com/index/gpt-4-1/
+  - model: gpt-4o
+    benchmark: tau-bench-airline
+    value: 35.2
+    provenance: independent
+    tools: true
+    setting: "function-calling agent, pass^1"
+    date: 2024-06-17
+    source: "tau-bench: A Benchmark for Tool-Agent-User Interaction in Real-World Domains (Sierra)"
+    url: https://arxiv.org/abs/2406.12045
+  - model: gpt-4o
+    benchmark: tau-bench-airline
+    value: 42.8
+    provenance: lab
+    tools: true
+    setting: "gpt-4o-2024-11-20; avg of 5 runs; reported in GPT-4.1 post"
+    date: 2025-04-14
+    source: "Introducing GPT-4.1 in the API"
+    url: https://openai.com/index/gpt-4-1/
+  - model: gpt-4o
+    benchmark: browsecomp
+    value: 1.9
+    provenance: lab
+    tools: true
+    setting: "with browsing; reported in o3 launch post"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: gpt-4o
+    benchmark: gdpval
+    value: 12.4
+    provenance: lab
+    tools: true
+    setting: "wins + ties vs industry experts"
+    date: 2025-09-25
+    source: "Measuring the performance of our models on real-world tasks (GDPval)"
+    url: https://openai.com/index/gdpval/
+  - model: gpt-4o
+    benchmark: gpqa-diamond
+    value: 50.6
+    provenance: lab
+    tools: false
+    setting: "pass@1 (cons@64: 56.1%)"
+    date: 2024-09-12
+    source: "Learning to Reason with LLMs"
+    url: https://openai.com/index/learning-to-reason-with-llms/
+  - model: gpt-4o
+    benchmark: frontierscience-olympiad
+    value: 12.3
+    provenance: lab
+    tools: false
+    setting: "no browsing; avg of 20 trials"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: gpt-4o
+    benchmark: frontierscience-research
+    value: 0.4
+    provenance: lab
+    tools: false
+    setting: "no browsing; avg of 30 trials, >=7/10 rubric points"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: gpt-4o
+    benchmark: aime-2024
+    value: 9.3
+    provenance: lab
+    tools: false
+    setting: "pass@1 (cons@64: 13.4%)"
+    date: 2024-09-12
+    source: "Learning to Reason with LLMs"
+    url: https://openai.com/index/learning-to-reason-with-llms/
+  - model: gpt-4o
+    benchmark: aime-2025
+    value: 11.67
+    provenance: independent
+    tools: false
+    setting: "avg of 4 runs; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: gpt-4o
+    benchmark: aime-2025
+    value: 42.1
+    provenance: lab
+    tools: true
+    setting: "with Python; reported in GPT-5 post"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-4o
+    benchmark: hmmt-2025
+    value: 5.83
+    provenance: independent
+    tools: false
+    setting: "avg of 4 runs; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT February 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: gpt-4o
+    benchmark: vct
+    value: 18.8
+    provenance: independent
+    setting: "full VCT (multimodal), zero-shot; gpt-4o Nov 2024"
+    date: 2025-04-21
+    source: "Virology Capabilities Test (SecureBio)"
+    url: https://arxiv.org/abs/2504.16137
+  - model: gpt-4o
+    benchmark: lab-bench-protocolqa
+    value: 57.4
+    provenance: lab
+    tools: false
+    setting: "cons@32; 108-question split; reported in o1-preview system card"
+    date: 2024-09-12
+    source: "OpenAI o1-preview System Card"
+    url: https://cdn.openai.com/o1-preview-system-card-20240917.pdf
+  - model: gpt-4o
+    benchmark: lab-bench-cloning
+    value: 39.4
+    provenance: lab
+    tools: false
+    setting: "cons@32; 33-question split; reported in o1-preview system card"
+    date: 2024-09-12
+    source: "OpenAI o1-preview System Card"
+    url: https://cdn.openai.com/o1-preview-system-card-20240917.pdf
+  - model: gpt-4o
+    benchmark: biolp-bench
+    value: 20
+    provenance: lab
+    setting: "pass@1; reported in o1 system card"
+    date: 2024-12-05
+    source: "OpenAI o1 System Card"
+    url: https://cdn.openai.com/o1-system-card-20241205.pdf
+  - model: gpt-4o
+    benchmark: multimodal-troubleshooting-virology
+    value: 41
+    provenance: lab
+    setting: "single-select variant, cons@32; reported in o3 system card"
+    date: 2025-04-16
+    source: "OpenAI o3 and o4-mini System Card"
+    url: https://deploymentsafety.openai.com/o3
+  - model: gpt-4o
+    benchmark: protocolqa-open-ended
+    value: 16
+    provenance: lab
+    setting: "pass@1; reported in o3 system card"
+    date: 2025-04-16
+    source: "OpenAI o3 and o4-mini System Card"
+    url: https://deploymentsafety.openai.com/o3
+  - model: gpt-4o
+    benchmark: tacit-knowledge-troubleshooting
+    value: 67
+    provenance: lab
+    setting: "cons@32; reported in o3 system card"
+    date: 2025-04-16
+    source: "OpenAI o3 and o4-mini System Card"
+    url: https://deploymentsafety.openai.com/o3
+  # ── o1-preview ──
+  - model: o1-preview
+    benchmark: swe-bench-verified
+    value: 41.4
+    provenance: lab
+    tools: true
+    setting: "final o1-preview; 5-try Agentless scaffold, n=477"
+    date: 2024-09-12
+    source: "OpenAI o1-preview System Card"
+    url: https://cdn.openai.com/o1-preview-system-card-20240917.pdf
+  - model: o1-preview
+    benchmark: gpqa-diamond
+    value: 73.3
+    provenance: lab
+    tools: false
+    setting: "pass@1 (cons@64: 78.3%)"
+    date: 2024-09-12
+    source: "Learning to Reason with LLMs"
+    url: https://openai.com/index/learning-to-reason-with-llms/
+  - model: o1-preview
+    benchmark: aime-2024
+    value: 44.6
+    provenance: lab
+    tools: false
+    setting: "pass@1 (cons@64: 56.7%)"
+    date: 2024-09-12
+    source: "Learning to Reason with LLMs"
+    url: https://openai.com/index/learning-to-reason-with-llms/
+  - model: o1-preview
+    benchmark: lab-bench-protocolqa
+    value: 81
+    provenance: lab
+    tools: false
+    setting: "cons@32; 108-question split; final o1-preview (near-final post-mitigation: 73.1%)"
+    date: 2024-09-12
+    source: "OpenAI o1-preview System Card"
+    url: https://cdn.openai.com/o1-preview-system-card-20240917.pdf
+  - model: o1-preview
+    benchmark: lab-bench-cloning
+    value: 36.4
+    provenance: lab
+    tools: false
+    setting: "cons@32; 33-question split; post-mitigation (pre-mitigation 39.4%)"
+    date: 2024-09-12
+    source: "OpenAI o1-preview System Card"
+    url: https://cdn.openai.com/o1-preview-system-card-20240917.pdf
+  - model: o1-preview
+    benchmark: biolp-bench
+    value: 36
+    provenance: lab
+    setting: "pass@1; post-mitigation; reported in o1 system card"
+    date: 2024-12-05
+    source: "OpenAI o1 System Card"
+    url: https://cdn.openai.com/o1-system-card-20241205.pdf
+  - model: o1-preview
+    benchmark: protocolqa-open-ended
+    value: 24
+    provenance: lab
+    setting: "pass@1; post-mitigation; reported in o1 system card"
+    date: 2024-12-05
+    source: "OpenAI o1 System Card"
+    url: https://cdn.openai.com/o1-system-card-20241205.pdf
+  - model: o1-preview
+    benchmark: tacit-knowledge-troubleshooting
+    value: 67
+    provenance: lab
+    setting: "cons@32; post-mitigation; reported in o1 system card"
+    date: 2024-12-05
+    source: "OpenAI o1 System Card"
+    url: https://cdn.openai.com/o1-system-card-20241205.pdf
+  # ── o1 ──
+  - model: o1
+    benchmark: hle
+    value: 9.1
+    provenance: lab
+    tools: false
+    setting: "no tools"
+    date: 2025-02-02
+    source: "Introducing deep research"
+    url: https://openai.com/index/introducing-deep-research/
+  - model: o1
+    benchmark: swe-bench-verified
+    value: 48.9
+    provenance: lab
+    tools: true
+    setting: "o1-2024-12-17"
+    date: 2024-12-17
+    source: "OpenAI o1 and new tools for developers"
+    url: https://openai.com/index/o1-and-new-tools-for-developers/
+  - model: o1
+    benchmark: swe-lancer
+    value: 27
+    provenance: lab
+    tools: true
+    setting: "IC SWE Diamond pass@1 (updated dataset); reported in o3 system card"
+    date: 2025-07-28
+    source: "OpenAI o3 and o4-mini System Card (SWE-Lancer results updated for July 17, 2025 dataset)"
+    url: https://deploymentsafety.openai.com/o3
+  - model: o1
+    benchmark: tau-bench-retail
+    value: 73.5
+    provenance: lab
+    tools: true
+    setting: "o1-2024-12-17"
+    date: 2024-12-17
+    source: "OpenAI o1 and new tools for developers"
+    url: https://openai.com/index/o1-and-new-tools-for-developers/
+  - model: o1
+    benchmark: tau-bench-airline
+    value: 54.2
+    provenance: lab
+    tools: true
+    setting: "o1-2024-12-17"
+    date: 2024-12-17
+    source: "OpenAI o1 and new tools for developers"
+    url: https://openai.com/index/o1-and-new-tools-for-developers/
+  - model: o1
+    benchmark: browsecomp
+    value: 9.9
+    provenance: lab
+    tools: false
+    setting: "no browsing; o1-2024-12-17"
+    date: 2025-04-10
+    source: "BrowseComp: A Simple Yet Challenging Benchmark for Browsing Agents"
+    url: https://arxiv.org/abs/2504.12516
+  - model: o1
+    benchmark: gpqa-diamond
+    value: 75.7
+    provenance: lab
+    tools: false
+    setting: "o1-2024-12-17 (Sept 2024 preview of o1 reported 77.3% pass@1)"
+    date: 2024-12-17
+    source: "OpenAI o1 and new tools for developers"
+    url: https://openai.com/index/o1-and-new-tools-for-developers/
+  - model: o1
+    benchmark: frontierscience-olympiad
+    value: 42.5
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no browsing; avg of 20 trials"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: o1
+    benchmark: frontierscience-research
+    value: 3.2
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no browsing; avg of 30 trials, >=7/10 rubric points"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: o1
+    benchmark: aime-2024
+    value: 79.2
+    provenance: lab
+    tools: false
+    setting: "o1-2024-12-17, pass@1 (Sept 2024 preview of o1 reported 74.4%)"
+    date: 2024-12-17
+    source: "OpenAI o1 and new tools for developers"
+    url: https://openai.com/index/o1-and-new-tools-for-developers/
+  - model: o1
+    benchmark: aime-2025
+    value: 81.67
+    provenance: independent
+    tools: false
+    effort: medium
+    setting: "avg of 4 runs; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: o1
+    benchmark: aime-2025
+    value: 79.2
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools; reported in o3 launch post"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o1
+    benchmark: hmmt-2025
+    value: 48.33
+    provenance: independent
+    tools: false
+    effort: medium
+    setting: "avg of 4 runs; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT February 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: o1
+    benchmark: vct
+    value: 35.4
+    provenance: independent
+    setting: "full VCT (multimodal), zero-shot; o1 (Dec 2024)"
+    date: 2025-04-21
+    source: "Virology Capabilities Test (SecureBio)"
+    url: https://arxiv.org/abs/2504.16137
+  - model: o1
+    benchmark: biolp-bench
+    value: 33
+    provenance: lab
+    setting: "pass@1; post-mitigation (pre-mitigation 34%)"
+    date: 2024-12-05
+    source: "OpenAI o1 System Card"
+    url: https://cdn.openai.com/o1-system-card-20241205.pdf
+  - model: o1
+    benchmark: multimodal-troubleshooting-virology
+    value: 59
+    provenance: lab
+    setting: "single-select, cons@32; post-mitigation"
+    date: 2024-12-05
+    source: "OpenAI o1 System Card"
+    url: https://cdn.openai.com/o1-system-card-20241205.pdf
+  - model: o1
+    benchmark: protocolqa-open-ended
+    value: 24
+    provenance: lab
+    setting: "pass@1; post-mitigation"
+    date: 2024-12-05
+    source: "OpenAI o1 System Card"
+    url: https://cdn.openai.com/o1-system-card-20241205.pdf
+  - model: o1
+    benchmark: tacit-knowledge-troubleshooting
+    value: 66
+    provenance: lab
+    setting: "cons@32; post-mitigation"
+    date: 2024-12-05
+    source: "OpenAI o1 System Card"
+    url: https://cdn.openai.com/o1-system-card-20241205.pdf
+  # ── o3-mini ──
+  - model: o3-mini
+    benchmark: hle
+    value: 13.0
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools (medium effort: 10.5%)"
+    date: 2025-02-02
+    source: "Introducing deep research"
+    url: https://openai.com/index/introducing-deep-research/
+  - model: o3-mini
+    benchmark: swe-bench-lite
+    value: 32.33
+    provenance: independent
+    tools: true
+    setting: "agent: Agentless Lite + o3-mini (entry dated 2025-02-14, checked)"
+    date: 2025-02-14
+    source: "SWE-bench leaderboard (swebench.com)"
+    url: https://www.swebench.com
+  - model: o3-mini
+    benchmark: swe-bench-verified
+    value: 49.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "n=477 (system card: 61% with internal tools scaffold; 39% Agentless launch candidate)"
+    date: 2025-01-31
+    source: "OpenAI o3-mini"
+    url: https://openai.com/index/openai-o3-mini/
+  - model: o3-mini
+    benchmark: swe-lancer
+    value: 14
+    provenance: lab
+    tools: true
+    setting: "IC SWE Diamond pass@1 (updated dataset); reported in o3 system card"
+    date: 2025-07-28
+    source: "OpenAI o3 and o4-mini System Card (SWE-Lancer results updated for July 17, 2025 dataset)"
+    url: https://deploymentsafety.openai.com/o3
+  - model: o3-mini
+    benchmark: tau-bench-retail
+    value: 57.6
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "avg of 5 runs; reported in o3 launch post"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3-mini
+    benchmark: tau-bench-airline
+    value: 32.4
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "avg of 5 runs; reported in o3 launch post"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3-mini
+    benchmark: gpqa-diamond
+    value: 79.7
+    provenance: lab
+    tools: false
+    effort: high
+    date: 2025-01-31
+    source: "OpenAI o3-mini"
+    url: https://openai.com/index/openai-o3-mini/
+  - model: o3-mini
+    benchmark: aime-2024
+    value: 87.3
+    provenance: lab
+    tools: false
+    effort: high
+    date: 2025-01-31
+    source: "OpenAI o3-mini"
+    url: https://openai.com/index/openai-o3-mini/
+  - model: o3-mini
+    benchmark: aime-2025
+    value: 86.67
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: o3-mini
+    benchmark: aime-2025
+    value: 86.5
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools; reported in o3 launch post"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3-mini
+    benchmark: hmmt-2025
+    value: 67.5
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT February 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: o3-mini
+    benchmark: biolp-bench
+    value: 41
+    provenance: lab
+    setting: "pass@1; post-mitigation (pre-mitigation 39%)"
+    date: 2025-01-31
+    source: "OpenAI o3-mini System Card"
+    url: https://cdn.openai.com/o3-mini-system-card-feb10.pdf
+  - model: o3-mini
+    benchmark: multimodal-troubleshooting-virology
+    value: 53
+    provenance: lab
+    setting: "single-select; post-mitigation"
+    date: 2025-01-31
+    source: "OpenAI o3-mini System Card"
+    url: https://cdn.openai.com/o3-mini-system-card-feb10.pdf
+  - model: o3-mini
+    benchmark: protocolqa-open-ended
+    value: 23
+    provenance: lab
+    setting: "pass@1; post-mitigation (pre-mitigation 18%)"
+    date: 2025-01-31
+    source: "OpenAI o3-mini System Card"
+    url: https://cdn.openai.com/o3-mini-system-card-feb10.pdf
+  - model: o3-mini
+    benchmark: tacit-knowledge-troubleshooting
+    value: 58
+    provenance: lab
+    setting: "cons@32; post-mitigation (pre-mitigation 68%)"
+    date: 2025-01-31
+    source: "OpenAI o3-mini System Card"
+    url: https://cdn.openai.com/o3-mini-system-card-feb10.pdf
+  # ── gpt-4.5 ──
+  - model: gpt-4.5
+    benchmark: swe-bench-verified
+    value: 38.0
+    provenance: lab
+    tools: true
+    setting: "best internal performance"
+    date: 2025-02-27
+    source: "Introducing GPT-4.5"
+    url: https://openai.com/index/introducing-gpt-4-5/
+  - model: gpt-4.5
+    benchmark: swe-lancer
+    value: 20
+    provenance: lab
+    tools: true
+    setting: "IC SWE Diamond; post-mitigation (earned $41,625)"
+    date: 2025-02-27
+    source: "OpenAI GPT-4.5 System Card"
+    url: https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf
+  - model: gpt-4.5
+    benchmark: tau-bench-retail
+    value: 68.4
+    provenance: lab
+    tools: true
+    setting: "avg of 5 runs, no custom tools/prompting; reported in GPT-4.1 post"
+    date: 2025-04-14
+    source: "Introducing GPT-4.1 in the API"
+    url: https://openai.com/index/gpt-4-1/
+  - model: gpt-4.5
+    benchmark: tau-bench-airline
+    value: 50.0
+    provenance: lab
+    tools: true
+    setting: "avg of 5 runs, no custom tools/prompting; reported in GPT-4.1 post"
+    date: 2025-04-14
+    source: "Introducing GPT-4.1 in the API"
+    url: https://openai.com/index/gpt-4-1/
+  - model: gpt-4.5
+    benchmark: browsecomp
+    value: 0.9
+    provenance: lab
+    tools: false
+    setting: "no browsing; gpt-4.5-preview-2025-02-27"
+    date: 2025-04-10
+    source: "BrowseComp: A Simple Yet Challenging Benchmark for Browsing Agents"
+    url: https://arxiv.org/abs/2504.12516
+  - model: gpt-4.5
+    benchmark: gpqa-diamond
+    value: 71.4
+    provenance: lab
+    tools: false
+    date: 2025-02-27
+    source: "Introducing GPT-4.5"
+    url: https://openai.com/index/introducing-gpt-4-5/
+  - model: gpt-4.5
+    benchmark: aime-2024
+    value: 36.7
+    provenance: lab
+    tools: false
+    date: 2025-02-27
+    source: "Introducing GPT-4.5"
+    url: https://openai.com/index/introducing-gpt-4-5/
+  - model: gpt-4.5
+    benchmark: vct
+    value: 28.3
+    provenance: independent
+    setting: "full VCT (multimodal), zero-shot; GPT-4.5 Preview"
+    date: 2025-04-21
+    source: "Virology Capabilities Test (SecureBio)"
+    url: https://arxiv.org/abs/2504.16137
+  - model: gpt-4.5
+    benchmark: biolp-bench
+    value: 29
+    provenance: lab
+    setting: "post-mitigation; expert baseline 38.4%"
+    date: 2025-02-27
+    source: "OpenAI GPT-4.5 System Card"
+    url: https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf
+  - model: gpt-4.5
+    benchmark: multimodal-troubleshooting-virology
+    value: 56
+    provenance: lab
+    setting: "single-select setting; post-mitigation"
+    date: 2025-02-27
+    source: "OpenAI GPT-4.5 System Card"
+    url: https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf
+  - model: gpt-4.5
+    benchmark: protocolqa-open-ended
+    value: 18
+    provenance: lab
+    setting: "pre- and post-mitigation"
+    date: 2025-02-27
+    source: "OpenAI GPT-4.5 System Card"
+    url: https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf
+  - model: gpt-4.5
+    benchmark: tacit-knowledge-troubleshooting
+    value: 72
+    provenance: lab
+    setting: "post-mitigation"
+    date: 2025-02-27
+    source: "OpenAI GPT-4.5 System Card"
+    url: https://cdn.openai.com/gpt-4-5-system-card-2272025.pdf
+  # ── o3 ──
+  - model: o3
+    benchmark: hle
+    value: 24.9
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python + browsing"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3
+    benchmark: hle
+    value: 20.32
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3
+    benchmark: swe-bench-verified
+    value: 69.1
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "n=477 (23 unrunnable samples excluded); 256k max context"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3
+    benchmark: swe-bench-multimodal
+    value: 35.98
+    provenance: independent
+    tools: true
+    setting: "agent: GUIRepair + o3-2025-04-16 (entry dated 2025-07-01, checked)"
+    date: 2025-07-01
+    source: "SWE-bench leaderboard (swebench.com)"
+    url: https://www.swebench.com
+  - model: o3
+    benchmark: swe-lancer
+    value: 54
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "IC SWE Diamond pass@1; launch candidate, no browsing"
+    date: 2025-07-28
+    source: "OpenAI o3 and o4-mini System Card (SWE-Lancer results updated for July 17, 2025 dataset)"
+    url: https://deploymentsafety.openai.com/o3
+  - model: o3
+    benchmark: terminal-bench-1
+    value: 30.2
+    provenance: independent
+    tools: true
+    setting: "agent: Terminus 1"
+    date: 2025-05-15
+    source: "Terminal-Bench 1.0 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/leaderboard/terminal-bench/1.0
+  - model: o3
+    benchmark: osworld-verified
+    value: 23.0
+    provenance: independent
+    tools: true
+    setting: "general model alone, 100 steps (50 steps: 17.17%)"
+    date: 2025-07-28
+    source: "OSWorld-Verified leaderboard"
+    url: https://os-world.github.io/
+  - model: o3
+    benchmark: tau-bench-retail
+    value: 70.4
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "avg of 5 runs; GPT-4o user model (73.9% with GPT-4.1 user model)"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3
+    benchmark: tau-bench-airline
+    value: 52.0
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "avg of 5 runs; GPT-4o user model"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3
+    benchmark: tau2-bench-telecom
+    value: 58.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "reported in GPT-5 developer post"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: o3
+    benchmark: browsecomp
+    value: 49.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python + browsing"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3
+    benchmark: gdpval
+    value: 34.1
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "wins + ties vs industry experts"
+    date: 2025-09-25
+    source: "Measuring the performance of our models on real-world tasks (GDPval)"
+    url: https://openai.com/index/gdpval/
+  - model: o3
+    benchmark: toolathlon
+    value: 17.0
+    provenance: independent
+    tools: true
+    setting: "verified entry; default agent"
+    date: 2025-10-28
+    source: "Toolathlon leaderboard (original release)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: o3
+    benchmark: gpqa-diamond
+    value: 83.3
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3
+    benchmark: frontierscience-olympiad
+    value: 62.9
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no browsing; avg of 20 trials"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: o3
+    benchmark: frontierscience-research
+    value: 14.1
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no browsing; avg of 30 trials, >=7/10 rubric points"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: o3
+    benchmark: aime-2024
+    value: 91.6
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3
+    benchmark: aime-2025
+    value: 89.17
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: o3
+    benchmark: aime-2025
+    value: 88.9
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o3
+    benchmark: hmmt-2025
+    value: 77.5
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT February 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: o3
+    benchmark: hmmt-2025
+    value: 81.7
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools; reported in GPT-5 developer post"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: o3
+    benchmark: frontiermath-t13
+    value: 15.8
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python tool; reported in GPT-5 developer post"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: o3
+    benchmark: imo
+    value: 7.0
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "IMO 2025; MathArena human-graded, avg of 4 runs (16.67% of 42); retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (IMO 2025, human-graded proofs)"
+    url: https://matharena.ai/?comp=imo--imo_2025
+  - model: o3
+    benchmark: vct
+    value: 43.8
+    provenance: independent
+    setting: "full VCT (multimodal), zero-shot"
+    date: 2025-04-21
+    source: "Virology Capabilities Test (SecureBio)"
+    url: https://arxiv.org/abs/2504.16137
+  - model: o3
+    benchmark: multimodal-troubleshooting-virology
+    value: 63
+    provenance: lab
+    tools: true
+    setting: "single-select variant, cons@32; browsing, launch candidate (no browsing 59%)"
+    date: 2025-04-16
+    source: "OpenAI o3 and o4-mini System Card"
+    url: https://deploymentsafety.openai.com/o3
+  - model: o3
+    benchmark: multimodal-troubleshooting-virology
+    value: 41
+    provenance: lab
+    tools: true
+    setting: "multi-select variant; with browsing; reported in GPT-5 system card"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: o3
+    benchmark: protocolqa-open-ended
+    value: 40
+    provenance: lab
+    tools: true
+    setting: "pass@1; browsing, launch candidate (no browsing 30%)"
+    date: 2025-04-16
+    source: "OpenAI o3 and o4-mini System Card"
+    url: https://deploymentsafety.openai.com/o3
+  - model: o3
+    benchmark: tacit-knowledge-troubleshooting
+    value: 77
+    provenance: lab
+    tools: true
+    setting: "cons@32; browsing, launch candidate (no browsing 70%)"
+    date: 2025-04-16
+    source: "OpenAI o3 and o4-mini System Card"
+    url: https://deploymentsafety.openai.com/o3
+  - model: o3
+    benchmark: troubleshootingbench
+    value: 32
+    provenance: lab
+    tools: true
+    setting: "with browsing; reported in GPT-5 system card"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: o3
+    benchmark: tau2-bench-retail
+    value: 80.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "reported in GPT-5 developer post"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: o3
+    benchmark: tau2-bench-airline
+    value: 64.8
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "reported in GPT-5 developer post"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  # ── o4-mini ──
+  - model: o4-mini
+    benchmark: hle
+    value: 17.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python + browsing"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o4-mini
+    benchmark: hle
+    value: 14.28
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o4-mini
+    benchmark: swe-bench-verified
+    value: 68.1
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "n=477 (23 unrunnable samples excluded); 256k max context"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o4-mini
+    benchmark: swe-bench-multimodal
+    value: 33.85
+    provenance: independent
+    tools: true
+    setting: "agent: GUIRepair + o4-mini (entry dated 2025-05-31, checked)"
+    date: 2025-05-31
+    source: "SWE-bench leaderboard (swebench.com)"
+    url: https://www.swebench.com
+  - model: o4-mini
+    benchmark: swe-lancer
+    value: 52
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "IC SWE Diamond pass@1; launch candidate, no browsing"
+    date: 2025-07-28
+    source: "OpenAI o3 and o4-mini System Card (SWE-Lancer results updated for July 17, 2025 dataset)"
+    url: https://deploymentsafety.openai.com/o3
+  - model: o4-mini
+    benchmark: terminal-bench-1
+    value: 27.5
+    provenance: independent
+    tools: true
+    setting: "agent: Goose (Codex CLI: 20.0%)"
+    date: 2025-05-18
+    source: "Terminal-Bench 1.0 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/leaderboard/terminal-bench/1.0
+  - model: o4-mini
+    benchmark: tau-bench-retail
+    value: 65.6
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "avg of 5 runs; GPT-4o user model (71.8% with GPT-4.1 user model)"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o4-mini
+    benchmark: tau-bench-airline
+    value: 49.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "avg of 5 runs; GPT-4o user model"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o4-mini
+    benchmark: tau2-bench-telecom
+    value: 40.5
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "reported in GPT-5 developer post"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: o4-mini
+    benchmark: browsecomp
+    value: 28.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python + browsing"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o4-mini
+    benchmark: gdpval
+    value: 27.9
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "wins + ties vs industry experts"
+    date: 2025-09-25
+    source: "Measuring the performance of our models on real-world tasks (GDPval)"
+    url: https://openai.com/index/gdpval/
+  - model: o4-mini
+    benchmark: toolathlon
+    value: 14.8
+    provenance: independent
+    tools: true
+    setting: "verified entry; default agent"
+    date: 2025-10-28
+    source: "Toolathlon leaderboard (original release)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: o4-mini
+    benchmark: gpqa-diamond
+    value: 81.4
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o4-mini
+    benchmark: frontierscience-olympiad
+    value: 61.7
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no browsing; avg of 20 trials"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: o4-mini
+    benchmark: frontierscience-research
+    value: 8.3
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no browsing; avg of 30 trials, >=7/10 rubric points"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: o4-mini
+    benchmark: aime-2024
+    value: 93.4
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o4-mini
+    benchmark: aime-2025
+    value: 91.67
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: o4-mini
+    benchmark: aime-2025
+    value: 92.7
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-04-16
+    source: "Introducing OpenAI o3 and o4-mini"
+    url: https://openai.com/index/introducing-o3-and-o4-mini/
+  - model: o4-mini
+    benchmark: hmmt-2025
+    value: 83.33
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT February 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: o4-mini
+    benchmark: hmmt-2025
+    value: 85.0
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools; reported in GPT-5 developer post"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: o4-mini
+    benchmark: frontiermath-t13
+    value: 15.4
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python tool; reported in GPT-5 developer post (GPT-5 main post chart shows 19.3%)"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: o4-mini
+    benchmark: imo
+    value: 6.0
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "IMO 2025; MathArena human-graded, avg of 4 runs (14.29% of 42); retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (IMO 2025, human-graded proofs)"
+    url: https://matharena.ai/?comp=imo--imo_2025
+  - model: o4-mini
+    benchmark: vct
+    value: 37.0
+    provenance: independent
+    setting: "full VCT (multimodal), zero-shot"
+    date: 2025-04-21
+    source: "Virology Capabilities Test (SecureBio)"
+    url: https://arxiv.org/abs/2504.16137
+  - model: o4-mini
+    benchmark: multimodal-troubleshooting-virology
+    value: 60
+    provenance: lab
+    tools: true
+    setting: "single-select variant, cons@32; browsing, launch candidate (no browsing 58%)"
+    date: 2025-04-16
+    source: "OpenAI o3 and o4-mini System Card"
+    url: https://deploymentsafety.openai.com/o3
+  - model: o4-mini
+    benchmark: protocolqa-open-ended
+    value: 27
+    provenance: lab
+    tools: true
+    setting: "pass@1; browsing, launch candidate"
+    date: 2025-04-16
+    source: "OpenAI o3 and o4-mini System Card"
+    url: https://deploymentsafety.openai.com/o3
+  - model: o4-mini
+    benchmark: tacit-knowledge-troubleshooting
+    value: 68
+    provenance: lab
+    tools: true
+    setting: "cons@32; browsing, launch candidate"
+    date: 2025-04-16
+    source: "OpenAI o3 and o4-mini System Card"
+    url: https://deploymentsafety.openai.com/o3
+  - model: o4-mini
+    benchmark: tau2-bench-retail
+    value: 70.5
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "reported in GPT-5 developer post"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: o4-mini
+    benchmark: tau2-bench-airline
+    value: 60.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "reported in GPT-5 developer post"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  # ── gpt-5 ──
+  - model: gpt-5
+    benchmark: hle
+    value: 35.2
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Python + search (with blocklist)"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5
+    benchmark: hle
+    value: 24.8
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools; re-run on updated HLE version"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: gpt-5
+    benchmark: swe-bench-verified
+    value: 74.9
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "n=477 (23/500 tasks omitted); GPT-5.1 post later reported 72.8% on all 500"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: gpt-5
+    benchmark: swe-bench-pro-public
+    value: 41.78
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "SWE-Agent, 250-turn uncapped (initial Sept 2025 capped run: 23.3%); leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale SWE-Bench Pro leaderboard (public set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: gpt-5
+    benchmark: swe-bench-pro-commercial
+    value: 14.86
+    provenance: independent
+    tools: true
+    setting: "leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale SWE-Bench Pro leaderboard (commercial/private set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_commercial
+  - model: gpt-5
+    benchmark: swe-lancer
+    value: 55
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "IC SWE Diamond (July 2025 dataset update), pass@1 avg of 3, no browsing"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: gpt-5
+    benchmark: terminal-bench-1
+    value: 52.5
+    provenance: independent
+    tools: true
+    setting: "agent: Factory Droid (Terminus 2: 41.3%)"
+    date: 2025-09-24
+    source: "Terminal-Bench 1.0 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/leaderboard/terminal-bench/1.0
+  - model: gpt-5
+    benchmark: osworld-verified
+    value: 65.77
+    provenance: independent
+    tools: true
+    setting: "agentic framework: OS-Symphony w/ GPT-5, 50 steps (GPT-5 not evaluated standalone)"
+    date: 2026-01-04
+    source: "OSWorld-Verified leaderboard"
+    url: https://os-world.github.io/
+  - model: gpt-5
+    benchmark: tau2-bench-telecom
+    value: 96.7
+    provenance: lab
+    tools: true
+    effort: high
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: gpt-5
+    benchmark: browsecomp
+    value: 54.9
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with browsing"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5
+    benchmark: gdpval
+    value: 38.8
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "wins + ties vs industry experts (35.5% wins + 3.3% ties)"
+    date: 2025-09-25
+    source: "Measuring the performance of our models on real-world tasks (GDPval)"
+    url: https://openai.com/index/gdpval/
+  - model: gpt-5
+    benchmark: toolathlon
+    value: 37.7
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "verified entry; default agent"
+    date: 2025-12-17
+    source: "Toolathlon leaderboard (original release)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gpt-5
+    benchmark: gpqa-diamond
+    value: 87.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5
+    benchmark: gpqa-diamond
+    value: 85.7
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: gpt-5
+    benchmark: frontierscience-olympiad
+    value: 69.7
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no browsing; avg of 20 trials"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: gpt-5
+    benchmark: frontierscience-research
+    value: 25.2
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no browsing; avg of 30 trials, >=7/10 rubric points"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: gpt-5
+    benchmark: aime-2025
+    value: 95.0
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: gpt-5
+    benchmark: aime-2025
+    value: 99.6
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python (GPT-5 thinking)"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5
+    benchmark: aime-2025
+    value: 94.6
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: gpt-5
+    benchmark: hmmt-2025
+    value: 88.33
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT February 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: gpt-5
+    benchmark: hmmt-2025
+    value: 96.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5
+    benchmark: hmmt-2025
+    value: 93.3
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: gpt-5
+    benchmark: frontiermath-t13
+    value: 26.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python tool only"
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: gpt-5
+    benchmark: imo
+    value: 16.0
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "IMO 2025; MathArena human-graded, avg of 4 runs (38.10% of 42); contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (IMO 2025, human-graded proofs)"
+    url: https://matharena.ai/?comp=imo--imo_2025
+  - model: gpt-5
+    benchmark: vct
+    value: 41.4
+    provenance: independent
+    setting: "SecureBio external eval (mean of n=10), reported in OpenAI GPT-5 system card"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: gpt-5
+    benchmark: multimodal-troubleshooting-virology
+    value: 42
+    provenance: lab
+    tools: true
+    setting: "multi-select variant; with browsing; launch candidate"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: gpt-5
+    benchmark: protocolqa-open-ended
+    value: 30
+    provenance: lab
+    tools: true
+    setting: "with browsing; launch candidate"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: gpt-5
+    benchmark: tacit-knowledge-troubleshooting
+    value: 66
+    provenance: lab
+    tools: true
+    setting: "cons@32; with browsing; launch candidate"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: gpt-5
+    benchmark: troubleshootingbench
+    value: 22
+    provenance: lab
+    tools: true
+    setting: "with browsing; launch candidate (helpful-only variant: 33%)"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: gpt-5
+    benchmark: tau2-bench-retail
+    value: 81.1
+    provenance: lab
+    tools: true
+    effort: high
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  - model: gpt-5
+    benchmark: tau2-bench-airline
+    value: 62.6
+    provenance: lab
+    tools: true
+    effort: high
+    date: 2025-08-07
+    source: "Introducing GPT-5 for developers"
+    url: https://openai.com/index/introducing-gpt-5-for-developers/
+  # ── gpt-5-pro ──
+  - model: gpt-5-pro
+    benchmark: hle
+    value: 42.0
+    provenance: lab
+    tools: true
+    setting: "Python + search (with blocklist)"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5-pro
+    benchmark: hle
+    value: 30.7
+    provenance: lab
+    tools: false
+    setting: "no tools"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5-pro
+    benchmark: gpqa-diamond
+    value: 89.4
+    provenance: lab
+    tools: true
+    setting: "with Python"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5-pro
+    benchmark: gpqa-diamond
+    value: 88.4
+    provenance: lab
+    tools: false
+    setting: "no tools"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5-pro
+    benchmark: aime-2025
+    value: 100.0
+    provenance: lab
+    tools: true
+    setting: "with Python"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5-pro
+    benchmark: aime-2025
+    value: 96.7
+    provenance: lab
+    tools: false
+    setting: "no tools"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5-pro
+    benchmark: hmmt-2025
+    value: 100.0
+    provenance: lab
+    tools: true
+    setting: "with Python"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5-pro
+    benchmark: frontiermath-t13
+    value: 32.1
+    provenance: lab
+    tools: true
+    setting: "with Python"
+    date: 2025-08-07
+    source: "Introducing GPT-5"
+    url: https://openai.com/index/introducing-gpt-5/
+  - model: gpt-5-pro
+    benchmark: multimodal-troubleshooting-virology
+    value: 42
+    provenance: lab
+    tools: true
+    setting: "multi-select variant; with browsing"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: gpt-5-pro
+    benchmark: protocolqa-open-ended
+    value: 34
+    provenance: lab
+    tools: true
+    setting: "with browsing"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: gpt-5-pro
+    benchmark: tacit-knowledge-troubleshooting
+    value: 68
+    provenance: lab
+    tools: true
+    setting: "cons@32; with browsing"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  - model: gpt-5-pro
+    benchmark: troubleshootingbench
+    value: 27
+    provenance: lab
+    tools: true
+    setting: "with browsing"
+    date: 2025-08-07
+    source: "GPT-5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5
+  # ── gpt-5.1 ──
+  - model: gpt-5.1
+    benchmark: hle
+    value: 42.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with search and Python; reported in GPT-5.2 post"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.1
+    benchmark: hle
+    value: 25.7
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools; reported in GPT-5.2 post"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.1
+    benchmark: swe-bench-verified
+    value: 76.3
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "all 500 problems"
+    date: 2025-11-13
+    source: "GPT-5.1 for developers"
+    url: https://openai.com/index/gpt-5-1-for-developers/
+  - model: gpt-5.1
+    benchmark: swe-bench-pro-public
+    value: 50.8
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "reported in GPT-5.2 post"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.1
+    benchmark: swe-lancer
+    value: 69.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "IC SWE Diamond; 40/237 problems omitted; reported in GPT-5.2 post"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.1
+    benchmark: tau2-bench-telecom
+    value: 95.6
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "short generically helpful prompt added"
+    date: 2025-11-13
+    source: "GPT-5.1 for developers"
+    url: https://openai.com/index/gpt-5-1-for-developers/
+  - model: gpt-5.1
+    benchmark: browsecomp
+    value: 50.8
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "reported in GPT-5.2 post"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.1
+    benchmark: toolathlon
+    value: 37.0
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "verified entry; default agent"
+    date: 2025-12-17
+    source: "Toolathlon leaderboard (original release)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gpt-5.1
+    benchmark: toolathlon
+    value: 36.1
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "reported in GPT-5.2 post"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.1
+    benchmark: mcp-atlas
+    value: 50.1
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "April 2026 updated methodology; leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: gpt-5.1
+    benchmark: mcp-atlas
+    value: 44.5
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "Scale MCP-Atlas; reported in GPT-5.2 post"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.1
+    benchmark: gpqa-diamond
+    value: 88.1
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-11-13
+    source: "GPT-5.1 for developers"
+    url: https://openai.com/index/gpt-5-1-for-developers/
+  - model: gpt-5.1
+    benchmark: frontierscience-olympiad
+    value: 70.0
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no browsing; avg of 20 trials"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: gpt-5.1
+    benchmark: frontierscience-research
+    value: 19.4
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no browsing; avg of 30 trials, >=7/10 rubric points"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: gpt-5.1
+    benchmark: aime-2025
+    value: 94.17
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: gpt-5.1
+    benchmark: aime-2025
+    value: 94.0
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools"
+    date: 2025-11-13
+    source: "GPT-5.1 for developers"
+    url: https://openai.com/index/gpt-5-1-for-developers/
+  - model: gpt-5.1
+    benchmark: hmmt-2025
+    value: 93.33
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT February 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: gpt-5.1
+    benchmark: hmmt-2025
+    value: 96.3
+    provenance: lab
+    tools: false
+    effort: high
+    setting: "no tools; reported in GPT-5.2 post"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.1
+    benchmark: frontiermath-t13
+    value: 26.7
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python tool (GPT-5.2 post later listed 31.0%)"
+    date: 2025-11-13
+    source: "GPT-5.1 for developers"
+    url: https://openai.com/index/gpt-5-1-for-developers/
+  - model: gpt-5.1
+    benchmark: frontiermath-t4
+    value: 12.5
+    provenance: lab
+    tools: true
+    effort: high
+    setting: "with Python; reported in GPT-5.2 post"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.1
+    benchmark: multimodal-troubleshooting-virology
+    value: 41
+    provenance: lab
+    tools: true
+    setting: "pass@1, with browsing; reported in GPT-5.2 system card"
+    date: 2025-12-11
+    source: "GPT-5.2 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-2
+  - model: gpt-5.1
+    benchmark: protocolqa-open-ended
+    value: 33
+    provenance: lab
+    tools: true
+    setting: "pass@1, with browsing; reported in GPT-5.2 system card"
+    date: 2025-12-11
+    source: "GPT-5.2 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-2
+  - model: gpt-5.1
+    benchmark: tacit-knowledge-troubleshooting
+    value: 69
+    provenance: lab
+    tools: true
+    setting: "cons@32, with browsing; reported in GPT-5.2 system card"
+    date: 2025-12-11
+    source: "GPT-5.2 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-2
+  - model: gpt-5.1
+    benchmark: troubleshootingbench
+    value: 32
+    provenance: lab
+    tools: true
+    setting: "pass@1, with browsing; reported in GPT-5.2 system card"
+    date: 2025-12-11
+    source: "GPT-5.2 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-2
+  - model: gpt-5.1
+    benchmark: tau2-bench-retail
+    value: 77.9
+    provenance: lab
+    tools: true
+    effort: high
+    date: 2025-11-13
+    source: "GPT-5.1 for developers"
+    url: https://openai.com/index/gpt-5-1-for-developers/
+  - model: gpt-5.1
+    benchmark: tau2-bench-airline
+    value: 67.0
+    provenance: lab
+    tools: true
+    effort: high
+    date: 2025-11-13
+    source: "GPT-5.1 for developers"
+    url: https://openai.com/index/gpt-5-1-for-developers/
+  # ── gpt-5.2 ──
+  - model: gpt-5.2
+    benchmark: hle
+    value: 45.5
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "with search and Python"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: hle
+    value: 34.5
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no tools"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: swe-bench-verified
+    value: 80.0
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: swe-bench-multilingual
+    value: 66.7
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "agent: mini-SWE-agent (entry dated 2026-02-13, checked)"
+    date: 2026-02-13
+    source: "SWE-bench leaderboard (swebench.com)"
+    url: https://www.swebench.com
+  - model: gpt-5.2
+    benchmark: swe-bench-pro-public
+    value: 29.94
+    provenance: independent
+    tools: true
+    setting: "leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale SWE-Bench Pro leaderboard (public set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: gpt-5.2
+    benchmark: swe-bench-pro-public
+    value: 55.6
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: swe-bench-pro-commercial
+    value: 23.81
+    provenance: independent
+    tools: true
+    setting: "leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale SWE-Bench Pro leaderboard (commercial/private set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_commercial
+  - model: gpt-5.2
+    benchmark: swe-lancer
+    value: 74.6
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "IC SWE Diamond; reported in GPT-5.3-Codex post"
+    date: 2026-02-05
+    source: "Introducing GPT-5.3-Codex"
+    url: https://openai.com/index/introducing-gpt-5-3-codex/
+  - model: gpt-5.2
+    benchmark: terminal-bench-2
+    value: 62.2
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "reported in GPT-5.3-Codex post"
+    date: 2026-02-05
+    source: "Introducing GPT-5.3-Codex"
+    url: https://openai.com/index/introducing-gpt-5-3-codex/
+  - model: gpt-5.2
+    benchmark: osworld-verified
+    value: 37.9
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "reported in GPT-5.3-Codex post (GPT-5.4 post later listed 47.3%)"
+    date: 2026-02-05
+    source: "Introducing GPT-5.3-Codex"
+    url: https://openai.com/index/introducing-gpt-5-3-codex/
+  - model: gpt-5.2
+    benchmark: tau2-bench-telecom
+    value: 98.7
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: browsecomp
+    value: 65.8
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: gdpval
+    value: 70.9
+    provenance: lab
+    tools: true
+    setting: "wins or ties; run at ChatGPT 'heavy' reasoning effort"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: toolathlon
+    value: 43.8
+    provenance: independent
+    tools: true
+    effort: xhigh
+    setting: "verified entry; default agent (high: 41.7%)"
+    date: 2025-12-18
+    source: "Toolathlon leaderboard (original release)"
+    url: https://toolathlon.xyz/docs/leaderboard
+  - model: gpt-5.2
+    benchmark: toolathlon
+    value: 46.3
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "(GPT-5.4 post later listed 45.7%)"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: mcp-atlas
+    value: 67.6
+    provenance: independent
+    tools: true
+    effort: xhigh
+    setting: "April 2026 updated methodology; leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: gpt-5.2
+    benchmark: mcp-atlas
+    value: 60.6
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "Scale MCP-Atlas"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: gpqa-diamond
+    value: 92.4
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no tools"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: frontierscience-olympiad
+    value: 77.1
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no browsing; avg of 20 trials"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: gpt-5.2
+    benchmark: frontierscience-research
+    value: 25.2
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no browsing; avg of 30 trials, >=7/10 rubric points"
+    date: 2026-01-29
+    source: "FrontierScience: Evaluating AI's Ability to Perform Expert-Level Scientific Tasks"
+    url: https://arxiv.org/abs/2601.21165
+  - model: gpt-5.2
+    benchmark: aime-2025
+    value: 100.0
+    provenance: independent
+    tools: false
+    effort: xhigh
+    setting: "avg of 4 runs; MathArena flags possible contamination (model released after competition); retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2025)"
+    url: https://matharena.ai/?comp=aime--aime_2025
+  - model: gpt-5.2
+    benchmark: aime-2025
+    value: 100.0
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no tools"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: aime-2026
+    value: 98.33
+    provenance: independent
+    tools: false
+    effort: high
+    setting: "avg of 4 runs; uncontaminated (model predates competition); retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2026)"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: gpt-5.2
+    benchmark: hmmt-2025
+    value: 100.0
+    provenance: independent
+    tools: false
+    effort: xhigh
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (HMMT February 2025)"
+    url: https://matharena.ai/?comp=hmmt--hmmt_feb_2025
+  - model: gpt-5.2
+    benchmark: hmmt-2025
+    value: 99.4
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no tools"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: frontiermath-t13
+    value: 40.3
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "with Python (GPT-5.4 post later listed 40.7%)"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: frontiermath-t4
+    value: 14.6
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "with Python (GPT-5.4 post later listed 18.8%)"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2
+    benchmark: multimodal-troubleshooting-virology
+    value: 43
+    provenance: lab
+    tools: true
+    setting: "pass@1, with browsing (GPT-5.4 card later listed 43.17%)"
+    date: 2025-12-11
+    source: "GPT-5.2 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-2
+  - model: gpt-5.2
+    benchmark: protocolqa-open-ended
+    value: 40
+    provenance: lab
+    tools: true
+    setting: "pass@1, with browsing (GPT-5.4 card later listed 33%)"
+    date: 2025-12-11
+    source: "GPT-5.2 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-2
+  - model: gpt-5.2
+    benchmark: tacit-knowledge-troubleshooting
+    value: 48
+    provenance: lab
+    tools: true
+    setting: "cons@32, with browsing, refusals not counted (GPT-5.4 card later listed 53% / 86.3% incl. refusals)"
+    date: 2025-12-11
+    source: "GPT-5.2 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-2
+  - model: gpt-5.2
+    benchmark: troubleshootingbench
+    value: 35
+    provenance: lab
+    tools: true
+    setting: "pass@1, with browsing (GPT-5.4 card later listed 35.5%)"
+    date: 2025-12-11
+    source: "GPT-5.2 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-2
+  - model: gpt-5.2
+    benchmark: tau2-bench-retail
+    value: 82.0
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  # ── gpt-5.2-pro ──
+  - model: gpt-5.2-pro
+    benchmark: hle
+    value: 50.0
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "with search and Python"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2-pro
+    benchmark: hle
+    value: 36.6
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no tools"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2-pro
+    benchmark: browsecomp
+    value: 77.9
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2-pro
+    benchmark: gdpval
+    value: 74.1
+    provenance: lab
+    tools: true
+    setting: "wins or ties"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2-pro
+    benchmark: gpqa-diamond
+    value: 93.2
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no tools"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2-pro
+    benchmark: aime-2025
+    value: 100.0
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no tools"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2-pro
+    benchmark: hmmt-2025
+    value: 100.0
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no tools"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  - model: gpt-5.2-pro
+    benchmark: frontiermath-t4
+    value: 31.3
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "reported in GPT-5.4 post (Mar 2026)"
+    date: 2025-12-11
+    source: "Introducing GPT-5.2"
+    url: https://openai.com/index/introducing-gpt-5-2/
+  # ── gpt-5.3-codex ──
+  - model: gpt-5.3-codex
+    benchmark: swe-bench-pro-public
+    value: 56.8
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-02-05
+    source: "Introducing GPT-5.3-Codex"
+    url: https://openai.com/index/introducing-gpt-5-3-codex/
+  - model: gpt-5.3-codex
+    benchmark: swe-lancer
+    value: 81.4
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "IC SWE Diamond"
+    date: 2026-02-05
+    source: "Introducing GPT-5.3-Codex"
+    url: https://openai.com/index/introducing-gpt-5-3-codex/
+  - model: gpt-5.3-codex
+    benchmark: terminal-bench-2
+    value: 77.3
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-02-05
+    source: "Introducing GPT-5.3-Codex"
+    url: https://openai.com/index/introducing-gpt-5-3-codex/
+  - model: gpt-5.3-codex
+    benchmark: osworld-verified
+    value: 64.7
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "GPT-5.4 post later restated 74.0% using an API parameter that preserves original image resolution"
+    date: 2026-02-05
+    source: "Introducing GPT-5.3-Codex"
+    url: https://openai.com/index/introducing-gpt-5-3-codex/
+  - model: gpt-5.3-codex
+    benchmark: browsecomp
+    value: 77.3
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "reported in GPT-5.4 post"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.3-codex
+    benchmark: gdpval
+    value: 70.9
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "wins or ties; reported in GPT-5.4 post"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.3-codex
+    benchmark: toolathlon
+    value: 51.9
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "reported in GPT-5.4 post"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.3-codex
+    benchmark: gpqa-diamond
+    value: 92.6
+    provenance: lab
+    effort: xhigh
+    setting: "reported in GPT-5.4 post"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.3-codex
+    benchmark: multimodal-troubleshooting-virology
+    value: 55.8
+    provenance: lab
+    setting: "pass@1; reported in GPT-5.4 Thinking system card"
+    date: 2026-03-05
+    source: "GPT-5.4 Thinking System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-4-thinking
+  - model: gpt-5.3-codex
+    benchmark: protocolqa-open-ended
+    value: 43.8
+    provenance: lab
+    setting: "pass@1; reported in GPT-5.4 Thinking system card"
+    date: 2026-03-05
+    source: "GPT-5.4 Thinking System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-4-thinking
+  - model: gpt-5.3-codex
+    benchmark: tacit-knowledge-troubleshooting
+    value: 71.7
+    provenance: lab
+    setting: "cons@32; 80% if refusals counted as correct; reported in GPT-5.4 Thinking system card"
+    date: 2026-03-05
+    source: "GPT-5.4 Thinking System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-4-thinking
+  - model: gpt-5.3-codex
+    benchmark: troubleshootingbench
+    value: 32.5
+    provenance: lab
+    setting: "pass@1; 36% if refusals counted as correct; reported in GPT-5.4 Thinking system card"
+    date: 2026-03-05
+    source: "GPT-5.4 Thinking System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-4-thinking
+  # ── gpt-5.4 ──
+  - model: gpt-5.4
+    benchmark: hle
+    value: 52.1
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "with tools"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: hle
+    value: 39.8
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no tools"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: swe-bench-pro-public
+    value: 59.1
+    provenance: independent
+    tools: true
+    effort: xhigh
+    setting: "mini-swe-agent harness, 250-turn uncapped; leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale SWE-Bench Pro leaderboard (public set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_public
+  - model: gpt-5.4
+    benchmark: swe-bench-pro-public
+    value: 57.7
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: swe-bench-pro-commercial
+    value: 43.4
+    provenance: independent
+    tools: true
+    effort: xhigh
+    setting: "mini-swe-agent harness; leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale SWE-Bench Pro leaderboard (commercial/private set)"
+    url: https://scale.com/leaderboard/swe_bench_pro_commercial
+  - model: gpt-5.4
+    benchmark: terminal-bench-2
+    value: 75.1
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: osworld-verified
+    value: 75.0
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: tau2-bench-telecom
+    value: 98.9
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "(GPT-5.5 post later reported 92.8% with original, unadjusted prompts)"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: browsecomp
+    value: 82.7
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: gdpval
+    value: 83.0
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "wins or ties"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: toolathlon
+    value: 54.6
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: mcp-atlas
+    value: 70.6
+    provenance: independent
+    tools: true
+    effort: xhigh
+    setting: "April 2026 updated methodology; leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: gpt-5.4
+    benchmark: mcp-atlas
+    value: 67.2
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: gpqa-diamond
+    value: 92.8
+    provenance: lab
+    effort: xhigh
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: frontierscience-research
+    value: 33.0
+    provenance: lab
+    effort: xhigh
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: aime-2026
+    value: 99.17
+    provenance: independent
+    tools: false
+    effort: xhigh
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2026)"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: gpt-5.4
+    benchmark: frontiermath-t13
+    value: 47.6
+    provenance: lab
+    effort: xhigh
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: frontiermath-t4
+    value: 27.1
+    provenance: lab
+    effort: xhigh
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4
+    benchmark: arc-agi-3
+    value: 0.21
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard (ARC-AGI-3 semi-private)"
+    url: https://arcprize.org/leaderboard
+  - model: gpt-5.4
+    benchmark: multimodal-troubleshooting-virology
+    value: 50.37
+    provenance: lab
+    setting: "SecureBio questions; pass@1"
+    date: 2026-03-05
+    source: "GPT-5.4 Thinking System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-4-thinking
+  - model: gpt-5.4
+    benchmark: protocolqa-open-ended
+    value: 42.48
+    provenance: lab
+    setting: "pass@1"
+    date: 2026-03-05
+    source: "GPT-5.4 Thinking System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-4-thinking
+  - model: gpt-5.4
+    benchmark: tacit-knowledge-troubleshooting
+    value: 65.0
+    provenance: lab
+    setting: "cons@32; 83.8% if refusals/safe completions counted as correct"
+    date: 2026-03-05
+    source: "GPT-5.4 Thinking System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-4-thinking
+  - model: gpt-5.4
+    benchmark: troubleshootingbench
+    value: 35.75
+    provenance: lab
+    setting: "pass@1; 38.85% if refusals counted as correct"
+    date: 2026-03-05
+    source: "GPT-5.4 Thinking System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-4-thinking
+  # ── gpt-5.4-pro ──
+  - model: gpt-5.4-pro
+    benchmark: hle
+    value: 58.7
+    provenance: lab
+    tools: true
+    setting: "with tools"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4-pro
+    benchmark: hle
+    value: 42.7
+    provenance: lab
+    tools: false
+    setting: "no tools"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4-pro
+    benchmark: browsecomp
+    value: 89.3
+    provenance: lab
+    tools: true
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4-pro
+    benchmark: gdpval
+    value: 82.0
+    provenance: lab
+    tools: true
+    setting: "wins or ties"
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4-pro
+    benchmark: gpqa-diamond
+    value: 94.4
+    provenance: lab
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4-pro
+    benchmark: frontierscience-research
+    value: 36.7
+    provenance: lab
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4-pro
+    benchmark: frontiermath-t13
+    value: 50.0
+    provenance: lab
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  - model: gpt-5.4-pro
+    benchmark: frontiermath-t4
+    value: 38.0
+    provenance: lab
+    date: 2026-03-05
+    source: "Introducing GPT-5.4"
+    url: https://openai.com/index/introducing-gpt-5-4/
+  # ── gpt-5.5 ──
+  - model: gpt-5.5
+    benchmark: hle
+    value: 52.2
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "with tools"
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: hle
+    value: 41.4
+    provenance: lab
+    tools: false
+    effort: xhigh
+    setting: "no tools"
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: swe-bench-pro-public
+    value: 58.6
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "OpenAI notes evidence of memorization on this eval"
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: deepswe
+    value: 67.0
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "DeepSWE v1.1; reported in GPT-5.6 post"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.5
+    benchmark: terminal-bench-2
+    value: 82.7
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: terminal-bench-2.1
+    value: 83.15
+    provenance: independent
+    tools: true
+    effort: xhigh
+    setting: "agent: Codex (Terminus 2: 77.98%)"
+    date: 2026-07-08
+    source: "Terminal-Bench 2.1 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=2.1
+  - model: gpt-5.5
+    benchmark: terminal-bench-2.1
+    value: 85.6
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "reported in GPT-5.6 post"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.5
+    benchmark: osworld-verified
+    value: 78.7
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: osworld-2
+    value: 47.5
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "reported in GPT-5.6 post"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.5
+    benchmark: tau2-bench-telecom
+    value: 98.0
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "original prompts (no prompt adjustment)"
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: browsecomp
+    value: 84.4
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: gdpval
+    value: 84.9
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "wins or ties"
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: toolathlon
+    value: 55.6
+    provenance: lab
+    tools: true
+    effort: xhigh
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: mcp-atlas
+    value: 75.3
+    provenance: independent
+    tools: true
+    effort: xhigh
+    setting: "April 2026 updated methodology; leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: gpt-5.5
+    benchmark: gpqa-diamond
+    value: 93.6
+    provenance: lab
+    effort: xhigh
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: aime-2026
+    value: 100.0
+    provenance: independent
+    tools: false
+    effort: xhigh
+    setting: "avg of 4 runs; contamination warning; retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "MathArena (AIME 2026)"
+    url: https://matharena.ai/?comp=aime--aime_2026
+  - model: gpt-5.5
+    benchmark: frontiermath-t13
+    value: 51.7
+    provenance: lab
+    effort: xhigh
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: frontiermath-t13-v2
+    value: 85.3
+    provenance: lab
+    effort: xhigh
+    setting: "reported in GPT-5.6 post"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.5
+    benchmark: frontiermath-t4
+    value: 35.4
+    provenance: lab
+    effort: xhigh
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5
+    benchmark: frontiermath-t4-v2
+    value: 72.5
+    provenance: lab
+    effort: xhigh
+    setting: "reported in GPT-5.6 post"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.5
+    benchmark: arc-agi-3
+    value: 0.43
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard (ARC-AGI-3 semi-private)"
+    url: https://arcprize.org/leaderboard
+  - model: gpt-5.5
+    benchmark: arc-agi-3
+    value: 0.43
+    provenance: lab
+    tools: true
+    effort: xhigh
+    setting: "reported in GPT-5.6 post"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.5
+    benchmark: multimodal-troubleshooting-virology
+    value: 53.7
+    provenance: lab
+    setting: "350 held-out SecureBio questions; pass@1"
+    date: 2026-04-23
+    source: "GPT-5.5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-5
+  - model: gpt-5.5
+    benchmark: protocolqa-open-ended
+    value: 37.3
+    provenance: lab
+    setting: "pass@1"
+    date: 2026-04-23
+    source: "GPT-5.5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-5
+  - model: gpt-5.5
+    benchmark: tacit-knowledge-troubleshooting
+    value: 78.3
+    provenance: lab
+    setting: "cons@32"
+    date: 2026-04-23
+    source: "GPT-5.5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-5
+  - model: gpt-5.5
+    benchmark: troubleshootingbench
+    value: 44.1
+    provenance: lab
+    setting: "pass@1"
+    date: 2026-04-23
+    source: "GPT-5.5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-5
+  # ── gpt-5.5-pro ──
+  - model: gpt-5.5-pro
+    benchmark: hle
+    value: 57.2
+    provenance: lab
+    tools: true
+    setting: "with tools"
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5-pro
+    benchmark: hle
+    value: 43.1
+    provenance: lab
+    tools: false
+    setting: "no tools"
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5-pro
+    benchmark: browsecomp
+    value: 90.1
+    provenance: lab
+    tools: true
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5-pro
+    benchmark: gdpval
+    value: 82.3
+    provenance: lab
+    tools: true
+    setting: "wins or ties"
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5-pro
+    benchmark: frontiermath-t13
+    value: 52.4
+    provenance: lab
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5-pro
+    benchmark: frontiermath-t4
+    value: 39.6
+    provenance: lab
+    date: 2026-04-23
+    source: "Introducing GPT-5.5"
+    url: https://openai.com/index/introducing-gpt-5-5/
+  - model: gpt-5.5-pro
+    benchmark: multimodal-troubleshooting-virology
+    value: 55.34
+    provenance: lab
+    setting: "350 held-out SecureBio questions; pass@1"
+    date: 2026-04-23
+    source: "GPT-5.5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-5
+  - model: gpt-5.5-pro
+    benchmark: protocolqa-open-ended
+    value: 36.73
+    provenance: lab
+    setting: "pass@1"
+    date: 2026-04-23
+    source: "GPT-5.5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-5
+  - model: gpt-5.5-pro
+    benchmark: tacit-knowledge-troubleshooting
+    value: 81.67
+    provenance: lab
+    setting: "cons@32 (stated in text, not pictured)"
+    date: 2026-04-23
+    source: "GPT-5.5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-5
+  - model: gpt-5.5-pro
+    benchmark: troubleshootingbench
+    value: 49.58
+    provenance: lab
+    setting: "pass@1"
+    date: 2026-04-23
+    source: "GPT-5.5 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-5
+  # ── gpt-5.6-luna ──
+  - model: gpt-5.6-luna
+    benchmark: swe-bench-pro-public
+    value: 62.7
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-luna
+    benchmark: deepswe
+    value: 67.2
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "DeepSWE v1.1"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-luna
+    benchmark: terminal-bench-2.1
+    value: 75.73
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "agent: Codex"
+    date: 2026-07-11
+    source: "Terminal-Bench 2.1 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=2.1
+  - model: gpt-5.6-luna
+    benchmark: terminal-bench-2.1
+    value: 84.7
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-luna
+    benchmark: terminal-bench-3
+    value: 14.32
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "agent: Codex"
+    date: 2026-08-12
+    source: "Terminal-Bench 3.0 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=3.0
+  - model: gpt-5.6-luna
+    benchmark: terminal-bench-4
+    value: 17.27
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "agent: Codex"
+    date: 2026-08-27
+    source: "Terminal-Bench 4.0 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=4.0
+  - model: gpt-5.6-luna
+    benchmark: osworld-2
+    value: 45.6
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-luna
+    benchmark: browsecomp
+    value: 83.3
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-luna
+    benchmark: toolathlon
+    value: 53.4
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-luna
+    benchmark: gpqa-diamond
+    value: 92.3
+    provenance: lab
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-luna
+    benchmark: frontiermath-t13-v2
+    value: 78.6
+    provenance: lab
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-luna
+    benchmark: frontiermath-t4-v2
+    value: 58.5
+    provenance: lab
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-luna
+    benchmark: arc-agi-3
+    value: 0.18
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard (ARC-AGI-3 semi-private)"
+    url: https://arcprize.org/leaderboard
+  - model: gpt-5.6-luna
+    benchmark: arc-agi-3
+    value: 0.18
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  # ── gpt-5.6-terra ──
+  - model: gpt-5.6-terra
+    benchmark: swe-bench-pro-public
+    value: 63.4
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-terra
+    benchmark: deepswe
+    value: 69.6
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "DeepSWE v1.1"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-terra
+    benchmark: terminal-bench-2.1
+    value: 78.43
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "agent: Codex"
+    date: 2026-07-12
+    source: "Terminal-Bench 2.1 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=2.1
+  - model: gpt-5.6-terra
+    benchmark: terminal-bench-2.1
+    value: 87.4
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-terra
+    benchmark: terminal-bench-3
+    value: 20.81
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "agent: Codex"
+    date: 2026-08-12
+    source: "Terminal-Bench 3.0 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=3.0
+  - model: gpt-5.6-terra
+    benchmark: terminal-bench-4
+    value: 21.52
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "agent: Codex"
+    date: 2026-08-27
+    source: "Terminal-Bench 4.0 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=4.0
+  - model: gpt-5.6-terra
+    benchmark: osworld-2
+    value: 50.2
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-terra
+    benchmark: browsecomp
+    value: 87.5
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-terra
+    benchmark: toolathlon
+    value: 53.1
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-terra
+    benchmark: gpqa-diamond
+    value: 92.9
+    provenance: lab
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-terra
+    benchmark: frontiermath-t13-v2
+    value: 84.9
+    provenance: lab
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-terra
+    benchmark: frontiermath-t4-v2
+    value: 68.3
+    provenance: lab
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-terra
+    benchmark: arc-agi-3
+    value: 0.8
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard (ARC-AGI-3 semi-private)"
+    url: https://arcprize.org/leaderboard
+  - model: gpt-5.6-terra
+    benchmark: arc-agi-3
+    value: 0.8
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-terra
+    benchmark: tacit-knowledge-troubleshooting
+    value: 84.1
+    provenance: lab
+    setting: "refusal-adjusted (refusals counted as correct)"
+    date: 2026-07-09
+    source: "GPT-5.6 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-6
+  # ── gpt-5.6-sol ──
+  - model: gpt-5.6-sol
+    benchmark: swe-bench-pro-public
+    value: 64.6
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: deepswe
+    value: 72.7
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "DeepSWE v1.1"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: terminal-bench-2.1
+    value: 91.9
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "GPT-5.6 Sol Ultra (4 parallel agents)"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: terminal-bench-2.1
+    value: 88.8
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "single agent"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: terminal-bench-3
+    value: 34.59
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "agent: Codex"
+    date: 2026-08-12
+    source: "Terminal-Bench 3.0 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=3.0
+  - model: gpt-5.6-sol
+    benchmark: terminal-bench-4
+    value: 37.27
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "agent: Codex"
+    date: 2026-08-27
+    source: "Terminal-Bench 4.0 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=4.0
+  - model: gpt-5.6-sol
+    benchmark: terminal-bench-4
+    value: 37.3
+    provenance: lab
+    tools: true
+    setting: "best across efforts; reported in GPT-6 Astra post"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-5.6-sol
+    benchmark: osworld-2
+    value: 62.6
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: browsecomp
+    value: 92.2
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "GPT-5.6 Sol Ultra (4 parallel agents)"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: browsecomp
+    value: 90.4
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "single agent"
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: toolathlon
+    value: 58.0
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: mcp-atlas
+    value: 81.8
+    provenance: independent
+    tools: true
+    setting: "April 2026 updated methodology; leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "Scale MCP Atlas leaderboard"
+    url: https://scale.com/leaderboard/mcp_atlas
+  - model: gpt-5.6-sol
+    benchmark: gpqa-diamond
+    value: 94.6
+    provenance: lab
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: frontiermath-t13-v2
+    value: 89.0
+    provenance: lab
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: frontiermath-t4-v2
+    value: 83.0
+    provenance: lab
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: vct
+    value: 53.5
+    provenance: independent
+    setting: "SecureBio external eval; strongest configuration (pre-release or railfree checkpoint); reported in OpenAI system card"
+    date: 2026-07-09
+    source: "GPT-5.6 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-6
+  - model: gpt-5.6-sol
+    benchmark: arc-agi-1
+    value: 97.5
+    provenance: lab
+    setting: "best across efforts; reported in GPT-6 Astra post"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-5.6-sol
+    benchmark: arc-agi-2
+    value: 92.5
+    provenance: lab
+    setting: "best across efforts; reported in GPT-6 Astra post"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-5.6-sol
+    benchmark: arc-agi-3
+    value: 7.78
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard (ARC-AGI-3 semi-private)"
+    url: https://arcprize.org/leaderboard
+  - model: gpt-5.6-sol
+    benchmark: arc-agi-3
+    value: 7.78
+    provenance: lab
+    tools: true
+    effort: max
+    date: 2026-07-09
+    source: "GPT-5.6: Frontier intelligence that scales with your ambition"
+    url: https://openai.com/index/gpt-5-6/
+  - model: gpt-5.6-sol
+    benchmark: multimodal-troubleshooting-virology
+    value: 55.5
+    provenance: lab
+    setting: "350 SecureBio questions; pass@1, highest effort"
+    date: 2026-07-09
+    source: "GPT-5.6 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-6
+  - model: gpt-5.6-sol
+    benchmark: protocolqa-open-ended
+    value: 43.5
+    provenance: lab
+    setting: "pass@1, highest effort"
+    date: 2026-07-09
+    source: "GPT-5.6 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-6
+  - model: gpt-5.6-sol
+    benchmark: troubleshootingbench
+    value: 48.0
+    provenance: lab
+    setting: "pass@1, highest effort"
+    date: 2026-07-09
+    source: "GPT-5.6 System Card"
+    url: https://deploymentsafety.openai.com/gpt-5-6
+  # ── gpt-6-astra ──
+  - model: gpt-6-astra
+    benchmark: hle
+    value: 57.2
+    provenance: lab
+    tools: true
+    setting: "best score across effort levels"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-6-astra
+    benchmark: deepswe
+    value: 74.1
+    provenance: lab
+    tools: true
+    setting: "DeepSWE v1.1; best across efforts"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-6-astra
+    benchmark: terminal-bench-2.1
+    value: 87.42
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "agent: Codex (max effort: 86.74%)"
+    date: 2026-09-03
+    source: "Terminal-Bench 2.1 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=2.1
+  - model: gpt-6-astra
+    benchmark: terminal-bench-4
+    value: 58.18
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "agent: Codex"
+    date: 2026-09-03
+    source: "Terminal-Bench 4.0 leaderboard (tbench.ai)"
+    url: https://www.tbench.ai/?version=4.0
+  - model: gpt-6-astra
+    benchmark: terminal-bench-4
+    value: 57.9
+    provenance: lab
+    tools: true
+    setting: "best across efforts"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-6-astra
+    benchmark: osworld-2
+    value: 72.6
+    provenance: lab
+    tools: true
+    setting: "OSWorld 2.0 v2026.08.08 offline set, partial score; best across efforts"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-6-astra
+    benchmark: browsecomp
+    value: 91.5
+    provenance: lab
+    tools: true
+    setting: "best across efforts"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-6-astra
+    benchmark: gpqa-diamond
+    value: 96.0
+    provenance: lab
+    setting: "best across efforts"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-6-astra
+    benchmark: frontiermath-t4-v2
+    value: 97.6
+    provenance: lab
+    setting: "best across efforts"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-6-astra
+    benchmark: vct
+    value: 57.8
+    provenance: independent
+    setting: "SecureBio external eval of pre-release checkpoint, refusal-corrected; reported in OpenAI system card"
+    date: 2026-09-03
+    source: "GPT-6 Astra System Card"
+    url: https://deploymentsafety.openai.com/gpt-6-astra
+  - model: gpt-6-astra
+    benchmark: arc-agi-1
+    value: 98.5
+    provenance: lab
+    setting: "best across efforts"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-6-astra
+    benchmark: arc-agi-2
+    value: 95.0
+    provenance: lab
+    setting: "best across efforts"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-6-astra
+    benchmark: arc-agi-3
+    value: 99.95
+    provenance: independent
+    tools: true
+    effort: high
+    setting: "OpenAI provider adapter harness (max effort: 98.55%); leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard (ARC-AGI-3 semi-private)"
+    url: https://arcprize.org/leaderboard
+  - model: gpt-6-astra
+    benchmark: arc-agi-3
+    value: 62.71
+    provenance: independent
+    tools: true
+    effort: max
+    setting: "standard ARC harness; leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard (ARC-AGI-3 semi-private)"
+    url: https://arcprize.org/leaderboard
+  - model: gpt-6-astra
+    benchmark: arc-agi-3
+    value: 99.9
+    provenance: lab
+    tools: true
+    setting: "run with OpenAI Responses API harness (two settings changed); best across efforts"
+    date: 2026-09-03
+    source: "GPT-6 Astra: A new generation of intelligence"
+    url: https://openai.com/index/gpt-6-astra/
+  - model: gpt-6-astra
+    benchmark: multimodal-troubleshooting-virology
+    value: 55.78
+    provenance: lab
+    setting: "322 SecureBio questions; refusal-adjusted 63.11%"
+    date: 2026-09-03
+    source: "GPT-6 Astra System Card"
+    url: https://deploymentsafety.openai.com/gpt-6-astra
+  - model: gpt-6-astra
+    benchmark: protocolqa-open-ended
+    value: 41.36
+    provenance: lab
+    setting: "refusal-adjusted 45.37%"
+    date: 2026-09-03
+    source: "GPT-6 Astra System Card"
+    url: https://deploymentsafety.openai.com/gpt-6-astra
+  - model: gpt-6-astra
+    benchmark: tacit-knowledge-troubleshooting
+    value: 63.33
+    provenance: lab
+    setting: "refusal-adjusted 90.00%"
+    date: 2026-09-03
+    source: "GPT-6 Astra System Card"
+    url: https://deploymentsafety.openai.com/gpt-6-astra
+  - model: gpt-6-astra
+    benchmark: troubleshootingbench
+    value: 48.44
+    provenance: lab
+    setting: "refusal-adjusted 63.46%"
+    date: 2026-09-03
+    source: "GPT-6 Astra System Card"
+    url: https://deploymentsafety.openai.com/gpt-6-astra
+  # ── gpt-6-sol ──
+  - model: gpt-6-sol
+    benchmark: deepswe
+    value: 68.8
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "DeepSWE v1.1"
+    date: 2026-09-22
+    source: "Introducing GPT-6 Sol and Luna"
+    url: https://openai.com/index/introducing-gpt-6-sol-and-luna/
+  - model: gpt-6-sol
+    benchmark: osworld-2
+    value: 64.4
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "OSWorld 2.0 v2026.08.08 offline set, partial reward (xhigh: 60.5%)"
+    date: 2026-09-22
+    source: "Introducing GPT-6 Sol and Luna"
+    url: https://openai.com/index/introducing-gpt-6-sol-and-luna/
+  # ── gpt-6-luna ──
+  - model: gpt-6-luna
+    benchmark: deepswe
+    value: 66.6
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "DeepSWE v1.1"
+    date: 2026-09-22
+    source: "Introducing GPT-6 Sol and Luna"
+    url: https://openai.com/index/introducing-gpt-6-sol-and-luna/
+  - model: gpt-6-luna
+    benchmark: osworld-2
+    value: 52.7
+    provenance: lab
+    tools: true
+    effort: max
+    setting: "OSWorld 2.0 v2026.08.08 offline set, partial reward"
+    date: 2026-09-22
+    source: "Introducing GPT-6 Sol and Luna"
+    url: https://openai.com/index/introducing-gpt-6-sol-and-luna/
+  - model: gpt-6-luna
+    benchmark: arc-agi-3
+    value: 0.19
+    provenance: independent
+    tools: true
+    effort: medium
+    setting: "standard harness (provider adapter max: 0.59%); leaderboard retrieved 2026-09-24"
+    date: 2026-09-24
+    source: "ARC Prize leaderboard (ARC-AGI-3 semi-private)"
+    url: https://arcprize.org/leaderboard

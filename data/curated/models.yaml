@@ -1,0 +1,1330 @@
+# Model registry. IDs are stable; the registry research pass enriches the other fields.
+# Enriched 2026-09-24: dates verified (first public availability; announcement date for restricted/unreleased models),
+# pretrain lineage, Epoch ids (effort suffix stripped) and ECI names checked against the local Epoch snapshot.
+
+# ── OpenAI ──────────────────────────────────────────────
+- id: gpt-4
+  name: GPT-4
+  lab: openai
+  released: 2023-03-14
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New base model (OpenAI's first GPT-4-class pretrain; size/architecture withheld in the tech report)"
+  trainingFlop: 2.1e+25
+  params: "~1.8T MoE (reported, SemiAnalysis)"
+  openWeights: false
+  # gpt-4-32k-* are the 32K-context GPT-4 snapshots (Epoch groups them with GPT-4); gpt-4-turbo/-1106/-0125 are a different model.
+  epochIds: ["gpt-4-0314", "gpt-4-0613", "gpt-4-32k-0314", "gpt-4-32k-0613"]
+  eciNames: ["GPT-4 (Mar 2023)", "GPT-4 (Jun 2023)"]
+  sources:
+    - https://arxiv.org/abs/2303.08774
+    - https://en.wikipedia.org/wiki/GPT-4
+    - https://newsletter.semianalysis.com/p/gpt-4-architecture-infrastructure
+
+- id: gpt-4o
+  name: GPT-4o
+  lab: openai
+  released: 2024-05-13
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "OpenAI: \"we trained a single new model end-to-end across text, vision, and audio\""
+  openWeights: false
+  # Later chatgpt-4o-* dated snapshots included; gpt-4o-mini is a different model.
+  epochIds: ["gpt-4o-2024-05-13", "gpt-4o-2024-08-06", "gpt-4o-2024-11-20", "chatgpt-4o-11-20-2024", "chatgpt-4o-01-29-2025", "chatgpt-4o-03-27-2025"]
+  eciNames: ["GPT-4o (May 2024)", "GPT-4o (Aug 2024)", "GPT-4o (Nov 2024)"]
+  sources:
+    - https://openai.com/index/hello-gpt-4o/
+    - https://en.wikipedia.org/wiki/GPT-4o
+
+- id: o1-preview
+  name: o1-preview
+  lab: openai
+  released: 2024-09-12
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Large-scale RL post-training on an existing base (SemiAnalysis: RL on GPT-4o produced o1)"
+  scalingVector: test-time-reasoning
+  openWeights: false
+  epochIds: ["o1-preview-2024-09-12"]
+  eciNames: ["o1-preview"]
+  sources:
+    - https://openai.com/index/introducing-openai-o1-preview/
+    - https://openai.com/index/learning-to-reason-with-llms/
+
+- id: o1
+  name: o1
+  lab: openai
+  released: 2024-12-05
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Same RL-on-GPT-4o lineage as o1-preview (SemiAnalysis); ChatGPT launch 2024-12-05, API 2024-12-17"
+  openWeights: false
+  # o1-pro-2025-03-19 (o1 pro mode) is not mapped here.
+  epochIds: ["o1-2024-12-17"]
+  eciNames: ["o1"]
+  sources:
+    - https://openai.com/index/introducing-chatgpt-pro/
+    - https://en.wikipedia.org/wiki/OpenAI_o1
+
+- id: o3-mini
+  name: o3-mini
+  lab: openai
+  released: 2025-01-31
+  tier: variant
+  variantOf: o3
+  status: released
+  pretrain: false
+  pretrainNote: "Small RL-trained reasoning model; base undisclosed"
+  openWeights: false
+  epochIds: ["o3-mini-2025-01-31"]
+  eciNames: ["o3-mini"]
+  sources:
+    - https://openai.com/index/openai-o3-mini/
+
+- id: gpt-4.5
+  name: GPT-4.5
+  lab: openai
+  released: 2025-02-27
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "OpenAI's largest pretrain to date (\"a step forward in scaling up pre-training\"); billed as its last non-chain-of-thought model"
+  scalingVector: pretraining-limits
+  trainingFlop: 3.8e+26
+  openWeights: false
+  epochIds: ["gpt-4.5-preview-2025-02-27"]
+  eciNames: ["GPT-4.5"]
+  sources:
+    - https://openai.com/index/introducing-gpt-4-5/
+    - https://en.wikipedia.org/wiki/GPT-4.5
+    - https://epoch.ai/gradient-updates/why-gpt5-used-less-training-compute-than-gpt45-but-gpt6-probably-wont
+
+- id: o3
+  name: o3
+  lab: openai
+  released: 2025-04-16
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "RL post-training (10x o1's RL compute per OpenAI); base reported as GPT-4o- or GPT-4.1-era, not a new frontier pretrain"
+  openWeights: false
+  # o3-pro-2025-06-10 is not mapped here.
+  epochIds: ["o3-2025-04-16"]
+  eciNames: ["o3"]
+  sources:
+    - https://openai.com/index/introducing-o3-and-o4-mini/
+    - https://en.wikipedia.org/wiki/OpenAI_o3
+    - https://epoch.ai/gradient-updates/how-far-can-reasoning-models-scale
+
+- id: o4-mini
+  name: o4-mini
+  lab: openai
+  released: 2025-04-16
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "RL-trained small reasoning model; base undisclosed"
+  openWeights: false
+  epochIds: ["o4-mini-2025-04-16"]
+  eciNames: ["o4-mini"]
+  sources:
+    - https://openai.com/index/introducing-o3-and-o4-mini/
+    - https://en.wikipedia.org/wiki/OpenAI_o4-mini
+
+- id: gpt-5
+  name: GPT-5
+  lab: openai
+  released: 2025-08-07
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Not a new frontier pretrain: Epoch estimates less pretraining compute than GPT-4.5, and GPT-5.5 is later called the first fully retrained base since 4.5 (the Sep-2024 cutoff suggests a refreshed mid-size base)"
+  trainingFlop: 6.6e+25
+  openWeights: false
+  # gpt-5-chat (the non-reasoning gpt-5-main model) and the alpine-alpha codename ("ChatGPT Latest") are excluded.
+  epochIds: ["gpt-5-2025-08-07"]
+  eciNames: ["GPT-5"]
+  sources:
+    - https://openai.com/index/introducing-gpt-5/
+    - https://cdn.openai.com/gpt-5-system-card.pdf
+    - https://epoch.ai/gradient-updates/why-gpt5-used-less-training-compute-than-gpt45-but-gpt6-probably-wont
+
+- id: gpt-5-pro
+  name: GPT-5 Pro
+  lab: openai
+  released: 2025-08-07
+  tier: variant
+  variantOf: gpt-5
+  status: released
+  pretrain: false
+  pretrainNote: "System card: gpt-5-thinking with a setting that uses parallel test-time compute; ChatGPT Pro 2025-08-07, API 2025-10-06"
+  openWeights: false
+  epochIds: ["gpt-5-pro-2025-10-06"]
+  eciNames: ["GPT-5 Pro"]
+  sources:
+    - https://openai.com/index/introducing-gpt-5/
+    - https://cdn.openai.com/gpt-5-system-card.pdf
+
+- id: gpt-5.1
+  name: GPT-5.1
+  lab: openai
+  released: 2025-11-12
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Framed by OpenAI as an upgrade of GPT-5; same 2024-09-30 knowledge cutoff"
+  openWeights: false
+  epochIds: ["gpt-5.1-2025-11-13"]
+  eciNames: ["GPT-5.1"]
+  sources:
+    - https://openai.com/index/gpt-5-1/
+
+- id: gpt-5.2
+  name: GPT-5.2
+  lab: openai
+  released: 2025-12-11
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Conflicting: cutoff moved to Aug 2025 and OpenAI cited pretraining improvements, but reporting says GPT-5.x before 5.5 shared one base"
+  openWeights: false
+  # robin-alpha-next-2025-11-24 is a pre-release codename Epoch groups under GPT-5.2.
+  epochIds: ["gpt-5.2-2025-12-11", "robin-alpha-next-2025-11-24"]
+  eciNames: ["GPT-5.2"]
+  sources:
+    - https://openai.com/index/introducing-gpt-5-2/
+    - https://fortune.com/2025/12/11/openai-gpt-5-2-launch-aims-to-silence-concerns-it-is-falling-behind-google-anthropic-code-red/
+
+- id: gpt-5.2-pro
+  name: GPT-5.2 Pro
+  lab: openai
+  released: 2025-12-11
+  tier: variant
+  variantOf: gpt-5.2
+  status: released
+  pretrain: false
+  pretrainNote: "GPT-5.2 Thinking with more test-time compute"
+  openWeights: false
+  # robin-alpha-pro-2025-11-24 is a pre-release codename Epoch groups under GPT-5.2 Pro.
+  epochIds: ["gpt-5.2-pro-2025-12-11", "gpt-5.2-pro-2025-12-11-webapp", "robin-alpha-pro-2025-11-24"]
+  eciNames: ["GPT-5.2 Pro"]
+  sources:
+    - https://openai.com/index/introducing-gpt-5-2/
+    - https://en.wikipedia.org/wiki/GPT-5.2
+
+- id: gpt-5.3-codex
+  name: GPT-5.3-Codex
+  lab: openai
+  released: 2026-02-05
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Merges GPT-5.2-Codex and GPT-5.2 capabilities; reporting says GPT-5.x before 5.5 shared one pretrain"
+  scalingVector: self-improvement
+  openWeights: false
+  epochIds: ["gpt-5.3-codex"]
+  eciNames: ["GPT-5.3 Codex"]
+  sources:
+    - https://openai.com/index/introducing-gpt-5-3-codex/
+    - https://en.wikipedia.org/wiki/GPT-5.3-Codex
+
+- id: gpt-5.4
+  name: GPT-5.4
+  lab: openai
+  released: 2026-03-05
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Every's review: used the same pre-train as earlier GPT-5.x models"
+  openWeights: false
+  # gpt-5.4-cyber is a separate fine-tune and is not mapped.
+  epochIds: ["gpt-5.4-2026-03-05"]
+  eciNames: ["GPT-5.4"]
+  sources:
+    - https://openai.com/index/introducing-gpt-5-4/
+    - https://every.to/vibe-check/gpt-5-5
+
+- id: gpt-5.4-pro
+  name: GPT-5.4 Pro
+  lab: openai
+  released: 2026-03-05
+  tier: variant
+  variantOf: gpt-5.4
+  status: released
+  pretrain: false
+  pretrainNote: "GPT-5.4 with more test-time compute"
+  openWeights: false
+  epochIds: ["gpt-5.4-pro-2026-03-05", "gpt-5.4-pro-2026-03-05-web-app"]
+  eciNames: ["GPT-5.4 Pro"]
+  sources:
+    - https://openai.com/index/introducing-gpt-5-4/
+
+- id: gpt-5.5
+  name: GPT-5.5
+  lab: openai
+  released: 2026-04-23
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "\"Spud\": a new pre-train (Brockman: \"a new base, a new pre-train\"); reported as the first fully retrained base since GPT-4.5"
+  openWeights: false
+  # gpt-5.5-instant and gpt-5.5-cyber are different models and are not mapped.
+  epochIds: ["gpt-5.5", "gpt-5.5-pre-release"]
+  eciNames: ["GPT-5.5"]
+  sources:
+    - https://openai.com/index/introducing-gpt-5-5/
+    - https://thenextweb.com/news/openai-gpt-5-5-launch-enterprise
+    - https://the-decoder.com/openai-ceo-sam-altman-reportedly-teases-a-very-strong-model-internally-that-can-really-accelerate-the-economy/
+
+- id: gpt-5.5-pro
+  name: GPT-5.5 Pro
+  lab: openai
+  released: 2026-04-23
+  tier: variant
+  variantOf: gpt-5.5
+  status: released
+  pretrain: false
+  pretrainNote: "Pro (more test-time compute) setting of GPT-5.5"
+  openWeights: false
+  epochIds: ["gpt-5.5-pro", "gpt-5.5-pro-pre-release"]
+  eciNames: ["GPT-5.5 Pro"]
+  sources:
+    - https://openai.com/index/introducing-gpt-5-5/
+
+- id: gpt-5.6-luna
+  name: GPT-5.6 Luna
+  lab: openai
+  released: 2026-07-09
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "Smallest of three GPT-5.6 sizes; The Decoder: Sol ran Luna's post-training \"after Luna's initial pre-training\""
+  openWeights: false
+  # Restricted partner preview 2026-06-26; general availability 2026-07-09.
+  epochIds: ["gpt-5.6-luna"]
+  eciNames: ["GPT-5.6 Luna"]
+  sources:
+    - https://openai.com/index/gpt-5-6/
+    - https://the-decoder.com/openais-gpt-5-6-sol-autonomously-post-trained-the-smaller-luna-model-with-a-fairly-underspecified-prompt/
+    - https://en.wikipedia.org/wiki/GPT-5.6
+
+- id: gpt-5.6-terra
+  name: GPT-5.6 Terra
+  lab: openai
+  released: 2026-07-09
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "OpenAI calls GPT-5.6 \"a new family of three models\" in three sizes; base lineage undisclosed"
+  openWeights: false
+  # Restricted partner preview 2026-06-26; general availability 2026-07-09.
+  epochIds: ["gpt-5.6-terra"]
+  eciNames: ["GPT-5.6 Terra"]
+  sources:
+    - https://openai.com/index/gpt-5-6/
+    - https://en.wikipedia.org/wiki/GPT-5.6
+
+- id: gpt-5.6-sol
+  name: GPT-5.6 Sol
+  lab: openai
+  released: 2026-07-09
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Largest GPT-5.6 size; an unverified leak says it shares the GPT-5.5 \"Spud\" base"
+  openWeights: false
+  # Restricted partner preview 2026-06-26; general availability 2026-07-09.
+  # Epoch encodes GPT-5.6 Sol Pro as an effort: gpt-5.6-sol_promax (stripped to this base), plus
+  # gpt-5.6-sol_prounknown / gpt-5.6-sol_proxhigh, which splitEpochVersion does NOT strip; left unmapped (no Pro id in the registry).
+  epochIds: ["gpt-5.6-sol"]
+  eciNames: ["GPT-5.6 Sol"]
+  sources:
+    - https://openai.com/index/gpt-5-6/
+    - https://openai.com/index/previewing-gpt-5-6-sol/
+    - https://en.wikipedia.org/wiki/GPT-5.6
+
+- id: gpt-6-astra
+  name: GPT-6 Astra
+  lab: openai
+  released: 2026-09-04
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New base: OpenAI's first pretraining run on >100,000 GPUs at the Stargate site in Abilene, Texas (Aidan Clark to Fortune)"
+  trainingFlop: 1.0e+27
+  openWeights: false
+  # Announced 2026-09-03 with a rollout to a limited set of organizations; public (ChatGPT Pro/Business) from 2026-09-04.
+  # Epoch encodes GPT-6 Astra Pro as an effort (gpt-6-astra_promax), which strips to this base.
+  epochIds: ["gpt-6-astra"]
+  eciNames: ["GPT-6 Astra"]
+  sources:
+    - https://openai.com/index/gpt-6-astra/
+    - https://fortune.com/2026/09/03/openai-debuts-gpt-6-astra-computer-use-greg-brockman-says-start-of-agi/
+    - https://epoch.ai/models/gpt-6-astra
+
+- id: gpt-6-sol
+  name: GPT-6 Sol
+  lab: openai
+  released: 2026-09-22
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "\"Trained with similar methods as GPT-6 Astra\"; whether it shares Astra's base is undisclosed"
+  openWeights: false
+  epochIds: ["gpt-6-sol"]
+  sources:
+    - https://openai.com/index/introducing-gpt-6-sol-and-luna/
+    - https://azure.microsoft.com/en-us/blog/gpt-6-astra-sol-and-luna-for-production-agents-in-microsoft-foundry/
+
+- id: gpt-6-luna
+  name: GPT-6 Luna
+  lab: openai
+  released: 2026-09-22
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "\"Trained with similar methods as GPT-6 Astra\"; whether it shares Astra's base is undisclosed"
+  openWeights: false
+  epochIds: ["gpt-6-luna"]
+  sources:
+    - https://openai.com/index/introducing-gpt-6-sol-and-luna/
+    - https://azure.microsoft.com/en-us/blog/gpt-6-astra-sol-and-luna-for-production-agents-in-microsoft-foundry/
+
+# ── Anthropic ───────────────────────────────────────────
+- id: claude-3.5-sonnet
+  name: Claude 3.5 Sonnet
+  lab: anthropic
+  released: 2024-06-20
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New mid-sized model: cutoff moved to Apr 2024; Dario Amodei said it \"cost a few $10M's to train\""
+  trainingFlop: 2.7e+25
+  openWeights: false
+  epochIds: ["claude-3-5-sonnet-20240620"]
+  eciNames: ["Claude 3.5 Sonnet"]
+  sources:
+    - https://www.anthropic.com/news/claude-3-5-sonnet
+    - https://darioamodei.com/post/on-deepseek-and-export-controls
+
+- id: claude-3.5-sonnet-oct
+  name: Claude 3.5 Sonnet (Oct)
+  lab: anthropic
+  released: 2024-10-22
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Model-card addendum: an \"upgraded version\" with the same April 2024 knowledge cutoff"
+  openWeights: false
+  epochIds: ["claude-3-5-sonnet-20241022"]
+  eciNames: ["Claude 3.5 Sonnet (October 2024)"]
+  sources:
+    - https://www.anthropic.com/news/3-5-models-and-computer-use
+    - https://assets.anthropic.com/m/1cd9d098ac3e6467/original/Claude-3-Model-Card-October-Addendum.pdf
+
+- id: claude-3.7-sonnet
+  name: Claude 3.7 Sonnet
+  lab: anthropic
+  released: 2025-02-24
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Undisclosed; cutoff moved to Oct 2024 and Anthropic said it cost \"a few tens of millions\" and used <1e26 FLOP"
+  scalingVector: hybrid-reasoning
+  trainingFlop: 3.35e+25
+  openWeights: false
+  epochIds: ["claude-3-7-sonnet-20250219"]
+  eciNames: ["Claude 3.7 Sonnet"]
+  sources:
+    - https://www.anthropic.com/news/claude-3-7-sonnet
+    - https://assets.anthropic.com/m/785e231869ea8b3b/original/claude-3-7-sonnet-system-card.pdf
+    - https://techcrunch.com/2025/02/25/anthropics-latest-flagship-ai-might-not-have-been-incredibly-costly-to-train/
+
+- id: claude-sonnet-4
+  name: Claude Sonnet 4
+  lab: anthropic
+  released: 2025-05-22
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Undisclosed; system card calls the Claude 4 models \"new\" with training data to March 2025"
+  openWeights: false
+  # claude-strudel-v8-p is a pre-release codename Epoch groups under Claude Sonnet 4.
+  epochIds: ["claude-sonnet-4-20250514", "claude-strudel-v8-p"]
+  eciNames: ["Claude Sonnet 4"]
+  sources:
+    - https://www.anthropic.com/news/claude-4
+    - https://www-cdn.anthropic.com/4263b940cabb546aa0e3283f35b686f4f3b2ff47.pdf
+
+- id: claude-opus-4
+  name: Claude Opus 4
+  lab: anthropic
+  released: 2025-05-22
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Undisclosed; system card calls the Claude 4 models \"new\" with training data to March 2025"
+  scalingVector: long-horizon-agentic-coding
+  openWeights: false
+  # claude-strudel-v4-p (dated 2025-05-22, ungrouped by Epoch) is left unmapped.
+  epochIds: ["claude-opus-4-20250514"]
+  eciNames: ["Claude Opus 4"]
+  sources:
+    - https://www.anthropic.com/news/claude-4
+    - https://www-cdn.anthropic.com/4263b940cabb546aa0e3283f35b686f4f3b2ff47.pdf
+
+- id: claude-opus-4.1
+  name: Claude Opus 4.1
+  lab: anthropic
+  released: 2025-08-05
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "System card addendum: \"an updated version of Claude Opus 4\""
+  openWeights: false
+  epochIds: ["claude-opus-4-1-20250805"]
+  eciNames: ["Claude Opus 4.1"]
+  sources:
+    - https://www.anthropic.com/news/claude-opus-4-1
+    - https://assets.anthropic.com/m/4c024b86c698d3d4/original/Claude-4-1-System-Card.pdf
+
+- id: claude-sonnet-4.5
+  name: Claude Sonnet 4.5
+  lab: anthropic
+  released: 2025-09-29
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Undisclosed; training data to July 2025 (vs March 2025 for Sonnet 4)"
+  openWeights: false
+  epochIds: ["claude-sonnet-4-5-20250929"]
+  eciNames: ["Claude Sonnet 4.5"]
+  sources:
+    - https://www.anthropic.com/news/claude-sonnet-4-5
+    - https://www-cdn.anthropic.com/963373e433e489a87a10c823c52a0a013e9172dd/Claude%20Sonnet%204.5%20System%20Card.pdf
+
+- id: claude-opus-4.5
+  name: Claude Opus 4.5
+  lab: anthropic
+  released: 2025-11-24
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Undisclosed; new cutoffs (May/Aug 2025) and a 3x price cut suggest a new base, but unconfirmed"
+  openWeights: false
+  epochIds: ["claude-opus-4-5-20251101"]
+  eciNames: ["Claude Opus 4.5"]
+  sources:
+    - https://www.anthropic.com/news/claude-opus-4-5
+    - https://platform.claude.com/docs/en/models/opus-4-5/overview
+
+- id: claude-opus-4.6
+  name: Claude Opus 4.6
+  lab: anthropic
+  released: 2026-02-05
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Same knowledge cutoffs as Opus 4.5; system card calls it an upgrade on Opus 4.5"
+  openWeights: false
+  epochIds: ["claude-opus-4-6"]
+  eciNames: ["Claude Opus 4.6"]
+  sources:
+    - https://www.anthropic.com/news/claude-opus-4-6
+    - https://platform.claude.com/docs/en/models/opus-4-6/overview
+
+- id: claude-sonnet-4.6
+  name: Claude Sonnet 4.6
+  lab: anthropic
+  released: 2026-02-17
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Undisclosed; training data to January 2026"
+  openWeights: false
+  epochIds: ["claude-sonnet-4-6"]
+  eciNames: ["Claude Sonnet 4.6"]
+  sources:
+    - https://www.anthropic.com/news/claude-sonnet-4-6
+    - https://platform.claude.com/docs/en/models/sonnet-4-6/overview
+
+- id: claude-mythos-preview
+  name: Claude Mythos Preview
+  lab: anthropic
+  released: 2026-04-07
+  tier: flagship
+  status: restricted
+  pretrain: true
+  pretrainNote: "New model tier \"larger and more intelligent than our Opus models\" (leaked Anthropic draft); system card refers to a Mythos Preview base model"
+  scalingVector: new-scale-tier
+  openWeights: false
+  # Restricted to Project Glasswing partners; Anthropic said it would not be made generally available.
+  epochIds: ["claude-mythos-preview", "claude-mythos-preview-early"]
+  sources:
+    - https://www.anthropic.com/glasswing
+    - https://www-cdn.anthropic.com/7624816413e9b4d2e3ba620c5a5e091b98b190a5/Claude%20Mythos%20Preview%20System%20Card.pdf
+    - https://fortune.com/2026/03/26/anthropic-says-testing-mythos-powerful-new-ai-model-after-data-leak-reveals-its-existence-step-change-in-capabilities/
+
+- id: claude-opus-4.7
+  name: Claude Opus 4.7
+  lab: anthropic
+  released: 2026-04-16
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "Inferred: new tokenizer (officially stated) and knowledge cutoff jumped to Jan 2026 from Opus 4.6's 2025 cutoffs"
+  openWeights: false
+  epochIds: ["claude-opus-4-7"]
+  eciNames: ["Claude Opus 4.7"]
+  sources:
+    - https://www.anthropic.com/news/claude-opus-4-7
+    - https://platform.claude.com/docs/en/models/opus-4-7/overview
+
+- id: claude-opus-4.8
+  name: Claude Opus 4.8
+  lab: anthropic
+  released: 2026-05-28
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "System card: \"an upgrade on its predecessor model (Claude Opus 4.7)\"; same Jan 2026 cutoff"
+  openWeights: false
+  epochIds: ["claude-opus-4-8"]
+  eciNames: ["Claude Opus 4.8"]
+  sources:
+    - https://www.anthropic.com/news/claude-opus-4-8
+    - https://www-cdn.anthropic.com/0b4915911bb0d19eca5b5ee635c80fef830a37ea.pdf
+
+- id: claude-fable-5
+  name: Claude Fable 5
+  lab: anthropic
+  released: 2026-06-09
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "System card: \"two configurations of a new large language model\" (Fable 5 = Mythos 5 weights with extra safeguards); whether it reuses the Mythos Preview base is undisclosed"
+  openWeights: false
+  epochIds: ["claude-fable-5"]
+  eciNames: ["Claude Fable 5"]
+  sources:
+    - https://www.anthropic.com/news/claude-fable-5-mythos-5
+    - https://www-cdn.anthropic.com/57a52ea7d8f0e54e8a542e908266086df425cdf5/Claude%20Fable%205%20%26%20Claude%20Mythos%205%20System%20Card.pdf
+    - https://www.anthropic.com/news/redeploying-fable-5
+
+- id: claude-mythos-5
+  name: Claude Mythos 5
+  lab: anthropic
+  released: 2026-06-09
+  tier: variant
+  variantOf: claude-fable-5
+  status: restricted
+  pretrain: null
+  pretrainNote: "Same model weights as Claude Fable 5, with more permissive safeguards"
+  openWeights: false
+  # No Epoch entry: Epoch benchmarks this model as Claude Fable 5 (same weights), so its ids are not duplicated here.
+  # Restricted: available only in Project Glasswing to vetted partners.
+  epochIds: []
+  sources:
+    - https://www.anthropic.com/news/claude-fable-5-mythos-5
+    - https://www-cdn.anthropic.com/57a52ea7d8f0e54e8a542e908266086df425cdf5/Claude%20Fable%205%20%26%20Claude%20Mythos%205%20System%20Card.pdf
+    - https://platform.claude.com/docs/en/models/fable-5/overview
+
+- id: claude-sonnet-5
+  name: Claude Sonnet 5
+  lab: anthropic
+  released: 2026-06-30
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "System card calls it \"an upgrade to Claude Sonnet 4.6\", but the cutoff moved to Jan 2026; undisclosed"
+  openWeights: false
+  epochIds: ["claude-sonnet-5"]
+  eciNames: ["Claude Sonnet 5"]
+  sources:
+    - https://www.anthropic.com/news/claude-sonnet-5
+    - https://www-cdn.anthropic.com/283ef97c476cf442c91d9a37d5b214242a55bb92/Claude%20Sonnet%205%20System%20Card.pdf
+
+- id: claude-opus-5
+  name: Claude Opus 5
+  lab: anthropic
+  released: 2026-07-24
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "System card: \"an upgrade to Claude Opus 4.8\", yet the cutoff moved to May 2026 (at least continued training); undisclosed"
+  openWeights: false
+  epochIds: ["claude-opus-5"]
+  eciNames: ["Claude Opus 5"]
+  sources:
+    - https://www.anthropic.com/news/claude-opus-5
+    - https://www-cdn.anthropic.com/ceaf5c7ff2783855203fde8208ec311252dced5b/Claude%20Opus%205%20System%20Card.pdf
+
+- id: claude-fable-5.1
+  name: Claude Fable 5.1
+  lab: anthropic
+  released: 2026-09-01
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "System card: \"a new large language model\" sharing weights with Mythos 5.1; cutoff moved to June 2026; base lineage undisclosed"
+  openWeights: false
+  epochIds: ["claude-fable-5-1"]
+  eciNames: ["Claude Fable 5.1"]
+  sources:
+    - https://www.anthropic.com/claude-fable-and-mythos-5-1
+    - https://www-cdn.anthropic.com/0339e6a7c5c7b87f5c07798616dc32c215d14235/Claude%20Fable%205.1%20%26%20Claude%20Mythos%205.1%20System%20Card.pdf
+
+- id: claude-mythos-5.1
+  name: Claude Mythos 5.1
+  lab: anthropic
+  released: 2026-09-01
+  tier: variant
+  variantOf: claude-fable-5.1
+  status: restricted
+  pretrain: null
+  pretrainNote: "Same model weights as Claude Fable 5.1, with more permissive safeguards"
+  openWeights: false
+  # No Epoch entry: Epoch benchmarks this model as Claude Fable 5.1 (same weights).
+  # Restricted: direct access limited to vetted organizations via trusted-access programs.
+  epochIds: []
+  sources:
+    - https://www.anthropic.com/claude/mythos
+    - https://www-cdn.anthropic.com/0339e6a7c5c7b87f5c07798616dc32c215d14235/Claude%20Fable%205.1%20%26%20Claude%20Mythos%205.1%20System%20Card.pdf
+
+- id: claude-opus-5.5
+  name: Claude Opus 5.5
+  lab: anthropic
+  released: 2026-09-22
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "System card: \"an upgrade to Claude Opus 5\"; cutoff moved to June 2026; undisclosed"
+  openWeights: false
+  epochIds: ["claude-opus-5-5"]
+  sources:
+    - https://www.anthropic.com/news/claude-opus-5-5
+    - https://www-cdn.anthropic.com/fc1b44717c85dc068bc6ba5024219938094694bd/Claude%20Opus%205.5%20System%20Card.pdf
+
+# ── Google ──────────────────────────────────────────────
+- id: gemini-2.5-pro
+  name: Gemini 2.5 Pro
+  lab: google
+  released: 2025-03-25
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "Google: \"combining a significantly enhanced base model with improved post-training\""
+  openWeights: false
+  # exp/preview snapshots (03-25, 05-06, 06-05) and the GA model are all mapped.
+  epochIds: ["gemini-2.5-pro-exp-03-25", "gemini-2.5-pro-preview-03-25", "gemini-2.5-pro-preview-05-06", "gemini-2.5-pro-preview-06-05", "gemini-2.5-pro"]
+  eciNames: ["Gemini 2.5 Pro (Mar 2025)", "Gemini 2.5 Pro (May 2025)", "Gemini 2.5 Pro (Jun 2025)"]
+  sources:
+    - https://blog.google/technology/google-deepmind/gemini-model-thinking-updates-march-2025/
+
+- id: gemini-2.5-flash
+  name: Gemini 2.5 Flash
+  lab: google
+  released: 2025-04-17
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Google: \"building upon the popular foundation of 2.0 Flash\"; whether it is a new pretrain is undisclosed"
+  openWeights: false
+  # Preview snapshots (04-17 incl. its thinking-budget variants, 05-20), GA, and the 09-2025 update are mapped; Flash-Lite is not.
+  epochIds: ["gemini-2.5-flash-preview-04-17", "gemini-2.5-flash-preview-04-17 (16K thinking)", "gemini-2.5-flash-preview-04-17 (24K thinking)", "gemini-2.5-flash-preview-05-20", "gemini-2.5-flash", "gemini-2.5-flash-preview-09-2025"]
+  eciNames: ["Gemini 2.5 Flash (Apr 2025)", "Gemini 2.5 Flash (May 2025)", "Gemini 2.5 Flash (Jun 2025)", "Gemini 2.5 Flash (Sep 2025)"]
+  sources:
+    - https://developers.googleblog.com/en/start-building-with-gemini-25-flash/
+
+- id: gemini-2.5-deep-think
+  name: Gemini 2.5 Deep Think
+  lab: google
+  released: 2025-08-01
+  tier: variant
+  variantOf: gemini-2.5-pro
+  status: released
+  pretrain: false
+  pretrainNote: "Gemini 2.5 Pro with parallel thinking at inference time"
+  openWeights: false
+  # Previewed at I/O 2025-05-20 (trusted testers); rolled out to Google AI Ultra subscribers 2025-08-01.
+  epochIds: ["gemini-2.5-deep-think-2025-08-01-webapp"]
+  sources:
+    - https://blog.google/products/gemini/gemini-2-5-deep-think/
+    - https://blog.google/technology/google-deepmind/google-gemini-updates-io-2025/
+
+- id: gemini-3-pro
+  name: Gemini 3 Pro
+  lab: google
+  released: 2025-11-18
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "Model card: \"not a modification or a fine-tune of a prior model\" (new sparse MoE base)"
+  openWeights: false
+  # gemini-3-deep-think-preview (Gemini 3 Deep Think) is not mapped.
+  epochIds: ["gemini-3-pro-preview"]
+  eciNames: ["Gemini 3 Pro"]
+  sources:
+    - https://deepmind.google/models/model-cards/gemini-3-pro/
+    - https://blog.google/products/gemini/gemini-3/
+    - https://ai.google.dev/gemini-api/docs/changelog
+
+- id: gemini-3-flash
+  name: Gemini 3 Flash
+  lab: google
+  released: 2025-12-17
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Model card: \"based on Gemini 3 Pro\" (Gemini 3 Pro family); how it was derived (e.g. distillation) is undisclosed"
+  openWeights: false
+  epochIds: ["gemini-3-flash-preview"]
+  eciNames: ["Gemini 3 Flash"]
+  sources:
+    - https://deepmind.google/models/model-cards/gemini-3-flash/
+    - https://ai.google.dev/gemini-api/docs/changelog
+
+- id: gemini-3.1-pro
+  name: Gemini 3.1 Pro
+  lab: google
+  released: 2026-02-19
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Model card: \"Gemini 3.1 Pro is based on Gemini 3 Pro\""
+  openWeights: false
+  epochIds: ["gemini-3.1-pro-preview", "gemini-3.1-pro-preview-customtools"]
+  eciNames: ["Gemini 3.1 Pro"]
+  sources:
+    - https://deepmind.google/models/model-cards/gemini-3-1-pro/
+    - https://blog.google/innovation-and-ai/models-and-research/gemini-models/gemini-3-1-pro/
+    - https://ai.google.dev/gemini-api/docs/changelog
+
+- id: gemini-3.5-flash
+  name: Gemini 3.5 Flash
+  lab: google
+  released: 2026-05-19
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Model card: \"Gemini 3.5 Flash is based on Gemini 3 Flash\""
+  openWeights: false
+  epochIds: ["gemini-3.5-flash"]
+  eciNames: ["Gemini 3.5 Flash"]
+  sources:
+    - https://deepmind.google/models/model-cards/gemini-3-5-flash/
+    - https://techcrunch.com/2026/05/19/with-gemini-3-5-flash-google-bets-its-next-ai-wave-on-agents-not-chatbots/
+    - https://ai.google.dev/gemini-api/docs/changelog
+
+- id: gemini-3.5-pro
+  name: Gemini 3.5 Pro
+  lab: google
+  released: 2026-05-19
+  tier: flagship
+  status: announced
+  pretrain: null
+  pretrainNote: "Unreleased; no model card yet"
+  openWeights: false
+  # Announced at I/O 2026-05-19 as forthcoming; still "coming soon" on deepmind.google and absent from the Gemini API changelog as of 2026-09-24.
+  epochIds: []
+  sources:
+    - https://techcrunch.com/2026/05/19/with-gemini-3-5-flash-google-bets-its-next-ai-wave-on-agents-not-chatbots/
+    - https://deepmind.google/models/gemini/pro/
+
+- id: gemini-3.5-flash-lite
+  name: Gemini 3.5 Flash-Lite
+  lab: google
+  released: 2026-07-21
+  tier: variant
+  variantOf: gemini-3.5-flash
+  status: released
+  pretrain: false
+  pretrainNote: "Model card: \"based on Gemini 3.1 Flash-Lite\""
+  openWeights: false
+  epochIds: ["gemini-3.5-flash-lite"]
+  eciNames: ["Gemini 3.5 Flash-Lite"]
+  sources:
+    - https://deepmind.google/models/model-cards/gemini-3-5-flash-lite/
+    - https://ai.google.dev/gemini-api/docs/changelog
+
+- id: gemini-3.6-flash
+  name: Gemini 3.6 Flash
+  lab: google
+  released: 2026-07-21
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Model card: \"based on Gemini 3.5 Flash\" (knowledge partly refreshed to March 2026)"
+  openWeights: false
+  epochIds: ["gemini-3.6-flash"]
+  eciNames: ["Gemini 3.6 Flash"]
+  sources:
+    - https://deepmind.google/models/model-cards/gemini-3-6-flash/
+    - https://ai.google.dev/gemini-api/docs/changelog
+
+- id: gemini-3.7-flash
+  name: Gemini 3.7 Flash
+  lab: google
+  released: 2026-08-13
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Model card: \"based on Gemini 3.6 Flash\""
+  openWeights: false
+  epochIds: ["gemini-3.7-flash"]
+  eciNames: ["Gemini 3.7 Flash"]
+  sources:
+    - https://deepmind.google/models/model-cards/gemini-3-7-flash/
+    - https://ai.google.dev/gemini-api/docs/changelog
+
+- id: gemini-3.8-flash
+  name: Gemini 3.8 Flash
+  lab: google
+  released: 2026-09-02
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Model card: \"based on Gemini 3.7 Flash\""
+  openWeights: false
+  epochIds: ["gemini-3.8-flash"]
+  eciNames: ["Gemini 3.8 Flash"]
+  sources:
+    - https://deepmind.google/models/model-cards/gemini-3-8-flash/
+    - https://ai.google.dev/gemini-api/docs/models/gemini-3.8-flash
+    - https://ai.google.dev/gemini-api/docs/changelog
+
+# ── xAI ─────────────────────────────────────────────────
+- id: grok-1
+  name: Grok-1
+  lab: xai
+  released: 2023-11-03
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "xAI's first base model (\"2 months of training\"); weights open-sourced 2024-03-17"
+  trainingFlop: 2.9e+24
+  params: "314B MoE, ~25% active (official)"
+  openWeights: true
+  # No Epoch benchmark or ECI entry for Grok-1.
+  # Announced 2023-11-03 with limited US early access.
+  epochIds: []
+  sources:
+    - https://x.ai/news/grok
+    - https://x.ai/news/grok-os
+    - https://github.com/xai-org/grok-1
+
+- id: grok-1.5
+  name: Grok-1.5
+  lab: xai
+  released: 2024-03-28
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Undisclosed whether it is a new pretrain or continued training of Grok-1"
+  trainingFlop: 9.26e+24
+  openWeights: false
+  # No Epoch benchmark or ECI entry for Grok-1.5.
+  # Announced 2024-03-28 for early testers and existing Grok users "in the coming days"; Wikipedia gives 2024-05-15 for all X Premium users.
+  epochIds: []
+  sources:
+    - https://x.ai/news/grok-1.5
+    - https://en.wikipedia.org/wiki/Grok_(chatbot)
+
+- id: grok-2
+  name: Grok-2
+  lab: xai
+  released: 2024-08-13
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "Undisclosed; Musk said Grok 2 took ~20k H100s to train"
+  trainingFlop: 2.96e+25
+  openWeights: true
+  # openWeights: weights published Aug 2025 as "Grok 2.5" (huggingface.co/xai-org/grok-2, xAI Community License).
+  # grok-2-mini and grok-2-vision-1212 are not mapped.
+  epochIds: ["grok-2-0813", "grok-2-1212"]
+  eciNames: ["Grok-2 (Dec 2024)"]
+  sources:
+    - https://x.ai/news/grok-2
+    - https://huggingface.co/xai-org/grok-2
+    - https://www.datacenterdynamics.com/en/news/elon-musk-xais-grok-2-requires-20000-nvidia-h100-gpus-grok-3-may-need-100000/
+
+- id: grok-3
+  name: Grok 3
+  lab: xai
+  released: 2025-02-17
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New pretrain on Colossus with ~10x Grok 2's compute (xAI: \"we scaled next-token prediction pretraining to unprecedented levels\")"
+  trainingFlop: 3.5e+26
+  params: "~3T (per Musk: Grok 3 and 4 are based on a 3T model)"
+  openWeights: false
+  epochIds: ["grok-3-beta", "grok-3"]
+  eciNames: ["Grok 3"]
+  sources:
+    - https://x.ai/news/grok-3
+    - https://en.wikipedia.org/wiki/Grok_(chatbot)
+    - https://x.com/scaling01/status/1989457860728647928
+
+- id: grok-4
+  name: Grok 4
+  lab: xai
+  released: 2025-07-09
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Grok 3 base + RL \"at pretraining scale\" on Colossus (Musk: Grok 3 and 4 share a 3T base)"
+  scalingVector: rl-at-pretraining-scale
+  trainingFlop: 5.0e+26
+  params: "~3T (per Musk)"
+  openWeights: false
+  epochIds: ["grok-4-0709"]
+  eciNames: ["Grok 4"]
+  sources:
+    - https://x.ai/news/grok-4
+    - https://x.com/scaling01/status/1989457860728647928
+
+- id: grok-4-heavy
+  name: Grok 4 Heavy
+  lab: xai
+  released: 2025-07-09
+  tier: variant
+  variantOf: grok-4
+  status: released
+  pretrain: false
+  pretrainNote: "Grok 4 with parallel test-time compute (multiple agents consider hypotheses at once)"
+  scalingVector: parallel-test-time-compute
+  openWeights: false
+  # Available from launch day via the SuperGrok Heavy tier.
+  epochIds: ["grok-4-heavy-web-app"]
+  sources:
+    - https://x.ai/news/grok-4
+
+- id: grok-4-fast
+  name: Grok 4 Fast
+  lab: xai
+  released: 2025-09-19
+  tier: variant
+  variantOf: grok-4
+  status: released
+  pretrain: null
+  pretrainNote: "Undisclosed base; trained end-to-end with tool-use RL"
+  openWeights: false
+  # grok-4-1-fast-* (Grok 4.1 Fast) is a different model and is not mapped.
+  epochIds: ["grok-4-fast"]
+  eciNames: ["Grok 4 Fast"]
+  sources:
+    - https://x.ai/news/grok-4-fast
+
+- id: grok-4.1
+  name: Grok 4.1
+  lab: xai
+  released: 2025-11-17
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Grok 4's large-scale RL stack applied to style, personality and alignment (post-training update)"
+  openWeights: false
+  # No ECI entry for Grok 4.1.
+  epochIds: ["grok-4-1"]
+  sources:
+    - https://x.ai/news/grok-4-1
+
+- id: grok-4.20
+  name: Grok 4.20
+  lab: xai
+  released: 2026-02-17
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "Musk: \"our V8 small foundation model, so 500B params\" (a new base, distinct from the ~3T Grok 3/4 base)"
+  params: "~500B (per Musk)"
+  openWeights: false
+  # Beta launched 2026-02-17 on grok.com and apps (registry previously said 02-15).
+  epochIds: ["grok-4-20", "grok-4.20-0309-reasoning"]
+  eciNames: ["Grok 4.20"]
+  sources:
+    - https://x.com/elonmusk/status/2023840935285760142
+    - https://www.nextbigfuture.com/2026/02/xai-launches-grok-4-20-and-it-has-4-ai-agents-collaborating.html
+    - https://docs.x.ai/developers/models
+
+- id: grok-4.3
+  name: Grok 4.3
+  lab: xai
+  released: 2026-04-17
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "grok.com release notes: \"a new pre-trained model matching the scale of Grok 4.20 with an improved architecture\" (Dec 2025 cutoff)"
+  params: "~0.5T (per Musk)"
+  openWeights: false
+  # Beta for SuperGrok Heavy subscribers from 2026-04-17 (registry previously said 04-15).
+  epochIds: ["grok-4.3"]
+  eciNames: ["Grok 4.3 Beta"]
+  sources:
+    - https://grok.com/release-notes
+    - https://piunikaweb.com/2026/04/17/xai-grok-4-3-beta-supergrok-heavy/
+    - https://x.com/elonmusk/status/2055914584373141906
+
+- id: grok-4.5
+  name: Grok 4.5
+  lab: xai
+  released: 2026-07-08
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "First model on xAI's new 1.5T \"V9\" foundation model, with Cursor data added in supplemental training (Musk)"
+  params: "~1.5T (per Musk)"
+  openWeights: false
+  # Released 2026-07-08 in Grok Build, Cursor and the API; xAI's written announcement is dated 2026-07-16.
+  epochIds: ["grok-4.5"]
+  eciNames: ["Grok 4.5"]
+  sources:
+    - https://x.ai/news/grok-4-5
+    - https://cursor.com/blog/grok-4-5
+    - https://x.com/elonmusk/status/2071184354756477041
+
+- id: grok-4.6
+  name: Grok 4.6
+  lab: xai
+  released: 2026-08-12
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Same V9 base as Grok 4.5 with a longer supplemental-training run plus SFT/RL (xAI)"
+  params: "~1.5T (per Musk)"
+  openWeights: false
+  epochIds: ["grok-4.6"]
+  eciNames: ["Grok 4.6"]
+  sources:
+    - https://x.ai/news/grok-4-6
+    - https://x.com/elonmusk/status/2082123925283041545
+
+- id: grok-4.7
+  name: Grok 4.7
+  lab: xai
+  released: 2026-09-21
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "xAI: \"uses a new, larger base model compared to Grok 4.6\""
+  params: "~2.1T (per Musk)"
+  openWeights: false
+  # No ECI entry yet for Grok 4.7.
+  epochIds: ["grok-4.7"]
+  sources:
+    - https://x.ai/news/grok-4-7
+
+# ── Chinese labs ────────────────────────────────────────
+- id: deepseek-v3
+  name: DeepSeek-V3
+  lab: deepseek
+  released: 2024-12-26
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New base: 14.8T-token pretrain in 2.788M H800 GPU-hours (tech report)"
+  trainingFlop: 3.3e+24
+  params: "671B total / 37B active (official)"
+  openWeights: true
+  # DeepSeek-V3-Base (released with V3) and the V3-0324 snapshot are mapped; V3.1/V3.2 and the deepseek-chat alias are not.
+  epochIds: ["DeepSeek-V3", "DeepSeek-V3-Base", "DeepSeek-V3-0324", "chutes/DeepSeek-V3-0324"]
+  eciNames: ["DeepSeek-V3", "DeepSeek-V3 (Mar 2025)"]
+  sources:
+    - https://api-docs.deepseek.com/news/news1226
+    - https://arxiv.org/abs/2412.19437
+    - https://huggingface.co/deepseek-ai/DeepSeek-V3
+
+- id: deepseek-r1
+  name: DeepSeek-R1
+  lab: deepseek
+  released: 2025-01-20
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "README: \"R1-Zero & R1 are trained based on DeepSeek-V3-Base\" (large-scale RL post-training)"
+  scalingVector: open-rl-verifiable-rewards
+  trainingFlop: 3.5e+24
+  params: "671B total / 37B active (official)"
+  openWeights: true
+  # The R1-0528 snapshot is mapped; distills, deepseek-r1-0528-qwen3-8b and the deepseek-reasoner alias (V3.2) are not.
+  epochIds: ["DeepSeek-R1", "DeepSeek-R1-0528", "chutes/DeepSeek-R1-0528"]
+  eciNames: ["DeepSeek-R1", "DeepSeek-R1 (May 2025)"]
+  sources:
+    - https://api-docs.deepseek.com/news/news250120
+    - https://arxiv.org/abs/2501.12948
+    - https://github.com/deepseek-ai/DeepSeek-R1
+
+- id: deepseek-v4-pro
+  name: DeepSeek-V4 Pro
+  lab: deepseek
+  released: 2026-04-24
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New base: pretrained on >32T tokens with new hybrid attention (CSA/HCA), mHC and the Muon optimizer (tech report)"
+  trainingFlop: 9.702e+24
+  params: "1.6T total / 49B active (official)"
+  openWeights: true
+  # Released 2026-04-24 as "V4 Preview" (open weights + API); GA update 2026-08-13 (the 0813 snapshot, mapped). V4 Flash / V4.1 Flash are different models.
+  epochIds: ["deepseek-v4-pro", "deepseek-v4-pro-0813"]
+  eciNames: ["DeepSeek-V4-Pro", "DeepSeek V4 Pro 0813"]
+  sources:
+    - https://api-docs.deepseek.com/news/news260424
+    - https://huggingface.co/deepseek-ai/DeepSeek-V4-Pro
+
+- id: qwen3
+  name: Qwen3-235B
+  lab: alibaba
+  released: 2025-04-29
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New base family pretrained on ~36T tokens in 119 languages (Qwen2.5: 18T)"
+  trainingFlop: 4.752e+24
+  params: "235B total / 22B active (official)"
+  openWeights: true
+  # Includes the -2507 Instruct/Thinking updates of the same 235B-A22B model and third-party hosts (chutes/, fireworks/, parasail).
+  epochIds: ["Qwen3-235B-A22B", "qwen3-235b-a22b", "chutes/Qwen3-235B-A22B", "Qwen3-235B-A22B-Instruct-2507", "parasail-qwen3-235b-a22b-instruct-2507", "Qwen3-235B-A22B-Thinking-2507", "Qwen/Qwen3-235B-A22B-Thinking-2507", "qwen/qwen3-235b-a22b-thinking-2507", "chutes/Qwen3-235B-A22B-Thinking-2507", "accounts/fireworks/models/qwen3-235b-a22b-thinking-2507"]
+  eciNames: ["Qwen3-235B-A22B", "Qwen3-235B-A22B-Instruct (Jul 2025)", "Qwen3-235B-A22B-Thinking (Jul 2025)"]
+  sources:
+    - https://qwenlm.github.io/blog/qwen3/
+    - https://arxiv.org/abs/2505.09388
+    - https://huggingface.co/Qwen/Qwen3-235B-A22B
+
+- id: qwen3.5
+  name: Qwen3.5
+  lab: alibaba
+  released: 2026-02-16
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New base: blog reports pretraining with a new 250k vocabulary and hybrid linear attention (Gated DeltaNet + gated attention) MoE"
+  params: "397B total / 17B active (official)"
+  openWeights: true
+  # Weights first public 2026-02-16 UTC (HF/ModelScope repos); the blog byline and hosted snapshot name say 02-15.
+  # Flagship Qwen3.5-397B-A17B plus Qwen3.5-Plus (its hosted version) are mapped; the smaller Qwen3.5 sizes and 3.5-Flash are not.
+  epochIds: ["qwen3.5-397b-a17b", "qwen3.5-plus"]
+  eciNames: ["Qwen3.5 397B-A17B", "Qwen 3.5 Plus (hosted 397B-A17B)"]
+  sources:
+    - https://qwen.ai/blog?id=qwen3.5
+    - https://huggingface.co/Qwen/Qwen3.5-397B-A17B
+    - https://github.com/QwenLM/Qwen3.5
+
+- id: qwen3.8-max
+  name: Qwen 3.8 Max
+  lab: alibaba
+  released: 2026-08-02
+  tier: flagship
+  status: released
+  pretrain: null
+  pretrainNote: "2.4T-param Qwen3.5-style hybrid MoE; the blog never says whether it is a new pretrain (Qwen3.7-Max's size is undisclosed)"
+  params: "2.4T total / 95B active (official)"
+  openWeights: true
+  # Released 2026-08-02 (blog + Alibaba release list); registry previously had 2026-09-01, the date of the qwen3.8-max-0902 snapshot (mapped).
+  # openWeights: published 2026-08-12 as Qwen3.8-2.4T-A95B under a custom license; the hosted Max adds vision input.
+  epochIds: ["qwen3.8-max", "qwen3.8-max-0902"]
+  eciNames: ["Qwen 3.8 Max", "Qwen3.8 Max (0902)"]
+  sources:
+    - https://qwen.ai/blog?id=qwen3.8
+    - https://huggingface.co/Qwen/Qwen3.8-2.4T-A95B
+    - https://www.alibabacloud.com/help/en/model-studio/newly-released-models
+
+- id: kimi-k2
+  name: Kimi K2
+  lab: moonshot
+  released: 2025-07-11
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New base: 1T-param MoE pretrained on 15.5T tokens with the MuonClip optimizer"
+  trainingFlop: 2.976e+24
+  params: "1T total / 32B active (official)"
+  openWeights: true
+  # Includes the 0905 update and the turbo serving variant; Kimi K2 Thinking is a separate release and is not mapped.
+  epochIds: ["kimi-k2-0711-preview", "Kimi-K2-Instruct", "Kimi-K2-Instruct-0905", "fireworks/Kimi-K2-Instruct-0905", "moonshotai/kimi-k2-0905", "kimi-k2-turbo-preview"]
+  eciNames: ["Kimi K2 (Jul 2025)"]
+  sources:
+    - https://moonshotai.github.io/Kimi-K2/
+    - https://arxiv.org/abs/2507.20534
+    - https://huggingface.co/moonshotai/Kimi-K2-Instruct
+
+- id: kimi-k2.5
+  name: Kimi K2.5
+  lab: moonshot
+  released: 2026-01-27
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "Continued (not from-scratch) pretraining: ~15T mixed vision-text tokens atop Kimi-K2-Base, roughly doubling K2's pretraining compute"
+  scalingVector: agent-swarm
+  trainingFlop: 5.8e+24
+  params: "1.04T total / 32B active (official)"
+  openWeights: true
+  epochIds: ["kimi-k2.5", "fireworks/kimi-k2p5"]
+  eciNames: ["Kimi K2.5"]
+  sources:
+    - https://www.kimi.com/blog/kimi-k2-5.html
+    - https://huggingface.co/moonshotai/Kimi-K2.5
+    - https://arxiv.org/abs/2602.02276
+
+- id: kimi-k3
+  name: Kimi K3
+  lab: moonshot
+  released: 2026-07-16
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New base and architecture: Kimi Delta Attention + Attention Residuals with a 896-expert LatentMoE (token count undisclosed)"
+  trainingFlop: 2.0e+25
+  params: "2.8T total / 104B active (official)"
+  openWeights: true
+  # Available on Kimi.ai and the API 2026-07-16 (registry previously said 07-15); weights released 2026-07-27.
+  epochIds: ["kimi-k3"]
+  eciNames: ["Kimi K3"]
+  sources:
+    - https://www.kimi.com/blog/kimi-k3
+    - https://huggingface.co/moonshotai/Kimi-K3
+
+- id: glm-5
+  name: GLM-5
+  lab: zhipu
+  released: 2026-02-11
+  tier: flagship
+  status: released
+  pretrain: true
+  pretrainNote: "New base: 744B MoE (256 experts) pretrained on ~28.5T tokens"
+  trainingFlop: 6.84e+24
+  params: "744B total / 40B active (official)"
+  openWeights: true
+  # Weights public on Hugging Face 2026-02-11 UTC; Z.ai's official date (China time) is 2026-02-12.
+  epochIds: ["glm-5", "zai-org/glm-5"]
+  eciNames: ["GLM-5"]
+  sources:
+    - https://z.ai/blog/glm-5
+    - https://huggingface.co/zai-org/GLM-5
+    - https://arxiv.org/abs/2602.15763
+
+- id: glm-5.3
+  name: GLM-5.3
+  lab: zhipu
+  released: 2026-08-14
+  tier: flagship
+  status: released
+  pretrain: false
+  pretrainNote: "Z.ai: \"uses the same base model as GLM-5.2 — every gain comes from post-training\""
+  params: "744B total / 40B active (official)"
+  openWeights: true
+  # Released 2026-08-14 (registry previously had 08-20, Epoch's date for GLM-5.3-Flash); weights under a custom license from 2026-08-27.
+  # GLM-5.3-Flash (a new 320B base) is a different model and is not mapped.
+  epochIds: ["glm-5.3"]
+  eciNames: ["GLM-5.3"]
+  sources:
+    - https://z.ai/blog/glm-5.3
+    - https://huggingface.co/zai-org/GLM-5.3
+    - https://docs.z.ai/release-notes/new-released
