@@ -9,7 +9,8 @@ Things that need Abhinav's input or his own hands. Go through this list before a
   - price columns
 
   Until then, Epoch's Capabilities Index (ECI) is used.
-- [ ] **Vercel deploy** once the dashboard is fully ready: which team, project name, domain?
+- [ ] **Vercel auto-deploy on push (optional).** Vercel needs your GitHub login linked before it can watch the repo: Vercel → Account Settings → Authentication → connect GitHub (abk999-cmyk). Then run `npx vercel@latest git connect` in this folder, or ask me to. Until then, deploy with `npx vercel@latest deploy --prod --archive=tgz`.
+- [ ] **Custom domain (optional):** the site is at https://frontier-watch-swart.vercel.app. Want a nicer domain or `*.vercel.app` alias?
 - [ ] **Auto-refresh:** a local nightly job (launchd) running `npm run refresh` now, or a GitHub Action after the move to Vercel?
 - [ ] **Optional: Metaculus API token.** The LEV forecast (median May 2053) is currently hand-copied into `data/curated/lev.yaml`, because the Metaculus API needs an account token. A token would let it refresh automatically.
 - [ ] **Optional: Human Mortality Database account** (free, needs your registration), for finer LEV data. The Our World in Data mirror of HMD covers the current charts.
@@ -17,6 +18,7 @@ Things that need Abhinav's input or his own hands. Go through this list before a
 - [ ] **Data policy: models not yet tracked.** Kimi K2 Thinking, DeepSeek V3.1/V3.2 and GLM-5.1/5.2 have scores available but no row. Add them?
 
 ## Resolved
+- Vercel: deployed to production at https://frontier-watch-swart.vercel.app (project `frontier-watch` in the Vercel team "abhinav's projects", `abhinavs-projects-8e429675`, which the Vercel CLI uses) on 2026-09-25. The Vercel connector in Claude points to a different, empty team (`abhinavs-projects-4fb6da9f`) and can't create projects.
 - Git: private repo `abk999-cmyk/frontier-watch` created and pushed (2026-09-25). To make it public: `gh repo edit abk999-cmyk/frontier-watch --visibility public --accept-visibility-change-consequences`.
 - AI 2040 = AI Futures Project's "Plan A", shown as a policy path (2026-09-24).
 - MiniMax and Meta Muse Spark excluded; Mythos included (2026-09-24).
